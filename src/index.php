@@ -100,7 +100,7 @@
 
 <?php
 // Localhost developer panel
-if (strpos($WEB_ROOT, 'src') !== false) : ?>
+if (strpos($WEB_ROOT, 'src') !== false || true) : ?>
 
 	<script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 	<script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>

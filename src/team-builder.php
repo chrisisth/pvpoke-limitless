@@ -23,6 +23,7 @@ require_once 'header.php';
 			<div class="team-option">
 				<h3>Max Team Size</h3>
 				<select class="team-size-select">
+					<option value="3" selected>6</option>
 					<option value="6" selected>6</option>
 					<option value="8">8</option>
 				</select>
@@ -36,6 +37,11 @@ require_once 'header.php';
 					<option value="40">40</option>
 					<option value="60">60</option>
 					<option value="80">80</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
+					<option value="300">300</option>
+					<option value="400">400</option>
+					<option value="500">500</option>
 				</select>
 			</div>
 			<div class="team-option">

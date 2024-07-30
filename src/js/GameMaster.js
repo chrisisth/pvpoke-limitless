@@ -25,8 +25,8 @@ var GameMaster = (function () {
 			gmVersion = "gamemaster";
 		}
 
-		// By default, load the minified version
-		if((gmVersion == "gamemaster")&&(host.indexOf("localhost") == -1)){
+		// By default, load the minified version &&(host.indexOf("localhost") == -1)
+		if((gmVersion == "gamemaster")){
 			gmVersion = "gamemaster.min";
 		}
 

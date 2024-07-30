@@ -9,7 +9,7 @@
 
 	<?php
 	// Localhost developer panel
-	if (strpos($WEB_ROOT, 'src') !== false) {
+	if (strpos($WEB_ROOT, 'src') !== false || true) {
 	    require 'modules/developer-panel.php';
 	}
 	?>
