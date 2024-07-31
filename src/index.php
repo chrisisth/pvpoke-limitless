@@ -69,7 +69,6 @@
 		</span>
 	</a>
 
-	<?php require 'modules/ads/body-728.php'; ?>
 
 	<!--Update section for updates-->
 	<div class="flex new-header">

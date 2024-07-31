@@ -42,6 +42,11 @@ require_once 'header.php';
 					<option value="300">300</option>
 					<option value="400">400</option>
 					<option value="500">500</option>
+					<option value="500">600</option>
+					<option value="500">700</option>
+					<option value="500">800</option>
+					<option value="500">900</option>
+					<option value="500">1000</option>
 				</select>
 			</div>
 			<div class="team-option">
@@ -118,7 +123,6 @@ require_once 'header.php';
 
 <div class="section white error">Please select one or more Pokemon.</div>
 
-<?php require 'modules/ads/body-728.php'; ?>
 
 <div class="section typings white">
 	<a href="#" class="toggle active">Overview <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
