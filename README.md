@@ -1,4 +1,4 @@
-# PvPoke
+# PvPoke Limitless (increase battle limit to 1000)
 
 [PvPoke.com](https://pvpoke.com) is a resource for Pokemon GO PvP that includes a battle simulator, rankings, and team building. The project’s goal is to provide tools and insights to help players build their teams, and foster the game’s community spirit by making all of the underlying code public. I hope this project can inspire new tools or benefit the existing ones that continue to enhance our enjoyment of the game.
 
