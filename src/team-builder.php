@@ -23,7 +23,7 @@ require_once 'header.php';
 			<div class="team-option">
 				<h3>Max Team Size</h3>
 				<select class="team-size-select">
-					<option value="3" selected>6</option>
+					<option value="3" selected>3</option>
 					<option value="6" selected>6</option>
 					<option value="8">8</option>
 				</select>
