@@ -250,7 +250,7 @@ var InterfaceMaster = (function () {
 					}
 
 					// Construct meta group from ranked Pokemon
-					if((i < 100)&&(context == "custom")){
+					if((i < 1000)&&(context == "custom")){
 						metaGroup.push(pokemon);
 					}
 

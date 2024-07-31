@@ -283,7 +283,7 @@ require_once 'header.php'; ?>
 
 <div class="section white custom-rankings-meta-group">
 	<h3>Custom Group</h3>
-	<p>Save or copy this custom group of the top 100 Pokemon to use in <a href="<?php echo $WEB_ROOT; ?>battle/" target="_blank">Multi-Battle</a> or the <a href="<?php echo $WEB_ROOT; ?>team-builder/" target="_blank">Team Builder</a>.</p>
+	<p>Save or copy this custom group of the top Pokemon to use in <a href="<?php echo $WEB_ROOT; ?>battle/" target="_blank">Multi-Battle</a> or the <a href="<?php echo $WEB_ROOT; ?>team-builder/" target="_blank">Team Builder</a>.</p>
 	<?php require 'modules/pokemultiselect.php'; ?>
 </div>
 
