@@ -222,11 +222,12 @@ var InterfaceMaster = (function () {
 
 				var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
 				customMetaSelector.init(data.pokemon, battle);
-				customMetaSelector.setContext("customrankings");
+				//customMetaSelector.setContext("customrankings");
 
 				// Create an element for each ranked Pokemon
 
 				metaGroup = [];
+				metaGroupExport = [];
 
 				for(var i = 0; i < rankings.length; i++){
 					var r = rankings[i];
@@ -309,6 +310,8 @@ var InterfaceMaster = (function () {
 							moveNameStr += ", "
 						}
 					}
+
+					metaGroupExport.push(pokemon);
 
 					// Is this the best way to add HTML content? I'm gonna go with no here. But does it work? Yes!
 
@@ -410,8 +413,7 @@ var InterfaceMaster = (function () {
 				$(".loading").hide();
 				$(".rank").on("click", selectPokemon);
 
-				
-				customMetaSelector.setPokemonList(metaGroup);
+				customMetaSelector.setPokemonList(metaGroupExport);
 
 				// Update download link with new data
 				const cupName = battle.getCup().name;
