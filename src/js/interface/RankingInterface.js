@@ -144,6 +144,7 @@ var InterfaceMaster = (function () {
 			this.displayRankingData = function(rankings){
 
 				var gm = GameMaster.getInstance();
+				var customMetaSelector;
 
 				data = rankings;
 
