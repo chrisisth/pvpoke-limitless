@@ -220,6 +220,10 @@ var InterfaceMaster = (function () {
 				csv = 'Pokemon,Score,Dex,Type 1,Type 2,Attack,Defense,Stamina,Stat Product,Level,CP,Fast Move,Charged Move 1,Charged Move 2,Charged Move 1 Count,Charged Move 2 Count,Buddy Distance,Charged Move Cost\n';
 
 
+				customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
+				customMetaSelector.init(data.pokemon, battle);
+				customMetaSelector.setContext("customrankings");
+
 				// Create an element for each ranked Pokemon
 
 				metaGroup = [];
