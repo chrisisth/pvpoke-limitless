@@ -223,7 +223,6 @@ var InterfaceMaster = (function () {
 				var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
 				customMetaSelector.init(data.pokemon, battle);
 				customMetaSelector.setContext("customrankings");
-				customMetaSelector.setPokemonList(this.getMetaGroup());
 
 				// Create an element for each ranked Pokemon
 
@@ -404,6 +403,10 @@ var InterfaceMaster = (function () {
 
 					csv += pokemon.speciesName+','+r.score+','+pokemon.dex+','+pokemon.types[0]+','+pokemon.types[1]+','+(Math.round(pokemon.stats.atk*10)/10)+','+(Math.round(pokemon.stats.def*10)/10)+','+Math.round(pokemon.stats.hp)+','+Math.round(pokemon.stats.atk*pokemon.stats.def*pokemon.stats.hp)+','+pokemon.level+','+pokemon.cp+','+pokemon.fastMove.name+','+pokemon.chargedMoves[0].name+','+chargedMove2Name+','+chargedMove1Count+','+chargedMove2Count+','+pokemon.buddyDistance+','+pokemon.thirdMoveCost+'\n';
 				}
+
+				
+				customMetaSelector.setPokemonList(metaGroup);
+
 
 				$(".loading").hide();
 				$(".rank").on("click", selectPokemon);
