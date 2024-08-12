@@ -223,6 +223,7 @@ var InterfaceMaster = (function () {
 				var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
 				customMetaSelector.init(data.pokemon, battle);
 				customMetaSelector.setContext("customrankings");
+				customMetaSelector.setPokemonList(this.getMetaGroup());
 
 				// Create an element for each ranked Pokemon
 
