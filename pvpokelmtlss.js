@@ -101,35 +101,32 @@
 
   if (url.includes("/new-season/battle") || url.includes("/battle")) {
 
-/*     GM.xmlHttpRequest({
+    GM.xmlHttpRequest({
       method: "GET",
       url: "https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/master/src/js/interface/PokeMultiSelect.js",
       onload: function (response) {
         const customScriptContent = response.responseText;
 
-        // Replace RankingInterface.js
         function replaceScript(oldScriptSrc, newScriptContent) {
-          const scripts = document.getElementsByTagName("script");
+          const scripts = unsafeWindow.document.getElementsByTagName("script");
           for (let i = 0; i < scripts.length; i++) {
             if (scripts[i].src.includes(oldScriptSrc)) {
-              const newScript = document.createElement("script");
+              const newScript = unsafeWindow.document.createElement("script");
               newScript.textContent = newScriptContent;
               scripts[i].parentNode.replaceChild(newScript, scripts[i]);
               break;
             }
           }
         }
+        // Replace RankingInterface.js
         replaceScript("PokeMultiSelect.js", customScriptContent);
         console.log("Replaced");
       },
       onerror: function (error) {
         console.error("Error loading script:", error);
       },
-    }); */
-
-    
+    });
   }
-
 
   if (
     url.includes("/new-season/team-builder") ||
@@ -142,18 +139,18 @@
       onload: function (response) {
         const customScriptContent = response.responseText;
 
-        // Replace RankingInterface.js
         function replaceScript(oldScriptSrc, newScriptContent) {
-          const scripts = document.getElementsByTagName("script");
+          const scripts = unsafeWindow.document.getElementsByTagName("script");
           for (let i = 0; i < scripts.length; i++) {
             if (scripts[i].src.includes(oldScriptSrc)) {
-              const newScript = document.createElement("script");
+              const newScript = unsafeWindow.document.createElement("script");
               newScript.textContent = newScriptContent;
               scripts[i].parentNode.replaceChild(newScript, scripts[i]);
               break;
             }
           }
         }
+        // Replace RankingInterface.js
         replaceScript("PokeMultiSelect.js", customScriptContent);
         console.log("Replaced");
       },
@@ -184,6 +181,6 @@
         scorecardSelect.appendChild(option);
       });
     }
-    
   }
+
 })();
