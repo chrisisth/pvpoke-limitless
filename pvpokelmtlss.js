@@ -149,9 +149,10 @@
         });
       }
       Main();
-      $(".custom-alternatives .poke.multi .poke-max-count").text("1000");
-      $(".exclude-alternatives .poke.multi .poke-max-count").text("1000");
-      $(".exclude-threats .poke.multi .poke-max-count").text("1000");
+      $(".custom-alternatives .poke-max-count").text("1000");
+      $(".custom-threats .poke-max-count").text("1000");
+      $(".exclude-alternatives .poke-max-count").text("1000");
+      $(".exclude-threats .poke-max-count").text("1000");
     };
   }
 })();
