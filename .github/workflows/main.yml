@@ -10,10 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Fork
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           repository: chrisisth/pvpoke-limitless
           token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Setup Upstream
+        run: git remote add upstream https://github.com/pvpoke/pvpoke.git
 
       - name: Fetch Upstream
         run: git fetch upstream
