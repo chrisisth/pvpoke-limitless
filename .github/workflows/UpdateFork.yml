@@ -21,8 +21,11 @@ jobs:
       - name: Fetch Upstream
         run: git fetch upstream
 
+      - name: List Upstream Branches
+        run: git branch -r
+
       - name: Merge Upstream
-        run: git merge upstream/main
+        run: git merge upstream/main || echo "Merge conflicts detected. Please resolve them manually."
 
       - name: Push Changes
-        run: git push origin main
+        run: git push origin main || echo "Push failed. Please check your token and permissions."
