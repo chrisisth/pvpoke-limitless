@@ -25,7 +25,7 @@ jobs:
         run: git branch -r
 
       - name: Merge Upstream
-        run: git merge upstream/master
+        run: git rebase upstream/master
 
       - name: Push Changes
         run: git push origin master
