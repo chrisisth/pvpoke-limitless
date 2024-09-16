@@ -21,11 +21,8 @@ jobs:
       - name: Fetch Upstream
         run: git fetch upstream
 
-      - name: List Upstream Branches
-        run: git branch -r
-
       - name: Merge Upstream
-        run: git rebase upstream/master
+        run: merge upstream/master --allow-unrelated-histories
 
       - name: Push Changes
         run: git push origin master
