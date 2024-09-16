@@ -14,6 +14,11 @@ jobs:
         with:
           repository: chrisisth/pvpoke-limitless
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "chrisisth"
+          git config user.email "chris73757@gmail.com"
           
       - name: Setup Upstream
         run: git remote add upstream https://github.com/pvpoke/pvpoke.git
