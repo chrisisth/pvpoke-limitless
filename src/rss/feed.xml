@@ -2,6 +2,25 @@
 <rss version="2.0">
 
 	<channel>
+<<<<<<< HEAD
+=======
+		<item>
+			<title>Sunshine Cup Rankings</title>
+			<description>
+				<![CDATA[Sunshine Cup returns for the new season in just a few weeks! With Vigoroth's time in the sun expired, Normal types look notably safe this time around. Great League favorites like Clodsire, Talonflame, and Gastrodon should see plenty of play, too. Grass will be a vital type in this meta, in particular Abomasnow and Chesnaught should find plenty of cores to break.]]>
+			</description>
+			<link>https://pvpoke.com/rankings/sunshine/1500/overall/</link>
+			<pubDate>Wed, 25 Sep 2024 19:22:07 GMT</pubDate>
+		</item>
+		<item>
+			<title>Galar Cup Rankings and Other Updates</title>
+			<description>
+				<![CDATA[I've posted initial rankings for Galar Cup! Bulky Pokemon like Mandibuzz, Diggersby, and Toxapex stand to form the core of the meta, but watch for old favorites like Charjabug, Lanturn, and Alolan Ninetales to make a return.<br><br>Elsewhere, I've tweaked energy values for Incinerate users in the Safe Switch scenario so they're better represented, and added a separate ranking entry for Sludge Bomb Clodsire. Like Lanturn in the past, Clodsire is central to the meta and its multiple viable movesets allow for different team building opportunities.]]>
+			</description>
+			<link>https://pvpoke.com/rankings/galar/1500/overall/</link>
+			<pubDate>Tue, 17 Sep 2024 16:03:26 GMT</pubDate>
+		</item>
+>>>>>>> upstream/master
 		<item>
 			<title>Rapidash Rankings</title>
 			<description>
@@ -114,6 +133,7 @@
 			<link>https://pvpoke.com/rankings/all/1500/overall/</link>
 			<pubDate>Tue, 18 Jun 2024 01:03:30 GMT</pubDate>
 		</item>
+<<<<<<< HEAD
 		<item>
 			<title>Goomy Community Day Guide</title>
 			<description>
@@ -130,6 +150,8 @@
 			<link>https://pvpoke.com/#news</link>
 			<pubDate>Tue, 04 Jun 2024 21:33:53 GMT</pubDate>
 		</item>
+=======
+>>>>>>> upstream/master
 
 		<title>PvPoke</title>
 		<link>https://pvpoke.com/</link>
