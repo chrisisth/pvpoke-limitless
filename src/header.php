@@ -1,5 +1,13 @@
 <?php require_once 'modules/config.php';
+<<<<<<< HEAD
 $SITE_VERSION = '1.32.1.9';
+=======
+<<<<<<< HEAD
+$SITE_VERSION = '1.32.1.9';
+=======
+$SITE_VERSION = '1.32.1.14';
+>>>>>>> upstream/master
+>>>>>>> 352dfcbd6f97387fdb1e9c8b5ced02b923e210a5
 
 // This prevents caching on local testing
 if (strpos($WEB_ROOT, 'src') !== false) {
