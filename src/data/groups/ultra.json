@@ -15,10 +15,6 @@
     "fastMove": "PSYCHO_CUT",
     "chargedMoves": ["GRASS_KNOT", "MOONBLAST"]
 }, {
-    "speciesId": "decidueye",
-    "fastMove": "ASTONISH",
-    "chargedMoves": ["FRENZY_PLANT", "SPIRIT_SHACKLE"]
-}, {
     "speciesId": "dragonite_shadow",
     "fastMove": "DRAGON_BREATH",
     "chargedMoves": ["DRAGON_CLAW", "SUPER_POWER"],
@@ -37,9 +33,10 @@
     "fastMove": "SHADOW_CLAW",
     "chargedMoves": ["HYDRO_CANNON", "ICE_BEAM"]
 }, {
-    "speciesId": "gastrodon",
-    "fastMove": "MUD_SLAP",
-    "chargedMoves": ["BODY_SLAM", "EARTH_POWER"]
+    "speciesId": "feraligatr_shadow",
+    "fastMove": "SHADOW_CLAW",
+    "chargedMoves": ["HYDRO_CANNON", "ICE_BEAM"],
+    "shadowType": "shadow"
 }, {
     "speciesId": "giratina_altered",
     "fastMove": "DRAGON_BREATH",
@@ -66,16 +63,9 @@
     "fastMove": "ROLLOUT",
     "chargedMoves": ["BODY_SLAM", "SHADOW_BALL"]
 }, {
-<<<<<<< HEAD
-    "speciesId": "machamp_shadow",
-    "fastMove": "KARATE_CHOP",
-    "chargedMoves": ["CROSS_CHOP", "STONE_EDGE"],
-    "shadowType": "shadow"
-=======
     "speciesId": "malamar",
     "fastMove": "PSYWAVE",
     "chargedMoves": ["SUPER_POWER", "FOUL_PLAY"]
->>>>>>> upstream/master
 }, {
     "speciesId": "mandibuzz",
     "fastMove": "SNARL",
@@ -88,10 +78,6 @@
     "speciesId": "pangoro",
     "fastMove": "KARATE_CHOP",
     "chargedMoves": ["CLOSE_COMBAT", "NIGHT_SLASH"]
-}, {
-    "speciesId": "poliwrath",
-    "fastMove": "COUNTER",
-    "chargedMoves": ["SCALD", "ICY_WIND"]
 }, {
     "speciesId": "registeel",
     "fastMove": "LOCK_ON",
@@ -109,15 +95,9 @@
     "fastMove": "POISON_JAB",
     "chargedMoves": ["SCALD", "BLIZZARD"]
 }, {
-<<<<<<< HEAD
-    "speciesId": "trevenant",
-    "fastMove": "SHADOW_CLAW",
-    "chargedMoves": ["SEED_BOMB", "SHADOW_BALL"]
-=======
     "speciesId": "typhlosion",
     "fastMove": "INCINERATE",
     "chargedMoves": ["BLAST_BURN", "THUNDER_PUNCH"]
->>>>>>> upstream/master
 }, {
     "speciesId": "venusaur",
     "fastMove": "VINE_WHIP",
@@ -131,15 +111,9 @@
     "fastMove": "FAIRY_WIND",
     "chargedMoves": ["BRUTAL_SWING", "PLAY_ROUGH"]
 }, {
-<<<<<<< HEAD
-    "speciesId": "feraligatr_shadow",
-    "fastMove": "SHADOW_CLAW",
-    "chargedMoves": ["HYDRO_CANNON", "ICE_BEAM"],
-=======
     "speciesId": "nidoqueen",
     "fastMove": "POISON_JAB",
     "chargedMoves": ["POISON_FANG", "EARTH_POWER"],
->>>>>>> upstream/master
     "shadowType": "shadow"
 }, {
     "speciesId": "zygarde_complete",
