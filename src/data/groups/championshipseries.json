@@ -1,4 +1,15 @@
 [{
+<<<<<<< HEAD
+=======
+    "speciesId": "abomasnow",
+    "fastMove": "POWDER_SNOW",
+    "chargedMoves": ["ICY_WIND", "ENERGY_BALL"]
+}, {
+    "speciesId": "arctibax",
+    "fastMove": "DRAGON_BREATH",
+    "chargedMoves": ["AVALANCHE", "DRAGON_CLAW"]
+}, {
+>>>>>>> upstream/master
     "speciesId": "ariados",
     "fastMove": "POISON_STING",
     "chargedMoves": ["LUNGE", "TRAILBLAZE"]
@@ -26,6 +37,10 @@
     "speciesId": "clodsire",
     "fastMove": "POISON_STING",
     "chargedMoves": ["EARTHQUAKE", "STONE_EDGE"]
+}, {
+    "speciesId": "clodsire",
+    "fastMove": "POISON_STING",
+    "chargedMoves": ["SLUDGE_BOMB", "EARTHQUAKE"]
 }, {
     "speciesId": "cresselia",
     "fastMove": "PSYCHO_CUT",
@@ -103,15 +118,22 @@
     "chargedMoves": ["SHADOW_BONE", "BONE_CLUB"],
     "shadowType": "shadow"
 }, {
+<<<<<<< HEAD
     "speciesId": "oranguru",
     "fastMove": "CONFUSION",
     "chargedMoves": ["BRUTAL_SWING", "TRAILBLAZE"]
+=======
+    "speciesId": "moltres_galarian",
+    "fastMove": "SUCKER_PUNCH",
+    "chargedMoves": ["ANCIENT_POWER", "BRAVE_BIRD"]
+>>>>>>> upstream/master
 }, {
     "speciesId": "quagsire",
     "fastMove": "MUD_SHOT",
     "chargedMoves": ["AQUA_TAIL", "STONE_EDGE"],
     "shadowType": "shadow"
 }, {
+<<<<<<< HEAD
     "speciesId": "sableye",
     "fastMove": "SHADOW_CLAW",
     "chargedMoves": ["FOUL_PLAY", "RETURN"]
@@ -120,6 +142,11 @@
     "fastMove": "SHADOW_CLAW",
     "chargedMoves": ["FOUL_PLAY", "POWER_GEM"],
     "shadowType": "shadow"
+=======
+    "speciesId": "sandslash_alolan",
+    "fastMove": "POWDER_SNOW",
+    "chargedMoves": ["DRILL_RUN", "ICE_PUNCH"]
+>>>>>>> upstream/master
 }, {
     "speciesId": "sandslash_alolan_shadow",
     "fastMove": "POWDER_SNOW",
@@ -142,6 +169,7 @@
     "fastMove": "POISON_JAB",
     "chargedMoves": ["BRINE", "SLUDGE_WAVE"]
 }, {
+<<<<<<< HEAD
     "speciesId": "wigglytuff",
     "fastMove": "CHARM",
     "chargedMoves": ["ICY_WIND", "SWIFT"]
@@ -154,4 +182,14 @@
     "fastMove": "MUD_SLAP",
     "chargedMoves": ["BONE_CLUB", "ROCK_SLIDE"],
     "shadowType": "shadow"
+=======
+    "speciesId": "typhlosion_shadow",
+    "fastMove": "INCINERATE",
+    "chargedMoves": ["BLAST_BURN", "THUNDER_PUNCH"],
+    "shadowType": "shadow"
+}, {
+    "speciesId": "araquanid",
+    "fastMove": "BUG_BITE",
+    "chargedMoves": ["BUG_BUZZ", "BUBBLE_BEAM"]
+>>>>>>> upstream/master
 }]
