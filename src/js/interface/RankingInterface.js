@@ -400,8 +400,6 @@ var InterfaceMaster = (function () {
 
 					if(pokemon.chargedMoves.length > 1){
 						chargedMove2Name = pokemon.chargedMoves[1].name;
-
-
 						chargedMove2Count = Math.ceil(pokemon.chargedMoves[1].energy / pokemon.fastMove.energyGain);
 					}
 
