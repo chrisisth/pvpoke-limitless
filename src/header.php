@@ -1,17 +1,5 @@
 <?php require_once 'modules/config.php';
-<<<<<<< HEAD
-<<<<<<< HEAD
-$SITE_VERSION = '1.32.1.9';
-=======
-<<<<<<< HEAD
-$SITE_VERSION = '1.32.1.9';
-=======
 $SITE_VERSION = '1.32.1.14';
->>>>>>> upstream/master
->>>>>>> 352dfcbd6f97387fdb1e9c8b5ced02b923e210a5
-=======
-$SITE_VERSION = '1.32.1';
->>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 
 // This prevents caching on local testing
 if (strpos($WEB_ROOT, 'src') !== false) {
@@ -145,11 +133,7 @@ if(! isset($OG_IMAGE)){
 
 <link id="favicon" rel="icon" href="<?php echo $WEB_ROOT; ?>img/themes/sunflower/favicon.png">
 
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=191">
-=======
-<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=189">
->>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 
 <?php if(strpos($META_TITLE, 'Train') !== false): ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/train.css?v=21">
