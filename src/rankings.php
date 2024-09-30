@@ -63,16 +63,16 @@ switch($cup){
 		$league = 'Fossil Cup';
 		break;
 
-	case "summer":
-		$league = 'Summer Cup';
+	case "sunshine":
+		$league = 'Sunshine Cup';
 		break;
 
 	case "zodiac":
 		$league = 'Devon Zodiac Cup';
 		break;
 
-	case "sovereign":
-		$league = 'Devon Sovereign Cup';
+	case "crypt":
+		$league = 'Devon Crypt Cup';
 		break;
 
 	case "devonchampionship":
@@ -127,8 +127,12 @@ switch($cup){
 		$league = 'Little Catch Cup';
 		break;
 
-	case "evolution":
-		$league = 'Evolution Cup';
+	case "halloween":
+		if($cp == "500"){
+			$league = 'Little Halloween Cup';
+		} else {
+			$league = 'Halloween Cup';
+		}
 		break;
 
 	case "fantasy":
