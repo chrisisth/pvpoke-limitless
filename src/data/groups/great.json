@@ -155,7 +155,6 @@
     "fastMove": "CHARM",
     "chargedMoves": ["ICY_WIND", "SWIFT"]
 }, {
-<<<<<<< HEAD
     "speciesId": "typhlosion_shadow",
     "fastMove": "INCINERATE",
     "chargedMoves": ["BLAST_BURN", "THUNDER_PUNCH"],
@@ -168,17 +167,4 @@
     "speciesId": "clodsire",
     "fastMove": "POISON_STING",
     "chargedMoves": ["SLUDGE_BOMB", "EARTHQUAKE"]
-=======
-    "speciesId": "ferrothorn",
-    "fastMove": "BULLET_SEED",
-    "chargedMoves": ["POWER_WHIP", "THUNDER"]
-}, {
-    "speciesId": "toxapex",
-    "fastMove": "POISON_JAB",
-    "chargedMoves": ["BRINE", "SLUDGE_WAVE"]
-}, {
-    "speciesId": "greninja",
-    "fastMove": "WATER_SHURIKEN",
-    "chargedMoves": ["HYDRO_CANNON", "NIGHT_SLASH"]
->>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 }]
