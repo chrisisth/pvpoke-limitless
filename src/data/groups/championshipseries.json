@@ -19,9 +19,23 @@
     "fastMove": "ROCK_THROW",
     "chargedMoves": ["POWER_GEM", "MOONBLAST"]
 }, {
+<<<<<<< HEAD
     "speciesId": "chesnaught",
     "fastMove": "VINE_WHIP",
     "chargedMoves": ["FRENZY_PLANT", "SUPER_POWER"]
+=======
+    "speciesId": "charjabug",
+    "fastMove": "VOLT_SWITCH",
+    "chargedMoves": ["X_SCISSOR", "DISCHARGE"]
+}, {
+    "speciesId": "chesnaught",
+    "fastMove": "VINE_WHIP",
+    "chargedMoves": ["FRENZY_PLANT", "SUPER_POWER"]
+}, {
+    "speciesId": "clefable",
+    "fastMove": "FAIRY_WIND",
+    "chargedMoves": ["MOONBLAST", "SWIFT"]
+>>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 }, {
     "speciesId": "clodsire",
     "fastMove": "POISON_STING",
@@ -108,6 +122,11 @@
     "fastMove": "POWDER_SNOW",
     "chargedMoves": ["DRILL_RUN", "ICE_PUNCH"]
 }, {
+    "speciesId": "sableye",
+    "fastMove": "SHADOW_CLAW",
+    "chargedMoves": ["FOUL_PLAY", "POWER_GEM"],
+    "shadowType": "shadow"
+}, {
     "speciesId": "sandslash_alolan_shadow",
     "fastMove": "POWDER_SNOW",
     "chargedMoves": ["ICE_PUNCH", "DRILL_RUN"],
@@ -116,6 +135,13 @@
     "speciesId": "serperior",
     "fastMove": "VINE_WHIP",
     "chargedMoves": ["FRENZY_PLANT", "AERIAL_ACE"]
+<<<<<<< HEAD
+=======
+}, {
+    "speciesId": "skeledirge",
+    "fastMove": "INCINERATE",
+    "chargedMoves": ["SHADOW_BALL", "DISARMING_VOICE"]
+>>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 }, {
     "speciesId": "talonflame",
     "fastMove": "INCINERATE",
@@ -125,6 +151,7 @@
     "fastMove": "POISON_JAB",
     "chargedMoves": ["BRINE", "SLUDGE_WAVE"]
 }, {
+<<<<<<< HEAD
     "speciesId": "typhlosion_shadow",
     "fastMove": "INCINERATE",
     "chargedMoves": ["BLAST_BURN", "THUNDER_PUNCH"],
@@ -133,4 +160,17 @@
     "speciesId": "araquanid",
     "fastMove": "BUG_BITE",
     "chargedMoves": ["BUG_BUZZ", "BUBBLE_BEAM"]
+=======
+    "speciesId": "ferrothorn",
+    "fastMove": "BULLET_SEED",
+    "chargedMoves": ["POWER_WHIP", "THUNDER"]
+}, {
+    "speciesId": "toxapex",
+    "fastMove": "POISON_JAB",
+    "chargedMoves": ["BRINE", "SLUDGE_WAVE"]
+}, {
+    "speciesId": "greninja",
+    "fastMove": "WATER_SHURIKEN",
+    "chargedMoves": ["HYDRO_CANNON", "NIGHT_SLASH"]
+>>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 }]

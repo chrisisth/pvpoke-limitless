@@ -10,7 +10,11 @@
 		<div class="custom-options">
 			<h3 class="section-title">Pokemon (<span class="poke-count">0</span> / <span class="poke-max-count">1000</span>)</h3>
 			<p>Create or select a group of custom Pokemon below.</p>
+<<<<<<< HEAD
 			<div class="flex space-between">
+=======
+			<div class="flex">
+>>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 				<a class="custom-group-sort" href="#">Sort ...</a>
 				<div class="check show-move-counts"><span></span>Move Counts</div>
 			</div>

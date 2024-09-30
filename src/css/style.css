@@ -945,7 +945,11 @@ footer a.domz-link {
   font-size: 12px;
   text-decoration: underline;
   visibility: hidden;
+<<<<<<< HEAD
   padding-right: 20px;
+=======
+  padding-right: 50px;
+>>>>>>> e525d716d (GL ranking and meta group updates, bug fixes, move counts in multiselect)
 }
 .poke.multi .custom-options .check.show-move-counts {
   visibility: hidden;
