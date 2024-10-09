@@ -199,25 +199,30 @@ var GameMaster = (function () {
 		object.updateShadowStatus = function(){
 
 			// First, clear all Shadow entries from the game master to start from a clean slate
-			for(var i = 0; i < object.data.pokemon.length; i++){
+			/*for(var i = 0; i < object.data.pokemon.length; i++){
 				var poke = object.data.pokemon[i];
 				if((poke)&&(poke.speciesId.indexOf("_shadow") > -1)){
 					console.log("Removed " + poke.speciesId);
 					object.data.pokemon.splice(i, 1);
 					i--;
 				}
-			}
+			}*/
 
 			var battle = new Battle();
 
 			$.each(object.data.pokemon, function(index, poke){
+				console.log(poke.speciesId);
 				if(poke.speciesId.indexOf("_shadow") > -1){
-					return false;
+					return;
 				}
 
 				var pokemon = new Pokemon(poke.speciesId, 0, battle);
 				var entry = object.getPokemonById(poke.speciesId);
 				battle.setNewPokemon(pokemon, 0, false);
+
+				if(pokemon.hasTag("shadoweligible")){
+					return;
+				}
 
 				// Remove Return and Frustration from legacy move list
 				if(entry.legacyMoves){
@@ -971,8 +976,8 @@ var GameMaster = (function () {
 
 				var stats = (pokemon.stats.hp * pokemon.stats.atk * pokemon.stats.def) / 1000;
 
-				if((stats >= minStats) ||
-				 ( (battle.getCP() == 1500) &&
+				if(stats >= minStats || battle.getCup().includeLowStatProduct ||
+				 ( battle.getCP() == 1500 &&
 				 (pokemon.hasTag("include1500") || pokemon.hasTag("mega") ))){
 					// Today is the day
 					if(! pokemon.released){
@@ -983,7 +988,7 @@ var GameMaster = (function () {
 						continue;
 					}
 
-					if(pokemon.hasTag("duplicate1500") && battle.getCP() != 1500){
+					if(pokemon.hasTag("duplicate1500") && (battle.getCP() != 1500 || (battle.getCup().name != "all" && battle.getCup().name != "sunshine" && battle.getCup().name != "halloween"))){
 						continue;
 					}
 
