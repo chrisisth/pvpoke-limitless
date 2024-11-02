@@ -20,6 +20,7 @@ var InterfaceMaster = (function () {
 			var customRankingInterface;
 			var metaGroup = [];
 			var metaGroupData = [];
+			var metaGroupExport = [];
 			var csv = '';
 			var showMoveCounts = false;
 			var rankingDisplayInterval;
