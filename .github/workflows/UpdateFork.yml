@@ -1,5 +1,8 @@
 name: Update Fork
 
+on:
+  workflow_dispatch:
+
 jobs:
   update-fork:
     runs-on: ubuntu-latest
