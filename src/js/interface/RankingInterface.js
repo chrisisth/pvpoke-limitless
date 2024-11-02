@@ -445,11 +445,6 @@ var InterfaceMaster = (function () {
 						jumpToPoke = false;
 					}, 50);
 				}
-
-				if (typeof PokeMultiSelect !== 'undefined'){
-					customMetaSelector.setPokemonList(metaGroupExport);
-					}
-
 			}
 
 			this.completeRankingDisplay = function(){
