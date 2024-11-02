@@ -125,10 +125,6 @@ body{
 .flex{
 	display:flex;
 
-	&.space-between{
-		justify-content: space-between;
-	}
-
 	&.cols-3 > div{
 		flex-basis:33%;
 	}
@@ -150,15 +146,14 @@ header{
     z-index: 25;
     width: 100%;
     box-shadow: rgba(0,0,0,0.3) 0px 0px 6px;
-	top: 0;
-	//top:28px;
+	top:30px;
 
 	.header-wrap{
 		max-width:800px;
 		margin:0 auto;
 		display: flex;
-		flex-wrap: wrap;
 		justify-content: space-between;
+		align-items: center;
 	}
 
 	a img{
@@ -170,10 +165,11 @@ header{
 		padding:3px 0;
 		display:flex;
 		align-items: center;
+		flex-grow: 1;
+		justify-content: space-between;
 
 		a{
 			display:block;
-			margin-left:20px;
 			color:$color-links;
 			text-decoration: none;
 			background-repeat: no-repeat;
@@ -316,7 +312,7 @@ footer{
 	margin: auto;
 	padding:60px 10px 10px 10px;
     border-radius: 12px;
-	//padding: 90px 10px 10px 10px;
+	padding: 90px 10px 10px 10px;
 
 	& > h1{
 		margin:0;
@@ -741,10 +737,6 @@ footer{
 					}
 				}
 			}
-
-			.label{
-				font-size:10px;
-			}
 		}
 
 		.types {
@@ -987,26 +979,24 @@ footer{
 		.start-hp,
 		.start-energy{
 			margin:5px 0;
-			max-width:120px;
-			max-height: 23px;
+			max-width:129px;
 		}
 
 		.flex{
 			justify-content: space-between;
 		}
 
+		.check.switch-delay{
+			margin-top: 20px;
+		}
+
 		.shield-baiting,
 		.show-ivs,
 		.optimize-timing,
-		.switch-delay,
 		.priority,
 		.negate-fast-moves{
 			text-align: left;
 			font-size:14px;
-		}
-
-		.show-ivs{
-			margin-bottom: 15px;
 		}
 
 		.add-fast-move{
@@ -1023,7 +1013,6 @@ footer{
 		}
 
 		.label{
-			font-size: 14px;
 			margin:5px 5px 5px 0;
 		}
 
@@ -1201,18 +1190,6 @@ footer{
 				font-size: 12px;
 				text-decoration: underline;
 				visibility: hidden;
-				padding-right: 20px;
-			}
-
-			.check.show-move-counts{
-				visibility: hidden;
-				margin-top: 5px;
-				font-size: 12px;
-
-				span{
-					width: 12px;
-					height: 12px;
-				}
 			}
 
 			.add-poke-btn{
@@ -1233,11 +1210,6 @@ footer{
 			p{
 				font-size:12px;
 			}
-		}
-
-		.search-string-btn{
-			margin-top: 5px;
-			margin-bottom: 15px;
 		}
 
 		.rankings-container{
@@ -1274,10 +1246,6 @@ footer{
 				    text-align: center;
 				    margin-right: 5px;
 				    padding-top: 2px;
-				}
-
-				.name{
-					display: block;
 				}
 
 				.moves{
@@ -1513,6 +1481,10 @@ footer{
 			.multi-battle-options{
 				display: none;
 			}
+		}
+
+		.options .section-title{
+			margin-top:0;
 		}
 
 		.delete-list-confirm + .poke.multi{
@@ -2912,7 +2884,8 @@ a.download-csv{
 
 
 	.moves{
-		display:block;
+		display:flex;
+		flex-wrap: wrap;
 		font-size:12px;
 
 		.move{
@@ -2933,7 +2906,7 @@ a.download-csv{
 		.count{
 			display:none;
 			margin-left:5px;
-			background:rgba(0, 0, 0, 0.25);
+			background:rgba(0,0,0,0.6);
 			color:#fff;
 			border-radius: 20px;
 			min-width: 16px;
@@ -2943,6 +2916,7 @@ a.download-csv{
 
 			&.fast{
 				border-radius: 0;
+				background:rgba(0,0,0,0.25);
 			}
 		}
 	}
@@ -4864,16 +4838,6 @@ a.rating{
 			font-size:12px;
 			margin-bottom:5px;
 		}
-
-		.poke-search-container{
-			margin-top: 10px;
-			justify-content: space-between;
-			align-items: center;
-
-			.check{
-				margin-top: 0;
-			}
-		}
 	}
 
 	.pokebox-import[select-mode="multi"]{
@@ -4889,8 +4853,7 @@ a.rating{
 	}
 
 	a.compare-poke,
-	a.duplicate-poke,
-	a.compare-pokebox{
+	a.duplicate-poke{
 		display: block;
 		font-size: 14px;
 		margin-top:25px;
@@ -5088,7 +5051,7 @@ a.pokebattler{
 			padding: 8px 8px;
     		box-sizing: border-box;
 			box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
-			//top: 65px;
+			top: 65px;
 
 			a{
 				padding: 9px 8px 9px 38px;

@@ -29,9 +29,6 @@ body {
 .flex {
   display: flex;
 }
-.flex.space-between {
-  justify-content: space-between;
-}
 .flex.cols-3 > div {
   flex-basis: 33%;
 }
@@ -52,14 +49,14 @@ header {
   z-index: 25;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;
-  top: 0;
+  top: 30px;
 }
 header .header-wrap {
   max-width: 800px;
   margin: 0 auto;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
 }
 header a img {
   display: block;
@@ -69,10 +66,11 @@ header .menu {
   padding: 3px 0;
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  justify-content: space-between;
 }
 header .menu a {
   display: block;
-  margin-left: 20px;
   color: #003462;
   text-decoration: none;
   background-repeat: no-repeat;
@@ -203,6 +201,7 @@ footer a.domz-link {
   margin: auto;
   padding: 60px 10px 10px 10px;
   border-radius: 12px;
+  padding: 90px 10px 10px 10px;
 }
 #main > h1 {
   margin: 0;
@@ -576,9 +575,6 @@ footer a.domz-link {
 .poke .poke-stats .damage-adjustments .adjustment .value.debuff {
   color: #0158d0;
 }
-.poke .poke-stats .damage-adjustments .label {
-  font-size: 10px;
-}
 .poke .poke-stats .types {
   margin-bottom: 3px;
   text-align: center;
@@ -775,23 +771,21 @@ footer a.domz-link {
 .poke .options .start-hp,
 .poke .options .start-energy {
   margin: 5px 0;
-  max-width: 120px;
-  max-height: 23px;
+  max-width: 129px;
 }
 .poke .options .flex {
   justify-content: space-between;
 }
+.poke .options .check.switch-delay {
+  margin-top: 20px;
+}
 .poke .options .shield-baiting,
 .poke .options .show-ivs,
 .poke .options .optimize-timing,
-.poke .options .switch-delay,
 .poke .options .priority,
 .poke .options .negate-fast-moves {
   text-align: left;
   font-size: 14px;
-}
-.poke .options .show-ivs {
-  margin-bottom: 15px;
 }
 .poke .options .add-fast-move {
   border: 1px solid #000;
@@ -805,7 +799,6 @@ footer a.domz-link {
   color: #fff;
 }
 .poke .options .label {
-  font-size: 14px;
   margin: 5px 5px 5px 0;
 }
 .poke .options.multi-battle-options {
@@ -951,16 +944,6 @@ footer a.domz-link {
   font-size: 12px;
   text-decoration: underline;
   visibility: hidden;
-  padding-right: 20px;
-}
-.poke.multi .custom-options .check.show-move-counts {
-  visibility: hidden;
-  margin-top: 5px;
-  font-size: 12px;
-}
-.poke.multi .custom-options .check.show-move-counts span {
-  width: 12px;
-  height: 12px;
 }
 .poke.multi .custom-options .add-poke-btn {
   font-size: 14px;
@@ -976,10 +959,6 @@ footer a.domz-link {
 }
 .poke.multi .custom-options p {
   font-size: 12px;
-}
-.poke.multi .search-string-btn {
-  margin-top: 5px;
-  margin-bottom: 15px;
 }
 .poke.multi .rankings-container {
   max-height: 410px;
@@ -1011,9 +990,6 @@ footer a.domz-link {
   text-align: center;
   margin-right: 5px;
   padding-top: 2px;
-}
-.poke.multi .rankings-container .rank .name {
-  display: block;
 }
 .poke.multi .rankings-container .rank .moves {
   margin-left: 0;
@@ -1206,6 +1182,9 @@ footer a.domz-link {
 }
 .poke-select-container.matrix .poke.multi .multi-battle-options {
   display: none;
+}
+.poke-select-container.matrix .options .section-title {
+  margin-top: 0;
 }
 .poke-select-container.matrix .delete-list-confirm + .poke.multi {
   float: right;
@@ -2594,7 +2573,8 @@ a.download-csv {
   margin-right: 6px;
 }
 .rank .moves {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
   font-size: 12px;
 }
 .rank .moves .move {
@@ -2613,7 +2593,7 @@ a.download-csv {
 .rank .moves .count {
   display: none;
   margin-left: 5px;
-  background: rgba(0, 0, 0, 0.25);
+  background: rgba(0, 0, 0, 0.6);
   color: #fff;
   border-radius: 20px;
   min-width: 16px;
@@ -2623,6 +2603,7 @@ a.download-csv {
 }
 .rank .moves .count.fast {
   border-radius: 0;
+  background: rgba(0, 0, 0, 0.25);
 }
 .rank .cliffhanger-points {
   border: 1px solid;
@@ -4320,14 +4301,6 @@ a.rating:hover:after {
   font-size: 12px;
   margin-bottom: 5px;
 }
-.modal .pokebox-import .poke-search-container {
-  margin-top: 10px;
-  justify-content: space-between;
-  align-items: center;
-}
-.modal .pokebox-import .poke-search-container .check {
-  margin-top: 0;
-}
 .modal .pokebox-import[select-mode=multi] .multi {
   display: block;
 }
@@ -4335,8 +4308,7 @@ a.rating:hover:after {
   display: none;
 }
 .modal a.compare-poke,
-.modal a.duplicate-poke,
-.modal a.compare-pokebox {
+.modal a.duplicate-poke {
   display: block;
   font-size: 14px;
   margin-top: 25px;
@@ -4764,6 +4736,7 @@ a.pokebattler {
     padding: 8px 8px;
     box-sizing: border-box;
     box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.4);
+    top: 65px;
   }
   header .menu a {
     padding: 9px 8px 9px 38px;
