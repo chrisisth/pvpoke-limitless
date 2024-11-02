@@ -322,7 +322,6 @@ var InterfaceMaster = (function () {
 					if(n < r.moveset.length - 1){
 						moveNameStr += ", "
 					}
-					metaGroupExport.push(pokemon);
 				}
 
 				// Is this the best way to add HTML content? I'm gonna go with no here. But does it work? Yes!
@@ -439,6 +438,9 @@ var InterfaceMaster = (function () {
 						jumpToPoke = false;
 					}, 50);
 				}
+
+				metaGroupExport.push(pokemon);
+
 			}
 
 			this.completeRankingDisplay = function(){
