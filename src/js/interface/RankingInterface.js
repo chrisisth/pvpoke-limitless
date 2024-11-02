@@ -253,6 +253,7 @@ var InterfaceMaster = (function () {
 						self.completeRankingDisplay();
 					}
 				}, i);
+				customMetaSelector.setPokemonList(metaGroupExport);
 			}
 
 			this.displayRankingEntry = function(r, index){
