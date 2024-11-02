@@ -221,12 +221,6 @@ var InterfaceMaster = (function () {
 
 				csv = 'Pokemon,Score,Dex,Type 1,Type 2,Attack,Defense,Stamina,Stat Product,Level,CP,Fast Move,Charged Move 1,Charged Move 2,Charged Move 1 Count,Charged Move 2 Count,Buddy Distance,Charged Move Cost\n';
 
-				if (typeof PokeMultiSelect !== 'undefined'){
-					var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
-				customMetaSelector.init(data.pokemon, battle);
-				}
-				//customMetaSelector.setContext("customrankings");
-
 				// Create an element for each ranked Pokemon
 
 				metaGroup = [];
@@ -254,7 +248,6 @@ var InterfaceMaster = (function () {
 						self.completeRankingDisplay();
 					}
 				}, i);
-				customMetaSelector.setPokemonList(metaGroupExport);
 			}
 
 			this.displayRankingEntry = function(r, index){
@@ -449,7 +442,6 @@ var InterfaceMaster = (function () {
 			}
 
 			this.completeRankingDisplay = function(){
-
 				// Update download link with new data
 				const cupName = battle.getCup().name;
 				const category = $(".category-select option:selected").val() || scenario.slug;
@@ -484,6 +476,15 @@ var InterfaceMaster = (function () {
 				if((! $(".check.xl").hasClass("on"))&&(context != "custom")){
 					toggleXLPokemon();
 				}
+				if (typeof PokeMultiSelect !== 'undefined'){
+					var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
+				customMetaSelector.init(data.pokemon, battle);
+				}
+
+				customMetaSelector.setPokemonList(metaGroupExport);
+
+
+
 			}
 
 			// Given JSON of get parameters, load these settings
