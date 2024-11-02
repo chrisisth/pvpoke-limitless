@@ -1,10 +1,5 @@
 name: Update Fork
 
-on:
-  schedule:
-    - cron: '0 0 * * *' # Täglich um Mitternacht
-  workflow_dispatch:
-
 jobs:
   update-fork:
     runs-on: ubuntu-latest
