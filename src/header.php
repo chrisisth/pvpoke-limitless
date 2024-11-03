@@ -235,11 +235,6 @@ if(! isset($OG_IMAGE)){
 
 	<header>
 		<div class="header-wrap">
-			<?php if($_SETTINGS->theme == 'night'): ?>
-				<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header-white.png" title="PvPoke.com" /></a>
-			<?php else: ?>
-				<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header.png" title="PvPoke.com" /></a>
-			<?php endif; ?>
 
 			<div class="hamburger mobile">
 				<!--Because I'm too lazy to make a graphic-->
@@ -248,6 +243,12 @@ if(! isset($OG_IMAGE)){
 				<div class="meat"></div>
 			</div>
 			<div class="menu">
+				<?php if($_SETTINGS->theme == 'night'): ?>
+					<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header-white.png" title="PvPoke.com" /></a>
+				<?php else: ?>
+					<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header.png" title="PvPoke.com" /></a>
+				<?php endif; ?>
+
 				<div class="parent-menu">
 					<a class="icon-battle <?php if(strpos($_SERVER['REQUEST_URI'], '/battle/')): echo "selected"; endif; ?>" href="<?php echo $WEB_ROOT; ?>battle/">
 						Battle<span></span>

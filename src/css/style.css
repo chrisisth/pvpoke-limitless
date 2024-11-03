@@ -45,14 +45,14 @@ header {
   padding: 3px;
   box-sizing: border-box;
   background: #f9fdff;
-  position: fixed;
+  /*position: fixed;*/
   z-index: 25;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 6px;
   top: 30px;
 }
 header .header-wrap {
-  max-width: 800px;
+  max-width: 90%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
@@ -110,8 +110,9 @@ header .menu .parent-menu .submenu {
 }
 header .menu .parent-menu .submenu.active {
   display: block;
-  max-height: 600px;
+  max-height: fit-content;
   pointer-events: auto;
+  z-index: 100;
 }
 header .menu .parent-menu > a {
   position: relative;
@@ -199,9 +200,9 @@ footer a.domz-link {
 #main {
   max-width: 80%;
   margin: auto;
-  padding: 60px 10px 10px 10px;
+  /*padding: 60px 10px 10px 10px;
+    padding: 90px 10px 10px 10px;*/
   border-radius: 12px;
-  padding: 90px 10px 10px 10px;
 }
 #main > h1 {
   margin: 0;
@@ -4768,9 +4769,9 @@ a.pokebattler {
   header .menu .icon-heart {
     background-image: url("../img/themes/sunflower/nav-heart-white.png");
   }
-  header .menu .submenu {
+  /*header .menu .submenu {
     padding-left: 38px;
-  }
+  }*/
   header .menu .submenu a {
     font-size: 16px;
   }
@@ -5541,10 +5542,13 @@ a.feed-subscribe {
   header .menu .submenu {
     padding-top: 15px;
     position: absolute;
-    padding-left: 20px;
+    /*padding-left: 20px;*/
     top: 18px;
     pointer-events: none;
     white-space: nowrap;
+    display: none;
+    transform: translateX(-50%);
+    left: 100%;
   }
   header .menu .submenu.active {
     padding-bottom: 100px;
