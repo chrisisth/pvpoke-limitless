@@ -479,6 +479,10 @@ var InterfaceMaster = (function () {
 				if((! $(".check.xl").hasClass("on"))&&(context != "custom")){
 					toggleXLPokemon();
 				}
+
+				if(context == "custom"){
+					customRankingInterface.setMetaGroup(metaGroup);
+				}
 				if (typeof PokeMultiSelect !== 'undefined'){
 					var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
 				customMetaSelector.init(data.pokemon, battle);
