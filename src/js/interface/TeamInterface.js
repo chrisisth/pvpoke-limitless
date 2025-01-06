@@ -478,7 +478,7 @@ var InterfaceMaster = (function () {
 
 					// Push to counter team
 
-					if(count < 6){
+					if(count < 500){
 						counterTeam.push(pokemon);
 					}
 
