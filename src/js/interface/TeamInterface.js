@@ -478,7 +478,7 @@ var InterfaceMaster = (function () {
 
 					// Push to counter team
 
-					if(count < 500){
+					if(count <= alternativeCount){
 						counterTeam.push(pokemon);
 					}
 
@@ -854,6 +854,7 @@ var InterfaceMaster = (function () {
 				// Gather advanced settings
 				var team = multiSelectors[0].getPokemonList();
 				var scorecardCount = parseInt($(".scorecard-length-select option:selected").val());
+				var alternativeCount = parseInt($(".scorecard-length-select option:selected").val());
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on");

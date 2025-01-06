@@ -191,6 +191,8 @@ var RankerMaster = (function () {
 							shieldTestArr.push([ overrideSettings[0].shields, overrideSettings[1].shields ]);
 						} else if(shieldMode == 'average'){
 							shieldTestArr.push([0,0], [1,1]);
+						} else if(shieldMode == 'all'){
+							shieldTestArr.push([0,0], [0,1], [0,2], [1,0], [1,1], [1,2], [2,0], [2,1], [2,2]);
 						}
 
 						var avgPokeRating = 0;
