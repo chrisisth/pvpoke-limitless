@@ -2052,6 +2052,7 @@ a.download-csv {
 
 .rating-table {
   text-align: center;
+  overflow: scroll;
 }
 .rating-table tr {
   background: none;
