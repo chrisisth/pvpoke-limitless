@@ -478,6 +478,7 @@ var InterfaceMaster = (function () {
 
 					// Push to counter team
 
+					var alternativeCount = parseInt($(".scorecard-length-select option:selected").val());
 					if(count <= alternativeCount){
 						counterTeam.push(pokemon);
 					}
