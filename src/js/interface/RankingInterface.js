@@ -247,7 +247,12 @@ var InterfaceMaster = (function () {
 
 				rankingDisplayInterval = setInterval(function(){
 					for(var index = i; index < rankings.length && index < i + rankingDisplayIncrement; index++){
-						self.displayRankingEntry(rankings[index], index);
+						try {
+							self.displayRankingEntry(rankings[index], index);
+						} catch{
+							console.error(rankings[index].speciesId + " could not be displayed");
+						}
+
 					}
 
 					i = index;
@@ -766,23 +771,24 @@ var InterfaceMaster = (function () {
 				$rank.toggleClass("selected");
 				$rank.find(".details").toggleClass("active");
 
-				var index = $(".rankings-container > .rank").index($rank);
-				var $details = $(".details").eq(index);
+				var speciesId = $rank.attr("data");
 
 				// Only execute if this was a direct action and not loaded from URL parameters, otherwise pushes infinite states when the user navigates back
 				if($rank.hasClass("selected")){
-					if((get)&&(data[index])&&(get.p == data[index].speciesId)){
+					if(get && get.p == speciesId){
 						get.p = false; // Unset this so URL properly sets if reselected
 					} else{
-						self.pushHistoryState(cup, battle.getCP(), category, data[index].speciesId);
+						self.pushHistoryState(cup, battle.getCP(), category, speciesId);
 					}
 				}
+
+				var $details = $rank.find(".details");
 
 				if($details.html() != ''){
 					return;
 				}
 
-				var r = data[index];
+				var r = data.find(r => r.speciesId == speciesId)
 				var pokemon = new Pokemon(r.speciesId, 0, battle);
 				pokemon.initialize(battle.getCP(), "gamemaster");
 				pokemon.selectMove("fast", r.moveset[0]);
