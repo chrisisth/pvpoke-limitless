@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-01-21 21:00:02",
+    "timestamp": "2025-02-02 18:19:28",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -374,6 +374,36 @@
         "partySize": 3,
         "presetOnly": true
     }, {
+        "name": "ingot",
+        "title": "Ingot",
+        "include": [{
+            "filterType": "type",
+            "name": "Type",
+            "values": ["dark", "electric", "fighting", "fire", "poison", "steel"]
+        }, {
+            "filterType": "id",
+            "name": "Species",
+            "values": ["rotom_wash", "wormadam_sandy", "archen", "archeops", "qwilfish_hisuian", "arctibax", "tyrunt", "stunfisk_galarian", "toxapex", "tentacruel", "cloyster", "araquanid", "cradily", "amaura", "avalugg_hisuian", "armaldo", "lairon", "", "steelix", "nidoking", "nidoqueen", "piloswine", "ursaluna", "", "camerupt", "munchlax", "lileep"]
+        }],
+        "exclude": [{
+            "filterType": "type",
+            "name": "Type",
+            "values": ["dragon", "ground", "rock", "water", "ghost", "fighting"]
+        }, {
+            "filterType": "id",
+            "name": "Species",
+            "values": ["gligar", "drapion", "vikavolt", "heliolisk", "morpeko_full_belly", "marowak_alolan", "grimer", "malamar", "salazzle", "nidorina", "qwilfish_hisuian", "pachirisu", "mandibuzz", "pangoro", "bellibolt"]
+        }, {
+            "filterType": "tag",
+            "name": "Tag",
+            "values": ["shadow", "mega"]
+        }],
+        "overrides": [],
+        "league": 1500,
+        "useDefaultMovesets": 1,
+        "levelCap": 50,
+        "includeLowStatProduct": true
+    }, {
         "name": "iridescent",
         "title": "Iridescent Cup",
         "include": [{
@@ -417,7 +447,7 @@
         }],
         "exclude": [{
             "filterType": "id",
-            "values": ["shuckle", "shuckle_shadow", "smeargle", "gligar", "stunfisk_galarian", "genesect", "celebi", "hoopa", "hoopa_unbound", "aerodactyl_shadow", "zarude", "genesect_douse", "genesect_burn", "xerneas", "thundurus_therian", "yveltal", "meloetta_aria", "zacian", "zamazenta", "zacian_hero", "zamazenta_hero", "genesect_douse", "zarude", "hoopa_unbound", "genesect_shock", "tapu_koko", "tapu_lele", "tapu_bulu", "nihilego", "genesect_chill", "braviary_hisuian", "solgaleo", "lunala", "keldeo_ordinary", "avalugg_hisuian", "kyogre_primal", "groudon_primal", "kleavor", "guzzlord"]
+            "values": ["shuckle", "shuckle_shadow", "smeargle", "genesect", "celebi", "hoopa", "hoopa_unbound", "aerodactyl_shadow", "zarude", "genesect_douse", "genesect_burn", "xerneas", "thundurus_therian", "yveltal", "meloetta_aria", "zacian", "zamazenta", "zacian_hero", "zamazenta_hero", "genesect_douse", "zarude", "hoopa_unbound", "genesect_shock", "tapu_koko", "tapu_lele", "tapu_bulu", "nihilego", "genesect_chill", "braviary_hisuian", "solgaleo", "lunala", "keldeo_ordinary", "avalugg_hisuian", "kyogre_primal", "groudon_primal", "kleavor", "guzzlord", "gligar", "stunfisk_galarian"]
         }, {
             "filterType": "tag",
             "values": ["legendary", "mega"]
@@ -429,7 +459,7 @@
         "include": [{
             "filterType": "id",
             "includeShadows": 1,
-            "values": ["charmander", "charmander_shadow", "charmeleon", "charmeleon_shadow", "charizard", "charizard_shadow", "vileplume", "vileplume_shadow", "paras", "parasect", "krabby", "kingler", "voltorb", "electrode", "goldeen", "seaking", "jynx", "magmar", "magmar_shadow", "magikarp", "magikarp_shadow", "flareon", "ledyba", "ledian", "ariados", "yanma", "scizor", "scizor_shadow", "slugma", "magcargo", "octillery", "delibird", "porygon2", "porygon2_shadow", "magby", "torchic", "combusken", "blaziken", "wurmple", "medicham", "medicham_xl", "carvanha", "carvanha_shadow", "camerupt", "solrock", "corphish", "crawdaunt", "kricketot", "kricketune", "burmy_trash", "wormadam_trash", "magmortar", "magmortar_shadow", "porygon_z", "porygon_z_shadow", "rotom_wash", "tepig", "pignite", "emboar", "pansear", "simisear", "throh", "venipede", "scolipede", "krookodile", "darumaka", "darmanitan_standard", "dwebble", "crustle", "deerling", "accelgor", "pawniard", "bisharp", "braviary", "heatmor", "fennekin", "braixen", "delphox", "fletchling", "fletchinder", "talonflame", "clefairy", "clefable", "jigglypuff", "wigglytuff", "slowpoke", "slowpoke_shadow", "slowbro", "slowbro_shadow", "exeggcute", "exeggcute_shadow", "lickitung", "lickitung_xl", "happiny", "chansey", "mr.mime", "mimejr.", "porygon", "porygon_shadow", "cleffa", "igglybuff", "flaaffy", "flaaffy_shadow", "hoppip", "hoppip_shadow", "slowking", "slowking_shadow", "snubbull", "corsola", "smoochum", "miltank", "blissey", "whismur", "skitty", "milotic", "gorebyss", "luvdisc", "cherubi", "cherrim_sunny", "lickilicky", "audino", "alomomola", "scrafty", "castform_sunny", "mr_mime", "druddigon", "sylveon", "spritzee", "aromatisse", "musharna", "slowbro_galarian", "slowking_galarian", "slowpoke_galarian", "electrode_hisuian", "litten", "torracat", "incineroar", "lycanroc_midnight", "oricorio_baile", "oricorio_pau", "fomantis", "lurantis", "bewear", "stufful", "tyrantrum", "buzzwole"]
+            "values": ["charmander", "charmander_shadow", "charmeleon", "charmeleon_shadow", "charizard", "charizard_shadow", "vileplume", "vileplume_shadow", "paras", "parasect", "krabby", "kingler", "voltorb", "electrode", "goldeen", "seaking", "jynx", "magmar", "magmar_shadow", "magikarp", "magikarp_shadow", "flareon", "ledyba", "ledian", "ariados", "yanma", "scizor", "scizor_shadow", "slugma", "magcargo", "octillery", "delibird", "porygon2", "porygon2_shadow", "magby", "torchic", "combusken", "blaziken", "wurmple", "medicham", "medicham_xl", "carvanha", "carvanha_shadow", "camerupt", "solrock", "corphish", "crawdaunt", "kricketot", "kricketune", "burmy_trash", "wormadam_trash", "magmortar", "magmortar_shadow", "porygon_z", "porygon_z_shadow", "rotom_wash", "tepig", "pignite", "emboar", "pansear", "simisear", "throh", "venipede", "scolipede", "krookodile", "darumaka", "darmanitan_standard", "dwebble", "crustle", "deerling", "accelgor", "pawniard", "bisharp", "braviary", "heatmor", "fennekin", "braixen", "delphox", "fletchling", "fletchinder", "talonflame", "clefairy", "clefable", "jigglypuff", "wigglytuff", "slowpoke", "slowpoke_shadow", "slowbro", "slowbro_shadow", "exeggcute", "exeggcute_shadow", "lickitung", "lickitung_xl", "happiny", "chansey", "mr.mime", "mimejr.", "porygon", "porygon_shadow", "cleffa", "igglybuff", "flaaffy", "flaaffy_shadow", "hoppip", "hoppip_shadow", "slowking", "slowking_shadow", "snubbull", "corsola", "smoochum", "miltank", "blissey", "whismur", "skitty", "milotic", "gorebyss", "luvdisc", "cherubi", "cherrim_sunny", "lickilicky", "audino", "alomomola", "scrafty", "castform_sunny", "mr_mime", "druddigon", "sylveon", "spritzee", "aromatisse", "musharna", "slowbro_galarian", "slowking_galarian", "slowpoke_galarian", "electrode_hisuian", "litten", "torracat", "incineroar", "lycanroc_midnight", "oricorio_baile", "oricorio_pau", "fomantis", "lurantis", "bewear", "stufful", "tyrantrum", "buzzwole", "latias", "latias_shadow", "vivillon", "turtonator", "fuecoco", "crocalor", "skeledirge", "charcadet", "armarouge", "wugtrio", "gimmighoul", "mesprit", "bruxish", "hatenna", "hattrem", "hatterene"]
         }],
         "exclude": [],
         "partySize": 3
@@ -787,6 +817,15 @@
         "showMeta": true,
         "rules": ["Pok\u00e9mon must be at or below 500 CP to enter.", "Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pok\u00e9mon are eligible.", "Gligar and Galarian Stunfisk are not allowed."]
     }, {
+        "title": "Love Cup",
+        "cup": "love",
+        "cp": 1500,
+        "meta": "love",
+        "showCup": true,
+        "showFormat": true,
+        "showMeta": true,
+        "rules": ["Pok\u00e9mon must be at or below 1500 CP to enter.", "Only red- or pink-colored Pok\u00e9mon are eligible."]
+    }, {
         "title": "Master League (Megas)",
         "cup": "mega",
         "cp": 10000,
@@ -839,6 +878,14 @@
         "cup": "pillar",
         "cp": 1500,
         "meta": "pillar",
+        "showCup": true,
+        "showFormat": true,
+        "showMeta": true
+    }, {
+        "title": "Devon Ingot Cup",
+        "cup": "ingot",
+        "cp": 1500,
+        "meta": "ingot",
         "showCup": true,
         "showFormat": true,
         "showMeta": true
