@@ -965,7 +965,7 @@ var GameMaster = (function () {
 
 			// Gather all eligible Pokemon
 
-			var minStats = 3500; // You must be this tall to ride this ride
+			var minStats = 4900; // You must be this tall to ride this ride
 
 			if(battle.getCP() == 500){
 				minStats = 0;
@@ -973,9 +973,6 @@ var GameMaster = (function () {
 				minStats = 1370;
 			} else if(battle.getCP() == 2500){
 				minStats = 2800;
-			} else if (battle.getCup().name === "factionsmaster") {
-				// big boy megas need taller height limit
-				minStats = 5000;
 			}
 
 			if(! excludeByStatProduct){
@@ -1259,19 +1256,19 @@ var GameMaster = (function () {
 								for(var k = 0; k < pokemon.fastMovePool.length; k++){
 									if((pokemon.fastMovePool[k].legacy == true)||(pokemon.fastMovePool[k].elite == true)){
 										valid = true;
-									} else if(param == "special") {
-										if ((pokemon.fastMovePool[k].moveId == "FRUSTRATION")||(pokemon.fastMovePool[k].moveId === "RETURN")) {
-											valid = true;
-										}
 									}
 								}
 
 								for(var k = 0; k < pokemon.chargedMovePool.length; k++){
 									if((pokemon.chargedMovePool[k].legacy == true)||(pokemon.chargedMovePool[k].elite == true)){
 										valid = true;
-									} else if(param == "special") {
-										if ((pokemon.chargedMovePool[k].moveId == "FRUSTRATION")||(pokemon.chargedMovePool[k].moveId === "RETURN")) {
+									}
+
+									if(pokemon.chargedMovePool[k].moveId == "FRUSTRATION"||pokemon.chargedMovePool[k].moveId === "RETURN") {
+										if(param == "special"){
 											valid = true;
+										} else if(param == "legacy"){
+											valid = false;
 										}
 									}
 								}

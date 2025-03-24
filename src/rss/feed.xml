@@ -3,6 +3,22 @@
 
 	<channel>
 		<item>
+			<title>Master Premier Rankings</title>
+			<description>
+				<![CDATA[Master Premier returns in a few weeks, and its top meta Pokemon received some love in the recent move update. Most notably, Florges now packs Attack-boosting Grass coverage in Trailblaze. Some trainers previously opted for Petal Blizzard for the same coverage, but Trailblaze is a clear upgrade that elevates this top meta Pokemon to even stronger levels. Meanwhile, Golisopod should have a larger role in the core meta with the changes to Aqua Jet. Not to be overlooked, Hex Gholdengo is back as one of the best closers in the format.<br><br>Pokemon that may be vital tools against the top meta include Metagross and Skeledirge. Skeledirge entirely walls Florges, and Torch Song now provides momentum that it can carry over into the next matchup. Some may still opt for Disarming Voice given the presence of Dragons.]]>
+			</description>
+			<link>https://pvpoke.com/rankings/premier/10000/overall/</link>
+			<pubDate>Thu, 20 Mar 2025 15:20:04 GMT</pubDate>
+		</item>
+		<item>
+			<title>Bug Fixes and UI Updates</title>
+			<description>
+				<![CDATA[I've made a few updates and fixes to the website including the following:<br><br>- Pokemon group selection and Matrix Battle results now display the Pokemon in a numbered list. This should help identify Pokemon among a large group of similar ones.<br><br>- The "@legacy" search term no longer includes Pokemon that know Frustration or Return.<br><br>- Fixed an issue where the "Performance" radar chart would appear in error on ranking subcategory pages where that data isn't available.<br><br>- Fixed a minor sim issue where Pokemon would sometimes throw an inefficient Charged Attack right before fainting.]]>
+			</description>
+			<link>https://pvpoke.com/</link>
+			<pubDate>Tue, 11 Mar 2025 01:35:44 GMT</pubDate>
+		</item>
+		<item>
 			<title>Skeledirge Rankings</title>
 			<description>
 				<![CDATA[Fuecoco has a big Community Day this weekend, where Skeledirge will be receiving Blast Burn as an exclusive move and Torch Song as a regular addition to its movepool. Blast Burn is the Fire-type nuke we all know, while Torch Song is an Attack-boosting move that's slightly stronger Flame Charge, dealing more damage and costing less energy. Skeledirge is a top Fire type in Great League and Ultra League, and should see renewed play with its new moveset options. It also has some niche play in Master Premier, so look to evolve one for each league.<br><br>Skeledirge now has multiple viable moveset options. It previously ran Disarming Voice + Shadow Ball as its preferred Charged Attacks. Fairy + Ghost provide near perfect coverage, able to hit any Pokemon in the metagame for neutral damage. Some may continue to opt for this moveset depending on the meta, however Torch Song or Blast Burn now provide greater damage output and a higher performance ceiling.<br><br>At an initial glance, the STAB combination of Torch Song + Shadow Ball appears to be the most likely moveset going forward. It still provides a wide degree of coverage (walled only by Guzzlord in the meta), and Torch Song boosts Skeledirge's performance to higher levels! For example, boosted Torch Song is about as strong as super effective Disarming Voice, and boosted Shadow Ball is about as strong as unboosted Blast Burn. This moveset only sees drawbacks in metas with heavy a Dragon-type presence where there's a two-stage difference in effectiveness between Disarming Voice and Torch Song.<br><br>Blast Burn is Skeledirge's strongest attack. However, Torch Song + Blast Burn leaves it with no coverage. Sometimes even resisted Blast Burn is better than neutral attacks on other Pokemon, but STAB Shadow Ball is strong enough that Blast Burn isn't the de facto attack on Skeledirge. Blast Burn has slightly faster pacing than Shadow Ball and can be doubled up, so there are some advantages to running it.<br><br>Even if you don't plan to use Blast Burn, look to evolve multiple Skeledirge so you have the option. This is a big Community Day for PvP, so have fun and good luck!]]>
@@ -105,22 +121,6 @@
 			</description>
 			<link>https://pvpoke.com/rankings/all/1500/overall/corviknight/</link>
 			<pubDate>Fri, 17 Jan 2025 17:50:30 GMT</pubDate>
-		</item>
-		<item>
-			<title>New Shadows and Grafaiai Rankings</title>
-			<description>
-				<![CDATA[A batch of new Shadows are coming next Rocket Takeover, and a lot of them are highly relevant for PvP! Meta favorites Diggersby and Serperior now have Shadow forms to add an extra layer to team building. Overall, both look like downgrades compared to their normal forms since their biggest advantage is their bulk. That said, definitely look to catch and ready these Pokemon during the event.<br><br>Shadow Palkia is the featured legendary Pokemon. In Master League, it's about even with normal Palkia. However, the Origin form is far and away superior to both. If you're holding onto Palkia XL Candy, you're much better off saving it for Palkia Origin. In the meantime, Shadow Palkia makes for wild spice in Great League where it's eligible for the first time.<br><br>The Poison/Normal Pokemon Grafaiai debuts in 12km eggs during this event. It has lackluster moves and stats, but one potential niche as a Poison type with access to Mud Slap. This could give it play in future themed cups that include Poison types.]]>
-			</description>
-			<link>https://pvpoke.com/rankings/all/1500/overall/diggersby_shadow/</link>
-			<pubDate>Sun, 12 Jan 2025 18:26:26 GMT</pubDate>
-		</item>
-		<item>
-			<title>Ultra League Top Performers</title>
-			<description>
-				<![CDATA[We're just over a month through the season, and today's update focuses on Ultra League top performers. I've updated training analysis with the sampling of Ultra League battles so far, so take a look for potential Pokemon and team ideas!<br><br>There aren't many shakeups in Ultra League this season, but some trainers found success with Bulldoze on Zygarde Complete. If you happen to have access to this rare Pokemon, it has a few different viable movesets. Zygarde is just about the only Pokemon that can make Bulldoze work thanks to its enormous stat product.<br><br>Top team data is limited. Common threads include Water types like Feraligatr, Greninja, or Gastrodon paired with Poison types like Shadow Drapion or Galarian Weezing. Drifblim is also a notable top individual and team performer.<br><br>Good luck in your battles and stay tuned, there are some exciting PvP Pokemon on the horizon!]]>
-			</description>
-			<link>https://pvpoke.com/train/analysis/all/2500/</link>
-			<pubDate>Fri, 10 Jan 2025 20:57:10 GMT</pubDate>
 		</item>
 
 		<title>PvPoke</title>

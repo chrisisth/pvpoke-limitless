@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-03-08 20:42:21",
+    "timestamp": "2025-03-23 18:20:50",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -69,7 +69,7 @@
             "floor": 0,
             "tiers": [{
                 "points": 7,
-                "pokemon": ["gallade_mega", "scizor_mega", "zygarde_complete"]
+                "pokemon": ["gallade_mega", "kyurem_black", "kyurem_white", "scizor_mega", "zygarde_complete"]
             }, {
                 "points": 6,
                 "pokemon": ["charizard_mega_y", "gengar_mega", "palkia_origin"]
@@ -78,13 +78,13 @@
                 "pokemon": ["dialga_origin", "latias_mega", "necrozma_dawn_wings", "necrozma_dusk_mane", "rhyperior", "solgaleo", "steelix_mega"]
             }, {
                 "points": 4,
-                "pokemon": ["aggron_mega", "dialga", "heracross_mega", "ho_oh", "landorus_therian", "yveltal", "zacian_hero"]
+                "pokemon": ["aggron_mega", "blastoise_mega", "dialga", "heracross_mega", "ho_oh", "landorus_therian", "yveltal", "zacian_hero"]
             }, {
                 "points": 3,
                 "pokemon": ["dragapult", "giratina_origin", "giratina_altered", "kyogre", "mewtwo", "meloetta_aria", "palkia", "primarina", "xerneas"]
             }, {
                 "points": 2,
-                "pokemon": ["blastoise_mega", "charizard_mega_x", "groudon", "heatran", "kangaskhan_mega", "lucario_mega", "lugia", "marshadow", "moltres_galarian", "reshiram", "slowbro_mega", "zarude", "zekrom"]
+                "pokemon": ["charizard_mega_x", "groudon", "heatran", "kangaskhan_mega", "lucario_mega", "lugia", "marshadow", "moltres_galarian", "reshiram", "slowbro_mega", "zarude", "zekrom"]
             }, {
                 "points": 1,
                 "pokemon": ["avalugg_hisuian", "blaziken_mega", "dragonite", "enamorus_incarnate", "florges", "genesect", "genesect_burn", "genesect_douse", "genesect_chill", "genesect_shock", "gyarados", "kyurem", "melmetal", "mew", "tapu_bulu", "tapu_lele"]
@@ -124,7 +124,7 @@
             "values": ["fairy", "fighting", "steel"]
         }, {
             "filterType": "id",
-            "values": ["gastrodon", "malamar", "araquanid", "clodsire", "toxapex", "lanturn", "zweilous", "hydreigon", "guzzlord", "cresselia", "drapion", "feraligatr", "skuntank", "muk_alolan", "grimer_alolan", "stunky", "qwilfish_hisuian", "overqwil", "giratina_origin", "suicune", "zygarde", "zygarde_10", "amaura", "aurorus", "ariados"]
+            "values": ["gastrodon", "malamar", "araquanid", "clodsire", "toxapex", "lanturn", "zweilous", "hydreigon", "guzzlord", "cresselia", "drapion", "feraligatr", "skuntank", "muk_alolan", "grimer_alolan", "stunky", "qwilfish_hisuian", "overqwil", "giratina_origin", "suicune", "zygarde", "zygarde_10", "amaura", "aurorus", "lapras", "grumpig", "blastoise", "wailmer", "armarouge", "jellicent", "ariados"]
         }]
     }, {
         "name": "catch",
@@ -154,7 +154,7 @@
         "exclude": []
     }, {
         "name": "gbinvitational",
-        "title": "GymBreakers Invitational",
+        "title": "Gymbreakers Invitational Remix",
         "include": [{
             "filterType": "type",
             "name": "Type",
@@ -162,20 +162,20 @@
         }, {
             "filterType": "id",
             "name": "Species",
-            "values": ["goodra", "lurantis", "ursaring", "gliscor", "dunsparce", "medicham", "charjabug"]
+            "values": ["goodra", "lurantis", "ursaring", "ursaring_shadow", "gliscor", "gliscor_shadow", "dunsparce", "charjabug"]
         }],
         "exclude": [{
-            "filterType": "tag",
-            "name": "Tag",
-            "values": ["shadow", "mega"]
-        }, {
             "filterType": "type",
             "name": "Type",
             "values": ["fighting"]
         }, {
             "filterType": "id",
             "name": "Species",
-            "values": ["morpeko", "morpeko_full_belly", "skarmory", "registeel", "gastrodon"]
+            "values": ["morpeko", "morpeko_full_belly", "skarmory", "registeel", "gastrodon", "medicham", "corviknight"]
+        }, {
+            "filterType": "tag",
+            "name": "Tag",
+            "values": ["mega"]
         }],
         "overrides": [],
         "league": 1500,
@@ -286,6 +286,15 @@
         }],
         "levelCap": 50
     }, {
+        "name": "premier",
+        "title": "Premier Cup",
+        "include": [],
+        "exclude": [{
+            "filterType": "tag",
+            "values": ["legendary", "mythical", "ultrabeast", "mega"]
+        }],
+        "partySize": 3
+    }, {
         "name": "remix",
         "title": "Remix",
         "include": [],
@@ -339,14 +348,14 @@
             "values": ["bug", "ice", "normal", "psychic"]
         }, {
             "filterType": "id",
-            "values": ["gyarados", "gyarados_mega", "gyarados_shadow", "hippowdon", "hippowdon_shadow", "muk", "muk_shadow", "nihilego", "samurott", "samurott_shadow", "swampert", "swampert_mega", "swampert_shadow"]
+            "values": ["gyarados", "gyarados_mega", "gyarados_shadow", "hippowdon", "hippowdon_shadow", "muk", "muk_shadow", "nihilego", "samurott", "samurott_shadow", "swampert", "swampert_mega", "swampert_shadow", "weezing", "weezing_shadow"]
         }],
         "exclude": [{
             "filterType": "type",
             "values": ["fire", "steel"]
         }, {
             "filterType": "id",
-            "values": ["aurorus", "buzzwole", "cresselia", "golisopod", "greedent", "heracross", "heracross_mega", "leavanny", "lickilicky", "lokix", "malamar", "miltank", "ninetales_alolan", "oranguru", "walrein"]
+            "values": ["aurorus", "buzzwole", "cresselia", "golisopod", "greedent", "heracross", "heracross_mega", "leavanny", "lickilicky", "lokix", "malamar", "miltank", "ninetales_alolan", "oranguru", "walrein", "grumpig", "lapras"]
         }]
     }, {
         "name": "tundraremixv2",
@@ -409,18 +418,9 @@
         "cp": 10000,
         "meta": "premiermaster",
         "showCup": true,
-        "showFormat": false,
-        "showMeta": true,
-        "hideRankings": true
-    }, {
-        "title": "Willpower Cup",
-        "cup": "willpower",
-        "cp": 1500,
-        "meta": "willpower",
-        "showCup": true,
         "showFormat": true,
         "showMeta": true,
-        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "Only Fighting-, Psychic-, and Dark-type Pok\u00e9mon will be eligible.", "The following Pokemon will not be allowed: Gardevoir"]
+        "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
     }, {
         "title": "Scroll Cup",
         "cup": "scroll",
@@ -495,7 +495,7 @@
         "showFormat": true,
         "showMeta": true
     }, {
-        "title": "Gymbreakers Invitational",
+        "title": "Gymbreakers Invitational Remix",
         "cup": "gbinvitational",
         "cp": 1500,
         "meta": "gbinvitational",
@@ -9988,7 +9988,7 @@
             "cp1500": [28, 4, 14, 12],
             "cp2500": [50, 15, 15, 15]
         },
-        "searchPriority": 3,
+        "searchPriority": 2,
         "buddyDistance": 1,
         "thirdMoveCost": 10000,
         "released": true,
@@ -18366,6 +18366,7 @@
             "cp2500": [50, 15, 15, 15],
             "cp1500l40": [37, 12, 15, 15]
         },
+        "nicknames": ["clops"],
         "searchPriority": 7,
         "level25CP": 927,
         "tags": ["shadoweligible"],
@@ -18462,7 +18463,8 @@
         },
         "types": ["dark", "none"],
         "fastMoves": ["PSYCHO_CUT", "SNARL"],
-        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK"],
+        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK", "BRUTAL_SWING"],
+        "eliteMoves": ["BRUTAL_SWING"],
         "defaultIVs": {
             "cp500": [7.5, 4, 14, 9],
             "cp1500": [22, 6, 12, 11],
@@ -18485,7 +18487,8 @@
         },
         "types": ["dark", "none"],
         "fastMoves": ["PSYCHO_CUT", "SNARL"],
-        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK"],
+        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK", "BRUTAL_SWING"],
+        "eliteMoves": ["BRUTAL_SWING"],
         "defaultIVs": {
             "cp500": [6, 4, 9, 4],
             "cp1500": [16.5, 6, 12, 15],
@@ -18507,7 +18510,7 @@
         },
         "types": ["dark", "none"],
         "fastMoves": ["PSYCHO_CUT", "SNARL"],
-        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK"],
+        "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK", "BRUTAL_SWING"],
         "defaultIVs": {
             "cp500": [7.5, 4, 14, 9],
             "cp1500": [22, 6, 12, 11],
@@ -23776,11 +23779,12 @@
             "cp2500": [48.5, 4, 14, 14],
             "cp2500l40": [40, 15, 15, 15]
         },
+        "nicknames": ["noir"],
         "level25CP": 1447,
         "tags": ["shadoweligible"],
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "searchPriority": 6,
+        "searchPriority": 3,
         "released": true,
         "family": {
             "id": "FAMILY_DUSKULL",
@@ -29901,7 +29905,7 @@
             "cp1500": [19.5, 5, 10, 15],
             "cp2500": [35, 4, 14, 11]
         },
-        "searchPriority": 6,
+        "searchPriority": 3,
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
         "released": true,
@@ -34265,6 +34269,7 @@
             "cp1500": [17.5, 6, 13, 11],
             "cp2500": [29.5, 4, 10, 13]
         },
+        "searchPriority": 4,
         "buddyDistance": 1,
         "thirdMoveCost": 10000,
         "released": true,
@@ -36679,7 +36684,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_SIZZLIPEDE",
             "evolutions": ["centiskorch"]
@@ -36703,7 +36708,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_SIZZLIPEDE",
             "parent": "sizzlipede"
@@ -37699,30 +37704,10 @@
         }
     }, {
         "dex": 888,
-        "speciesName": "Zacian",
-        "speciesId": "zacian",
-        "baseStats": {
-            "atk": 254,
-            "def": 236,
-            "hp": 192
-        },
-        "types": ["fairy", "steel"],
-        "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "FIRE_FANG"],
-        "chargedMoves": ["PLAY_ROUGH", "IRON_HEAD", "WILD_CHARGE", "CLOSE_COMBAT"],
-        "defaultIVs": {
-            "cp500": [5, 8, 15, 12],
-            "cp1500": [14, 9, 15, 15],
-            "cp2500": [23.5, 6, 15, 15]
-        },
-        "buddyDistance": 20,
-        "thirdMoveCost": 100000,
-        "released": false
-    }, {
-        "dex": 888,
         "speciesName": "Zacian (Crowned Sword)",
         "speciesId": "zacian_crowned_sword",
         "baseStats": {
-            "atk": 332,
+            "atk": 295,
             "def": 240,
             "hp": 192
         },
@@ -37730,10 +37715,11 @@
         "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "FIRE_FANG"],
         "chargedMoves": ["PLAY_ROUGH", "IRON_HEAD", "WILD_CHARGE", "CLOSE_COMBAT"],
         "defaultIVs": {
-            "cp500": [4, 6, 15, 8],
-            "cp1500": [11, 5, 14, 10],
-            "cp2500": [18, 4, 15, 15]
+            "cp500": [4.5, 4, 6, 11],
+            "cp1500": [12.5, 4, 12, 8],
+            "cp2500": [20.5, 5, 11, 14]
         },
+        "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
         "released": false
@@ -37761,41 +37747,22 @@
         "searchPriority": 5
     }, {
         "dex": 889,
-        "speciesName": "Zamazenta",
-        "speciesId": "zamazenta",
-        "baseStats": {
-            "atk": 254,
-            "def": 236,
-            "hp": 192
-        },
-        "types": ["fighting", "steel"],
-        "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "ICE_FANG"],
-        "chargedMoves": ["MOONBLAST", "IRON_HEAD", "CRUNCH", "CLOSE_COMBAT"],
-        "defaultIVs": {
-            "cp500": [5, 8, 15, 12],
-            "cp1500": [14, 9, 15, 15],
-            "cp2500": [23.5, 6, 15, 15]
-        },
-        "buddyDistance": 20,
-        "thirdMoveCost": 100000,
-        "released": false
-    }, {
-        "dex": 889,
         "speciesName": "Zamazenta (Crowned Shield)",
         "speciesId": "zamazenta_crowned_shield",
         "baseStats": {
-            "atk": 250,
-            "def": 292,
+            "atk": 231,
+            "def": 282,
             "hp": 192
         },
         "types": ["fighting", "steel"],
         "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "ICE_FANG"],
         "chargedMoves": ["MOONBLAST", "IRON_HEAD", "CRUNCH", "CLOSE_COMBAT"],
         "defaultIVs": {
-            "cp500": [4.5, 13, 15, 15],
-            "cp1500": [13, 5, 15, 15],
-            "cp2500": [22, 4, 15, 11]
+            "cp500": [5, 10, 10, 15],
+            "cp1500": [14.5, 5, 11, 14],
+            "cp2500": [24, 4, 13, 15]
         },
+        "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
         "released": false
@@ -40973,6 +40940,8 @@
             "cp1500": [15.5, 6, 12, 15],
             "cp2500": [25.5, 8, 15, 15]
         },
+        "searchPriority": 2,
+        "nicknames": ["golden"],
         "buddyDistance": 5,
         "thirdMoveCost": 10000,
         "released": true,
