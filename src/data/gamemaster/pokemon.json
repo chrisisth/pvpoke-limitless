@@ -7734,12 +7734,13 @@
     "tags": ["regional", "paldean"],
     "defaultIVs": {
 		"cp500": [6.5, 9, 15, 14],
-        "cp1500": [19.5, 5, 15, 11],
+        "cp1500": [20, 4, 13, 5],
         "cp2500": [35.5, 5, 10, 14]
     },
+	"levelFloor": 20,
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false
+    "released": true
 }, {
     "dex": 128,
     "speciesName": "Tauros (Aqua)",
@@ -7755,13 +7756,14 @@
     "tags": ["regional", "paldean"],
     "defaultIVs": {
 		"cp500": [6.5, 9, 15, 14],
-        "cp1500": [19.5, 5, 15, 11],
+        "cp1500": [20, 4, 13, 5],
         "cp2500": [35.5, 5, 10, 14]
     },
+	"levelFloor": 20,
 	"searchPriority": 2,
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false
+    "released": true
 }, {
     "dex": 128,
     "speciesName": "Tauros (Blaze)",
@@ -7777,12 +7779,13 @@
     "tags": ["regional", "paldean"],
     "defaultIVs": {
 		"cp500": [6.5, 9, 15, 14],
-        "cp1500": [19.5, 5, 15, 11],
+        "cp1500": [20, 4, 13, 5],
         "cp2500": [35.5, 5, 10, 14]
     },
+	"levelFloor": 20,
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false
+    "released": true
 }, {
     "dex": 129,
     "speciesName": "Magikarp",
@@ -35560,7 +35563,7 @@
         "hp": 120
     },
     "types": ["dark", "none"],
-    "fastMoves": ["QUICK_ATTACK", "SNARL"],
+    "fastMoves": ["QUICK_ATTACK", "SNARL", "SUCKER_PUNCH"],
     "chargedMoves": ["NIGHT_SLASH", "PLAY_ROUGH"],
     "defaultIVs": {
         "cp500": [28, 4, 12, 13],
@@ -35584,7 +35587,7 @@
         "hp": 172
     },
     "types": ["dark", "none"],
-    "fastMoves": ["QUICK_ATTACK", "SNARL"],
+    "fastMoves": ["QUICK_ATTACK", "SNARL", "SUCKER_PUNCH"],
     "chargedMoves": ["NIGHT_SLASH", "PLAY_ROUGH"],
     "defaultIVs": {
         "cp500": [9, 4, 15, 4],
@@ -35729,7 +35732,7 @@
     },
     "types": ["water", "rock"],
     "fastMoves": ["WATERFALL", "BITE"],
-    "chargedMoves": ["BODY_SLAM", "SURF", "ROCK_BLAST"],
+    "chargedMoves": ["BODY_SLAM", "SURF", "ROCK_BLAST", "CRUNCH"],
     "defaultIVs": {
         "cp500": [6.5, 8, 15, 15],
         "cp1500": [19.5, 7, 13, 10],
@@ -35950,7 +35953,7 @@
     },
     "types": ["ground", "none"],
     "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-    "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER"],
+    "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER", "WRAP"],
     "defaultIVs": {
         "cp500": [17.5, 7, 13, 15],
         "cp1500": [50, 15, 15, 15],
@@ -35974,7 +35977,7 @@
     },
     "types": ["ground", "none"],
     "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-    "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER"],
+    "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER", "WRAP"],
     "defaultIVs": {
         "cp500": [6.5, 15, 13, 15],
         "cp1500": [20, 5, 8, 15],
@@ -38679,7 +38682,7 @@
     },
     "types": ["rock", "none"],
     "fastMoves": ["SMACK_DOWN", "MUD_SHOT"],
-    "chargedMoves": ["ROCK_SLIDE", "ROCK_TOMB", "ANCIENT_POWER"],
+    "chargedMoves": ["ROCK_BLAST", "ROCK_TOMB", "ANCIENT_POWER"],
     "defaultIVs": {
         "cp500": [7, 6, 15, 10],
         "cp1500": [20.5, 5, 12, 15],
@@ -39043,7 +39046,7 @@
     },
     "types": ["ground", "grass"],
     "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-    "chargedMoves": ["EARTH_POWER", "SEED_BOMB", "ACID_SPRAY"],
+    "chargedMoves": ["EARTH_POWER", "SEED_BOMB", "ACID_SPRAY", "WRAP"],
     "defaultIVs": {
         "cp500": [8, 4, 5, 13],
         "cp1500": [23.5, 4, 7, 14],
@@ -39211,7 +39214,7 @@
     },
     "types": ["psychic", "none"],
     "fastMoves": ["PECK", "CONFUSION"],
-    "chargedMoves": ["PSYBEAM", "PSYSHOCK", "PSYCHIC"],
+    "chargedMoves": ["PSYBEAM", "PSYSHOCK", "PSYCHIC", "DAZZLING_GLEAM"],
     "defaultIVs": {
         "cp500": [7.5, 5, 15, 13],
         "cp1500": [22, 8, 15, 13],
@@ -39565,7 +39568,7 @@
     },
     "types": ["rock", "poison"],
     "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-    "chargedMoves": ["DAZZLING_GLEAM", "ROCK_SLIDE", "SLUDGE_WAVE"],
+    "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
     "defaultIVs": {
         "cp500": [11, 4, 13, 15],
         "cp1500": [35.5, 7, 14, 14],
@@ -39589,7 +39592,7 @@
     },
     "types": ["rock", "poison"],
     "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-    "chargedMoves": ["DAZZLING_GLEAM", "ROCK_SLIDE", "SLUDGE_WAVE"],
+    "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
     "defaultIVs": {
         "cp500": [6, 4, 7, 10],
         "cp1500": [17, 5, 8, 15],

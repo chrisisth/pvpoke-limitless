@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-03-26 22:00:42",
+    "timestamp": "2025-04-02 02:01:36",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -358,6 +358,32 @@
             "values": ["aurorus", "buzzwole", "cresselia", "golisopod", "greedent", "heracross", "heracross_mega", "leavanny", "lickilicky", "lokix", "malamar", "miltank", "ninetales_alolan", "oranguru", "walrein", "grumpig", "lapras"]
         }]
     }, {
+        "name": "stygian",
+        "title": "Devon Stygian Cup",
+        "include": [{
+            "filterType": "type",
+            "name": "Type",
+            "values": ["dark", "water", "dragon", "ice"]
+        }],
+        "exclude": [{
+            "filterType": "tag",
+            "name": "Tag",
+            "values": ["mega"]
+        }, {
+            "filterType": "type",
+            "name": "Type",
+            "values": ["electric", "fairy", "rock"]
+        }, {
+            "filterType": "id",
+            "name": "Species",
+            "values": ["mandibuzz", "toxapex", "malamar", "azumarill", "feraligatr", "umbreon", "moltres_galarian", "gastrodon", "quagsire", "pangoro", "obstagoon", "scrafty", "poliwrath", "lapras"]
+        }],
+        "overrides": [],
+        "league": 1500,
+        "useDefaultMovesets": 1,
+        "levelCap": 50,
+        "includeLowStatProduct": true
+    }, {
         "name": "tundraremixv2",
         "title": "Devon Tundra Cup (Gymbreakers Remix V2)",
         "include": [{
@@ -422,15 +448,6 @@
         "showMeta": true,
         "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
     }, {
-        "title": "Scroll Cup",
-        "cup": "scroll",
-        "cp": 1500,
-        "meta": "scroll",
-        "showCup": true,
-        "showFormat": true,
-        "showMeta": true,
-        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "Only Water-, Fighting-, and Dark-type Pok\u00e9mon will be eligible.", "The following Pokemon will not be allowed: Primarina"]
-    }, {
         "title": "P!P Championship Series",
         "cup": "great",
         "cp": 1500,
@@ -471,18 +488,10 @@
         "showFormat": true,
         "showMeta": true
     }, {
-        "title": "Devon Ingot Cup",
-        "cup": "ingot",
+        "title": "Devon Stygian Cup",
+        "cup": "stygian",
         "cp": 1500,
-        "meta": "ingot",
-        "showCup": true,
-        "showFormat": true,
-        "showMeta": true
-    }, {
-        "title": "Devon Illusion Cup",
-        "cup": "illusion",
-        "cp": 1500,
-        "meta": "illusion",
+        "meta": "stygian",
         "showCup": true,
         "showFormat": true,
         "showMeta": true
@@ -8312,12 +8321,13 @@
         "tags": ["regional", "paldean"],
         "defaultIVs": {
             "cp500": [6.5, 9, 15, 14],
-            "cp1500": [19.5, 5, 15, 11],
+            "cp1500": [20, 4, 13, 5],
             "cp2500": [35.5, 5, 10, 14]
         },
+        "levelFloor": 20,
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "released": false
+        "released": true
     }, {
         "dex": 128,
         "speciesName": "Tauros (Aqua)",
@@ -8333,13 +8343,14 @@
         "tags": ["regional", "paldean"],
         "defaultIVs": {
             "cp500": [6.5, 9, 15, 14],
-            "cp1500": [19.5, 5, 15, 11],
+            "cp1500": [20, 4, 13, 5],
             "cp2500": [35.5, 5, 10, 14]
         },
+        "levelFloor": 20,
         "searchPriority": 2,
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "released": false
+        "released": true
     }, {
         "dex": 128,
         "speciesName": "Tauros (Blaze)",
@@ -8355,12 +8366,13 @@
         "tags": ["regional", "paldean"],
         "defaultIVs": {
             "cp500": [6.5, 9, 15, 14],
-            "cp1500": [19.5, 5, 15, 11],
+            "cp1500": [20, 4, 13, 5],
             "cp2500": [35.5, 5, 10, 14]
         },
+        "levelFloor": 20,
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "released": false
+        "released": true
     }, {
         "dex": 129,
         "speciesName": "Magikarp",
@@ -36138,7 +36150,7 @@
             "hp": 120
         },
         "types": ["dark", "none"],
-        "fastMoves": ["QUICK_ATTACK", "SNARL"],
+        "fastMoves": ["QUICK_ATTACK", "SNARL", "SUCKER_PUNCH"],
         "chargedMoves": ["NIGHT_SLASH", "PLAY_ROUGH"],
         "defaultIVs": {
             "cp500": [28, 4, 12, 13],
@@ -36162,7 +36174,7 @@
             "hp": 172
         },
         "types": ["dark", "none"],
-        "fastMoves": ["QUICK_ATTACK", "SNARL"],
+        "fastMoves": ["QUICK_ATTACK", "SNARL", "SUCKER_PUNCH"],
         "chargedMoves": ["NIGHT_SLASH", "PLAY_ROUGH"],
         "defaultIVs": {
             "cp500": [9, 4, 15, 4],
@@ -36307,7 +36319,7 @@
         },
         "types": ["water", "rock"],
         "fastMoves": ["WATERFALL", "BITE"],
-        "chargedMoves": ["BODY_SLAM", "SURF", "ROCK_BLAST"],
+        "chargedMoves": ["BODY_SLAM", "SURF", "ROCK_BLAST", "CRUNCH"],
         "defaultIVs": {
             "cp500": [6.5, 8, 15, 15],
             "cp1500": [19.5, 7, 13, 10],
@@ -36528,7 +36540,7 @@
         },
         "types": ["ground", "none"],
         "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-        "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER"],
+        "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER", "WRAP"],
         "defaultIVs": {
             "cp500": [17.5, 7, 13, 15],
             "cp1500": [50, 15, 15, 15],
@@ -36552,7 +36564,7 @@
         },
         "types": ["ground", "none"],
         "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-        "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER"],
+        "chargedMoves": ["DIG", "BULLDOZE", "EARTH_POWER", "WRAP"],
         "defaultIVs": {
             "cp500": [6.5, 15, 13, 15],
             "cp1500": [20, 5, 8, 15],
@@ -39257,7 +39269,7 @@
         },
         "types": ["rock", "none"],
         "fastMoves": ["SMACK_DOWN", "MUD_SHOT"],
-        "chargedMoves": ["ROCK_SLIDE", "ROCK_TOMB", "ANCIENT_POWER"],
+        "chargedMoves": ["ROCK_BLAST", "ROCK_TOMB", "ANCIENT_POWER"],
         "defaultIVs": {
             "cp500": [7, 6, 15, 10],
             "cp1500": [20.5, 5, 12, 15],
@@ -39621,7 +39633,7 @@
         },
         "types": ["ground", "grass"],
         "fastMoves": ["MUD_SLAP", "MUD_SHOT"],
-        "chargedMoves": ["EARTH_POWER", "SEED_BOMB", "ACID_SPRAY"],
+        "chargedMoves": ["EARTH_POWER", "SEED_BOMB", "ACID_SPRAY", "WRAP"],
         "defaultIVs": {
             "cp500": [8, 4, 5, 13],
             "cp1500": [23.5, 4, 7, 14],
@@ -39789,7 +39801,7 @@
         },
         "types": ["psychic", "none"],
         "fastMoves": ["PECK", "CONFUSION"],
-        "chargedMoves": ["PSYBEAM", "PSYSHOCK", "PSYCHIC"],
+        "chargedMoves": ["PSYBEAM", "PSYSHOCK", "PSYCHIC", "DAZZLING_GLEAM"],
         "defaultIVs": {
             "cp500": [7.5, 5, 15, 13],
             "cp1500": [22, 8, 15, 13],
@@ -40143,7 +40155,7 @@
         },
         "types": ["rock", "poison"],
         "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-        "chargedMoves": ["DAZZLING_GLEAM", "ROCK_SLIDE", "SLUDGE_WAVE"],
+        "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
         "defaultIVs": {
             "cp500": [11, 4, 13, 15],
             "cp1500": [35.5, 7, 14, 14],
@@ -40167,7 +40179,7 @@
         },
         "types": ["rock", "poison"],
         "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-        "chargedMoves": ["DAZZLING_GLEAM", "ROCK_SLIDE", "SLUDGE_WAVE"],
+        "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
         "defaultIVs": {
             "cp500": [6, 4, 7, 10],
             "cp1500": [17, 5, 8, 15],
