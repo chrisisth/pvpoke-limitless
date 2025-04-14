@@ -11724,7 +11724,7 @@
     },
     "types": ["bug", "fighting"],
     "fastMoves": ["COUNTER", "STRUGGLE_BUG"],
-    "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST"],
+    "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND"],
     "tags": ["regional"],
     "defaultIVs": {
         "cp500": [6, 12, 12, 13],
@@ -11745,7 +11745,7 @@
     },
     "types": ["bug", "fighting"],
     "fastMoves": ["COUNTER", "STRUGGLE_BUG"],
-    "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST"],
+    "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND"],
     "tags": ["regional", "mega"],
     "defaultIVs": {
         "cp500": [4, 13, 13, 15],
@@ -15274,7 +15274,7 @@
     },
     "types": ["fighting", "none"],
     "fastMoves": ["ROCK_SMASH", "TACKLE"],
-    "chargedMoves": ["CROSS_CHOP", "HEAVY_SLAM", "LOW_SWEEP"],
+    "chargedMoves": ["CROSS_CHOP", "HEAVY_SLAM", "LOW_SWEEP", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [24, 5, 14, 10],
         "cp1500": [50, 15, 15, 15],
@@ -15300,7 +15300,7 @@
     },
     "types": ["fighting", "none"],
     "fastMoves": ["ROCK_SMASH", "TACKLE"],
-    "chargedMoves": ["CROSS_CHOP", "HEAVY_SLAM", "LOW_SWEEP"],
+    "chargedMoves": ["CROSS_CHOP", "HEAVY_SLAM", "LOW_SWEEP", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [24, 5, 14, 10],
         "cp1500": [50, 15, 15, 15],
@@ -15325,7 +15325,7 @@
     },
     "types": ["fighting", "none"],
     "fastMoves": ["BULLET_PUNCH", "COUNTER", "FORCE_PALM"],
-    "chargedMoves": ["CLOSE_COMBAT", "DYNAMIC_PUNCH", "HEAVY_SLAM", "SUPER_POWER"],
+    "chargedMoves": ["CLOSE_COMBAT", "DYNAMIC_PUNCH", "HEAVY_SLAM", "SUPER_POWER", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [6.5, 9, 15, 14],
         "cp1500": [19.5, 4, 14, 15],
@@ -15351,7 +15351,7 @@
     },
     "types": ["fighting", "none"],
     "fastMoves": ["BULLET_PUNCH", "COUNTER", "FORCE_PALM"],
-    "chargedMoves": ["CLOSE_COMBAT", "DYNAMIC_PUNCH", "HEAVY_SLAM", "SUPER_POWER"],
+    "chargedMoves": ["CLOSE_COMBAT", "DYNAMIC_PUNCH", "HEAVY_SLAM", "SUPER_POWER", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [6.5, 9, 15, 14],
         "cp1500": [19.5, 4, 14, 15],
@@ -27030,7 +27030,7 @@
     },
     "types": ["dark", "fighting"],
     "fastMoves": ["ROCK_SMASH", "FEINT_ATTACK"],
-    "chargedMoves": ["ACID_SPRAY", "BRICK_BREAK", "FOUL_PLAY", "THUNDER_PUNCH"],
+    "chargedMoves": ["ACID_SPRAY", "BRICK_BREAK", "FOUL_PLAY", "THUNDER_PUNCH", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [14, 5, 9, 14],
         "cp1500": [48, 13, 15, 15],
@@ -27055,7 +27055,7 @@
     },
     "types": ["dark", "fighting"],
     "fastMoves": ["COUNTER", "SNARL"],
-    "chargedMoves": ["ACID_SPRAY", "POWER_UP_PUNCH", "FOUL_PLAY", "THUNDER_PUNCH"],
+    "chargedMoves": ["ACID_SPRAY", "POWER_UP_PUNCH", "FOUL_PLAY", "THUNDER_PUNCH", "UPPER_HAND"],
     "defaultIVs": {
         "cp500": [8.5, 5, 8, 8],
         "cp1500": [24.5, 4, 13, 14],
@@ -35643,7 +35643,7 @@
     },
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_GOSSIFLEUR",
         "evolutions": ["eldegoss"]
@@ -35667,7 +35667,7 @@
     },
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_GOSSIFLEUR",
         "parent": "gossifleur"
@@ -37219,13 +37219,14 @@
     "speciesName": "Zacian (Crowned Sword)",
     "speciesId": "zacian_crowned_sword",
     "baseStats": {
-        "atk": 295,
+        "atk": 332,
         "def": 240,
         "hp": 192
     },
     "types": ["fairy", "steel"],
-    "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "FIRE_FANG"],
-    "chargedMoves": ["PLAY_ROUGH", "IRON_HEAD", "WILD_CHARGE", "CLOSE_COMBAT"],
+    "fastMoves": ["METAL_CLAW", "AIR_SLASH"],
+    "chargedMoves": ["PLAY_ROUGH", "CLOSE_COMBAT", "GIGA_IMPACT", "BEHEMOTH_BLADE"],
+	"legacyMoves": ["BEHEMOTH_BLADE"],
     "defaultIVs": {
 		"cp500": [4.5, 4, 6, 11],
         "cp1500": [12.5, 4, 12, 8],
@@ -37262,13 +37263,14 @@
     "speciesName": "Zamazenta (Crowned Shield)",
     "speciesId": "zamazenta_crowned_shield",
     "baseStats": {
-        "atk": 231,
-        "def": 282,
+        "atk": 250,
+        "def": 292,
         "hp": 192
     },
     "types": ["fighting", "steel"],
-    "fastMoves": ["METAL_CLAW", "SNARL", "QUICK_ATTACK", "ICE_FANG"],
-    "chargedMoves": ["MOONBLAST", "IRON_HEAD", "CRUNCH", "CLOSE_COMBAT"],
+    "fastMoves": ["METAL_CLAW", "ICE_FANG"],
+    "chargedMoves": ["MOONBLAST", "CLOSE_COMBAT", "GIGA_IMPACT", "BEHEMOTH_BASH"],
+	"legacyMoves": ["BEHEMOTH_BASH"],
     "defaultIVs": {
 		"cp500": [5, 10, 10, 15],
         "cp1500": [14.5, 5, 11, 14],
@@ -39262,7 +39264,7 @@
     },
     "types": ["fairy", "steel"],
     "fastMoves": ["FAIRY_WIND", "ROCK_SMASH"],
-    "chargedMoves": ["PLAY_ROUGH", "BRUTAL_SWING", "FLASH_CANNON"],
+    "chargedMoves": ["PLAY_ROUGH", "FLASH_CANNON"],
     "defaultIVs": {
         "cp500": [23.5, 4, 8, 15],
         "cp1500": [50, 15, 15, 15],
@@ -39286,7 +39288,7 @@
     },
     "types": ["fairy", "steel"],
     "fastMoves": ["FAIRY_WIND", "ROCK_SMASH"],
-    "chargedMoves": ["PLAY_ROUGH", "BRUTAL_SWING", "FLASH_CANNON"],
+    "chargedMoves": ["PLAY_ROUGH", "FLASH_CANNON"],
     "defaultIVs": {
         "cp500": [14.5, 7, 12, 14],
         "cp1500": [50, 15, 15, 15],
@@ -39311,13 +39313,14 @@
     },
     "types": ["fairy", "steel"],
     "fastMoves": ["FAIRY_WIND", "ROCK_SMASH"],
-    "chargedMoves": ["PLAY_ROUGH", "BRUTAL_SWING", "FLASH_CANNON", "HEAVY_SLAM"],
+    "chargedMoves": ["PLAY_ROUGH", "FLASH_CANNON", "HEAVY_SLAM", "BULLDOZE"],
     "defaultIVs": {
         "cp500": [8.5, 4, 9, 15],
         "cp1500": [25.5, 4, 6, 14],
         "cp2500": [50, 12, 14, 14],
         "cp2500l40": [40, 15, 15, 15]
     },
+	"searchPriority": 3,
     "buddyDistance": 3,
     "thirdMoveCost": 75000,
     "released": false,
