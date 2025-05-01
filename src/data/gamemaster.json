@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-04-19 18:09:25",
+    "timestamp": "2025-04-30 02:35:18",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -464,15 +464,6 @@
         "showMeta": true,
         "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
     }, {
-        "title": "Spring Cup",
-        "cup": "spring",
-        "cp": 1500,
-        "meta": "spring",
-        "showCup": true,
-        "showFormat": true,
-        "showMeta": true,
-        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "Only Water-, Grass-, and Fairy-type Pok\u00e9mon are eligible.", "The following Pok\u00e9mon will not be allowed: Jumpluff, Roserade, Toxapex"]
-    }, {
         "title": "Great League Remix",
         "cup": "remix",
         "cp": 1500,
@@ -483,12 +474,13 @@
         "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "The 20 Pok\u00e9mon that are most used by Trainers ranked Ace and above in the Great League are not eligible in the Great League Remix: Blastoise, Wigglytuff, Marowak, Galarian Weezing, Lapras, Feraligatr, Azumarill, Jumpluff, Sableye, Cradily, Gastrodon, Drapion, Serperior, Mandibuzz, Talonflame, Malamar, Golisopod, Morpeko, Annihilape, and Clodsire"]
     }, {
         "title": "P!P Championship Series",
-        "cup": "great",
+        "cup": "all",
         "cp": 1500,
         "meta": "championshipseries",
-        "showCup": false,
-        "showFormat": false,
-        "showMeta": true
+        "showCup": true,
+        "showFormat": true,
+        "showMeta": true,
+        "hideRankings": true
     }, {
         "title": "Battle Frontier (Cascade)",
         "cup": "cascade",
@@ -28677,7 +28669,8 @@
         },
         "types": ["ice", "none"],
         "fastMoves": ["FROST_BREATH", "ASTONISH"],
-        "chargedMoves": ["BLIZZARD", "FLASH_CANNON", "SIGNAL_BEAM"],
+        "chargedMoves": ["BLIZZARD", "FLASH_CANNON", "SIGNAL_BEAM", "AVALANCHE"],
+        "eliteMoves": ["AVALANCHE"],
         "defaultIVs": {
             "cp500": [6.5, 13, 12, 15],
             "cp1500": [19.5, 5, 14, 14],
@@ -36531,7 +36524,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_APPLIN",
             "evolutions": ["flapple", "appletun"]
@@ -36556,7 +36549,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_APPLIN",
             "parent": "applin"
@@ -36581,7 +36574,7 @@
         },
         "buddyDistance": 5,
         "thirdMoveCost": 75000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_APPLIN",
             "parent": "applin"
