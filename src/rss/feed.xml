@@ -3,6 +3,30 @@
 
 	<channel>
 		<item>
+			<title>Catch Cup Rankings</title>
+			<description>
+				<![CDATA[Anything goes in Catch Cup where you can battle with any Great League Pokemon you've caught this season. This should play like open Great League for the most part, but the availability of some staple picks (especially Shadows) may affect the metagame. Shadow Jumpluff, for example, has had a recent dominating stretch but may be benched for this cup.<br><br>A few thrifty and popular picks include Furret, Feraligatr, Skeledirge, and Thievul. Good luck during this GO Battle Week!]]>
+			</description>
+			<link>https://pvpoke.com/rankings/catch/1500/overall/</link>
+			<pubDate>Thu, 22 May 2025 14:49:23 GMT</pubDate>
+		</item>
+		<item>
+			<title>Urshifu Rankings</title>
+			<description>
+				<![CDATA[Kubfu will be able to evolve into Urshifu next week with the option of two styles, Rapid Strike (Fighting/Water) and Single Strike (Fighting/Dark). While Urshifu can fit into the lower leagues, it's best suited for Master League - although as we'll get to below, it may only have a short window in the metagame.<br><br>Single Strike Urshifu is currently the better of the two with access to Sucker Punch, while Rapid Strike has nerfed Counter. Single Strike's Dark typing is also more appealing than Water in the current Master League meta. Urshifu's stats and attacks fall short of top tier legendaries like Origin Palkia, Black/White Kyurem, and Necrozma, so it's likely to fill more of an anti-meta or corebreaking role.<br><br>However, Urshifu has to contend with the upcoming release of Crowned Zacian and Zamazenta, which look to shatter Master League as we know it. Both will significantly reduce its viability, ultimately making Urshifu a poor long term investment for PvP.]]>
+			</description>
+			<link>https://pvpoke.com/rankings/all/10000/overall/urshifu_single_strike/</link>
+			<pubDate>Sat, 17 May 2025 16:30:10 GMT</pubDate>
+		</item>
+		<item>
+			<title>Retro Cup Rankings</title>
+			<description>
+				<![CDATA[Apologies for the delay! Initial rankings and resources are now posted for Retro Cup. Similar to the Remix we just saw, Retro Cup tosses out the biggest answers to Ghost and Dragon, leaving these offensive types to wreak havoc. Expect plenty of double-Ghost or double-Dragon lines in this format! Bulky Pokemon like Jumpluff and Lapras should provide anchors for other team building schemes.]]>
+			</description>
+			<link>https://pvpoke.com/rankings/retro/1500/overall/</link>
+			<pubDate>Tue, 13 May 2025 20:01:42 GMT</pubDate>
+		</item>
+		<item>
 			<title>Kingambit and New Shadow Rankings</title>
 			<description>
 				<![CDATA[Kingambit and new Shadow Pokemon make their upcoming debuts. Kingambit is the final evolution of Bisharp and a Dark/Steel glass cannon. It's a spice pick for the lower leagues, but keep an eye on Master League and Master Premier where it has some corebreaker potential against Steel + Fairy teams. It will need to wait for its signature move or potential move updates to reach its full potential.<br><br>Shadow Malamar commands the most attention of the new batch. As a core meta Pokemon already, Shadow Malamar makes for an exciting alternative. It's well-suited for the Shadow role thanks to its Fast Attack pressure and spammy Charged Attacks. Aurorus is another interesting choice that will likely see play in themed cups. In Master League, Shadow Dialga carries big name recognition but is outclassed by the Origin form. Note that Shadow Dialga doesn't have the strict IV requirements of its non-Shadow counterpart - it will generally always deal and take 5 Dragon Breath damage in the mirror matchup.]]>
@@ -97,30 +121,6 @@
 			</description>
 			<link>https://pvpoke.com/</link>
 			<pubDate>Tue, 11 Mar 2025 01:35:44 GMT</pubDate>
-		</item>
-		<item>
-			<title>Skeledirge Rankings</title>
-			<description>
-				<![CDATA[Fuecoco has a big Community Day this weekend, where Skeledirge will be receiving Blast Burn as an exclusive move and Torch Song as a regular addition to its movepool. Blast Burn is the Fire-type nuke we all know, while Torch Song is an Attack-boosting move that's slightly stronger Flame Charge, dealing more damage and costing less energy. Skeledirge is a top Fire type in Great League and Ultra League, and should see renewed play with its new moveset options. It also has some niche play in Master Premier, so look to evolve one for each league.<br><br>Skeledirge now has multiple viable moveset options. It previously ran Disarming Voice + Shadow Ball as its preferred Charged Attacks. Fairy + Ghost provide near perfect coverage, able to hit any Pokemon in the metagame for neutral damage. Some may continue to opt for this moveset depending on the meta, however Torch Song or Blast Burn now provide greater damage output and a higher performance ceiling.<br><br>At an initial glance, the STAB combination of Torch Song + Shadow Ball appears to be the most likely moveset going forward. It still provides a wide degree of coverage (walled only by Guzzlord in the meta), and Torch Song boosts Skeledirge's performance to higher levels! For example, boosted Torch Song is about as strong as super effective Disarming Voice, and boosted Shadow Ball is about as strong as unboosted Blast Burn. This moveset only sees drawbacks in metas with heavy a Dragon-type presence where there's a two-stage difference in effectiveness between Disarming Voice and Torch Song.<br><br>Blast Burn is Skeledirge's strongest attack. However, Torch Song + Blast Burn leaves it with no coverage. Sometimes even resisted Blast Burn is better than neutral attacks on other Pokemon, but STAB Shadow Ball is strong enough that Blast Burn isn't the de facto attack on Skeledirge. Blast Burn has slightly faster pacing than Shadow Ball and can be doubled up, so there are some advantages to running it.<br><br>Even if you don't plan to use Blast Burn, look to evolve multiple Skeledirge so you have the option. This is a big Community Day for PvP, so have fun and good luck!]]>
-			</description>
-			<link>https://pvpoke.com/rankings/all/1500/overall/skeledirge/</link>
-			<pubDate>Fri, 07 Mar 2025 14:43:59 GMT</pubDate>
-		</item>
-		<item>
-			<title>Scroll Cup Rankings</title>
-			<description>
-				<![CDATA[Scroll Cup takes place next week, featuring the three types in the Kubfu family - Dark, Fighting, and Water. You won't have to scroll far to find your Pokemon for this cup because it's a pretty limited meta. Great League standouts like Azumarill, Mandibuzz, and Annihilape will be taking on vital counterpicks like Chesnaught, Lanturn, and Jellicent. Dark-type attacks are resisted by two of the featured types, so Mandibuzz and others may lean toward alternate movesets that provide more neutral play.]]>
-			</description>
-			<link>https://pvpoke.com/rankings/scroll/1500/overall/</link>
-			<pubDate>Thu, 06 Mar 2025 00:43:20 GMT</pubDate>
-		</item>
-		<item>
-			<title>Might and Mastery Updates</title>
-			<description>
-				<![CDATA[The site is updated for the Season of Might and Mastery! Willpower Cup rankings are now available, and Scroll Cup rankings are coming soon.<br><br>This season brings a ton of move updates and will certainly shake up the meta. Some of the biggest winners include Lapras, Grumpig, and Claydol with major buffs or attack updates. As a previous meta staple, Lapras likely has the longest staying power and looks to overthrow Dewgong and Feraligatr in similar roles. Meanwhile, Galarian Corsola is no longer the sole and supreme Ghost-type. Multiple Ghosts including Sableye, Jellicent, Dusclops, and Dusknoir received updates which can push them into the metagame.<br><br>There's a lot to take in, so have fun in the early season! Stay tuned for more updates on upcoming cups and tournament results.]]>
-			</description>
-			<link>https://pvpoke.com/rankings/all/1500/overall/</link>
-			<pubDate>Tue, 04 Mar 2025 22:09:43 GMT</pubDate>
 		</item>
 
 		<title>PvPoke</title>

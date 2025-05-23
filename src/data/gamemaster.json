@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-05-10 18:51:10",
+    "timestamp": "2025-05-22 16:48:56",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -120,7 +120,7 @@
         "include": [],
         "exclude": [{
             "filterType": "id",
-            "values": ["deoxys_defense", "regirock", "regice", "mew", "victini", "genesect", "rayquaza", "zygarde", "latios", "latias", "raikou", "suicune", "entei", "celebi", "diancie", "regidrago", "regieleki", "ho_oh", "buzzwole", "drapion_shadow", "marowak_alolan_shadow", "lapras_shadow", "hitmontop_shadow", "meganium_shadow", "jumpluff_shadow", "steelix_shadow", "walrein_shadow", "poliwrath_shadow", "politoed_shadow", "sealeo_shadow", "guzzlord", "zapdos_shadow"]
+            "values": ["deoxys_defense", "regirock", "regice", "mew", "victini", "genesect", "rayquaza", "zygarde", "latios", "latias", "raikou", "suicune", "entei", "celebi", "diancie", "regidrago", "regieleki", "ho_oh", "buzzwole", "marowak_alolan_shadow", "lapras_shadow", "hitmontop_shadow", "meganium_shadow", "jumpluff_shadow", "steelix_shadow", "walrein_shadow", "poliwrath_shadow", "politoed_shadow", "sealeo_shadow", "guzzlord", "zapdos_shadow", "sableye_shadow", "feraligatr_shadow", "golurk_shadow", "quagsire_shadow", "diggersby_shadow", "zapdos_shadow", "bastiodon_shadow", "typhlosion_shadow", "registeel_shadow", "dusknoir_shadow", "dusclops_shadow"]
         }, {
             "filterType": "tag",
             "values": ["mega"]
@@ -527,14 +527,14 @@
         "showMeta": true,
         "rules": ["No CP limit.", "Legendary Pok\u00e9mon, Mythical Pok\u00e9mon, and Ultra Beasts are not eligible."]
     }, {
-        "title": "Great League Remix",
-        "cup": "remix",
+        "title": "Catch Cup",
+        "cup": "catch",
         "cp": 1500,
-        "meta": "remix",
+        "meta": "catch",
         "showCup": true,
         "showFormat": true,
         "showMeta": true,
-        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "The 20 Pok\u00e9mon that are most used by Trainers ranked Ace and above in the Great League are not eligible in the Great League Remix: Blastoise, Wigglytuff, Marowak, Galarian Weezing, Lapras, Feraligatr, Azumarill, Jumpluff, Sableye, Cradily, Gastrodon, Drapion, Serperior, Mandibuzz, Talonflame, Malamar, Golisopod, Morpeko, Annihilape, and Clodsire"]
+        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "Only Pok\u00e9mon caught during the Might and Mastery Season are eligible."]
     }, {
         "title": "P!P Championship Series",
         "cup": "all",
@@ -38321,33 +38321,7 @@
         "released": true,
         "family": {
             "id": "FAMILY_KUBFU",
-            "evolutions": ["urshifu", "urshifu"]
-        }
-    }, {
-        "dex": 892,
-        "speciesName": "Urshifu",
-        "speciesId": "urshifu",
-        "baseStats": {
-            "atk": 254,
-            "def": 177,
-            "hp": 225
-        },
-        "types": ["fighting", "none"],
-        "fastMoves": ["ROCK_SMASH", "COUNTER"],
-        "chargedMoves": ["BRICK_BREAK", "DYNAMIC_PUNCH", "CLOSE_COMBAT"],
-        "defaultIVs": {
-            "cp500": [5, 11, 15, 14],
-            "cp1500": [15, 10, 12, 10],
-            "cp2500": [24.5, 13, 13, 14]
-        },
-        "tags": ["legendary", "untradeable"],
-        "levelFloor": 15,
-        "buddyDistance": 20,
-        "thirdMoveCost": 100000,
-        "released": false,
-        "family": {
-            "id": "FAMILY_KUBFU",
-            "parent": "kubfu"
+            "evolutions": ["urshifu_rapid_strike", "urshifu_single_strike"]
         }
     }, {
         "dex": 892,
@@ -38370,7 +38344,7 @@
         "levelFloor": 15,
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_KUBFU",
             "parent": "kubfu"
@@ -38396,7 +38370,8 @@
         "levelFloor": 15,
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": false,
+        "searchPriority": 3,
+        "released": true,
         "family": {
             "id": "FAMILY_KUBFU",
             "parent": "kubfu"

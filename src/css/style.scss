@@ -2864,7 +2864,7 @@ a.download-csv{
 
 	.expand-label{
 		position: absolute;
-		color: rgba(255,255,255,.65);
+		color: rgba(255,255,255,.75);
 		left: -16px;
 		font-size: 24px;
 		top: 10px;
@@ -2877,7 +2877,7 @@ a.download-csv{
 	}
 
 	.name-container{
-		float:left;
+		float: left;
 		padding:5px 0;
 	}
 
@@ -2908,10 +2908,11 @@ a.download-csv{
 			background-color: rgba(0,0,0,.6);
 			border-radius: 8px;
 			text-align: right;
-			padding: 5px 8px;
+			padding: 2px 6px;
+		    font-size: 15px;
 
 			&.score-rating{
-				width:60px !important;
+				width:55px !important;
 			}
 
 			span{
@@ -2938,6 +2939,7 @@ a.download-csv{
 		display:flex;
 		flex-wrap: wrap;
 		font-size:12px;
+		max-width: 300px;
 
 		.move{
 			width: 16px;
@@ -3488,6 +3490,61 @@ a.download-csv{
 		}
 
 		h2{ margin: 0 0 5px 0; }
+	}
+}
+
+.rank.typed-ranking{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 8px 10px;
+
+	.pokemon-info{
+		flex: 1;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		min-width: 0;
+
+		.name-container{
+			margin-right: 8px;
+			align-items: center;
+			margin-top: -3px;
+			margin-bottom: -3px;
+			min-width: 46.5%;
+		}
+
+		.type-container{
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+			margin-right: 15px;
+			align-self: flex-start;
+
+			.type-info{
+				display: inline-flex;
+				border-radius: 4px;
+				padding: 2px 5px;
+				font-size: 12px;
+				line-height: 1.2;
+				border: 1px solid #222;
+				color: $color-off-black;
+
+				&.dark, &.dragon, &.ghost{
+					color: $color-off-white;
+				}
+			}
+		}
+
+		.moves{
+			width: 100%;
+			margin-top: 3px;
+		}
+	}
+
+	& > .rating-container{
+		margin-left: auto;
+		align-self: flex-start;
 	}
 }
 
@@ -5269,10 +5326,6 @@ a.pokebattler{
 			.archetype .name{
 				font-size:10px;
 			}
-		}
-
-		.moves{
-			max-width:180px;
 		}
 
 		.rating-container .rating{
