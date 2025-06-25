@@ -1,19 +1,5 @@
 [
 	{
-		"title": "Sunshine Cup",
-		"cup": "sunshine",
-		"cp": 1500,
-		"meta": "sunshine",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
-		"rules": [
-			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Normal-, Fire-, Grass-, and Ground-type Pokémon are eligible.",
-			"Charizard is not allowed."
-		]
-	},
-	{
 		"title": "Fossil Cup",
 		"cup": "fossil",
 		"cp": 1500,
@@ -25,6 +11,33 @@
 			"Pokémon must be at or below 1,500 CP to enter.",
 			"Only Water-, Rock-, and Steel-type Pokémon are eligible.",
 			"Charizard is not allowed."
+		]
+	},
+	{
+		"title": "Summer Cup (Ultra League)",
+		"cup": "summer",
+		"cp": 2500,
+		"meta": "summerultra",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 2,500 CP to enter.",
+			"Only Normal-, Fire-, Water-, Grass-, Electric-, and Bug-type Pokémon are eligible."
+		]
+	},
+	{
+		"title": "Little Element Cup",
+		"cup": "element",
+		"cp": 500,
+		"meta": "element",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 500 CP to enter.",
+			"Only Fire-, Water-, and Grass-type Pokémon are eligible.",
+			"Only Pokémon that are able to evolve and have not evolved even once will be eligible."
 		]
 	},
 	{
@@ -53,7 +66,7 @@
 	},
 	{
 		"title": "P!P Championship Series",
-		"cup": "all",
+		"cup": "championshipseries",
 		"cp": 1500,
 		"meta": "championshipseries",
 		"showCup": true,
@@ -62,22 +75,22 @@
 		"hideRankings": true
 	},
 	{
-        "title": "Battle Tower (Tempo)",
-        "cup": "tempo",
-        "cp": 1500,
-        "meta": "tempo",
-        "showCup": true,
-        "showFormat": true,
-        "showMeta": true
+		"title": "Battle Tower (Aurora)",
+		"cup": "aurora",
+		"cp": 1500,
+		"meta": "aurora",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
 	},
 	{
-        "title": "Battle Tower (Wasteland)",
-        "cup": "wasteland",
-        "cp": 1500,
-        "meta": "wasteland",
-        "showCup": true,
-        "showFormat": true,
-        "showMeta": true
+		"title": "Battle Tower (Onyx)",
+		"cup": "onyx",
+		"cp": 1500,
+		"meta": "onyx",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
 	},
 	{
 		"title": "Battle Tower (Ultra)",
@@ -116,19 +129,10 @@
 		"showMeta": true
 	},
 	{
-		"title": "Devon Tundra Cup (Gymbreakers Remix V2)",
-		"cup": "tundraremixv2",
+		"title": "Gymbreakers Pillar Cup Remix",
+		"cup": "pillar2",
 		"cp": 1500,
-		"meta": "tundraremixv2",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
-	},
-	{
-		"title": "Gymbreakers Invitational Remix",
-		"cup": "gbinvitational",
-		"cp": 1500,
-		"meta": "gbinvitational",
+		"meta": "pillar2",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true

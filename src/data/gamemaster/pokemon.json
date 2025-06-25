@@ -9188,10 +9188,10 @@
     "tags": ["starter", "hisuian"],
     "defaultIVs": {
         "cp500": [6.5, 4, 9, 9],
-        "cp1500": [20, 1, 1, 2],
+        "cp1500": [18.5, 5, 11, 14],
         "cp2500": [31.5, 5, 12, 14]
     },
-    "levelFloor": 20,
+    "levelFloor": 15,
     "buddyDistance": 3,
     "thirdMoveCost": 10000,
     "released": true,
@@ -23828,7 +23828,8 @@
     },
     "types": ["normal", "none"],
     "fastMoves": ["HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ZEN_HEADBUTT"],
-    "chargedMoves": ["GIGA_IMPACT", "FOCUS_BLAST", "THUNDER"],
+    "chargedMoves": ["GIGA_IMPACT", "FOCUS_BLAST", "THUNDER", "CRUSH_GRIP"],
+	"eliteMoves": ["CRUSH_GRIP"],
     "tags": ["legendary", "shadoweligible"],
     "defaultIVs": {
         "cp500": [4.5, 4, 13, 15],
@@ -23850,7 +23851,8 @@
     },
     "types": ["normal", "none"],
     "fastMoves": ["HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ZEN_HEADBUTT"],
-    "chargedMoves": ["GIGA_IMPACT", "FOCUS_BLAST", "THUNDER"],
+	"chargedMoves": ["GIGA_IMPACT", "FOCUS_BLAST", "THUNDER", "CRUSH_GRIP"],
+	"eliteMoves": ["CRUSH_GRIP"],
     "tags": ["legendary", "shadow"],
     "defaultIVs": {
         "cp500": [4.5, 6, 14, 11],
@@ -32731,14 +32733,17 @@
     "types": ["fire", "water"],
     "fastMoves": ["INCINERATE", "WATER_GUN", "TAKE_DOWN"],
     "chargedMoves": ["HYDRO_PUMP", "OVERHEAT", "EARTH_POWER", "SLUDGE_BOMB"],
-    "defaultIVs": {
-        "cp500": [5.5, 6, 4, 5],
-        "cp1500": [15, 5, 15, 13],
-        "cp2500": [25, 8, 15, 11]
+	"defaultIVs": {
+        "cp500": [5, 15, 15, 10],
+        "cp1500": [15, 10, 11, 10],
+        "cp2500": [24, 15, 15, 15]
     },
+	"tags": ["mythical", "untradeable"],
+	"searchPriority": 2,
+	"levelFloor": 15,
     "buddyDistance": 20,
     "thirdMoveCost": 100000,
-    "released": false
+    "released": true
 }, {
     "dex": 722,
     "speciesName": "Rowlet",
@@ -34792,7 +34797,8 @@
     },
     "types": ["dragon", "fighting"],
     "fastMoves": ["POISON_JAB", "DRAGON_TAIL"],
-    "chargedMoves": ["DRAGON_CLAW", "CLOSE_COMBAT", "FLAMETHROWER", "BOOMBURST", "BRICK_BREAK"],
+    "chargedMoves": ["DRAGON_CLAW", "CLOSE_COMBAT", "FLAMETHROWER", "BOOMBURST", "BRICK_BREAK", "CLANGING_SCALES"],
+	"eliteMoves": ["CLANGING_SCALES"],
     "defaultIVs": {
         "cp500": [6, 5, 6, 4],
         "cp1500": [16.5, 6, 15, 14],
@@ -36087,7 +36093,7 @@
     },
     "buddyDistance": 1,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_YAMPER",
         "evolutions": ["boltund"]
@@ -36111,7 +36117,7 @@
     },
     "buddyDistance": 1,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_YAMPER",
         "parent": "yamper"
@@ -37753,7 +37759,8 @@
     },
     "types": ["electric", "none"],
     "fastMoves": ["THUNDER_SHOCK", "LOCK_ON", "VOLT_SWITCH"],
-    "chargedMoves": ["ZAP_CANNON", "THUNDER", "HYPER_BEAM"],
+    "chargedMoves": ["ZAP_CANNON", "THUNDER", "HYPER_BEAM", "THUNDER_CAGE"],
+	"eliteMoves": ["THUNDER_CAGE"],
     "defaultIVs": {
         "cp500": [7, 6, 7, 5],
         "cp1500": [20, 5, 13, 6],
@@ -37774,8 +37781,9 @@
         "hp": 400
     },
     "types": ["dragon", "none"],
-    "fastMoves": ["BITE"],
-    "chargedMoves": ["HYPER_BEAM", "OUTRAGE", "DRAGON_PULSE", "BREAKING_SWIPE"],
+    "fastMoves": ["BITE", "DRAGON_BREATH"],
+    "chargedMoves": ["HYPER_BEAM", "OUTRAGE", "DRAGON_PULSE", "BREAKING_SWIPE", "DRAGON_ENERGY"],
+	"eliteMoves": ["DRAGON_BREATH", "DRAGON_ENERGY"],
     "defaultIVs": {
         "cp500": [6.5, 4, 12, 11],
         "cp1500": [20, 2, 4, 4],
