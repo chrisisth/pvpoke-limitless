@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-06-27 01:09:05",
+    "timestamp": "2025-07-02 20:45:20",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -259,6 +259,22 @@
         "name": "gobattleleague",
         "title": "GO Battle League",
         "include": [],
+        "exclude": [{
+            "filterType": "tag",
+            "values": ["mega"]
+        }],
+        "partySize": 3,
+        "presetOnly": true
+    }, {
+        "name": "hisui",
+        "title": "Hisui Cup",
+        "include": [{
+            "filterType": "dex",
+            "values": [387, 493]
+        }, {
+            "filterType": "id",
+            "values": ["sneasel_hisuian", "sneasel_hisuian_shadow", "sneasler", "sneasler_shadow", "qwilfish_hisuian", "overqwil", "growlithe_hisuian", "arcanine_hisuian", "braviary_hisuian", "voltorb_hisuian", "electrode_hisuian", "typhlosion_hisuian", "samurott_hisuian", "decidueye_hisuian", "wyrdeer", "kleavor", "ursaluna", "zoroark_hisuian"]
+        }],
         "exclude": [{
             "filterType": "tag",
             "values": ["mega"]
@@ -671,6 +687,15 @@
         "showFormat": true,
         "showMeta": true,
         "rules": ["Pok\u00e9mon must be at or below 500 CP to enter.", "Only Fire-, Water-, and Grass-type Pok\u00e9mon are eligible.", "Only Pok\u00e9mon that are able to evolve and have not evolved even once will be eligible."]
+    }, {
+        "title": "Hisui Cup",
+        "cup": "hisui",
+        "cp": 1500,
+        "meta": "hisui",
+        "showCup": true,
+        "showFormat": true,
+        "showMeta": true,
+        "rules": ["Pok\u00e9mon must be at or below 1,500 CP to enter.", "Only Pok\u00e9mon first discovered in the Hisui region or Pok\u00e9mon with a Pok\u00e9dex number from #387 to #493 will be allowed."]
     }, {
         "title": "Master League (Classic)",
         "cup": "classic",
@@ -1141,7 +1166,7 @@
         },
         "level25CP": 1784,
         "eliteMoves": ["EMBER", "WING_ATTACK", "BLAST_BURN", "FLAMETHROWER", "DRAGON_BREATH"],
-        "searchPriority": 10,
+        "searchPriority": 5,
         "buddyDistance": 3,
         "thirdMoveCost": 10000,
         "released": true,
@@ -1225,7 +1250,6 @@
             "cp2500": [34, 5, 11, 14]
         },
         "eliteMoves": ["EMBER", "WING_ATTACK", "BLAST_BURN", "FLAMETHROWER", "DRAGON_BREATH"],
-        "searchPriority": 10,
         "buddyDistance": 3,
         "thirdMoveCost": 10000,
         "released": true,
@@ -19981,7 +20005,7 @@
             "cp1500": [13.5, 6, 10, 9],
             "cp2500": [22.5, 5, 14, 7]
         },
-        "searchPriority": 5,
+        "searchPriority": 4,
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
         "released": true,
@@ -28442,6 +28466,30 @@
             "evolutions": ["zoroark"]
         }
     }, {
+        "dex": 570,
+        "speciesId": "zorua_hisuian",
+        "speciesName": "Zorua (Hisuian)",
+        "baseStats": {
+            "atk": 162,
+            "def": 79,
+            "hp": 111
+        },
+        "types": ["normal", "ghost"],
+        "fastMoves": ["SCRATCH", "SNARL"],
+        "chargedMoves": ["FOUL_PLAY", "SHADOW_BALL", "DARK_PULSE", "NIGHT_SHADE"],
+        "defaultIVs": {
+            "cp500": [15.5, 4, 15, 15],
+            "cp1500": [50, 15, 15, 15],
+            "cp2500": [50, 15, 15, 15]
+        },
+        "buddyDistance": 5,
+        "thirdMoveCost": 75000,
+        "released": false,
+        "family": {
+            "id": "FAMILY_ZORUA",
+            "evolutions": ["zoroark"]
+        }
+    }, {
         "dex": 571,
         "speciesId": "zoroark",
         "speciesName": "Zoroark",
@@ -28466,6 +28514,32 @@
             "id": "FAMILY_ZORUA",
             "parent": "zorua"
         }
+    }, {
+        "dex": 571,
+        "speciesId": "zoroark_hisuian",
+        "speciesName": "Zoroark (Hisuian)",
+        "baseStats": {
+            "atk": 261,
+            "def": 128,
+            "hp": 146
+        },
+        "types": ["normal", "ghost"],
+        "fastMoves": ["SHADOW_CLAW", "SNARL"],
+        "chargedMoves": ["FOUL_PLAY", "SLUDGE_BOMB", "FLAMETHROWER", "SHADOW_BALL"],
+        "defaultIVs": {
+            "cp500": [7.5, 2, 11, 5],
+            "cp1500": [21, 5, 13, 14],
+            "cp2500": [40, 6, 15, 11]
+        },
+        "tags": ["hisuian"],
+        "buddyDistance": 5,
+        "thirdMoveCost": 75000,
+        "released": false,
+        "family": {
+            "id": "FAMILY_ZORUA",
+            "parent": "zorua"
+        },
+        "searchPriority": 2
     }, {
         "dex": 572,
         "speciesId": "minccino",
@@ -31039,7 +31113,8 @@
         "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": true
+        "released": true,
+        "searchPriority": 5
     }, {
         "dex": 646,
         "speciesId": "kyurem_white",
@@ -38364,14 +38439,15 @@
         "chargedMoves": ["PLAY_ROUGH", "CLOSE_COMBAT", "GIGA_IMPACT", "BEHEMOTH_BLADE"],
         "legacyMoves": ["BEHEMOTH_BLADE"],
         "defaultIVs": {
-            "cp500": [4.5, 4, 6, 11],
-            "cp1500": [12.5, 4, 12, 8],
-            "cp2500": [20.5, 5, 11, 14]
+            "cp500": [4, 6, 15, 8],
+            "cp1500": [11, 5, 14, 10],
+            "cp2500": [18, 4, 15, 15]
         },
         "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": true
+        "released": true,
+        "searchPriority": 9
     }, {
         "dex": 888,
         "speciesName": "Zacian (Hero)",
@@ -38392,8 +38468,7 @@
         "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": true,
-        "searchPriority": 5
+        "released": true
     }, {
         "dex": 889,
         "speciesName": "Zamazenta (Crowned Shield)",
@@ -38408,14 +38483,15 @@
         "chargedMoves": ["MOONBLAST", "CLOSE_COMBAT", "GIGA_IMPACT", "BEHEMOTH_BASH"],
         "legacyMoves": ["BEHEMOTH_BASH"],
         "defaultIVs": {
-            "cp500": [5, 10, 10, 15],
-            "cp1500": [14.5, 5, 11, 14],
-            "cp2500": [24, 4, 13, 15]
+            "cp500": [4.5, 13, 15, 15],
+            "cp1500": [13, 5, 15, 15],
+            "cp2500": [22, 4, 15, 11]
         },
         "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": true
+        "released": true,
+        "searchPriority": 7
     }, {
         "dex": 889,
         "speciesName": "Zamazenta (Hero)",
@@ -38436,8 +38512,7 @@
         "tags": ["legendary"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
-        "released": true,
-        "searchPriority": 5
+        "released": true
     }, {
         "dex": 890,
         "speciesName": "Eternatus",
