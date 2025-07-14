@@ -23482,7 +23482,7 @@
     },
     "buddyDistance": 5,
     "thirdMoveCost": 75000,
-    "released": false
+    "released": true
 }, {
     "dex": 479,
     "speciesName": "Rotom (Frost)",
@@ -26694,6 +26694,32 @@
         "parent": "petilil"
     }
 }, {
+    "dex": 549,
+    "speciesId": "lilligant_hisuian",
+    "speciesName": "Lilligant (Hisuian)",
+    "baseStats": {
+        "atk": 208,
+        "def": 159,
+        "hp": 172
+    },
+    "types": ["grass", "fighting"],
+    "fastMoves": ["MAGICAL_LEAF", "BULLET_SEED"],
+    "chargedMoves": ["PETAL_BLIZZARD", "CLOSE_COMBAT", "SOLAR_BEAM", "UPPER_HAND"],
+    "defaultIVs": {
+		"cp500": [7.5, 5, 12, 15],
+        "cp1500": [22.5, 4, 7, 15],
+        "cp2500": [44, 4, 15, 13],
+        "cp2500l40": [39.5, 14, 15, 15]
+    },
+	"tags": ["hisuian"],
+    "buddyDistance": 1,
+    "thirdMoveCost": 10000,
+    "released": true,
+    "family": {
+        "id": "FAMILY_PETILIL",
+        "parent": "petilil"
+    }
+}, {
     "dex": 550,
     "speciesId": "basculin",
     "speciesName": "Basculin",
@@ -27626,12 +27652,13 @@
         "cp1500": [50, 15, 15, 15],
         "cp2500": [50, 15, 15, 15]
     },
+	"tags": ["hisuian"],
     "buddyDistance": 5,
     "thirdMoveCost": 75000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_ZORUA",
-        "evolutions": ["zoroark"]
+        "evolutions": ["zoroark_hisuian"]
     }
 }, {
     "dex": 571,
@@ -27675,10 +27702,10 @@
         "cp1500": [21, 5, 13, 14],
         "cp2500": [40, 6, 15, 11]
     },
-    "tags": ["hisuian"],
+    "tags": ["hisuian", "include1500"],
     "buddyDistance": 5,
     "thirdMoveCost": 75000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_ZORUA",
         "parent": "zorua"
@@ -29656,7 +29683,8 @@
     "released": true,
     "family": {
         "id": "FAMILY_PAWNIARD",
-        "parent": "pawniard"
+        "parent": "pawniard",
+        "evolutions": ["kingambit"]
     }
 }, {
     "dex": 626,
@@ -31290,7 +31318,7 @@
         "hp": 128
     },
     "types": ["steel", "ghost"],
-    "fastMoves": ["TACKLE", "FURY_CUTTER"],
+    "fastMoves": ["TACKLE", "PSYCHO_CUT"],
     "chargedMoves": ["IRON_HEAD", "GYRO_BALL"],
     "defaultIVs": {
         "cp500": [14, 4, 6, 15],
@@ -31315,7 +31343,7 @@
         "hp": 153
     },
     "types": ["steel", "ghost"],
-    "fastMoves": ["PSYCHO_CUT", "FURY_CUTTER"],
+    "fastMoves": ["PSYCHO_CUT", "TACKLE"],
     "chargedMoves": ["IRON_HEAD", "GYRO_BALL"],
     "defaultIVs": {
         "cp500": [8, 5, 5, 8],
@@ -31342,7 +31370,7 @@
         "hp": 155
     },
     "types": ["steel", "ghost"],
-    "fastMoves": ["PSYCHO_CUT", "FURY_CUTTER"],
+    "fastMoves": ["PSYCHO_CUT", "AIR_SLASH"],
     "chargedMoves": ["FLASH_CANNON", "GYRO_BALL", "SHADOW_BALL"],
     "defaultIVs": {
         "cp500": [7, 6, 14, 15],
@@ -31367,7 +31395,7 @@
         "hp": 155
     },
     "types": ["steel", "ghost"],
-    "fastMoves": ["PSYCHO_CUT", "FURY_CUTTER"],
+    "fastMoves": ["PSYCHO_CUT", "AIR_SLASH"],
     "chargedMoves": ["FLASH_CANNON", "GYRO_BALL", "SHADOW_BALL"],
     "defaultIVs": {
         "cp500": [12.5, 4, 5, 12],
@@ -33655,7 +33683,7 @@
     },
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_MUDBRAY",
         "evolutions": ["mudsdale"]
@@ -33679,7 +33707,7 @@
     },
     "buddyDistance": 3,
     "thirdMoveCost": 50000,
-    "released": false,
+    "released": true,
     "family": {
         "id": "FAMILY_MUDBRAY",
         "parent": "mudbray"
@@ -37668,7 +37696,7 @@
     },
     "types": ["poison", "dragon"],
     "fastMoves": ["DRAGON_TAIL", "POISON_JAB"],
-    "chargedMoves": ["CROSS_POISON", "DRAGON_PULSE", "FLAMETHROWER"],
+    "chargedMoves": ["SLUDGE_BOMB", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
     "defaultIVs": {
         "cp500": [4.5, 6, 10, 7],
         "cp1500": [12.5, 5, 9, 13],
@@ -37688,7 +37716,7 @@
     },
     "types": ["poison", "dragon"],
     "fastMoves": ["DRAGON_TAIL", "POISON_JAB"],
-    "chargedMoves": ["CROSS_POISON", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
+    "chargedMoves": ["SLUDGE_BOMB", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
     "defaultIVs": {
         "cp500": [2.5, 14, 15, 12],
         "cp1500": [6.5, 15, 15, 13],
@@ -37816,7 +37844,6 @@
         "cp2500": [36, 4, 11, 15]
     },
     "tags": ["legendary"],
-    "levelFloor": 20,
     "buddyDistance": 20,
     "thirdMoveCost": 100000,
     "released": true
@@ -37839,7 +37866,6 @@
         "cp2500": [31.5, 6, 15, 13]
     },
     "tags": ["legendary"],
-    "levelFloor": 20,
     "buddyDistance": 20,
     "thirdMoveCost": 100000,
     "released": true

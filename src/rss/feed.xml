@@ -1,7 +1,14 @@
-<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0">
+<?xml version="1.0" encoding="utf-8"?><rss version="2.0">
 
-	<channel>
+	<channel><item><title>Ultra League Top Performers</title><description><![CDATA[While training data for Ultra League has only a small sample, I've posted the results so far and updated the default training teams to reflect the new Bellibolt meta. This smiley chunkster demands counterplay from picks like Gastrodon, Virizion, and Guzzlord. Zygarde Complete also looks like the complete package if you have the option. Best of luck in your practice and thanks for any training you contribute!]]></description><link>https://pvpoke.com/train/analysis/all/2500/</link><pubDate>Fri, 11 Jul 2025 18:39:06 GMT</pubDate></item>
+		<item>
+			<title>Hisuian Zoroark Rankings</title>
+			<description>
+				<![CDATA[Hisuian Zoroark is a unique Ghost/Normal typing, which makes it the only Pokemon to resist both Ghost and Fighting attacks. However, as a Haunter-like glass cannon, Hisuian Zoroark can't take much damage of any kind! Its movepool gives it some play as a spice pick, with access to Shadow Claw, Foul Play, and Shadow Ball for a mix of Fast Attack pressure, speed, and nuke potential. Be prepared for some quick battles!<br><br>]]>
+			</description>
+			<link>https://pvpoke.com/rankings/all/1500/overall/zoroark_hisuian/</link>
+			<pubDate>Sun, 06 Jul 2025 16:38:19 GMT</pubDate>
+		</item>
 		<item>
 			<title>Hisui Cup Rankings</title>
 			<description>
@@ -106,22 +113,7 @@
 			<link>https://pvpoke.com/rankings/all/10000/overall/kingambit/</link>
 			<pubDate>Fri, 09 May 2025 14:32:12 GMT</pubDate>
 		</item>
-		<item>
-			<title>Team Builder and Bug Fixes</title>
-			<description>
-				<![CDATA[I've made the following site updates and fixes:<br><br>- Fixed an issue where using the "Custom Threats" option of the Team Builder would sometimes return unexpected results for suggested alternatives.<br>- Fixed an issue where the "Custom Alternatives" option of the Team Builder would use default movesets instead of the movesets provided.<br>- Fixed an issue where closing the Pokebox feature would prevent it from opening again.<br>- Play! Pokemon Championship format is now listed in the Team Builder and Multi-Battle.]]>
-			</description>
-			<link>https://pvpoke.com/#news</link>
-			<pubDate>Wed, 30 Apr 2025 01:01:14 GMT</pubDate>
-		</item>
-		<item>
-			<title>Top Performers Updated</title>
-			<description>
-				<![CDATA[Training Analysis has been updated for all three leagues with data collected so far this season. Check out the top performers for some Pokemon or team ideas against the current meta. Good luck with your practice and keep it up as we head into the second half of the season!]]>
-			</description>
-			<link>https://pvpoke.com/train/analysis/</link>
-			<pubDate>Sun, 27 Apr 2025 21:58:23 GMT</pubDate>
-		</item>
+		
 
 		<title>PvPoke</title>
 		<link>https://pvpoke.com/</link>
