@@ -842,7 +842,8 @@ b{
 			}
 		}
 
-		.mega-cp-container{
+		.mega-cp-container,
+		.form-cp-container{
 			border: 1px solid #888;
 		    border-radius: 8px;
 		    padding: 5px;
@@ -855,11 +856,12 @@ b{
 				margin-top: 0;
 			}
 
-			.mega-cp{
+			.mega-cp,
+			.form-cp{
 				font-size:14px;
 			}
 		}
-
+		
 		.advanced-section{
 			margin-top: 15px;
 

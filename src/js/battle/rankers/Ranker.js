@@ -62,7 +62,9 @@ var RankerMaster = (function () {
 					}
 				}
 
-				callback(allResults);
+				if(callback){
+					callback(allResults);
+				}
 			}
 
 			this.initPokemonList = function(cp){
@@ -712,6 +714,10 @@ var RankerMaster = (function () {
 
 					if(pokemon.speciesId == "morpeko_full_belly"){
 						rankings[i].moveset[1] = "AURA_WHEEL_ELECTRIC";
+					}
+
+					if(pokemon.speciesId == "aegislash_shield"){
+						rankings[i].moveset[0] = "AEGISLASH_CHARGE_PSYCHO_CUT";
 					}
 
 					rankings[i].score = rankings[i].scores[rankings[i].scores.length-1];

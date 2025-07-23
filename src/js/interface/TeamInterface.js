@@ -45,6 +45,7 @@ var InterfaceMaster = (function () {
 				}
 
 				multiSelectors[0].setMaxPokemonCount(6);
+				multiSelectors[0].setContext("team");
 
 
 				$(".format-select").on("change", selectFormat);
@@ -287,6 +288,7 @@ var InterfaceMaster = (function () {
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on");
+				var prioritizeMeta = $(".team-option .check.prioritize-meta").hasClass("on");
 
 				if(battle.getCup().name == "shadow"){
 					allowShadows = true;
@@ -364,6 +366,8 @@ var InterfaceMaster = (function () {
 				ranker.setShieldMode(shieldMode);
 				ranker.applySettings(teamSettings, 0);
 				ranker.applySettings(opponentSettings, 1);
+				ranker.setMetaGroup(metaGroup);
+				ranker.setPrioritizeMeta(prioritizeMeta);
 
 				ranker.setRecommendMoveUsage(true);
 
@@ -376,6 +380,7 @@ var InterfaceMaster = (function () {
 				var data = ranker.rank(team, battle.getCP(), battle.getCup(), [], "team-counters");
 				var counterRankings = data.rankings;
 				var teamRatings = data.teamRatings;
+
 				counterTeam = [];
 
 				// Clear targets so it will default to the normal format if the user changes settings
@@ -471,8 +476,8 @@ var InterfaceMaster = (function () {
 					var pokemon = r.pokemon;
 
 					// Display threat score
-					if(count < 20){
-						avgThreatScore += r.score;
+					if(count < 6){
+						avgThreatScore += r.rating;
 					}
 
 					// Push to counter team
@@ -517,7 +522,7 @@ var InterfaceMaster = (function () {
 				}
 
 				// Display average threat score
-				avgThreatScore = Math.round(avgThreatScore / 20);
+				avgThreatScore = Math.round(avgThreatScore / 6);
 				$(".threat-score").html(avgThreatScore);
 
 				// Build CSV results
@@ -683,26 +688,6 @@ var InterfaceMaster = (function () {
 					}
 				}
 
-				// For Season 2 continentals, exclude Pokemon in already occupied slots
-
-				if((battle.getCup().slots)&&(team.length < 6)){
-					// Add ineligible Pokemon to the exclusion list
-					var slots = battle.getCup().slots;
-
-					for(var i = 0; i < slots.length; i++){
-						for(var n = 0; n < team.length; n++){
-							if(slots[i].pokemon.indexOf(team[n].speciesId) > -1){
-								for(var j = 0; j < slots[i].pokemon.length; j++){
-									exclusionList.push(slots[i].pokemon[j]);
-									exclusionList.push(slots[i].pokemon[j]+"_shadow");
-								}
-
-								continue;
-							}
-						}
-					}
-				}
-
 				// If using a restricted Pokemon, exclude restricted list
 
 				if(battle.getCup().restrictedPokemon){
@@ -731,7 +716,7 @@ var InterfaceMaster = (function () {
 
 				$(".poke-search[context='alternative-search']").val('');
 
-				altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList).rankings;
+				altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
 				altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
 				self.displayAlternatives();
 
@@ -744,7 +729,7 @@ var InterfaceMaster = (function () {
 				$(".overview-section .notes div").hide();
 
 				// Coverage grade, take threat score
-				var threatGrade = self.calculateLetterGrade(1200 - avgThreatScore, 640);
+				var threatGrade = self.calculateLetterGrade(1200 - avgThreatScore, 680);
 
 				$(".overview-section.coverage .grade").html(threatGrade.letter);
 				$(".overview-section.coverage .grade").attr("grade", threatGrade.letter);
@@ -909,12 +894,24 @@ var InterfaceMaster = (function () {
 					}
 				}
 
-				// For Continentals, exclude slots that are already filled
+				// For slot metas, exclude slots that are already filled
 				var usedSlots = [];
 
 				if(battle.getCup().slots){
 					for(var n = 0; n < team.length; n++){
-						usedSlots.push(team[n].getSlot(battle.getCup()));
+						let slots = team[n].getSlotNumbers(battle.getCup(), false);
+
+						// Use slots in order
+						if(slots.length == 1){
+							usedSlots.push(slots[0]);
+						} else if(slots.length > 0){
+							for(let j = 0; j < slots.length; j++){
+								if(! usedSlots.includes(slots[j])){
+									usedSlots.push(slots[j]);
+									break;
+								}
+							}
+						}
 					}
 				}
 
@@ -966,9 +963,12 @@ var InterfaceMaster = (function () {
 						}
 					}
 
-					// For Continentals, exclude Pokemon of existing slots
+					// For slot metas, exclude Pokemon of used slots
 					if((battle.getCup().slots)&&(team.length < 6)){
-						if(usedSlots.indexOf(pokemon.getSlot(battle.getCup())) > -1){
+						let slots = pokemon.getSlotNumbers(battle.getCup(), false);
+
+						// If every slot this Pokemon could fill is used, exclude it
+						if(slots.every(slot => usedSlots.includes(slot))){
 							i++;
 							continue;
 						}
@@ -1024,21 +1024,17 @@ var InterfaceMaster = (function () {
 						$row.find("th.name").append("<div class=\"region-label "+tierName.toLowerCase()+"\">"+points+" "+pointsName+"</div>");
 					}
 
-					// Add slot label for Continentals
+					// Add slot label for slot metas
 					if(battle.getCup().slots){
 						var tierName = "";
 						var slot = 0;
 
-						var slots = battle.getCup().slots;
+						let slots = pokemon.getSlotNumbers(battle.getCup());
 
-						for(var j = 0; j < slots.length; j++){
-							if((slots[j].pokemon.indexOf(pokemon.speciesId) > -1)||(slots[j].pokemon.indexOf(pokemon.speciesId.replace("_shadow","")) > -1)){
-								slot = j+1;
-								break;
-							}
+						if(slots.length > 0){
+							$row.find("th.name").append("<div class=\"region-label\">Slot "+slots.join(", ")+"</div>");
 						}
 
-						$row.find("th.name").append("<div class=\"region-label\">Slot "+slot+"</div>");
 					}
 
 					$(".alternatives-table tbody").append($row);
