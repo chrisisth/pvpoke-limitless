@@ -1172,6 +1172,10 @@ function Battle(){
 					}
 				}
 
+				if(mode == "emulate" && players[defender.index].getShields() == 0){
+					useShield = false;
+				}
+
 				if(useShield){
 					var damageBlocked = damage-1;
 
@@ -1275,7 +1279,15 @@ function Battle(){
 				attacker.battleStats.energyGained += Math.min(move.energyGain, 100 - attacker.energy);
 			}
 
-			attacker.energy += attacker.fastMove.energyGain;
+			let energyGain = attacker.fastMove.energyGain;
+
+			// Hard code to apply to custom moves
+			if(attacker.activeFormId == "aegislash_shield"){
+				energyGain = 6;
+			}
+
+
+			attacker.energy += energyGain;
 
 			if(attacker.energy > 100){
 				attacker.energy = 100;
@@ -1296,6 +1308,11 @@ function Battle(){
 			var effectiveness = defender.typeEffectiveness[move.type];
 
 			self.pushAnimation(defender.index, "damage", effectiveness);
+		}
+
+		// Hard code to apply to custom moves
+		if(attacker.activeFormId == "aegislash_shield" && move.energyGain > 0){
+			damage = 1;
 		}
 
 		defender.hp = Math.max(0, defender.hp-damage);
@@ -1450,6 +1467,12 @@ function Battle(){
 			energyValue = -move.energy;
 		}
 
+		// Hard code override for Shield forme with custom move
+		if(attacker.activeFormId == "aegislash_shield" && move.energyGain > 0 && move.moveId.indexOf("AEGISLASH_CHARGE") == -1){
+			energyValue = 6;
+		}
+
+
 		var timelineDescriptions = [damage, energyValue, percentDamage]
 
 		if(buffApplied){
@@ -1482,7 +1505,7 @@ function Battle(){
 		if(attacker.formChange && attacker.formChange.trigger == "charged_move" && attacker.activeFormId != attacker.formChange.alternativeFormId
 			&& move.energy > 0 && (attacker.formChange.moveId == "ANY" || attacker.formChange.moveId == move.moveId)){
 
-			attacker.changeForm();
+			attacker.changeForm(attacker.formChange.alternativeFormId);
 
 			self.logDecision(attacker, " has changed forms into " + attacker.activeFormId);
 
@@ -1498,7 +1521,6 @@ function Battle(){
 		}
 
 		timeline.push(new TimelineEvent(type, move.name, attacker.index, displayTime, turns, timelineDescriptions));
-
 		// If a Pokemon has fainted, clear the action queue
 
 		if(defender.hp <= 0){

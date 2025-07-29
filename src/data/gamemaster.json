@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-07-22 23:36:16",
+    "timestamp": "2025-07-27 18:56:42",
     "settings": {
         "partySize": 3,
         "maxBuffStages": 4,
@@ -951,16 +951,6 @@
     ],
     "formats": [
         {
-            "title": "Sunshine Cup",
-            "cup": "sunshine",
-            "cp": 1500,
-            "meta": "sunshine",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Fire-,  Grass-,  and Ground-type Pokémon are eligible.", "Charizard is not allowed."]
-        },
-        {
             "title": "Fossil Cup",
             "cup": "fossil",
             "cp": 1500,
@@ -1084,10 +1074,19 @@
             "showMeta": true
         },
         {
-            "title": "Little",
+            "title": "Little Cup",
             "cup": "little",
             "cp": 500,
             "meta": "little",
+            "showCup": false,
+            "showFormat": false,
+            "showMeta": false
+        },
+        {
+            "title": "Catch Cup",
+            "cup": "catch",
+            "cp": 1500,
+            "meta": "great",
             "showCup": false,
             "showFormat": false,
             "showMeta": false
@@ -11930,7 +11929,7 @@
                 "cp2500": [46, 5, 15, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 4,
+            "searchPriority": 2,
             "level25CP": 1494,
             "tags": ["shadoweligible"],
             "eliteMoves": ["EARTHQUAKE", "ICE_BEAM"],
@@ -11961,7 +11960,6 @@
                 "cp2500": [46, 5, 15, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 4,
             "tags": ["shadow"],
             "eliteMoves": ["EARTHQUAKE", "ICE_BEAM"],
             "buddyDistance": 3,
@@ -33783,8 +33781,8 @@
             "chargedMoves": ["FLASH_CANNON", "GYRO_BALL", "SHADOW_BALL"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 15, 15],
-                "cp1500": [22, 4, 15, 15],
-                "cp2500": [43.5, 5, 15, 15],
+                "cp1500": [22, 4, 14, 15],
+                "cp2500": [38, 15, 15, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
             "buddyDistance": 5,
@@ -40385,7 +40383,7 @@
             },
             "types": ["poison", "dragon"],
             "fastMoves": ["DRAGON_TAIL", "POISON_JAB"],
-            "chargedMoves": ["SLUDGE_BOMB", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
+            "chargedMoves": ["CROSS_POISON", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
             "defaultIVs": {
                 "cp500": [4.5, 4, 10, 11],
                 "cp1500": [12.5, 4, 14, 8],
@@ -40406,7 +40404,7 @@
             },
             "types": ["poison", "dragon"],
             "fastMoves": ["DRAGON_TAIL", "POISON_JAB"],
-            "chargedMoves": ["SLUDGE_BOMB", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
+            "chargedMoves": ["CROSS_POISON", "DRAGON_PULSE", "FLAMETHROWER", "HYPER_BEAM"],
             "defaultIVs": {
                 "cp500": [2.5, 15, 15, 14],
                 "cp1500": [7, 4, 4, 5],
@@ -42178,7 +42176,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_TOEDSCOOL",
                 "evolutions": ["toedscruel"]
@@ -42204,11 +42202,12 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_TOEDSCOOL",
                 "parent": "toedscool"
-            }
+            },
+            "searchPriority": 4
         },
         {
             "dex": 950,
