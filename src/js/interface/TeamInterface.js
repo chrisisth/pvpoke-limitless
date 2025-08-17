@@ -1096,7 +1096,7 @@ var InterfaceMaster = (function () {
 			this.getTypeEffectivenessArray = function(subjectTypes, direction){
 				var arr = [];
 
-				var allTypes = this.getAllTypes();
+				var allTypes = Pokemon.getAllTypes();
 
 				for(var n = 0; n < allTypes.length; n++){
 
@@ -1122,14 +1122,6 @@ var InterfaceMaster = (function () {
 				return arr;
 			}
 
-			// Array of all types
-
-			this.getAllTypes = function(){
-				var types = ["Bug","Dark","Dragon","Electric","Fairy","Fighting","Fire","Flying","Ghost","Grass","Ground","Ice","Normal","Poison","Psychic","Rock","Steel","Water"];
-
-				return types;
-			}
-
 			this.displayArray = function(arr, direction){
 				$(".typings ."+direction).html('');
 
@@ -1139,7 +1131,7 @@ var InterfaceMaster = (function () {
 
 				// Output header row of all types
 
-				var allTypes = this.getAllTypes();
+				var allTypes = Pokemon.getAllTypes();
 				var $tr = $("<tr><td></td></tr>");
 
 				for(var i = 0; i < allTypes.length; i++){
@@ -1235,7 +1227,7 @@ var InterfaceMaster = (function () {
 				var typesNeutralOrBetter = []; // Array of types that can be hit for neutral damage or better
 				var productArr = []; // Product of resistances across all Pokemon
 
-				var allTypes = this.getAllTypes();
+				var allTypes = Pokemon.getAllTypes();
 
 				for(var i = 0; i < allTypes.length; i++){
 					typesResistedArr.push(0);
