@@ -20,7 +20,6 @@ var InterfaceMaster = (function () {
 			var customRankingInterface;
 			var metaGroup = [];
 			var metaGroupData = [];
-			var metaGroupExport = [];
 			var csv = '';
 			var showMoveCounts = false;
 			var rankingDisplayInterval;
@@ -230,10 +229,10 @@ var InterfaceMaster = (function () {
 
 				csv = 'Pokemon,Score,Dex,Type 1,Type 2,Attack,Defense,Stamina,Stat Product,Level,CP,Fast Move,Charged Move 1,Charged Move 2,Charged Move 1 Count,Charged Move 2 Count,Buddy Distance,Charged Move Cost\n';
 
+
 				// Create an element for each ranked Pokemon
 
 				metaGroup = [];
-				metaGroupExport = [];
 
 
 				$(".loading").hide();
@@ -282,7 +281,7 @@ var InterfaceMaster = (function () {
 				}
 
 				// Construct meta group from ranked Pokemon
-				if((index < 1000)&&(context == "custom")){
+				if((index < 100)&&(context == "custom")){
 					metaGroup.push(pokemon);
 				}
 
@@ -475,12 +474,10 @@ var InterfaceMaster = (function () {
 						jumpToPoke = false;
 					}, 50);
 				}
-
-				metaGroupExport.push(pokemon);
-
 			}
 
 			this.completeRankingDisplay = function(){
+
 				// Update download link with new data
 				const cupName = battle.getCup().name;
 				const category = $(".category-select option:selected").val() || scenario.slug;
@@ -515,15 +512,6 @@ var InterfaceMaster = (function () {
 				if(context == "custom"){
 					customRankingInterface.setMetaGroup(metaGroup);
 				}
-				if (typeof PokeMultiSelect !== 'undefined'){
-					var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
-				customMetaSelector.init(data.pokemon, battle);
-				}
-
-				customMetaSelector.setPokemonList(metaGroupExport);
-
-
-
 			}
 
 			// Given JSON of get parameters, load these settings

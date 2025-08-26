@@ -8,9 +8,9 @@
 
 	<div class="poke-stats">
 		<div class="custom-options">
-			<h3 class="section-title">Pokemon (<span class="poke-count">0</span> / <span class="poke-max-count">1000</span>)</h3>
+			<h3 class="section-title">Pokemon (<span class="poke-count">0</span> / <span class="poke-max-count">100</span>)</h3>
 			<p>Create or select a group of custom Pokemon below.</p>
-			<div class="flex">
+			<div class="flex space-between">
 				<a class="custom-group-sort" href="#">Sort ...</a>
 				<div class="check show-move-counts"><span></span>Move Counts</div>
 			</div>

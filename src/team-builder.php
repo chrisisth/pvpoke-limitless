@@ -23,8 +23,7 @@ require_once 'header.php';
 			<div class="team-option">
 				<h3>Max Team Size</h3>
 				<select class="team-size-select">
-					<option value="3" selected>3</option>
-					<option value="6">6</option>
+					<option value="6" selected>6</option>
 					<option value="8">8</option>
 				</select>
 			</div>
@@ -32,42 +31,11 @@ require_once 'header.php';
 				<h3>Scorecard Length</h3>
 				<select class="scorecard-length-select">
 					<option value="10">10</option>
-					<option value="20">20</option>
+					<option value="20" selected>20</option>
 					<option value="30">30</option>
 					<option value="40">40</option>
 					<option value="60">60</option>
 					<option value="80">80</option>
-					<option value="100">100</option>
-					<option value="200">200</option>
-					<option value="300">300</option>
-					<option value="400">400</option>
-					<option value="500">500</option>
-					<option value="500">600</option>
-					<option value="500">700</option>
-					<option value="500">800</option>
-					<option value="500">900</option>
-					<option value="500" selected>1000</option>
-				</select>
-			</div>
-			<div>
-				<h3>Alternatives Length</h3>
-				<select class="alternatives-length-select">
-					<option value="10">10</option>
-					<option value="20">20</option>
-					<option value="30">30</option>
-					<option value="40">40</option>
-					<option value="60">60</option>
-					<option value="80">80</option>
-					<option value="100" selected>100</option>
-					<option value="200">200</option>
-					<option value="300">300</option>
-					<option value="400">400</option>
-					<option value="500">500</option>
-					<option value="500">600</option>
-					<option value="500">700</option>
-					<option value="500">800</option>
-					<option value="500">900</option>
-					<option value="500">1000</option>
 				</select>
 			</div>
 			<div class="team-option">
@@ -94,7 +62,6 @@ require_once 'header.php';
 					<option value="0">No shields</option>
 					<option value="1">1 shield</option>
 					<option value="2">2 shields</option>
-					<option value="all">all</option>
 				</select>
 			</div>
 			<div class="team-option">
@@ -149,6 +116,7 @@ require_once 'header.php';
 
 <div class="section white error">Please select one or more Pokemon.</div>
 
+<?php require 'modules/ads/body-728.php'; ?>
 
 <div class="section typings white">
 	<a href="#" class="toggle active">Overview <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>

@@ -92,6 +92,8 @@ require_once 'header.php';
 		<div class="tip sandbox">Click the circles to edit actions.</div>
 	</div>
 
+	<?php require 'modules/ads/body-728.php'; ?>
+
 	<div class="battle-results single">
 
 		<div class="share-link-container">

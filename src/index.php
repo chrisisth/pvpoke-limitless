@@ -71,6 +71,7 @@
 		</span>
 	</a>
 
+	<?php require 'modules/ads/body-728.php'; ?>
 
 	<!--Update section for updates-->
 	<div class="flex new-header">
@@ -101,7 +102,7 @@
 
 <?php
 // Localhost developer panel
-if (strpos($WEB_ROOT, 'src') !== false || true) : ?>
+if (strpos($WEB_ROOT, 'src') !== false) : ?>
 
 	<script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 	<script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>

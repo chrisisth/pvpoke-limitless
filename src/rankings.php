@@ -176,13 +176,9 @@ require_once 'header.php';
 	<div class="rankings-container clear"></div>
 </div>
 
-<div class="section white custom-rankings-meta-group">
-	<h3>Custom Group</h3>
-	<p>Save or copy this custom group of the top Pokemon to use in <a href="<?php echo $WEB_ROOT; ?>battle/" target="_blank">Multi-Battle</a> or the <a href="<?php echo $WEB_ROOT; ?>team-builder/" target="_blank">Team Builder</a>.</p>
-	<?php require 'modules/pokemultiselect.php'; ?>
-</div>
-
 <a href="#" class="button download-csv">Export to CSV</a>
+
+<?php require 'modules/ads/body-728.php'; ?>
 
 <div class="section about white">
 	<a class="toggle" href="#">About Rankings <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
@@ -257,8 +253,5 @@ require_once 'header.php';
 <script src="<?php echo $WEB_ROOT; ?>js/battle/rankers/TeamRanker.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/RankingMain.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/libs/hexagon-chart.js?v=<?php echo $SITE_VERSION; ?>"></script>
-
-<script src="<?php echo $WEB_ROOT; ?>js/interface/Pokebox.js?v=<?php echo $SITE_VERSION; ?>"></script>
-<script src="<?php echo $WEB_ROOT; ?>js/interface/PokeMultiSelect.js?v=<?php echo $SITE_VERSION; ?>"></script>
 
 <?php require_once 'footer.php'; ?>

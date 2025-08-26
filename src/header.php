@@ -1,5 +1,5 @@
 <?php require_once 'modules/config.php';
-$SITE_VERSION = '1.35.3.2';
+$SITE_VERSION = '1.36.1.4';
 
 // This prevents caching on local testing
 if (strpos($WEB_ROOT, 'src') !== false) {
@@ -15,7 +15,7 @@ if(isset($_COOKIE['settings'])){
 		$_SETTINGS->matrixDirection = "row";
 	}
 
-	// Fill in missing settings with defaults
+	// Deprecate old gamemaster versions
 	if(! isset($_SETTINGS->gamemaster)){
 		$_SETTINGS->gamemaster = "gamemaster";
 	} else if($_SETTINGS->gamemaster == "gamemaster-paldea"){
@@ -138,7 +138,7 @@ if(! isset($OG_IMAGE)){
 
 <link id="favicon" rel="icon" href="<?php echo $WEB_ROOT; ?>img/themes/sunflower/favicon.png">
 
-<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=211">
+<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=213">
 
 <?php if(strpos($META_TITLE, 'Train') !== false || strpos($META_TITLE, 'Performers') !== false): ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/train.css?v=21">
@@ -218,10 +218,10 @@ if(! isset($OG_IMAGE)){
 
 <body <?php if($_SETTINGS->colorblindMode == 1): ?>class="colorblind"<?php endif; ?>>
 
-	<?php  if(false): // Removing this but saving code for future use ?>
-		<?php if(strpos($_SERVER['REQUEST_URI'], 'delightful-days') == false): ?>
+	<?php  if(true): // Removing this but saving code for future use ?>
+		<?php if(strpos($_SERVER['REQUEST_URI'], 'new-season-2026') == false): ?>
 			<div class="header-ticker">
-				<a href="https://pvpoke.com/delightful-days/rankings/">Preview next season</a>
+				<a href="https://pvpoke.com/new-season-2026/rankings/">Preview next season</a>
 			</div>
 		<?php else: ?>
 			<div class="header-ticker old-version">
@@ -232,6 +232,11 @@ if(! isset($OG_IMAGE)){
 
 	<header>
 		<div class="header-wrap">
+			<?php if($_SETTINGS->theme == 'night'): ?>
+				<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header-white.png" title="PvPoke.com" /></a>
+			<?php else: ?>
+				<a href="<?php echo $WEB_ROOT; ?>"><img src="<?php echo $WEB_ROOT; ?>img/themes/sunflower/header.png" title="PvPoke.com" /></a>
+			<?php endif; ?>
 
 			<div class="hamburger mobile">
 				<!--Because I'm too lazy to make a graphic-->

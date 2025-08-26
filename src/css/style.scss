@@ -162,14 +162,15 @@ header{
     z-index: 25;
     width: 100%;
     box-shadow: rgba(0,0,0,0.3) 0px 0px 6px;
-	top:30px;
+	//top: 0;
+	top:28px;
 
 	.header-wrap{
 		max-width:800px;
 		margin:0 auto;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-between;
-		align-items: center;
 	}
 
 	a img{
@@ -181,6 +182,7 @@ header{
 		padding:3px 0;
 		a{
 			display:block;
+			margin-left:20px;
 			color:$color-links;
 			text-decoration: none;
 			background-repeat: no-repeat;
@@ -826,6 +828,10 @@ b{
 					}
 				}
 			}
+
+			.label{
+				font-size:10px;
+			}
 		}
 
 		.types {
@@ -998,24 +1004,26 @@ b{
 		.start-hp,
 		.start-energy{
 			margin:5px 0;
-			max-width:129px;
+			max-width:120px;
+			max-height: 23px;
 		}
 
 		.flex{
 			justify-content: space-between;
 		}
 
-		.check.switch-delay{
-			margin-top: 20px;
-		}
-
 		.shield-baiting,
 		.show-ivs,
 		.optimize-timing,
+		.switch-delay,
 		.priority,
 		.negate-fast-moves{
 			text-align: left;
 			font-size:14px;
+		}
+
+		.show-ivs{
+			margin-bottom: 15px;
 		}
 
 		.add-fast-move{
@@ -1032,6 +1040,7 @@ b{
 		}
 
 		.label{
+			font-size: 14px;
 			margin:5px 5px 5px 0;
 		}
 
@@ -1133,6 +1142,18 @@ b{
 				font-size: 12px;
 				text-decoration: underline;
 				visibility: hidden;
+				padding-right: 20px;
+			}
+
+			.check.show-move-counts{
+				visibility: hidden;
+				margin-top: 5px;
+				font-size: 12px;
+
+				span{
+					width: 12px;
+					height: 12px;
+				}
 			}
 
 			.add-poke-btn{
@@ -1153,6 +1174,11 @@ b{
 			p{
 				font-size:12px;
 			}
+		}
+
+		.search-string-btn{
+			margin-top: 5px;
+			margin-bottom: 15px;
 		}
 
 		.rankings-container{
@@ -1196,6 +1222,10 @@ b{
 				    text-align: center;
 				    margin-right: 5px;
 				    padding-top: 2px;
+				}
+
+				.name{
+					display: block;
 				}
 
 				.moves{
@@ -1587,10 +1617,6 @@ b{
 			.multi-battle-options{
 				display: none;
 			}
-		}
-
-		.options .section-title{
-			margin-top:0;
 		}
 
 		.delete-list-confirm + .poke.multi{
@@ -3023,8 +3049,7 @@ a.download-csv{
 
 
 	.moves{
-		display:flex;
-		flex-wrap: wrap;
+		display:block;
 		font-size:12px;
 		max-width: 300px;
 
@@ -3046,7 +3071,7 @@ a.download-csv{
 		.count{
 			display:none;
 			margin-left:5px;
-			background:rgba(0,0,0,0.6);
+			background:rgba(0, 0, 0, 0.25);
 			color:#fff;
 			border-radius: 20px;
 			min-width: 16px;
@@ -3056,7 +3081,6 @@ a.download-csv{
 
 			&.fast{
 				border-radius: 0;
-				background:rgba(0,0,0,0.25);
 			}
 		}
 	}
@@ -5064,6 +5088,16 @@ a.rating{
 			font-size:12px;
 			margin-bottom:5px;
 		}
+
+		.poke-search-container{
+			margin-top: 10px;
+			justify-content: space-between;
+			align-items: center;
+
+			.check{
+				margin-top: 0;
+			}
+		}
 	}
 
 	.pokebox-import[select-mode="multi"]{
@@ -5079,7 +5113,8 @@ a.rating{
 	}
 
 	a.compare-poke,
-	a.duplicate-poke{
+	a.duplicate-poke,
+	a.compare-pokebox{
 		display: block;
 		font-size: 14px;
 		margin-top:25px;
@@ -5284,7 +5319,7 @@ a.pokebattler{
     		box-sizing: border-box;
 			box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
 			overflow-y: auto;
-			//top: 65px;
+			top: 65px;
 
 			a{
 				padding: 9px 8px 9px 38px;

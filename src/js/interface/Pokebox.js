@@ -11,7 +11,7 @@ function Pokebox(element, selector, selectMode, b){
 	var battle = b;
 	var box = [];
 	var filteredBox = [];
-	var maxCount = 1000;
+	var maxCount = 100;
 	var lastDateTime = settings.pokeboxLastDateTime; // Last dateTime refreshed
 
 	$el.find("a.open-pokebox").click(openPokebox);

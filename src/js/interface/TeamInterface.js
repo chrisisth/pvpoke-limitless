@@ -482,8 +482,7 @@ var InterfaceMaster = (function () {
 
 					// Push to counter team
 
-					var alternativeCount = parseInt($(".scorecard-length-select option:selected").val());
-					if(count <= alternativeCount){
+					if(count < 6){
 						counterTeam.push(pokemon);
 					}
 
@@ -842,7 +841,6 @@ var InterfaceMaster = (function () {
 				// Gather advanced settings
 				var team = multiSelectors[0].getPokemonList();
 				var scorecardCount = parseInt($(".scorecard-length-select option:selected").val());
-				var alternativeCount = parseInt($(".scorecard-length-select option:selected").val());
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on");
