@@ -1,6 +1,8 @@
 name: Update Fork
 
 on:
+  schedule:
+    - cron: "0 4 * * *"
   workflow_dispatch:
 
 jobs:
@@ -29,3 +31,12 @@ jobs:
 
       - name: Push Changes
         run: git push origin master
+
+  trigger-deploy:
+    needs: update-fork
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger DeployFork Workflow
+        run: gh workflow run DeployFork.yml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
