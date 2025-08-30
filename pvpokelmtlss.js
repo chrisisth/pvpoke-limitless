@@ -64,7 +64,7 @@
     });
   }
 
-  if (url.includes("/new-season/rankings") || url.includes("/rankings")) {
+  if (url.includes("/rankings")) {
     BlockScript("Pokebox.js");
     BlockScript("PokeMultiSelect.js");
     BlockScript("RankingInterface.js");
@@ -95,7 +95,7 @@
       Main();
     };
   }
-  if (url.includes("/new-season/battle") || url.includes("/battle")) {
+  if (url.includes("/battle")) {
     BlockScript("PokeMultiSelect.js");
     BlockScript("RankingInterface.js");
 
@@ -111,9 +111,7 @@
     };
   }
 
-  if (
-    url.includes("/new-season/team-builder") ||
-    url.includes("/team-builder")
+  if (url.includes("/team-builder")
   ) {
     BlockScript("PokeMultiSelect.js");
     BlockScript("RankingInterface.js");
@@ -156,3 +154,4 @@
     };
   }
 })();
+
