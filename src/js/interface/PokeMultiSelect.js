@@ -31,6 +31,8 @@ function PokeMultiSelect(element){
 	var cliffhangerMode = false;
 
 	var showMoveCounts = false;
+	
+	let updateCallback; // A callback function which is run any time the Pokemon list is updated
 
 	// Show move counts if previously set
 	if(window.localStorage.getItem("rankingsShowMoveCounts") == "true"){
@@ -74,11 +76,7 @@ function PokeMultiSelect(element){
 				$meta.attr("type", leagueName);
 				$meta.addClass("multi-battle");
 
-				if(leagueName != "great"){
-					$meta.addClass("hide");
-				}
-
-				$el.find(".quick-fill-select").append($meta);
+				$el.find(".quick-fill-select optgroup[label='Cups']").append($meta);
 			}
 		}
 
@@ -92,7 +90,7 @@ function PokeMultiSelect(element){
 			var groupRegex = new RegExp("([a-z_]*),([A-Z_]*),([A-Z_]*),([A-Z_]*)");
 
 			if((groupRegex.test(content))&&(key.indexOf("criteo") == -1)){
-				$el.find(".quick-fill-select").append("<option value=\""+key+"\" type=\"custom\">"+key+"</option>");
+				$el.find(".quick-fill-select optgroup[label='Custom']").append("<option value=\""+key+"\" type=\"custom\">"+key+"</option>");
 			}
 
 			i++;
@@ -418,7 +416,11 @@ function PokeMultiSelect(element){
 			}
 
 			if(battle.getCup().slots){
-				$item.find(".moves").prepend("(Slot " + (pokemon.getSlot(battle.getCup())+1) + ") ");
+				let includedSlots = pokemon.getSlotNumbers(battle.getCup());
+
+				if(includedSlots.length > 0){
+					$item.find(".moves").prepend("(Slot " + includedSlots.join(", ") + ") ");
+				}
 			}
 
 			// For Prismatic Cup, show color category
@@ -501,6 +503,10 @@ function PokeMultiSelect(element){
 		} else{
 			$el.find(".add-poke-btn").show();
 			$el.find(".pokebox").show();
+		}
+
+		if(typeof updateCallback === "function"){
+			updateCallback();
 		}
 
 	}
@@ -635,22 +641,6 @@ function PokeMultiSelect(element){
 	// Update the custom group selections when changing league
 
 	this.setCP = function(cp){
-		// only show quick fill metas with same cp as selected
-		const leagueMap = {"little": 500, "great": 1500, "ultra": 2500, "master": 10000}
-		$el.find(".quick-fill-select option").each(function(index, element) {
-			element = $(element);
-			// always show custom groups (from cookies) and create new group
-			if (element.attr("type") === "custom" || element.attr("value") === "new") {
-				element.show();
-				return;
-			}
-			var optionCP = leagueMap[element.attr("type")];
-			if (optionCP == cp) {
-				element.show();
-			} else {
-				element.hide();
-			}
-		});
 		// Load default meta group when switching to Multi Battle
 		if((self.battleMode == "multi") && (! settingGetParams)){
 			cupSelect.trigger("change");
@@ -773,11 +763,12 @@ function PokeMultiSelect(element){
 			// Add new group to all dropdowns
 
 			$(".quick-fill-select").append($("<option value=\""+name+"\" type=\"custom\">"+name+"</option>"));
-			$el.find(".quick-fill-select option").last().prop("selected", "selected");
+			$el.find(".quick-fill-select option[value='"+name+"']").prop("selected", "selected");
 
 			$el.find(".save-as").hide();
 			$el.find(".save-custom").show();
 			$el.find(".delete-btn").show();
+			selectedGroup = name;
 		}
 	}
 
@@ -920,7 +911,7 @@ function PokeMultiSelect(element){
 
 		// Load a preset group from data files
 
-		if((type != "custom")&&(val != "new")){
+		if(type != "custom" && type != "top" && val != "new"){
 			gm.loadGroupData(self, val);
 
 			// Show the save as button
@@ -957,8 +948,35 @@ function PokeMultiSelect(element){
 			$el.find(".delete-btn").show();
 		}
 
+		// Populate from the rankings
+		if(type == "top"){
+			let key = battle.getCup().name + "overall" + battle.getCP();
+			let pokemonCount = 0;
+			let csv = '';
+
+			switch(val){
+				case "top50":
+					pokemonCount = 50;
+					break;
+
+				case "top100":
+					pokemonCount = 100;
+					break;
+			}
+
+			if(gm.rankings[key]){
+				for(var i = 0; i < pokemonCount && i < gm.rankings[key].length; i++){
+					csv += gm.rankings[key][i].speciesId + '\n';
+				}
+
+				self.quickFillCSV(csv);
+			}
+		}
+
 		selectedGroup = val;
 		selectedGroupType = type;
+
+		$el.find(".rankings-container").scrollTop(0);
 
 	});
 
@@ -1004,7 +1022,7 @@ function PokeMultiSelect(element){
 
 	$el.find(".save-btn").click(function(e){
 
-		var selectedGroupType = $(".quick-fill-select option[value='"+selectedGroup+"']").attr("type");
+		var selectedGroupType = $el.find(".quick-fill-select option[value='"+selectedGroup+"']").attr("type");
 
 		if(selectedGroupType != "custom"){
 			// Prompt to save a new group if a custom one isn't selected
@@ -1067,7 +1085,11 @@ function PokeMultiSelect(element){
 		$(".modal .yes").click(function(e){
 			pokemonList = [];
 			self.updateListDisplay();
-			$el.find(".quick-fill-select option").first().prop("selected", "selected");
+			$el.find(".quick-fill-select option[value='new']").prop("selected", "selected");
+
+			$el.find(".save-as").hide();
+			$el.find(".save-custom").show();
+			$el.find(".delete-btn").hide();
 
 			closeModalWindow();
 		});
@@ -1256,6 +1278,11 @@ function PokeMultiSelect(element){
 
 	this.setContext = function(val){
 		context = val;
+
+		if(context == "team"){
+			$el.find(".quick-fill-select option[type='top']").hide();
+		}
+
 	}
 
 	// Return the number of remaining spots
@@ -1274,6 +1301,13 @@ function PokeMultiSelect(element){
 	// Return the single pokeselector
 	this.getPokeSelector = function(){
 		return pokeSelector;
+	}
+
+	// Set the callback function for when the Pokemon list is updated
+	this.setUpdateCallback = function(callback){
+		if(typeof callback === "function"){
+			updateCallback = callback;
+		}
 	}
 
 	// Open the search string generation window

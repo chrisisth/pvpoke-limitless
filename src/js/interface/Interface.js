@@ -112,7 +112,7 @@ var InterfaceMaster = (function () {
 
 				$("body").on("click", ".battle-details .rating-table a.rating", viewShieldBattle);
 				$("body").on("click", ".section.summary a.rating", viewBulkBattle);
-				$("body").on("click", ".breakpoints-section .button, .cmp-section .button", selectBreakpointIVs);
+				$("body").on("click", ".breakpoints-section .button, .cmp-section .ivs .button", selectBreakpointIVs);
 				$("body").on("change", "select.breakpoint-move", selectBreakpointMove);
 				$("body").on("change", "select.bulkpoint-move", selectBulkpointMove);
 
@@ -817,6 +817,11 @@ var InterfaceMaster = (function () {
 					// Show blank if this Pokemon can't win CMP at all
 					$(".stats-table.cmp .output").append("<tr class=\"toggle\"><td>Can't win<br>CMP</td><td>Can't win<br>CMP</td><td>Can't win<br>CMP</td></tr>");
 				}
+
+				// CMP Chart link
+				let cmpChartLink = host+"attack-cmp-chart/"+battle.getCup().name+"/"+battle.getCP()+"/"+pokemon[0].aliasId+"/";
+				$(".battle-cmp-link").html(pokemon[0].speciesName + " CMP Chart");
+				$(".battle-cmp-link").attr("href", cmpChartLink);
 
 				// Display optimal move timing chart
 
@@ -2514,7 +2519,7 @@ var InterfaceMaster = (function () {
 				$tooltip.addClass($(this).attr("class"));
 				$tooltip.find(".details").html('');
 
-				if((($(this).hasClass("fast")) || ($(this).hasClass("charged")))&&(! $(this).hasClass("tap"))){
+				if(($(this).hasClass("fast") || $(this).hasClass("charged"))&&(! $(this).hasClass("tap"))){
 
 					var values = $(this).attr("values").split(',');
 
@@ -2528,6 +2533,15 @@ var InterfaceMaster = (function () {
 					$tooltip.find(".details").append("<br>" + values[1] + " energy");
 
 					for(var i = 3; i < values.length; i++){
+						$tooltip.find(".details").append("<br>"+values[i]);
+					}
+				}
+
+				if($(this).hasClass("shield")){
+					let values = $(this).attr("values").split(',');
+
+					$tooltip.find(".details").html(values[0] + " blocked");
+					for(let i = 1; i < values.length; i++){
 						$tooltip.find(".details").append("<br>"+values[i]);
 					}
 				}

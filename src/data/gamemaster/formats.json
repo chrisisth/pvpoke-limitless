@@ -1,40 +1,12 @@
 [
 	{
-		"title": "Hisui Cup",
-		"cup": "hisui",
-		"cp": 1500,
-		"meta": "hisui",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
-		"rules": [
-			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Pokémon first discovered in the Hisui region or Pokémon with a Pokédex number from #387 to #493 will be allowed."
-		]
-	},
-	{
-		"title": "Sunshine Cup",
-		"cup": "sunshine",
-		"cp": 1500,
-		"meta": "sunshine",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
-		"rules": [
-			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Normal-, Fire-, Grass-, and Ground-type Pokémon are eligible.",
-			"Charizard is not allowed."
-		]
-	},
-	{
 		"title": "Fossil Cup",
 		"cup": "fossil",
 		"cp": 1500,
 		"meta": "fossil",
-		"showCup": false,
-		"showFormat": false,
-		"showMeta": false,
-		"hideRankings": true,
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
 		"rules": [
 			"Pokémon must be at or below 1,500 CP to enter.",
 			"Only Water-, Rock-, and Steel-type Pokémon are eligible.",
@@ -46,10 +18,9 @@
 		"cup": "summer",
 		"cp": 2500,
 		"meta": "summerultra",
-		"showCup": false,
-		"showFormat": false,
-		"showMeta": false,
-		"hideRankings": true,
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
 		"rules": [
 			"Pokémon must be at or below 2,500 CP to enter.",
 			"Only Normal-, Fire-, Water-, Grass-, Electric-, and Bug-type Pokémon are eligible."
@@ -153,10 +124,28 @@
 		"showMeta": true
 	},
 	{
-		"title": "Little",
+		"title": "Zygarden Chrono Meta",
+		"cup": "chrono",
+		"cp": 1500,
+		"meta": "chrono",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Little Cup",
 		"cup": "little",
 		"cp": 500,
 		"meta": "little",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false
+	},
+	{
+		"title": "Catch Cup",
+		"cup": "catch",
+		"cp": 1500,
+		"meta": "great",
 		"showCup": false,
 		"showFormat": false,
 		"showMeta": false

@@ -844,14 +844,16 @@ function TrainingAI(l, p, b){
 				hp: pokemon.hp,
 				energy: pokemon.energy,
 				cooldown: pokemon.cooldown,
-				index: pokemon.index
+				index: pokemon.index,
+				formId: pokemon.activeFormId
 			},
 			{
 				shields: opponent.startingShields,
 				hp: opponent.hp,
 				energy: opponent.energy,
 				cooldown: opponent.cooldown,
-				index: opponent.index
+				index: opponent.index,
+				formId: opponent.activeFormId
 			}
 		];
 
@@ -925,6 +927,7 @@ function TrainingAI(l, p, b){
 		opponent.startHp = startStats[1].hp;
 		opponent.startEnergy = startStats[1].energy;
 		opponent.startCooldown = startStats[1].cooldown;
+		
 
 		pokemon.reset();
 		opponent.reset();
@@ -932,6 +935,23 @@ function TrainingAI(l, p, b){
 		pokemon.farmEnergy = false;
 		opponent.index = startStats[1].index;
 		opponent.farmEnergy = false;
+
+		if(pokemon.formChange){
+			pokemon.startFormId = pokemon.originalFormId;
+
+			if(pokemon.activeFormId != startStats[0].formId){
+				pokemon.formChange(startStats[0].formId);
+			}
+		}
+
+		if(opponent.formChange){
+			opponent.startFormId = opponent.originalFormId;
+
+			if(opponent.activeFormId != startStats[1].formId){
+				opponent.formChange(startStats[1].formId);
+			}
+		}
+
 
 		return scenario;
 	}

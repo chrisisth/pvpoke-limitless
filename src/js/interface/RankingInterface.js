@@ -59,7 +59,7 @@ var InterfaceMaster = (function () {
 				$("body").on("click", ".check", checkBox);
 				$("body").on("click", ".check.limited", toggleLimitedPokemon);
 				$("body").on("click", ".check.xl", toggleXLPokemon);
-				$("body").on("click", ".continentals .check", toggleContinentalsSlots);
+				$("body").on("click", ".continentals .check", toggleSlots);
 				$("body").on("click", ".detail-section .trait-info, .detail-section .traits > div", openTraitPopup);
 				$("body").on("click", ".detail-tab-nav a", toggleDetailTab);
 				$("body").on("click", ".detail-section a.show-move-stats", toggleMoveStats);
@@ -407,18 +407,19 @@ var InterfaceMaster = (function () {
 				}
 
 				if(battle.getCup().slots){
-					let slotNumber = 0;
+					let slotNumbers = [];
 
 					for(var n = 0; n < battle.getCup().slots.length; n++){
 						let slot = battle.getCup().slots[n];
 
 						if((slot.pokemon.indexOf(pokemon.speciesId) > -1)||(slot.pokemon.indexOf(pokemon.speciesId.replace("_shadow","")) > -1)){
-							slotNumber = n + 1;
-							break;
+							slotNumbers.push(n+1);
 						}
 					}
 
-					$el.attr("slot", slotNumber);
+					for(let i = 0; i < slotNumbers.length; i++){
+						$el.attr("slot"+slotNumbers[i], '');
+					}
 				}
 
 				$(".section.white > .rankings-container").append($el);
@@ -440,16 +441,14 @@ var InterfaceMaster = (function () {
 				}
 
 
-				// For Prismatic Cup, show color category
+				// For metas with species specific slots, show slot label
 
 				if(battle.getCup().slots){
-					var slots = battle.getCup().slots;
+					let includedSlots = pokemon.getSlotNumbers(battle.getCup());
 
-					for(var n = 0; n < slots.length; n++){
-						if((slots[n].pokemon.indexOf(pokemon.speciesId) > -1)||(slots[n].pokemon.indexOf(pokemon.speciesId.replace("_shadow",""))) > -1){
-							$el.find(".moves").prepend("<b>Slot " + (n+1) + ".</b>&nbsp;");
-							break;
-						}
+					if(includedSlots.length > 0){
+						let slotStr = "<b>Slot " + includedSlots.join(", ") + ".</b>&nbsp;";
+						$el.find(".moves").prepend(slotStr);
 					}
 				}
 
@@ -638,6 +637,15 @@ var InterfaceMaster = (function () {
 				  page_location: (host+rankStr),
 				  pageview_type: 'virtual'
 				});
+
+				// Set document title
+				let selectedFormat = gm.getFormat(cup, cp);
+
+				if(selectedFormat){
+					document.title = selectedFormat.title + " Rankings | PvPoke";
+				} else{
+					document.title = "Rankings | PvPoke";
+				}
 			}
 
 			// Set a context so this interface can add or skip functionality
@@ -681,11 +689,11 @@ var InterfaceMaster = (function () {
 				$(".rankings-container").scrollTop(0); // This is dumb but it works for reasons I do not understand
 
 				// Scroll to element
-				var elTop = $el.position().top;
+				var elTop = $el.position().top - 20;
 				var containerTop = $(".rankings-container").position().top;
-				var gotoTop = elTop - containerTop - 20;
+				var gotoTop = elTop - containerTop;
 
-				$("html, body").animate({ scrollTop: 350}, 500);
+				$("html, body").animate({ scrollTop: 260}, 500);
 				$(".rankings-container").scrollTop(gotoTop);
 
 				$el.trigger("click");
@@ -1049,7 +1057,7 @@ var InterfaceMaster = (function () {
 					$moveDetails.find(".dpe .value").html( Math.round( ((chargedMoves[n].power * chargedMoves[n].stab * pokemon.shadowAtkMult) / chargedMoves[n].energy) * 100) / 100);
 					$moveDetails.attr("data", chargedMoves[n].moveId);
 
-					if(chargedMoves[n].buffs){
+					if(chargedMoves[n].buffs && chargedMoves[n].buffApplyChance){
 						$moveDetails.find(".move-effect").html(gm.getStatusEffectString(chargedMoves[n]));
 					}
 
@@ -1242,9 +1250,16 @@ var InterfaceMaster = (function () {
 					$details.find(".multi-battle-link a").attr("href", multiBattleLink);
 					$details.find(".multi-battle-link a").html(pokemon.speciesName+" vs. " + cupName);
 					$details.find(".multi-battle-link .name").html(pokemon.speciesName+"'s");
+
+					// CMP chart link
+					
+					let cmpChartLink = host+"attack-cmp-chart/"+cup+"/"+battle.getCP()+"/"+pokemon.aliasId+"/";
+					$details.find(".ranking-cmp-link").html(pokemon.speciesName + " CMP Chart");
+					$details.find(".ranking-cmp-link").attr("href", cmpChartLink);
 				} else{
 					$details.find(".share-link").remove();
 					$details.find(".multi-battle-link").remove();
+					$details.find(".ranking-cmp-link").remove();
 				}
 
 				var scores;
@@ -1541,10 +1556,15 @@ var InterfaceMaster = (function () {
 				});
 			}
 
-			// Show or hide Continentals slots
+			// Show or hide cup slots
 
-			function toggleContinentalsSlots(e){
+			function toggleSlots(e){
 				var selectedSlots = [];
+				var cup = battle.getCup();
+
+				if(! cup?.slots){
+					return;
+				}
 
 				$(".continentals .check").each(function(index, value){
 					if($(this).hasClass("on")){
@@ -1552,16 +1572,16 @@ var InterfaceMaster = (function () {
 					}
 				});
 
-				for(var i = 1; i < 7; i++){
-					if(selectedSlots.indexOf(i) > -1){
-						$(".rank[slot='"+i+"']").removeClass("hide");
-					} else{
-						$(".rank[slot='"+i+"']").addClass("hide");
-					}
-				}
-
 				if(selectedSlots.length == 0){
 					$(".rank").removeClass("hide");
+				} else if(selectedSlots.length > 0){
+					$(".rank").addClass("hide");
+
+					for(var i = 1; i <= cup.slots.length; i++){
+						if(selectedSlots.includes(i)){
+							$(".rank[slot"+i+"]").removeClass("hide");
+						}
+					}
 				}
 			}
 
