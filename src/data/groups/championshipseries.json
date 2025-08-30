@@ -36,6 +36,11 @@
         "chargedMoves": ["ROCK_TOMB", "GRASS_KNOT"]
     },
     {
+        "speciesId": "cradily",
+        "fastMove": "BULLET_SEED",
+        "chargedMoves": ["ROCK_TOMB", "GRASS_KNOT"]
+    },
+    {
         "speciesId": "dedenne",
         "fastMove": "THUNDER_SHOCK",
         "chargedMoves": ["PARABOLIC_CHARGE", "PLAY_ROUGH"]
@@ -103,6 +108,11 @@
         "speciesId": "golisopod",
         "fastMove": "FURY_CUTTER",
         "chargedMoves": ["X_SCISSOR", "AQUA_JET"]
+    },
+    {
+        "speciesId": "greninja",
+        "fastMove": "WATER_SHURIKEN",
+        "chargedMoves": ["HYDRO_CANNON", "NIGHT_SLASH"]
     },
     {
         "speciesId": "jellicent",
@@ -223,8 +233,8 @@
         "shadowType": "shadow"
     },
     {
-        "speciesId": "greninja",
-        "fastMove": "WATER_SHURIKEN",
-        "chargedMoves": ["HYDRO_CANNON", "NIGHT_SLASH"]
+        "speciesId": "corviknight",
+        "fastMove": "SAND_ATTACK",
+        "chargedMoves": ["AIR_CUTTER", "PAYBACK"]
     }
 ]

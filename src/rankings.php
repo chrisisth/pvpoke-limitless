@@ -43,21 +43,21 @@ switch($cp){
 // Load format data to generate page title
 $formatFound = false;
 
-if($cup != 'all'){
+if($cup != 'all' && ! $formatFound){
 	// Only load format data for non default cups
-	if(@$formatContent = file_get_contents('data/gamemaster/formats.json')){
-		$formats = json_decode($formatContent);
+	require_once 'data/formats.php';
 
+	if(isset($formats) && is_array($formats)){
+		// Find the format that matches the cup and cp
 		foreach ( $formats as $format ) {
-			if ( $cup == $format->cup && $cp == $format->cp ) {
-				$league = $format->title;
+			if ( $cup == $format['cup'] && $cp == $format['cp'] ) {
+				$league = $format['title'];
 				$formatFound = true;
 				break;
 			}
 		}
+
 	}
-} else{
-	$formatFound = true;
 }
 
 

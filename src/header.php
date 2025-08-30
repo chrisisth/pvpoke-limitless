@@ -1,5 +1,5 @@
 <?php require_once 'modules/config.php';
-$SITE_VERSION = '1.35.0.1';
+$SITE_VERSION = '1.36.2.2';
 
 // This prevents caching on local testing
 if (strpos($WEB_ROOT, 'src') !== false) {
@@ -15,8 +15,12 @@ if(isset($_COOKIE['settings'])){
 		$_SETTINGS->matrixDirection = "row";
 	}
 
-	// Fill in missing settings with defaults
+	// Deprecate old gamemaster versions
 	if(! isset($_SETTINGS->gamemaster)){
+		$_SETTINGS->gamemaster = "gamemaster";
+	} else if($_SETTINGS->gamemaster == "gamemaster-paldea"){
+		$_SETTINGS->gamemaster = "gamemaster";
+	} else if($_SETTINGS->gamemaster == "gamemaster-mega"){
 		$_SETTINGS->gamemaster = "gamemaster";
 	}
 
@@ -54,13 +58,6 @@ if(isset($_COOKIE['settings'])){
 
 	if(! isset($_SETTINGS->theme)){
 		$_SETTINGS->theme = 'default';
-	}
-
-	// Validate the gamemaster setting, only allow these options
-	$gamemasters = ["gamemaster", "gamemaster-mega", "gamemaster-paldea"];
-
-	if(! in_array($_SETTINGS->gamemaster, $gamemasters)){
-		$_SETTINGS->gamemaster = "gamemaster";
 	}
 } else{
 	$_SETTINGS = (object) [
@@ -141,14 +138,14 @@ if(! isset($OG_IMAGE)){
 
 <link id="favicon" rel="icon" href="<?php echo $WEB_ROOT; ?>img/themes/sunflower/favicon.png">
 
-<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=211">
+<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/style.css?v=213">
 
 <?php if(strpos($META_TITLE, 'Train') !== false || strpos($META_TITLE, 'Performers') !== false): ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/train.css?v=21">
 <?php endif; ?>
 
 <?php if(strpos($_SERVER['REQUEST_URI'], 'articles') !== false): ?>
-	<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/article-extras.css?v=21">
+	<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/article-extras.css?v=22">
 <?php endif; ?>
 
 <?php if((isset($_SETTINGS->theme))&&($_SETTINGS->theme != "default")): ?>
@@ -180,6 +177,7 @@ if(! isset($OG_IMAGE)){
 			hardMovesetLinks: <?php echo intval($_SETTINGS->hardMovesetLinks); ?>,
 			colorblindMode: <?php echo intval($_SETTINGS->colorblindMode); ?>,
 			performanceMode: <?php echo intval($_SETTINGS->performanceMode); ?>,
+			theme: "<?php echo htmlspecialchars($_SETTINGS->theme); ?>"
 		};
 	<?php else: ?>
 
@@ -194,7 +192,8 @@ if(! isset($OG_IMAGE)){
 			rankingDetails: "one-page",
 			hardMovesetLinks: 0,
 			colorblindMode: 0,
-			performanceMode: 0
+			performanceMode: 0,
+			theme: "default"
 		};
 
 	<?php endif; ?>
@@ -221,10 +220,10 @@ if(! isset($OG_IMAGE)){
 
 <body <?php if($_SETTINGS->colorblindMode == 1): ?>class="colorblind"<?php endif; ?>>
 
-	<?php  if(false): // Removing this but saving code for future use ?>
-		<?php if(strpos($_SERVER['REQUEST_URI'], 'delightful-days') == false): ?>
+	<?php  if(true): // Removing this but saving code for future use ?>
+		<?php if(strpos($_SERVER['REQUEST_URI'], 'new-season-2026') == false): ?>
 			<div class="header-ticker">
-				<a href="https://pvpoke.com/delightful-days/rankings/">Preview next season</a>
+				<a href="https://pvpoke.com/new-season-2026/rankings/">Preview next season</a>
 			</div>
 		<?php else: ?>
 			<div class="header-ticker old-version">
@@ -312,4 +311,8 @@ if(! isset($OG_IMAGE)){
 	</header>
 	<div class="main-wrap">
 		<div id="main">
-			<div class="hide mega-warning"><b>Stats for unreleased Mega Evolutions are speculative. Don't invest any resources until they're officially released.</b></div>
+			<?php if($_SETTINGS->gamemaster != "gamemaster"): ?>
+				<div class="custom-gm-banner">
+					A <a href="<?php echo $WEB_ROOT; ?>gm-editor/">custom gamemaster</a> is active. Simulations and content may change.
+				</div>
+			<?php endif; ?>

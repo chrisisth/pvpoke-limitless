@@ -4,6 +4,6 @@
     "include": [],
     "exclude": [{
         "filterType": "id",
-        "values": ["primeape", "bellibolt","lapras","moltres_galarian","gastrodon","forretress","dusknoir","drifblim","blastoise","gliscor"]
+        "values": ["feraligatr","tentacruel","moltres_galarian","dusknoir","forretress","lickilicky","runerigus","talonflame","tinkaton","giratina_altered_shadow"]
     }]
 }
