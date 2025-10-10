@@ -84,6 +84,17 @@
         "shadowType": "shadow"
     },
     {
+        "speciesId": "dusknoir_shadow",
+        "fastMove": "ASTONISH",
+        "chargedMoves": ["DYNAMIC_PUNCH", "SHADOW_PUNCH"],
+        "shadowType": "shadow"
+    },
+    {
+        "speciesId": "florges",
+        "fastMove": "FAIRY_WIND",
+        "chargedMoves": ["CHILLING_WATER", "TRAILBLAZE"]
+    },
+    {
         "speciesId": "forretress",
         "fastMove": "BUG_BITE",
         "chargedMoves": ["ROCK_TOMB", "SAND_TOMB"]
@@ -159,7 +170,8 @@
     {
         "speciesId": "primeape_shadow",
         "fastMove": "KARATE_CHOP",
-        "chargedMoves": ["RAGE_FIST", "CLOSE_COMBAT"]
+        "chargedMoves": ["RAGE_FIST", "CLOSE_COMBAT"],
+        "shadowType": "shadow"
     },
     {
         "speciesId": "scizor_shadow",
@@ -205,9 +217,8 @@
         "chargedMoves": ["ICY_WIND", "SWIFT"]
     },
     {
-        "speciesId": "dusknoir_shadow",
-        "fastMove": "ASTONISH",
-        "chargedMoves": ["DYNAMIC_PUNCH", "SHADOW_PUNCH"],
-        "shadowType": "shadow"
+        "speciesId": "clodsire",
+        "fastMove": "POISON_STING",
+        "chargedMoves": ["EARTHQUAKE", "STONE_EDGE"]
     }
 ]

@@ -1,19 +1,5 @@
 [
 	{
-		"title": "Master Premier",
-		"cup": "premier",
-		"cp": 10000,
-		"meta": "premiermaster",
-		"showCup": true,
-		"showFormat": false,
-		"showMeta": true,
-		"hideRankings": true,
-		"rules": [
-			"No CP limit.",
-			"Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible."
-		]
-	},
-	{
 		"title": "P!P Championship Series",
 		"cup": "championshipseries",
 		"cp": 1500,
@@ -22,33 +8,6 @@
 		"showFormat": true,
 		"showMeta": true,
 		"hideRankings": true
-	},
-	{
-		"title": "Willpower Cup",
-		"cup": "willpower",
-		"cp": 1500,
-		"meta": "willpower",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
-		"rules": [
-			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Fighting-, Psychic-, and Dark-type Pokémon will be eligible.",
-			"The following Pokémon will not be allowed: Gardevoir, Zorua, Zoroark"
-		]
-	},
-	{
-		"title": "Mega Master League",
-		"cup": "mega",
-		"cp": 10000,
-		"meta": "mega",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true,
-		"rules": [
-			"No CP limit.",
-			"Mega-Evolved Pokémon are allowed."
-		]
 	},
 	{
 		"title": "Fantasy Cup",
@@ -64,6 +23,47 @@
 		]
 	},
 	{
+		"title": "Jungle Cup",
+		"cup": "jungle",
+		"cp": 1500,
+		"meta": "jungle",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible.",
+			"The following Pokémon will not be allowed: Gligar, Galarian Stunfisk"
+		]
+	},
+	{
+		"title": "Master Premier",
+		"cup": "premier",
+		"cp": 10000,
+		"meta": "premiermaster",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"No CP limit.",
+			"Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible."
+		]
+	},
+	{
+		"title": "Mega Master League",
+		"cup": "mega",
+		"cp": 10000,
+		"meta": "mega",
+		"showCup": false,
+		"showFormat": false,
+		"showMeta": false,
+		"hideRankings": true,
+		"rules": [
+			"No CP limit.",
+			"Mega-Evolved Pokémon are allowed."
+		]
+	},
+	{
 		"title": "LAIC 2025 Championship Series Cup",
 		"cup": "laic2025",
 		"cp": 1500,
@@ -73,19 +73,10 @@
 		"showMeta": true
 	},
 	{
-		"title": "Battle Frontier (Aurora)",
-		"cup": "aurora",
+		"title": "Battle Frontier (Calamity)",
+		"cup": "calamity",
 		"cp": 1500,
-		"meta": "aurora",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
-	},
-	{
-		"title": "Battle Frontier (Onyx)",
-		"cup": "onyx",
-		"cp": 1500,
-		"meta": "onyx",
+		"meta": "calamity",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
@@ -109,19 +100,10 @@
 		"showMeta": true
 	},
 	{
-		"title": "Devon Ascension Cup",
-		"cup": "ascension",
+		"title": "Devon Metamorphosis Cup",
+		"cup": "metamorphosis",
 		"cp": 1500,
-		"meta": "ascension",
-		"showCup": true,
-		"showFormat": true,
-		"showMeta": true
-	},
-	{
-		"title": "Devon (Championship Invitational S2)",
-		"cup": "devonchampionship",
-		"cp": 1500,
-		"meta": "devonchampionship",
+		"meta": "metamorphosis",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true

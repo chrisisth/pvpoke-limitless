@@ -834,6 +834,17 @@ b {
 .poke .custom-ranking-options {
   display: none;
 }
+.poke .custom-ranking-options textarea {
+  width: 100%;
+  resize: none;
+  height: 200px;
+  font-family: arial, sans-serif;
+  font-size: 12px;
+  box-sizing: border-box;
+  border-radius: 4px;
+  padding: 8px;
+  margin: 10px 0;
+}
 .poke a.random,
 .poke a.swap {
   font-size: 10px;
@@ -2665,9 +2676,10 @@ a.download-csv {
 .rank .name {
   font-weight: bold;
 }
-.rank .xl-info-icon {
+.rank .xl-info-icon,
+.rank .editor-note-icon {
   display: inline-block;
-  margin-left: 10px;
+  margin-left: 6px;
   opacity: 0.3;
   position: relative;
   top: 3px;
@@ -2677,6 +2689,11 @@ a.download-csv {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+}
+.rank .editor-note-icon {
+  width: 21px;
+  height: 17px;
+  background-image: url("../img/notes-icon.png");
 }
 .rank .rating-container {
   /*a{
@@ -2807,14 +2824,14 @@ a.download-csv {
   text-transform: capitalize;
   padding: 2px 12px;
 }
-.rank .details .detail-section.traits-container, .rank .details .detail-section.similar-pokemon, .rank .details .detail-section.partner-pokemon {
+.rank .details .detail-section.traits-container, .rank .details .detail-section.similar-pokemon, .rank .details .detail-section.partner-pokemon, .rank .details .detail-section.notes-container {
   width: 100%;
 }
-.rank .details .detail-section.traits-container .ranking-header, .rank .details .detail-section.similar-pokemon .ranking-header, .rank .details .detail-section.partner-pokemon .ranking-header {
+.rank .details .detail-section.traits-container .ranking-header, .rank .details .detail-section.similar-pokemon .ranking-header, .rank .details .detail-section.partner-pokemon .ranking-header, .rank .details .detail-section.notes-container .ranking-header {
   float: none;
   width: 100%;
 }
-.rank .details .detail-section.traits-container .ranking-header a.trait-info, .rank .details .detail-section.similar-pokemon .ranking-header a.trait-info, .rank .details .detail-section.partner-pokemon .ranking-header a.trait-info {
+.rank .details .detail-section.traits-container .ranking-header a.info-icon, .rank .details .detail-section.similar-pokemon .ranking-header a.info-icon, .rank .details .detail-section.partner-pokemon .ranking-header a.info-icon, .rank .details .detail-section.notes-container .ranking-header a.info-icon {
   text-decoration: none;
   color: #00171c;
   border: 1px solid #00171c;
@@ -2829,7 +2846,13 @@ a.download-csv {
   position: relative;
   top: -4px;
 }
-.rank .details .detail-section.traits-container .list, .rank .details .detail-section.similar-pokemon .list, .rank .details .detail-section.partner-pokemon .list {
+.rank .details .detail-section.traits-container .ranking-header.editor-score-header, .rank .details .detail-section.similar-pokemon .ranking-header.editor-score-header, .rank .details .detail-section.partner-pokemon .ranking-header.editor-score-header, .rank .details .detail-section.notes-container .ranking-header.editor-score-header {
+  background: url("../img/notes-icon.png");
+  background-repeat: no-repeat;
+  background-position-y: 5px;
+  padding-left: 26px;
+}
+.rank .details .detail-section.traits-container .list, .rank .details .detail-section.similar-pokemon .list, .rank .details .detail-section.partner-pokemon .list, .rank .details .detail-section.notes-container .list {
   justify-content: center;
 }
 .rank .details .detail-section .stat-details .stat-row {
@@ -3000,6 +3023,16 @@ a.download-csv {
 }
 .rank .details .detail-section.performance .hexagon-container .chart-label:nth-of-type(6) .comparison {
   left: -38px;
+}
+.rank .details .detail-section.notes-container .editor-score {
+  font-size: 24px;
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin-right: 5px;
+}
+.rank .details .detail-section.notes-container .editor-notes {
+  font-size: 14px;
 }
 .rank .details .detail-section .moveset.show-stats .name-container {
   border-bottom: 1px solid;
@@ -3423,6 +3456,13 @@ a.download-csv {
 .modal .trait-modal .traits > div {
   cursor: default;
   border: none !important;
+}
+
+.modal .editor-score-modal table th {
+  text-align: left;
+}
+.modal .editor-score-modal table th, .modal .editor-score-modal table td {
+  padding: 4px 2px;
 }
 
 .modal .search-traits-selector .traits > div {
