@@ -885,6 +885,9 @@ var InterfaceMaster = (function () {
 				for(var n = 0; n < counterTeam.length; n++){
 					$row.find("tr").append("<td class=\"name-small\">"+counterTeam[n].speciesName+"</td>");
 				}
+				
+				// Add score column header
+				$row.find("tr").append("<td class=\"name-small score-header\" title=\"Total Score = Base Score + Win Rate Bonus\">Score</td>");
 
 				$(".alternatives-table").append($row);
 				$(".alternatives-table").append("<tbody></tbody>");
@@ -996,8 +999,21 @@ var InterfaceMaster = (function () {
 					}
 
 					// Add results to alternatives table
+					
+					// Calculate win/loss record and score breakdown
+					var wins = r.matchups.filter(m => m.rating > 500).length;
+					var losses = r.matchups.filter(m => m.rating <= 500).length;
+					var winRate = (wins / r.matchups.length * 100).toFixed(1);
+					var winBonus = (wins / r.matchups.length >= 0.5) ? ((wins / r.matchups.length - 0.5) * 100).toFixed(1) : 0;
+					var baseScore = (r.matchupAltScore - winBonus).toFixed(1);
+					var totalScore = r.matchupAltScore.toFixed(1);
+					
+					var scoreTooltip = "W-L: " + wins + "-" + losses + " (" + winRate + "%)\n" +
+					                   "Base Score: " + baseScore + "\n" +
+					                   "Win Bonus: +" + winBonus + "\n" +
+					                   "Total Score: " + totalScore;
 
-					$row = $("<tr><th class=\"name\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"record\">"+wins+"-"+losses+"</div><div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					for(var n = 0; n < r.matchups.length; n++){
 						var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
@@ -1022,6 +1038,10 @@ var InterfaceMaster = (function () {
 
 						$row.append($cell);
 					}
+					
+					// Add score column
+					var $scoreCell = $("<td class=\"score-cell\" title=\"" + scoreTooltip + "\"><span class=\"total-score\">" + totalScore + "</span><div class=\"score-breakdown\">Base: " + baseScore + " + Bonus: " + winBonus + "</div></td>");
+					$row.append($scoreCell);
 
 					// Add region for alternative Pokemon for Continentals
 					if(battle.getCup().name == "continentals-3"){
