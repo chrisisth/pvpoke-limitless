@@ -282,12 +282,15 @@ var RankerMaster = (function () {
 						var alternativeScore = 500;
 
 						if(avgPokeRating > 500){
+							// Power curve: diminishing returns on overkill wins
 							alternativeScore = 500 + Math.pow(avgPokeRating - 500, .75);
-							alternativeScore = avgPokeRating;
 							score = 500 + Math.pow(avgPokeRating - 500, .75);
 						} else{
-							score = avgPokeRating / 2;
-							alternativeScore = avgPokeRating / 2;
+							// Graduated penalty: less harsh for close losses
+							var lossDelta = 500 - avgPokeRating;  // How far from break-even (0-500)
+							var penaltyFactor = Math.min(0.5, lossDelta / 1000);  // Max 50% penalty
+							alternativeScore = avgPokeRating * (1 - penaltyFactor);
+							score = avgPokeRating * (1 - penaltyFactor);
 						}
 
 						
@@ -376,6 +379,15 @@ var RankerMaster = (function () {
 					matchupScore = matchupScore / team.length;
 					matchupAltScore = matchupAltScore / team.length;
 
+					// Calculate win rate bonus for consistent performance
+					var wins = rankObj.matchups.filter(m => m.rating > 500).length;
+					var winRate = wins / team.length;
+					
+					// Add bonus for high win rates (up to 50 point bonus for 100% win rate)
+					if(winRate >= 0.5){
+						var winBonus = (winRate - 0.5) * 100;
+						matchupAltScore += winBonus;
+					}
 
 					rankObj.rating = avg;
 					rankObj.opRating = opponentRating;
