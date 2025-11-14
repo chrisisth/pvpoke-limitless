@@ -54,6 +54,8 @@ var InterfaceMaster = (function () {
 				$("body").on("click", ".alternatives-table .button.add", addAlternativePokemon);
 				$("body").on("click", ".check", checkBox);
 				$(".team-size-select").on("change", selectTeamSize);
+				$(".shield-select").on("change", toggleShieldWeights);
+				$(".reset-weights").on("click", resetShieldWeights);
 
 				// If get data exists, load settings
 
@@ -285,6 +287,7 @@ var InterfaceMaster = (function () {
 
 				// Gather advanced settings
 				var scorecardCount = parseInt($(".scorecard-length-select option:selected").val());
+				var counterTeamSize = parseInt($(".counter-team-size-select option:selected").val());
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on") ? 1 : 0;
@@ -368,6 +371,11 @@ var InterfaceMaster = (function () {
 				ranker.applySettings(opponentSettings, 1);
 				ranker.setMetaGroup(metaGroup);
 				ranker.setPrioritizeMeta(prioritizeMeta);
+				
+				// Set custom shield weights if using "all" mode
+				if(shieldMode == "all"){
+					ranker.setShieldWeights(self.getShieldWeights());
+				}
 
 				ranker.setRecommendMoveUsage(true);
 
@@ -445,7 +453,7 @@ var InterfaceMaster = (function () {
 
 				var i = 0;
 
-				while((count < total || counterTeam.length < 6)&&(i < counterRankings.length)){
+				while((count < total || counterTeam.length < counterTeamSize)&&(i < counterRankings.length)){
 					var r = counterRankings[i];
 
 					// Don't exclude threats that are part of a custom threat list
@@ -476,7 +484,7 @@ var InterfaceMaster = (function () {
 					var pokemon = r.pokemon;
 
 					// Push to counter team
-					if(counterTeam.length < 6){
+					if(counterTeam.length < counterTeamSize){
 						let similarCounterExists = counterTeam.some(counter => {
 							let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
 
@@ -532,7 +540,7 @@ var InterfaceMaster = (function () {
 				}
 
 				// Display average threat score
-				avgThreatScore = Math.round(avgThreatScore / 6);
+				avgThreatScore = Math.round(avgThreatScore / counterTeamSize);
 				$(".threat-score").html(avgThreatScore);
 
 				// Build CSV results
@@ -1562,6 +1570,42 @@ var InterfaceMaster = (function () {
 
 			function selectTeamSize(e){
 				multiSelectors[0].setMaxPokemonCount($(e.target).find("option:selected").val());
+			}
+
+			// Toggle shield weights section visibility based on shield mode
+
+			function toggleShieldWeights(e){
+				var shieldMode = $(e.target).find("option:selected").val();
+				
+				if(shieldMode == "all"){
+					$(".shield-weights-section").slideDown(300);
+				} else {
+					$(".shield-weights-section").slideUp(300);
+				}
+			}
+
+			// Reset shield weights to default values
+
+			function resetShieldWeights(e){
+				e.preventDefault();
+				
+				$(".shield-weight[data-scenario='1-1']").val(6);
+				$(".shield-weight[data-scenario='0-0']").val(4);
+				$(".shield-weight[data-scenario='2-2']").val(2);
+				$(".shield-weight[data-scenario='diff-1']").val(3);
+				$(".shield-weight[data-scenario='diff-2']").val(1);
+			}
+
+			// Get shield scenario weights from UI
+
+			this.getShieldWeights = function(){
+				return {
+					'1-1': parseInt($(".shield-weight[data-scenario='1-1']").val()) || 6,
+					'0-0': parseInt($(".shield-weight[data-scenario='0-0']").val()) || 4,
+					'2-2': parseInt($(".shield-weight[data-scenario='2-2']").val()) || 2,
+					'diff-1': parseInt($(".shield-weight[data-scenario='diff-1']").val()) || 3,
+					'diff-2': parseInt($(".shield-weight[data-scenario='diff-2']").val()) || 1
+				};
 			}
 		};
 

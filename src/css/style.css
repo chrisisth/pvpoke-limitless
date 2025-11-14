@@ -3677,6 +3677,47 @@ a.download-csv {
   margin-top: 0;
 }
 
+.shield-weights-section {
+  margin: 20px 0;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 5px;
+}
+.shield-weights-section .section-title {
+  font-size: 16px;
+  margin-top: 0;
+}
+.shield-weights-section .info-tooltip {
+  cursor: help;
+  color: #888;
+  font-size: 14px;
+  margin-left: 5px;
+}
+.shield-weights-section .weight-option {
+  margin-right: 20px;
+  margin-bottom: 15px;
+}
+.shield-weights-section .weight-option label {
+  display: block;
+  font-weight: bold;
+  font-size: 12px;
+  margin-bottom: 5px;
+}
+.shield-weights-section .weight-option input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+.shield-weights-section .weight-option .weight-description {
+  font-size: 11px;
+  color: #666;
+  font-style: italic;
+}
+.shield-weights-section .reset-weights {
+  margin-top: 20px;
+}
+
 .typings {
   display: none;
 }

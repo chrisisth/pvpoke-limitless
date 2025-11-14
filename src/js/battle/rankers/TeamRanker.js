@@ -26,6 +26,15 @@ var RankerMaster = (function () {
 
 			var shieldMode = 'single'; // single - sim specific shield scenarios, average - sim average of 0 and 1 shields each
 			var overrideSettings = [getDefaultMultiBattleSettings(), getDefaultMultiBattleSettings()];
+			
+			// Default shield scenario weights for "all" mode
+			var shieldWeights = {
+				'1-1': 6,
+				'0-0': 4,
+				'2-2': 2,
+				'diff-1': 3,
+				'diff-2': 1
+			};
 
 			var useRecommendedMoves = true;
 			var prioritizeMeta = true;
@@ -199,13 +208,11 @@ var RankerMaster = (function () {
 						var avgPokeRating = 0;
 						var avgOpRating = 0;
 						var shieldRatings = [];
+						var shieldWeights = []; // Weight for each shield scenario
 
 						for(var j = 0; j < shieldTestArr.length; j++){
 							pokemon.setShields(shieldTestArr[j][1]);
-
-							if((shieldMode == 'average')||(shieldMode == 'single')||(context == 'matrix')){
-								opponent.setShields(shieldTestArr[j][0]);
-							}
+							opponent.setShields(shieldTestArr[j][0]);
 
 							battle.simulate();
 
@@ -223,17 +230,48 @@ var RankerMaster = (function () {
 								return false;
 							}
 
-							avgPokeRating += rating;
-							avgOpRating += opRating;
+							// Calculate weight for this shield scenario
+							var weight = 1;
+							if(shieldMode == 'average'){
+								weight = 4; // Equal weight for 0-0 and 1-1
+							} else if(shieldMode == 'all'){
+								// Use configurable weights
+								var playerShields = shieldTestArr[j][1];
+								var opponentShields = shieldTestArr[j][0];
+								
+								// Determine which weight to use based on scenario
+								if(playerShields == opponentShields){
+									// Equal shields scenario
+									var key = playerShields + '-' + opponentShields;
+									weight = shieldWeights[key] || 1;
+								} else {
+									// Unequal shields - use difference-based weight
+									var diff = Math.abs(playerShields - opponentShields);
+									var key = 'diff-' + diff;
+									weight = shieldWeights[key] || 1;
+								}
+							}
+
+							avgPokeRating += (rating * weight);
+							avgOpRating += (opRating * weight);
+							shieldWeights.push(weight);
 
 							shieldRatings.push(rating);
 						}
 
 						if(shieldTestArr.length > 1){
-							avgPokeRating = Math.round( Math.pow(shieldRatings[0] * Math.pow(shieldRatings[1], 3), 1/4));
+							if(shieldMode == 'average'){
+								avgPokeRating = Math.round( Math.pow(shieldRatings[0] * Math.pow(shieldRatings[1], 3), 1/4));
+								avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
+							} else if(shieldMode == 'all'){
+								// Calculate weighted average
+								var totalWeight = shieldWeights.reduce((a, b) => a + b, 0);
+								avgPokeRating = Math.round(avgPokeRating / totalWeight);
+								avgOpRating = Math.round(avgOpRating / totalWeight);
+							}
+						} else {
+							avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
 						}
-
-						avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
 
 						csv += ',' + avgOpRating + ',' + opponent.energy + ',' + opponent.hp;
 
@@ -378,6 +416,13 @@ var RankerMaster = (function () {
 
 			this.setShieldMode = function(value){
 				shieldMode = value;
+			}
+			
+			// Set custom shield scenario weights for "all" mode
+			this.setShieldWeights = function(weights){
+				if(weights){
+					shieldWeights = weights;
+				}
 			}
 
 			// Apply settings from a MultiSelector
