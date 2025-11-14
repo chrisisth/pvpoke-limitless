@@ -870,7 +870,10 @@ var InterfaceMaster = (function () {
 				var shieldMode = $(".team-advanced .flex.poke .shield-select option:selected").val();
 				var shieldCount = 1;
 
-				if(shieldMode != "average"){
+				if(shieldMode == "all"){
+					// For "all" mode, default to 1v1 for battle links
+					shieldCount = 1;
+				} else if(shieldMode != "average"){
 					shieldCount = parseInt(shieldMode);
 					shieldMode = "single";
 				}
