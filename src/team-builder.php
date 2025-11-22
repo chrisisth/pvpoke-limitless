@@ -121,6 +121,83 @@ require_once 'header.php';
 			</div>
 		</div>
 		
+		<!-- Enhanced Ranking Algorithm Settings -->
+		<div class="enhanced-ranking-section">
+			<h3 class="section-title">Enhanced Analysis Weights <span class="info-tooltip" title="Configure how different factors influence Pokemon rankings and team analysis. Higher values = more importance.">ⓘ</span></h3>
+			<p>Customize the importance of various factors in Pokemon evaluation and team analysis. This advanced algorithm considers stat product efficiency, role alignment, meta relevance, and matchup quality beyond simple win/loss ratios.</p>
+			
+			<div class="flex poke">
+				<div class="weight-option">
+					<label>Battle Rating</label>
+					<input type="range" class="ranking-weight" data-factor="battle" min="0" max="100" value="40" />
+					<span class="weight-value">40%</span>
+					<span class="weight-description">Direct win/loss simulation results</span>
+				</div>
+				<div class="weight-option">
+					<label>Stat Product</label>
+					<input type="range" class="ranking-weight" data-factor="stat-product" min="0" max="100" value="20" />
+					<span class="weight-value">20%</span>
+					<span class="weight-description">Bulk efficiency under CP limits</span>
+				</div>
+				<div class="weight-option">
+					<label>Meta Relevance</label>
+					<input type="range" class="ranking-weight" data-factor="meta" min="0" max="100" value="25" />
+					<span class="weight-value">25%</span>
+					<span class="weight-description">Current usage and threat coverage</span>
+				</div>
+			</div>
+			
+			<div class="flex poke">
+				<div class="weight-option">
+					<label>Role Alignment</label>
+					<input type="range" class="ranking-weight" data-factor="role" min="0" max="100" value="15" />
+					<span class="weight-value">15%</span>
+					<span class="weight-description">How well Pokemon fits intended role</span>
+				</div>
+				<div class="weight-option">
+					<label>Team Synergy</label>
+					<input type="range" class="ranking-weight" data-factor="synergy" min="0" max="100" value="20" />
+					<span class="weight-value">20%</span>
+					<span class="weight-description">Type coverage and role balance</span>
+				</div>
+				<div class="weight-option">
+					<label>Matchup Quality</label>
+					<input type="range" class="ranking-weight" data-factor="quality" min="0" max="100" value="15" />
+					<span class="weight-value">15%</span>
+					<span class="weight-description">Win margin and switch safety</span>
+				</div>
+			</div>
+			
+			<div class="flex poke">
+				<div class="enhanced-option">
+					<h3>Role Detection</h3>
+					<div class="check role-detection on"><span></span>Automatically detect optimal Pokemon roles</div>
+				</div>
+				<div class="enhanced-option">
+					<h3>Stat Product Display</h3>
+					<div class="check stat-product-display on"><span></span>Show stat product values in results</div>
+				</div>
+				<div class="enhanced-option">
+					<h3>Advanced Synergy</h3>
+					<div class="check advanced-synergy on"><span></span>Enable detailed team synergy analysis</div>
+				</div>
+			</div>
+			
+			<div class="flex poke">
+				<div class="enhanced-option">
+					<h3>Quality Scoring</h3>
+					<div class="check quality-scoring on"><span></span>Factor in win margins and switch safety</div>
+				</div>
+				<div class="enhanced-option">
+					<h3>Position Weighting</h3>
+					<div class="check position-weighting"><span></span>Weight threats by team position vulnerability</div>
+				</div>
+				<div class="enhanced-option">
+					<button class="button reset-enhanced">Reset Enhanced Settings</button>
+				</div>
+			</div>
+		</div>
+		
 		<!-- Shield Weight Configuration -->
 		<div class="shield-weights-section" style="display:none;">
 			<h3 class="section-title">Shield Scenario Weights <span class="info-tooltip" title="These weights determine how much each shield scenario influences the overall rating in 'all' mode. Higher weights = more important.">ⓘ</span></h3>
@@ -398,6 +475,8 @@ require_once 'header.php';
 <?php require_once 'modules/search-traits.php'; ?>
 
 <?php require_once 'modules/scripts/battle-scripts.php'; ?>
+
+<link rel="stylesheet" type="text/css" href="<?php echo $WEB_ROOT; ?>css/enhanced-ranking.css?v=<?php echo $SITE_VERSION; ?>">
 
 <script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>

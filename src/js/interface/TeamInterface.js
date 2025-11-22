@@ -56,6 +56,8 @@ var InterfaceMaster = (function () {
 				$(".team-size-select").on("change", selectTeamSize);
 				$(".shield-select").on("change", toggleShieldWeights);
 				$(".reset-weights").on("click", resetShieldWeights);
+				$(".ranking-weight").on("input", updateRankingWeights);
+				$(".reset-enhanced").on("click", resetEnhancedSettings);
 
 				// If get data exists, load settings
 
@@ -376,6 +378,10 @@ var InterfaceMaster = (function () {
 				if(shieldMode == "all"){
 					ranker.setShieldWeights(self.getShieldWeights());
 				}
+				
+				// Apply enhanced ranking settings
+				ranker.setEnhancedWeights(self.getEnhancedWeights());
+				ranker.setEnhancedOptions(self.getEnhancedOptions());
 
 				ranker.setRecommendMoveUsage(true);
 
@@ -507,7 +513,24 @@ var InterfaceMaster = (function () {
 						continue;
 					}
 
-					$row = $("<tr><th class=\"name\"><b>"+(count+1)+". "+pokemon.speciesName+"</b></th></tr>");
+					// Generate enhanced display info for threats
+					var enhancedInfo = "";
+					var enhancedOptions = self.getEnhancedOptions();
+					
+					if(enhancedOptions.statProductDisplay) {
+						var statProduct = pokemon.calculateStatProduct(battle.getCP());
+						enhancedInfo += "<div class=\"stat-product-info\">SP: " + 
+							Math.round(statProduct.relativeEfficiency * 100) + "% <span class=\"stat-grade " + 
+							statProduct.grade + "\">" + statProduct.grade + "</span></div>";
+					}
+					
+					if(enhancedOptions.roleDetection) {
+						var role = pokemon.detectOptimalRole();
+						enhancedInfo += "<div class=\"role-badge " + role.primary + "\">" + 
+							role.primary.charAt(0).toUpperCase() + role.primary.slice(1) + "</div>";
+					}
+
+					$row = $("<tr><th class=\"name\"><b>"+(count+1)+". "+pokemon.speciesName+"</b>" + enhancedInfo + "</th></tr>");
 
 					for(var n = 0; n < r.matchups.length; n++){
 						var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
@@ -1013,7 +1036,24 @@ var InterfaceMaster = (function () {
 					                   "Win Bonus: +" + winBonus + "\n" +
 					                   "Total Score: " + totalScore;
 
-					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"record\">"+wins+"-"+losses+"</div><div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					// Generate enhanced display info
+					var enhancedInfo = "";
+					var enhancedOptions = self.getEnhancedOptions();
+					
+					if(enhancedOptions.statProductDisplay) {
+						var statProduct = pokemon.calculateStatProduct(battle.getCP());
+						enhancedInfo += "<div class=\"stat-product-info\">Stat Product: " + 
+							Math.round(statProduct.relativeEfficiency * 100) + "% <span class=\"stat-grade " + 
+							statProduct.grade + "\">" + statProduct.grade + "</span></div>";
+					}
+					
+					if(enhancedOptions.roleDetection) {
+						var role = pokemon.detectOptimalRole();
+						enhancedInfo += "<div class=\"role-badge " + role.primary + "\">" + 
+							role.primary.charAt(0).toUpperCase() + role.primary.slice(1) + "</div>";
+					}
+
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"record\">"+wins+"-"+losses+"</div>" + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					for(var n = 0; n < r.matchups.length; n++){
 						var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
@@ -1626,6 +1666,78 @@ var InterfaceMaster = (function () {
 				$(".shield-weight[data-scenario='0-1']").val(3);
 				$(".shield-weight[data-scenario='1-2']").val(3);
 				$(".shield-weight[data-scenario='0-2']").val(1);
+			}
+
+			// Update ranking weight display values
+			function updateRankingWeights(e) {
+				var $slider = $(e.target);
+				var value = $slider.val();
+				$slider.siblings('.weight-value').text(value + '%');
+				
+				// Normalize weights to total 100%
+				var total = 0;
+				$('.ranking-weight').each(function() {
+					total += parseInt($(this).val());
+				});
+				
+				if(total > 0) {
+					$('.ranking-weight').each(function() {
+						var normalizedValue = Math.round((parseInt($(this).val()) / total) * 100);
+						$(this).siblings('.weight-value').text(normalizedValue + '%');
+					});
+				}
+			}
+
+			// Reset enhanced settings to defaults
+			function resetEnhancedSettings(e) {
+				e.preventDefault();
+				
+				// Reset weight sliders
+				$('.ranking-weight[data-factor="battle"]').val(40).trigger('input');
+				$('.ranking-weight[data-factor="stat-product"]').val(20).trigger('input');
+				$('.ranking-weight[data-factor="meta"]').val(25).trigger('input');
+				$('.ranking-weight[data-factor="role"]').val(15).trigger('input');
+				$('.ranking-weight[data-factor="synergy"]').val(20).trigger('input');
+				$('.ranking-weight[data-factor="quality"]').val(15).trigger('input');
+				
+				// Reset checkboxes
+				$('.enhanced-option .check').addClass('on');
+				$('.enhanced-option .check.position-weighting').removeClass('on');
+			}
+
+			// Get enhanced ranking weights from UI
+			this.getEnhancedWeights = function() {
+				var total = 0;
+				var weights = {};
+				
+				// Get raw values
+				weights.battle = parseInt($('.ranking-weight[data-factor="battle"]').val()) || 40;
+				weights.statProduct = parseInt($('.ranking-weight[data-factor="stat-product"]').val()) || 20;
+				weights.meta = parseInt($('.ranking-weight[data-factor="meta"]').val()) || 25;
+				weights.role = parseInt($('.ranking-weight[data-factor="role"]').val()) || 15;
+				weights.synergy = parseInt($('.ranking-weight[data-factor="synergy"]').val()) || 20;
+				weights.quality = parseInt($('.ranking-weight[data-factor="quality"]').val()) || 15;
+				
+				// Normalize to percentages
+				total = Object.values(weights).reduce((sum, val) => sum + val, 0);
+				if(total > 0) {
+					Object.keys(weights).forEach(key => {
+						weights[key] = weights[key] / total;
+					});
+				}
+				
+				return weights;
+			}
+
+			// Get enhanced ranking options from UI
+			this.getEnhancedOptions = function() {
+				return {
+					roleDetection: $('.enhanced-option .check.role-detection').hasClass('on'),
+					statProductDisplay: $('.enhanced-option .check.stat-product-display').hasClass('on'),
+					advancedSynergy: $('.enhanced-option .check.advanced-synergy').hasClass('on'),
+					qualityScoring: $('.enhanced-option .check.quality-scoring').hasClass('on'),
+					positionWeighting: $('.enhanced-option .check.position-weighting').hasClass('on')
+				};
 			}
 
 			// Get shield scenario weights from UI

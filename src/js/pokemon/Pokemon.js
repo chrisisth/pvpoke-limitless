@@ -2166,6 +2166,10 @@ function Pokemon(id, i, b, d){
 	// Calculate consistency score based on moveset, used in rankings and the team builder
 
 	this.calculateConsistency = function(){
+		// Return default consistency if moves not initialized
+		if (!self.fastMove || !self.chargedMoves || self.chargedMoves.length === 0) {
+			return 75; // Default moderate consistency score
+		}
 
 		var fastMove = self.fastMove;
 		var chargedMoves = self.chargedMoves;
@@ -2286,6 +2290,142 @@ function Pokemon(id, i, b, d){
 
 		return consistencyScore;
 	}
+
+	// Calculate stat product for PvP optimization
+	this.calculateStatProduct = function(cpLimit) {
+		cpLimit = cpLimit || 1500;
+		
+		var atk = this.stats.atk * this.shadowAtkMult;
+		var def = this.stats.def * this.shadowDefMult; 
+		var hp = this.stats.hp;
+		
+		// Basic stat product
+		var product = atk * def * hp;
+		
+		// Bulk efficiency (prioritizes defense and HP over attack)
+		var bulkEfficiency = (def * hp) / Math.pow(atk, 0.5);
+		
+		// PvP-weighted product (logarithmic attack scaling)
+		var pvpWeighted = Math.pow(atk, 0.7) * Math.sqrt(def * hp);
+		
+		// Relative to league average
+		var leagueAverages = {
+			500: { product: 800000, efficiency: 1200 },
+			1500: { product: 1800000, efficiency: 2000 },
+			2500: { product: 3200000, efficiency: 2800 },
+			10000: { product: 8000000, efficiency: 3500 }
+		};
+		
+		var baseline = leagueAverages[cpLimit] || leagueAverages[1500];
+		
+		return {
+			raw: product,
+			efficiency: bulkEfficiency,
+			pvpWeighted: pvpWeighted,
+			relativeProduct: product / baseline.product,
+			relativeEfficiency: bulkEfficiency / baseline.efficiency,
+			grade: this.calculateStatProductGrade(bulkEfficiency, baseline.efficiency)
+		};
+	};
+
+	// Detect Pokemon's optimal role based on stats and moveset
+	this.detectOptimalRole = function() {
+		// Ensure Pokemon is properly initialized
+		if (!this.stats || !this.fastMove) {
+			return {
+				primary: 'consistency',
+				scores: { consistency: 50 },
+				confidence: 0.5
+			};
+		}
+		
+		var bulk = this.stats.def * this.stats.hp * this.shadowDefMult;
+		var attack = this.stats.atk * this.shadowAtkMult;
+		var chargeSpeed = this.calculateChargeSpeed();
+		var movesetFlexibility = this.calculateMovesetFlexibility();
+		var consistency = this.calculateConsistency();
+		
+		var scores = {
+			lead: this.calculateLeadScore(attack, chargeSpeed, movesetFlexibility),
+			closer: this.calculateCloserScore(bulk, consistency),
+			switch: this.calculateSwitchScore(bulk, movesetFlexibility),
+			attacker: (attack / bulk) * 100,
+			charger: chargeSpeed * 10,
+			consistency: consistency
+		};
+		
+		// Find highest scoring role
+		var bestRole = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+		var maxScore = Math.max(...Object.values(scores));
+		
+		return {
+			primary: bestRole,
+			scores: scores,
+			confidence: maxScore > 0 ? scores[bestRole] / maxScore : 0.5
+		};
+	};
+
+	// Calculate charge speed (moves per second to first charged move)
+	this.calculateChargeSpeed = function() {
+		if (!this.fastestChargedMove || !this.fastMove) return 0;
+		
+		var turnsToCharge = Math.ceil(this.fastestChargedMove.energy / this.fastMove.energyGain);
+		var timeToCharge = turnsToCharge * (this.fastMove.cooldown / 1000);
+		
+		return timeToCharge > 0 ? 1 / timeToCharge : 0;
+	};
+
+	// Calculate moveset flexibility (type coverage and utility)
+	this.calculateMovesetFlexibility = function() {
+		if (!this.fastMove) return 0;
+		
+		var types = [this.fastMove.type];
+		var utilities = 0;
+		
+		if (!this.chargedMoves || this.chargedMoves.length === 0) {
+			return types.length * 20; // Only fast move type coverage
+		}
+		
+		for (var i = 0; i < this.chargedMoves.length; i++) {
+			var move = this.chargedMoves[i];
+			if (types.indexOf(move.type) === -1) {
+				types.push(move.type);
+			}
+			
+			// Count utility moves (stat changes, debuffs)
+			if (move.buffApplyChance > 0 || move.buffTarget === 'opponent') {
+				utilities++;
+			}
+		}
+		
+		return (types.length * 20) + (utilities * 15);
+	};
+
+	// Calculate role-specific scores
+	this.calculateLeadScore = function(attack, chargeSpeed, flexibility) {
+		return (attack * 0.4) + (chargeSpeed * 30) + (flexibility * 0.6);
+	};
+
+	this.calculateCloserScore = function(bulk, consistency) {
+		var bulkScore = Math.min(bulk / 25000, 1) * 100;
+		return (bulkScore * 0.7) + (consistency * 0.3);
+	};
+
+	this.calculateSwitchScore = function(bulk, flexibility) {
+		var bulkScore = Math.min(bulk / 25000, 1) * 100;
+		return (bulkScore * 0.5) + (flexibility * 0.5);
+	};
+
+	// Calculate stat product grade
+	this.calculateStatProductGrade = function(efficiency, baseline) {
+		var ratio = efficiency / baseline;
+		
+		if (ratio >= 1.4) return 'A';
+		if (ratio >= 1.2) return 'B'; 
+		if (ratio >= 1.0) return 'C';
+		if (ratio >= 0.8) return 'D';
+		return 'F';
+	};
 
 	// Return an array of slot numbers which contain this Pokemon in a slot based meta
 

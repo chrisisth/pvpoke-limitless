@@ -1,0 +1,162 @@
+/* Enhanced Ranking Algorithm UI Styles */
+
+.enhanced-ranking-section {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.enhanced-ranking-section h3.section-title {
+    margin-bottom: 10px;
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.enhanced-ranking-section h4 {
+    margin: 15px 0 10px 0;
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.weight-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+    margin: 10px;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.weight-option label {
+    font-weight: 500;
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 13px;
+    color: #495057;
+}
+
+.ranking-weight {
+    width: 120px;
+    margin: 5px 0;
+}
+
+.weight-value {
+    font-weight: 600;
+    color: #007bff;
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.weight-description {
+    font-size: 11px;
+    color: #6c757d;
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 5px;
+}
+
+.enhanced-option {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+    margin: 10px;
+    padding: 10px;
+}
+
+.enhanced-option h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #495057;
+    text-align: center;
+}
+
+.enhanced-option .check {
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.3;
+}
+
+.info-tooltip {
+    cursor: help;
+    color: #007bff;
+    font-weight: normal;
+}
+
+/* Stat Product Display in Results */
+.stat-product-info {
+    background: #e3f2fd;
+    border-radius: 4px;
+    padding: 4px 8px;
+    margin: 2px 0;
+    font-size: 11px;
+    color: #1565c0;
+}
+
+.role-badge {
+    background: #f3e5f5;
+    color: #7b1fa2;
+    padding: 2px 6px;
+    border-radius: 12px;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 2px;
+    display: inline-block;
+}
+
+/* Role-specific colors */
+.role-badge.lead { background: #ffecb3; color: #f57c00; }
+.role-badge.closer { background: #c8e6c9; color: #388e3c; }
+.role-badge.switch { background: #e1f5fe; color: #0277bd; }
+.role-badge.attacker { background: #ffcdd2; color: #d32f2f; }
+.role-badge.charger { background: #f3e5f5; color: #7b1fa2; }
+.role-badge.consistency { background: #fff3e0; color: #f57c00; }
+
+/* Grade indicators for stat product */
+.stat-grade {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    color: white;
+    margin-left: 5px;
+}
+
+.stat-grade.A { background: #4caf50; }
+.stat-grade.B { background: #8bc34a; }
+.stat-grade.C { background: #ffc107; }
+.stat-grade.D { background: #ff9800; }
+.stat-grade.F { background: #f44336; }
+
+/* Enhanced tooltip styling */
+[title] {
+    position: relative;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .weight-option, .enhanced-option {
+        min-width: 120px;
+        margin: 5px;
+        padding: 8px;
+    }
+    
+    .weight-option label, .enhanced-option h3 {
+        font-size: 12px;
+    }
+    
+    .ranking-weight {
+        width: 100px;
+    }
+}

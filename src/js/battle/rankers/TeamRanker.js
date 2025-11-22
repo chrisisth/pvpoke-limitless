@@ -45,6 +45,24 @@ var RankerMaster = (function () {
 				'0-2': 1
 			};
 
+			// Enhanced ranking algorithm weights
+			var enhancedWeights = {
+				battle: 0.40,
+				statProduct: 0.20,
+				meta: 0.25,
+				role: 0.15,
+				synergy: 0.20,
+				quality: 0.15
+			};
+
+			var enhancedOptions = {
+				roleDetection: true,
+				statProductDisplay: true,
+				advancedSynergy: true,
+				qualityScoring: true,
+				positionWeighting: false
+			};
+
 			var useRecommendedMoves = true;
 			var prioritizeMeta = true;
 
@@ -295,10 +313,16 @@ var RankerMaster = (function () {
 						}
 
 						
-						// Factor in meta relevance
+						// Apply enhanced ranking algorithm if enabled
+						if(enhancedOptions.qualityScoring || enhancedOptions.roleDetection || enhancedOptions.statProductDisplay) {
+							var enhancedScore = self.calculateEnhancedScore(pokemon, opponent, avgPokeRating, context);
+							score = enhancedScore.total;
+							alternativeScore = enhancedScore.total;
+						}
 
+						// Factor in meta relevance
 						if(context == "team-counters" || context == "team-alternatives"){
-							let isMetaFactor = 0.85;
+							let isMetaFactor = enhancedWeights.meta || 0.25;
 
 							if(score > 500 && prioritizeMeta){
 								if(metaGroup.some(poke => poke.speciesId == pokemon.speciesId)){
@@ -309,7 +333,6 @@ var RankerMaster = (function () {
 									alternativeScore -= (alternativeScore - 500) * (1 - isMetaFactor);
 								}
 							}
-
 						}
 
 						matchupScore += score;
@@ -476,6 +499,108 @@ var RankerMaster = (function () {
 			// Set whether or not to prioritize meta Pokemon in the results
 			this.setPrioritizeMeta = function(val){
 				prioritizeMeta = val;
+			}
+
+			// Set enhanced ranking weights
+			this.setEnhancedWeights = function(weights){
+				enhancedWeights = Object.assign(enhancedWeights, weights);
+			}
+
+			// Set enhanced ranking options
+			this.setEnhancedOptions = function(options){
+				enhancedOptions = Object.assign(enhancedOptions, options);
+			}
+
+			// Calculate enhanced score using multiple factors
+			this.calculateEnhancedScore = function(pokemon, opponent, battleRating, context){
+				var baseScore = battleRating;
+				var factors = {};
+				
+				// 1. Battle Rating (base component)
+				factors.battle = baseScore * enhancedWeights.battle;
+				
+				// 2. Stat Product Factor
+				if(enhancedOptions.statProductDisplay) {
+					var statProduct = pokemon.calculateStatProduct(battle.getCP());
+					var statProductBonus = Math.min(1.2, statProduct.relativeEfficiency);
+					factors.statProduct = baseScore * statProductBonus * enhancedWeights.statProduct;
+				} else {
+					factors.statProduct = 0;
+				}
+				
+				// 3. Role Alignment Factor
+				if(enhancedOptions.roleDetection) {
+					var roleData = pokemon.detectOptimalRole();
+					var roleAlignment = self.calculateRoleAlignment(roleData.primary, context);
+					factors.role = baseScore * roleAlignment * enhancedWeights.role;
+				} else {
+					factors.role = 0;
+				}
+				
+				// 4. Meta Relevance Factor
+				var metaRelevance = self.calculateMetaRelevance(pokemon);
+				factors.meta = baseScore * metaRelevance * enhancedWeights.meta;
+				
+				// 5. Matchup Quality Factor
+				if(enhancedOptions.qualityScoring) {
+					var quality = self.calculateMatchupQuality(battleRating);
+					factors.quality = baseScore * quality * enhancedWeights.quality;
+				} else {
+					factors.quality = 0;
+				}
+				
+				// Composite score
+				var total = Object.values(factors).reduce((sum, val) => sum + val, 0);
+				
+				return {
+					base: baseScore,
+					total: total,
+					factors: factors
+				};
+			}
+
+			// Calculate role alignment score
+			this.calculateRoleAlignment = function(role, context) {
+				var alignments = {
+					'team-counters': { lead: 1.2, switch: 1.1, closer: 1.0, attacker: 1.1, charger: 1.0, consistency: 1.0 },
+					'team-alternatives': { lead: 1.1, switch: 1.2, closer: 1.2, attacker: 1.0, charger: 1.1, consistency: 1.1 }
+				};
+				
+				return alignments[context] && alignments[context][role] ? alignments[context][role] : 1.0;
+			}
+
+			// Calculate meta relevance
+			this.calculateMetaRelevance = function(pokemon) {
+				var relevance = 1.0;
+				
+				// Check if Pokemon is in meta group
+				if(metaGroup.some(poke => poke.speciesId === pokemon.speciesId)) {
+					relevance += 0.3;
+				}
+				
+				// Factor in usage patterns (simplified)
+				if(pokemon.speciesName.includes("Shadow")) {
+					relevance += 0.1; // Shadow bonus
+				}
+				
+				return Math.min(relevance, 1.5); // Cap at 50% bonus
+			}
+
+			// Calculate matchup quality beyond win/loss
+			this.calculateMatchupQuality = function(rating) {
+				var quality = 1.0;
+				
+				if(rating > 700) {
+					quality = 1.3; // Decisive wins
+				} else if(rating > 600) {
+					quality = 1.1; // Solid wins
+				} else if(rating > 400) {
+					quality = 0.9; // Close losses
+				} else {
+					quality = 0.7; // Decisive losses
+				}
+				
+				return quality;
 			}
 
 		};
