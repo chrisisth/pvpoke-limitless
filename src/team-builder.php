@@ -125,6 +125,8 @@ require_once 'header.php';
 		<div class="shield-weights-section" style="display:none;">
 			<h3 class="section-title">Shield Scenario Weights <span class="info-tooltip" title="These weights determine how much each shield scenario influences the overall rating in 'all' mode. Higher weights = more important.">ⓘ</span></h3>
 			<p>Configure the importance of each shield scenario when using "all shields" mode. Higher values = more weight in the final rating.</p>
+			
+			<h4>Equal Shield Scenarios</h4>
 			<div class="flex poke">
 				<div class="weight-option">
 					<label>1v1 Shields</label>
@@ -142,17 +144,46 @@ require_once 'header.php';
 					<span class="weight-description">Less common, both shielding</span>
 				</div>
 			</div>
+			
+			<h4>Shield Advantage Scenarios (You have more shields)</h4>
 			<div class="flex poke">
 				<div class="weight-option">
-					<label>1 Shield Advantage (0v1, 1v0, 1v2, 2v1)</label>
-					<input type="number" class="shield-weight" data-scenario="diff-1" value="3" min="0" max="10" />
-					<span class="weight-description">Moderate advantage scenarios</span>
+					<label>1v0 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="1-0" value="3" min="0" max="10" />
+					<span class="weight-description">You have 1, opponent has 0</span>
 				</div>
 				<div class="weight-option">
-					<label>2 Shield Advantage (0v2, 2v0)</label>
-					<input type="number" class="shield-weight" data-scenario="diff-2" value="1" min="0" max="10" />
-					<span class="weight-description">Extreme/rare scenarios</span>
+					<label>2v1 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="2-1" value="3" min="0" max="10" />
+					<span class="weight-description">You have 2, opponent has 1</span>
 				</div>
+				<div class="weight-option">
+					<label>2v0 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="2-0" value="1" min="0" max="10" />
+					<span class="weight-description">You have 2, opponent has 0 (rare)</span>
+				</div>
+			</div>
+			
+			<h4>Shield Disadvantage Scenarios (You have fewer shields)</h4>
+			<div class="flex poke">
+				<div class="weight-option">
+					<label>0v1 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="0-1" value="3" min="0" max="10" />
+					<span class="weight-description">You have 0, opponent has 1</span>
+				</div>
+				<div class="weight-option">
+					<label>1v2 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="1-2" value="3" min="0" max="10" />
+					<span class="weight-description">You have 1, opponent has 2</span>
+				</div>
+				<div class="weight-option">
+					<label>0v2 Shields</label>
+					<input type="number" class="shield-weight" data-scenario="0-2" value="1" min="0" max="10" />
+					<span class="weight-description">You have 0, opponent has 2 (rare)</span>
+				</div>
+			</div>
+			
+			<div class="flex poke">
 				<div class="weight-option">
 					<button class="button reset-weights">Reset to Defaults</button>
 				</div>

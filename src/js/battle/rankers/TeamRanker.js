@@ -29,11 +29,20 @@ var RankerMaster = (function () {
 			
 			// Default shield scenario weights for "all" mode
 			var shieldWeights = {
+				// Equal shield scenarios
 				'1-1': 6,
 				'0-0': 4,
 				'2-2': 2,
-				'diff-1': 3,
-				'diff-2': 1
+				
+				// Shield advantage scenarios (you have more shields)
+				'1-0': 3,
+				'2-1': 3,
+				'2-0': 1,
+				
+				// Shield disadvantage scenarios (you have fewer shields) 
+				'0-1': 3,
+				'1-2': 3,
+				'0-2': 1
 			};
 
 			var useRecommendedMoves = true;
@@ -239,17 +248,9 @@ var RankerMaster = (function () {
 								var playerShields = shieldTestArr[j][1];
 								var opponentShields = shieldTestArr[j][0];
 								
-								// Determine which weight to use based on scenario
-								if(playerShields == opponentShields){
-									// Equal shields scenario
-									var key = playerShields + '-' + opponentShields;
-									weight = shieldWeights[key] || 1;
-								} else {
-									// Unequal shields - use difference-based weight
-									var diff = Math.abs(playerShields - opponentShields);
-									var key = 'diff-' + diff;
-									weight = shieldWeights[key] || 1;
-								}
+								// Use specific scenario-based weight (player-opponent format)
+								var key = playerShields + '-' + opponentShields;
+								weight = shieldWeights[key] || 1;
 							}
 
 							avgPokeRating += (rating * weight);

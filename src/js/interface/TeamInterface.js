@@ -1612,22 +1612,40 @@ var InterfaceMaster = (function () {
 			function resetShieldWeights(e){
 				e.preventDefault();
 				
+				// Equal shield scenarios
 				$(".shield-weight[data-scenario='1-1']").val(6);
 				$(".shield-weight[data-scenario='0-0']").val(4);
 				$(".shield-weight[data-scenario='2-2']").val(2);
-				$(".shield-weight[data-scenario='diff-1']").val(3);
-				$(".shield-weight[data-scenario='diff-2']").val(1);
+				
+				// Shield advantage scenarios (you have more)
+				$(".shield-weight[data-scenario='1-0']").val(3);
+				$(".shield-weight[data-scenario='2-1']").val(3);
+				$(".shield-weight[data-scenario='2-0']").val(1);
+				
+				// Shield disadvantage scenarios (you have fewer)
+				$(".shield-weight[data-scenario='0-1']").val(3);
+				$(".shield-weight[data-scenario='1-2']").val(3);
+				$(".shield-weight[data-scenario='0-2']").val(1);
 			}
 
 			// Get shield scenario weights from UI
 
 			this.getShieldWeights = function(){
 				return {
+					// Equal shield scenarios
 					'1-1': parseInt($(".shield-weight[data-scenario='1-1']").val()) || 6,
 					'0-0': parseInt($(".shield-weight[data-scenario='0-0']").val()) || 4,
 					'2-2': parseInt($(".shield-weight[data-scenario='2-2']").val()) || 2,
-					'diff-1': parseInt($(".shield-weight[data-scenario='diff-1']").val()) || 3,
-					'diff-2': parseInt($(".shield-weight[data-scenario='diff-2']").val()) || 1
+					
+					// Shield advantage scenarios (you have more shields)
+					'1-0': parseInt($(".shield-weight[data-scenario='1-0']").val()) || 3,
+					'2-1': parseInt($(".shield-weight[data-scenario='2-1']").val()) || 3,
+					'2-0': parseInt($(".shield-weight[data-scenario='2-0']").val()) || 1,
+					
+					// Shield disadvantage scenarios (you have fewer shields)
+					'0-1': parseInt($(".shield-weight[data-scenario='0-1']").val()) || 3,
+					'1-2': parseInt($(".shield-weight[data-scenario='1-2']").val()) || 3,
+					'0-2': parseInt($(".shield-weight[data-scenario='0-2']").val()) || 1
 				};
 			}
 		};
