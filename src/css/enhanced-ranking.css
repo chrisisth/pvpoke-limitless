@@ -140,6 +140,86 @@
 .stat-grade.F { background: #f44336; }
 
 /* Team Composition Improvement Display */
+
+/* Left column: Brief improvement tags */
+.composition-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 4px 0;
+}
+
+.improvement-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 3px;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.improvement-tag.positive {
+    color: #28a745;
+    background: #d4edda;
+}
+
+.improvement-tag.negative {
+    color: #dc3545;
+    background: #f8d7da;
+}
+
+/* Middle section: Detailed breakdown */
+.composition-summary {
+    background: #f8f9fa;
+    vertical-align: middle;
+    padding: 12px;
+}
+
+.composition-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: 11px;
+}
+
+.factor-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 8px;
+    background: white;
+    border-radius: 3px;
+    border-left: 3px solid #dee2e6;
+}
+
+.factor-name {
+    color: #495057;
+    font-weight: 500;
+}
+
+.factor-value {
+    font-weight: 700;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 3px;
+}
+
+.factor-value.positive {
+    color: #28a745;
+    background: #d4edda;
+}
+
+.factor-value.negative {
+    color: #dc3545;
+    background: #f8d7da;
+}
+
+.factor-value.neutral {
+    color: #6c757d;
+    background: #e9ecef;
+}
+
+/* Legacy styles for old display */
 .replacement-info {
     background: #fff3cd;
     border-left: 3px solid #ffc107;
@@ -193,13 +273,6 @@
     color: #1565c0;
     font-weight: 500;
     cursor: help;
-}
-
-.composition-summary {
-    text-align: center;
-    background: #f8f9fa;
-    vertical-align: middle;
-    padding: 8px;
 }
 
 .composition-label {

@@ -1075,25 +1075,41 @@ var InterfaceMaster = (function () {
 						"Win Bonus: +" + winBonus + "\n" +
 						"Total Score: " + totalScore;
 
-					// Generate enhanced display info
+					// Generate enhanced display info for LEFT COLUMN
 					var enhancedInfo = "";
 					var enhancedOptions = self.getEnhancedOptions();
 					
-					// Show replacement recommendation if composition-based
-					if (isCompositionBased && r.replacedPokemon) {
-						enhancedInfo += "<div class=\"replacement-info\">Replace: <b>" + r.replacedPokemon.speciesName + "</b></div>";
+					// For composition-based: show brief improvement tags in left column
+					if (isCompositionBased && r.improvements) {
+						var improvementTags = [];
 						
-						// Show improvements
-						if (r.improvements) {
-							var improvements = [];
-							if (r.improvements.bulkDelta > 5) improvements.push("+" + r.improvements.bulkDelta.toFixed(0) + " Bulk");
-							if (r.improvements.eptDptDelta > 5) improvements.push("Better Energy");
-							if (r.improvements.roleDelta > 0) improvements.push("Fills Role");
-							if (r.improvements.typeCoverageDelta > 5) improvements.push("Better Coverage");
-							
-							if (improvements.length > 0) {
-								enhancedInfo += "<div class=\"improvements-info\">" + improvements.join(", ") + "</div>";
-							}
+						// Only show significant changes (>5 points for positive, >5 points for negative)
+						if (r.improvements.bulkDelta > 5) {
+							improvementTags.push("<span class=\"improvement-tag positive\">+Bulk</span>");
+						} else if (r.improvements.bulkDelta < -5) {
+							improvementTags.push("<span class=\"improvement-tag negative\">-Bulk</span>");
+						}
+						
+						if (r.improvements.eptDptDelta > 5) {
+							improvementTags.push("<span class=\"improvement-tag positive\">+Energy</span>");
+						} else if (r.improvements.eptDptDelta < -5) {
+							improvementTags.push("<span class=\"improvement-tag negative\">-Energy</span>");
+						}
+						
+						if (r.improvements.roleDelta > 5) {
+							improvementTags.push("<span class=\"improvement-tag positive\">+Role</span>");
+						} else if (r.improvements.roleDelta < -5) {
+							improvementTags.push("<span class=\"improvement-tag negative\">-Role</span>");
+						}
+						
+						if (r.improvements.typeCoverageDelta > 5) {
+							improvementTags.push("<span class=\"improvement-tag positive\">+Coverage</span>");
+						} else if (r.improvements.typeCoverageDelta < -5) {
+							improvementTags.push("<span class=\"improvement-tag negative\">-Coverage</span>");
+						}
+						
+						if (improvementTags.length > 0) {
+							enhancedInfo += "<div class=\"composition-tags\">" + improvementTags.join(" ") + "</div>";
 						}
 					}
 					
@@ -1139,50 +1155,56 @@ var InterfaceMaster = (function () {
 							$row.append($cell);
 						}
 					} else if (isCompositionBased) {
-						// For composition-based alternatives, show a single summary cell with improvement details
+						// For composition-based alternatives, show detailed breakdown in middle section
 						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
 						
-						// Show meaningful improvements based on what's significant
-						if (r.improvements) {
-							var improvements = [];
-							
-							// Only show significant changes (>5 points for positive, >2 points for negative)
-							if (r.improvements.bulkDelta > 5) {
-								improvements.push("<span class=\"improvement-positive\" title=\"Increases team survivability and shield pressure\">+Bulk</span>");
-							} else if (r.improvements.bulkDelta < -5) {
-								improvements.push("<span class=\"improvement-negative\" title=\"Decreases team survivability\">-Bulk</span>");
-							}
-							
-							if (r.improvements.eptDptDelta > 5) {
-								improvements.push("<span class=\"improvement-positive\" title=\"Better fast move energy generation and damage\">+Energy Balance</span>");
-							} else if (r.improvements.eptDptDelta < -5) {
-								improvements.push("<span class=\"improvement-negative\" title=\"Worse fast move effectiveness\">-Energy Balance</span>");
-							}
-							
-							if (r.improvements.roleDelta > 5) {
-								improvements.push("<span class=\"improvement-positive\" title=\"Fills missing Lead/Safe Swap/Closer role\">+Role Coverage</span>");
-							} else if (r.improvements.roleDelta < -5) {
-								improvements.push("<span class=\"improvement-negative\" title=\"Creates role imbalance\">-Role Coverage</span>");
-							}
-							
-							if (r.improvements.typeCoverageDelta > 5) {
-								improvements.push("<span class=\"improvement-positive\" title=\"Reduces shared weaknesses and improves type diversity\">+Type Synergy</span>");
-							} else if (r.improvements.typeCoverageDelta < -5) {
-								improvements.push("<span class=\"improvement-negative\" title=\"Increases weakness overlap or removes unique type\">-Type Synergy</span>");
-							}
-							
-							if (improvements.length > 0) {
-								$summaryCell.append("<div class=\"improvements-list\">" + improvements.join(" ") + "</div>");
-							} else {
-								$summaryCell.append("<div class=\"improvements-neutral\">Minor adjustments</div>");
-							}
-							
-							// Show threat coverage score if available
-							if (r.threatCoverage !== undefined) {
-								var threatScore = r.threatCoverage.toFixed(1);
-								$summaryCell.append("<div class=\"threat-coverage\" title=\"Average performance against identified threats (0-100 scale)\">Threat Coverage: " + threatScore + "/100</div>");
-							}
+						// Get current weights to show what factors mattered
+						var weights = self.getEnhancedWeights();
+						
+						// Build detailed breakdown showing each factor's contribution
+						var detailsHTML = "<div class=\"composition-details\">";
+						
+						// Threat Coverage (always show if weight > 0)
+						if (weights.threatCoverage > 0 && r.threatCoverage !== undefined) {
+							var threatScore = r.threatCoverage.toFixed(1);
+							var threatPct = (weights.threatCoverage * 100).toFixed(0);
+							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Threat Coverage (" + threatPct + "%):</span> <span class=\"factor-value\">" + threatScore + "/100</span></div>";
 						}
+						
+						// Bulk Improvement
+						if (weights.bulkImprovement > 0 && r.improvements && r.improvements.bulkDelta !== undefined) {
+							var bulkPct = (weights.bulkImprovement * 100).toFixed(0);
+							var bulkValue = r.improvements.bulkDelta.toFixed(1);
+							var bulkClass = r.improvements.bulkDelta > 0 ? "positive" : (r.improvements.bulkDelta < 0 ? "negative" : "neutral");
+							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Bulk (" + bulkPct + "%):</span> <span class=\"factor-value " + bulkClass + "\">" + (r.improvements.bulkDelta > 0 ? "+" : "") + bulkValue + "</span></div>";
+						}
+						
+						// EPT/DPT Balance
+						if (weights.eptDptBalance > 0 && r.improvements && r.improvements.eptDptDelta !== undefined) {
+							var eptPct = (weights.eptDptBalance * 100).toFixed(0);
+							var eptValue = r.improvements.eptDptDelta.toFixed(1);
+							var eptClass = r.improvements.eptDptDelta > 0 ? "positive" : (r.improvements.eptDptDelta < 0 ? "negative" : "neutral");
+							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Energy Balance (" + eptPct + "%):</span> <span class=\"factor-value " + eptClass + "\">" + (r.improvements.eptDptDelta > 0 ? "+" : "") + eptValue + "</span></div>";
+						}
+						
+						// Role Completion
+						if (weights.roleCompletion > 0 && r.improvements && r.improvements.roleDelta !== undefined) {
+							var rolePct = (weights.roleCompletion * 100).toFixed(0);
+							var roleValue = r.improvements.roleDelta.toFixed(1);
+							var roleClass = r.improvements.roleDelta > 0 ? "positive" : (r.improvements.roleDelta < 0 ? "negative" : "neutral");
+							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span> <span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span></div>";
+						}
+						
+						// Type Coverage
+						if (weights.typeCoverage > 0 && r.improvements && r.improvements.typeCoverageDelta !== undefined) {
+							var covPct = (weights.typeCoverage * 100).toFixed(0);
+							var covValue = r.improvements.typeCoverageDelta.toFixed(1);
+							var covClass = r.improvements.typeCoverageDelta > 0 ? "positive" : (r.improvements.typeCoverageDelta < 0 ? "negative" : "neutral");
+							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
+						}
+						
+						detailsHTML += "</div>";
+						$summaryCell.append(detailsHTML);
 						
 						$row.append($summaryCell);
 					}
