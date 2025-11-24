@@ -123,48 +123,48 @@ require_once 'header.php';
 		
 		<!-- Enhanced Ranking Algorithm Settings -->
 		<div class="enhanced-ranking-section">
-			<h3 class="section-title">Enhanced Analysis Weights <span class="info-tooltip" title="Configure how different factors influence Pokemon rankings and team analysis. Higher values = more importance.">ⓘ</span></h3>
-			<p>Customize the importance of various factors in Pokemon evaluation and team analysis. This advanced algorithm considers stat product efficiency, role alignment, meta relevance, and matchup quality beyond simple win/loss ratios.</p>
+			<h3 class="section-title">Team Composition Analysis Weights <span class="info-tooltip" title="Configure how different factors influence alternative Pokemon recommendations. Higher values = more importance.">ⓘ</span></h3>
+			<p>Customize the importance of various factors when evaluating potential team improvements. This algorithm analyzes how well alternatives fit into your team composition, not just how they perform against threats.</p>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label>Battle Rating</label>
-					<input type="range" class="ranking-weight" data-factor="battle" min="0" max="100" value="40" />
-					<span class="weight-value">40%</span>
-					<span class="weight-description">Direct win/loss simulation results</span>
+					<label>Threat Coverage</label>
+					<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="30" />
+					<span class="weight-value">30%</span>
+					<span class="weight-description">How well alternative counters your identified threats</span>
 				</div>
 				<div class="weight-option">
-					<label>Stat Product</label>
-					<input type="range" class="ranking-weight" data-factor="stat-product" min="0" max="100" value="20" />
+					<label>Bulk Improvement</label>
+					<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="20" />
 					<span class="weight-value">20%</span>
-					<span class="weight-description">Bulk efficiency under CP limits</span>
+					<span class="weight-description">Survivability and shield economy improvement</span>
 				</div>
 				<div class="weight-option">
-					<label>Meta Relevance</label>
-					<input type="range" class="ranking-weight" data-factor="meta" min="0" max="100" value="25" />
-					<span class="weight-value">25%</span>
-					<span class="weight-description">Current usage and threat coverage</span>
+					<label>EPT/DPT Balance</label>
+					<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="15" />
+					<span class="weight-value">15%</span>
+					<span class="weight-description">Energy generation and pressure balance</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label>Role Alignment</label>
-					<input type="range" class="ranking-weight" data-factor="role" min="0" max="100" value="15" />
+					<label>Role Completion</label>
+					<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="15" />
 					<span class="weight-value">15%</span>
-					<span class="weight-description">How well Pokemon fits intended role</span>
+					<span class="weight-description">Filling missing Lead/Safe Swap/Closer roles</span>
 				</div>
 				<div class="weight-option">
-					<label>Team Synergy</label>
-					<input type="range" class="ranking-weight" data-factor="synergy" min="0" max="100" value="20" />
-					<span class="weight-value">20%</span>
-					<span class="weight-description">Type coverage and role balance</span>
+					<label>Type Coverage</label>
+					<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="15" />
+					<span class="weight-value">15%</span>
+					<span class="weight-description">Defensive resistances and offensive coverage</span>
 				</div>
 				<div class="weight-option">
-					<label>Matchup Quality</label>
-					<input type="range" class="ranking-weight" data-factor="quality" min="0" max="100" value="15" />
-					<span class="weight-value">15%</span>
-					<span class="weight-description">Win margin and switch safety</span>
+					<label>Meta Relevance</label>
+					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
+					<span class="weight-value">5%</span>
+					<span class="weight-description">Current usage and consistency</span>
 				</div>
 			</div>
 			
@@ -480,6 +480,7 @@ require_once 'header.php';
 
 <script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>
+<script src="<?php echo $WEB_ROOT; ?>js/battle/TeamCompositionAnalyzer.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/interface/TeamInterface.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/interface/PokeMultiSelect.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/interface/Pokebox.js?=<?php echo $SITE_VERSION; ?>"></script>

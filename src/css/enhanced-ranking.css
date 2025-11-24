@@ -139,6 +139,44 @@
 .stat-grade.D { background: #ff9800; }
 .stat-grade.F { background: #f44336; }
 
+/* Team Composition Improvement Display */
+.replacement-info {
+    background: #fff3cd;
+    border-left: 3px solid #ffc107;
+    padding: 4px 8px;
+    margin: 4px 0;
+    font-size: 11px;
+    color: #856404;
+    font-weight: 500;
+}
+
+.improvements-info {
+    background: #d4edda;
+    border-left: 3px solid #28a745;
+    padding: 4px 8px;
+    margin: 4px 0;
+    font-size: 10px;
+    color: #155724;
+}
+
+.score-cell {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.total-score {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    color: #007bff;
+}
+
+.score-breakdown {
+    font-size: 10px;
+    color: #6c757d;
+    margin-top: 2px;
+}
+
 /* Enhanced tooltip styling */
 [title] {
     position: relative;

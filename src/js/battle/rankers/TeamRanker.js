@@ -19,6 +19,7 @@ var RankerMaster = (function () {
 			var gm = GameMaster.getInstance();
 			var battle;
 			var self = this;
+			var compositionAnalyzer; // Team composition analyzer instance
 
 			var targets = []; // Set targets to rank against
 
@@ -45,15 +46,22 @@ var RankerMaster = (function () {
 				'0-2': 1
 			};
 
-			// Enhanced ranking algorithm weights
+			// Enhanced ranking algorithm weights - now focused on TEAM COMPOSITION improvements
 			var enhancedWeights = {
-				battle: 0.40,
-				statProduct: 0.20,
-				meta: 0.25,
-				role: 0.15,
-				synergy: 0.20,
-				quality: 0.15
+				threatCoverage: 0.30,   // How well alternative counters your threats
+				bulkImprovement: 0.20,  // Bulk/survivability improvement
+				eptDptBalance: 0.15,    // Energy generation and pressure balance
+				roleCompletion: 0.15,   // Filling missing Lead/Safe Swap/Closer roles
+				typeCoverage: 0.15,     // Defensive and offensive type synergy
+				metaRelevance: 0.05     // Current usage and consistency
 			};
+
+			// Initialize composition analyzer
+			try {
+				compositionAnalyzer = TeamCompositionAnalyzer.getInstance();
+			} catch(e) {
+				console.warn('TeamCompositionAnalyzer not available, using fallback', e);
+			}
 
 			var enhancedOptions = {
 				roleDetection: true,
@@ -601,6 +609,109 @@ var RankerMaster = (function () {
 				}
 				
 				return quality;
+			}
+
+			/**
+			 * NEW: Evaluate team composition improvement when adding an alternative
+			 * This is the core of the improved algorithm
+			 */
+			this.evaluateTeamImprovement = function(alternative, currentTeam, replacementIndex, counterTeam, cp) {
+				if (!compositionAnalyzer) {
+					// Fallback to old behavior if analyzer not available
+					return { compositeScore: 0, improvements: {} };
+				}
+
+				// Evaluate current team
+				var currentComposition = compositionAnalyzer.evaluateTeamComposition(currentTeam, cp);
+				compositionAnalyzer.calculateOverallScore(currentComposition, {
+					bulk: 0.25, eptDpt: 0.20, roles: 0.25, typeCoverage: 0.30
+				});
+
+				// Create hypothetical new team with the alternative
+				var newTeam = currentTeam.slice(); // Clone array
+				newTeam[replacementIndex] = alternative;
+
+				// Evaluate new team
+				var newComposition = compositionAnalyzer.evaluateTeamComposition(newTeam, cp);
+				compositionAnalyzer.calculateOverallScore(newComposition, {
+					bulk: 0.25, eptDpt: 0.20, roles: 0.25, typeCoverage: 0.30
+				});
+
+				// Calculate improvements (deltas)
+				var improvements = {
+					bulkDelta: newComposition.bulk.score - currentComposition.bulk.score,
+					eptDptDelta: newComposition.eptDpt.score - currentComposition.eptDpt.score,
+					roleDelta: newComposition.roles.score - currentComposition.roles.score,
+					typeCoverageDelta: newComposition.typeCoverage.score - currentComposition.typeCoverage.score,
+					overallDelta: newComposition.overall - currentComposition.overall
+				};
+
+				// Evaluate threat coverage (how well alternative performs against counterTeam)
+				var threatCoverageScore = 0;
+				if (counterTeam && counterTeam.length > 0) {
+					var wins = 0;
+					var totalRating = 0;
+					
+					for (var i = 0; i < counterTeam.length; i++) {
+						battle.setNewPokemon(alternative, 0, false);
+						battle.setNewPokemon(counterTeam[i], 1, false);
+						battle.simulate();
+						
+						var healthRating = (alternative.hp / alternative.stats.hp);
+						var damageRating = ((counterTeam[i].stats.hp - counterTeam[i].hp) / counterTeam[i].stats.hp);
+						var rating = (healthRating + damageRating) * 500;
+						
+						if (rating > 500) wins++;
+						totalRating += rating;
+						
+						alternative.reset();
+						counterTeam[i].reset();
+					}
+					
+					threatCoverageScore = (totalRating / counterTeam.length) / 10; // Scale to 0-100
+				}
+
+				// Calculate weighted composite score
+				var compositeScore = 
+					(threatCoverageScore * enhancedWeights.threatCoverage) +
+					(Math.max(0, improvements.bulkDelta + 50) * enhancedWeights.bulkImprovement) +
+					(Math.max(0, improvements.eptDptDelta + 50) * enhancedWeights.eptDptBalance) +
+					(Math.max(0, improvements.roleDelta + 50) * enhancedWeights.roleCompletion) +
+					(Math.max(0, improvements.typeCoverageDelta + 50) * enhancedWeights.typeCoverage);
+
+				return {
+					compositeScore: compositeScore,
+					improvements: improvements,
+					threatCoverageScore: threatCoverageScore,
+					replacedPokemon: currentTeam[replacementIndex],
+					newComposition: newComposition,
+					currentComposition: currentComposition
+				};
+			}
+
+			/**
+			 * NEW: Find best team position for an alternative
+			 * Tries replacing each team member and returns best improvement
+			 */
+			this.findBestTeamSlot = function(alternative, currentTeam, counterTeam, cp) {
+				var bestSlot = 0;
+				var bestEval = null;
+				var bestScore = -Infinity;
+
+				for (var i = 0; i < currentTeam.length; i++) {
+					var evaluation = this.evaluateTeamImprovement(alternative, currentTeam, i, counterTeam, cp);
+					
+					if (evaluation.compositeScore > bestScore) {
+						bestScore = evaluation.compositeScore;
+						bestSlot = i;
+						bestEval = evaluation;
+					}
+				}
+
+				return {
+					slotIndex: bestSlot,
+					evaluation: bestEval
+				};
 			}
 
 		};

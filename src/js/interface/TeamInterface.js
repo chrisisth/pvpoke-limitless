@@ -757,8 +757,24 @@ var InterfaceMaster = (function () {
 
 				$(".poke-search[context='alternative-search']").val('');
 
-				altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
-				altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
+				// NEW: Use team composition-based ranking instead of just counter-team performance
+				var useCompositionAnalysis = $(".enhanced-option .check.advanced-synergy").hasClass("on");
+				
+				if (useCompositionAnalysis && typeof ranker.findBestTeamSlot === 'function') {
+					// New algorithm: Evaluate alternatives by team composition improvement
+					altRankings = self.rankAlternativesByCompositionImprovement(
+						team, 
+						counterTeam, 
+						battle.getCP(), 
+						battle.getCup(), 
+						exclusionList
+					);
+				} else {
+					// Fallback to old algorithm
+					altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
+					altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
+				}
+				
 				self.displayAlternatives();
 
 				// Clear targets so it will default to the normal format if the user changes settings
@@ -1023,22 +1039,45 @@ var InterfaceMaster = (function () {
 
 					// Add results to alternatives table
 					
+					// Check if this is a composition-based recommendation
+					var isCompositionBased = (r.replacedPokemon !== undefined);
+					
 					// Calculate win/loss record and score breakdown
-					var wins = r.matchups.filter(m => m.rating > 500).length;
-					var losses = r.matchups.filter(m => m.rating <= 500).length;
-					var winRate = (wins / r.matchups.length * 100).toFixed(1);
-					var winBonus = (wins / r.matchups.length >= 0.5) ? ((wins / r.matchups.length - 0.5) * 100).toFixed(1) : 0;
+					var wins = r.matchups ? r.matchups.filter(m => m.rating > 500).length : 0;
+					var losses = r.matchups ? r.matchups.filter(m => m.rating <= 500).length : 0;
+					var winRate = r.matchups ? (wins / r.matchups.length * 100).toFixed(1) : "N/A";
+					var winBonus = (wins / (r.matchups?.length || 1) >= 0.5) ? ((wins / r.matchups.length - 0.5) * 100).toFixed(1) : 0;
 					var baseScore = (r.matchupAltScore - winBonus).toFixed(1);
 					var totalScore = r.matchupAltScore.toFixed(1);
 					
-					var scoreTooltip = "W-L: " + wins + "-" + losses + " (" + winRate + "%)\n" +
-					                   "Base Score: " + baseScore + "\n" +
-					                   "Win Bonus: +" + winBonus + "\n" +
-					                   "Total Score: " + totalScore;
+					var scoreTooltip = isCompositionBased ? 
+						"Team Composition Score\nThreat Coverage: " + (r.threatCoverage?.toFixed(1) || "N/A") :
+						"W-L: " + wins + "-" + losses + " (" + winRate + "%)\n" +
+						"Base Score: " + baseScore + "\n" +
+						"Win Bonus: +" + winBonus + "\n" +
+						"Total Score: " + totalScore;
 
 					// Generate enhanced display info
 					var enhancedInfo = "";
 					var enhancedOptions = self.getEnhancedOptions();
+					
+					// Show replacement recommendation if composition-based
+					if (isCompositionBased && r.replacedPokemon) {
+						enhancedInfo += "<div class=\"replacement-info\">Replace: <b>" + r.replacedPokemon.speciesName + "</b></div>";
+						
+						// Show improvements
+						if (r.improvements) {
+							var improvements = [];
+							if (r.improvements.bulkDelta > 5) improvements.push("+" + r.improvements.bulkDelta.toFixed(0) + " Bulk");
+							if (r.improvements.eptDptDelta > 5) improvements.push("Better Energy");
+							if (r.improvements.roleDelta > 0) improvements.push("Fills Role");
+							if (r.improvements.typeCoverageDelta > 5) improvements.push("Better Coverage");
+							
+							if (improvements.length > 0) {
+								enhancedInfo += "<div class=\"improvements-info\">" + improvements.join(", ") + "</div>";
+							}
+						}
+					}
 					
 					if(enhancedOptions.statProductDisplay) {
 						var statProduct = pokemon.calculateStatProduct(battle.getCP());
@@ -1053,30 +1092,34 @@ var InterfaceMaster = (function () {
 							role.primary.charAt(0).toUpperCase() + role.primary.slice(1) + "</div>";
 					}
 
-					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"record\">"+wins+"-"+losses+"</div>" + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					var recordDisplay = isCompositionBased ? "" : "<div class=\"record\">"+wins+"-"+losses+"</div>";
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
-					for(var n = 0; n < r.matchups.length; n++){
-						var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
-						var rating = r.matchups[n].rating;
+					// Only show matchup cells if we have matchup data
+					if (r.matchups && r.matchups.length > 0) {
+						for(var n = 0; n < r.matchups.length; n++){
+							var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
+							var rating = r.matchups[n].rating;
 
-						$cell.find("a").addClass(battle.getRatingClass(rating));
+							$cell.find("a").addClass(battle.getRatingClass(rating));
 
-						if(! baitShields){
-							pokemon.isCustom = true;
-							pokemon.baitShields = 0;
-							r.matchups[n].opponent.isCustom = true;
-							r.matchups[n].opponent.baitShields = 0;
+							if(! baitShields){
+								pokemon.isCustom = true;
+								pokemon.baitShields = 0;
+								r.matchups[n].opponent.isCustom = true;
+								r.matchups[n].opponent.baitShields = 0;
+							}
+
+							var pokeStr = pokemon.generateURLPokeStr();
+							var moveStr = pokemon.generateURLMoveStr();
+							var opPokeStr = r.matchups[n].opponent.generateURLPokeStr();
+							var opMoveStr = r.matchups[n].opponent.generateURLMoveStr();
+							var shieldStr = shieldCount + "" + shieldCount;
+							var battleLink = host+"battle/"+battle.getCP(true)+"/"+pokeStr+"/"+opPokeStr+"/"+shieldStr+"/"+moveStr+"/"+opMoveStr+"/";
+							$cell.find("a").attr("href", battleLink);
+
+							$row.append($cell);
 						}
-
-						var pokeStr = pokemon.generateURLPokeStr();
-						var moveStr = pokemon.generateURLMoveStr();
-						var opPokeStr = r.matchups[n].opponent.generateURLPokeStr();
-						var opMoveStr = r.matchups[n].opponent.generateURLMoveStr();
-						var shieldStr = shieldCount + "" + shieldCount;
-						var battleLink = host+"battle/"+battle.getCP(true)+"/"+pokeStr+"/"+opPokeStr+"/"+shieldStr+"/"+moveStr+"/"+opMoveStr+"/";
-						$cell.find("a").attr("href", battleLink);
-
-						$row.append($cell);
 					}
 					
 					// Add score column
@@ -1692,13 +1735,13 @@ var InterfaceMaster = (function () {
 			function resetEnhancedSettings(e) {
 				e.preventDefault();
 				
-				// Reset weight sliders
-				$('.ranking-weight[data-factor="battle"]').val(40).trigger('input');
-				$('.ranking-weight[data-factor="stat-product"]').val(20).trigger('input');
-				$('.ranking-weight[data-factor="meta"]').val(25).trigger('input');
-				$('.ranking-weight[data-factor="role"]').val(15).trigger('input');
-				$('.ranking-weight[data-factor="synergy"]').val(20).trigger('input');
-				$('.ranking-weight[data-factor="quality"]').val(15).trigger('input');
+				// Reset weight sliders to new defaults
+				$('.ranking-weight[data-factor="threatCoverage"]').val(30).trigger('input');
+				$('.ranking-weight[data-factor="bulkImprovement"]').val(20).trigger('input');
+				$('.ranking-weight[data-factor="eptDptBalance"]').val(15).trigger('input');
+				$('.ranking-weight[data-factor="roleCompletion"]').val(15).trigger('input');
+				$('.ranking-weight[data-factor="typeCoverage"]').val(15).trigger('input');
+				$('.ranking-weight[data-factor="metaRelevance"]').val(5).trigger('input');
 				
 				// Reset checkboxes
 				$('.enhanced-option .check').addClass('on');
@@ -1710,13 +1753,13 @@ var InterfaceMaster = (function () {
 				var total = 0;
 				var weights = {};
 				
-				// Get raw values
-				weights.battle = parseInt($('.ranking-weight[data-factor="battle"]').val()) || 40;
-				weights.statProduct = parseInt($('.ranking-weight[data-factor="stat-product"]').val()) || 20;
-				weights.meta = parseInt($('.ranking-weight[data-factor="meta"]').val()) || 25;
-				weights.role = parseInt($('.ranking-weight[data-factor="role"]').val()) || 15;
-				weights.synergy = parseInt($('.ranking-weight[data-factor="synergy"]').val()) || 20;
-				weights.quality = parseInt($('.ranking-weight[data-factor="quality"]').val()) || 15;
+				// Get raw values for new weight system
+				weights.threatCoverage = parseInt($('.ranking-weight[data-factor="threatCoverage"]').val()) || 30;
+				weights.bulkImprovement = parseInt($('.ranking-weight[data-factor="bulkImprovement"]').val()) || 20;
+				weights.eptDptBalance = parseInt($('.ranking-weight[data-factor="eptDptBalance"]').val()) || 15;
+				weights.roleCompletion = parseInt($('.ranking-weight[data-factor="roleCompletion"]').val()) || 15;
+				weights.typeCoverage = parseInt($('.ranking-weight[data-factor="typeCoverage"]').val()) || 15;
+				weights.metaRelevance = parseInt($('.ranking-weight[data-factor="metaRelevance"]').val()) || 5;
 				
 				// Normalize to percentages
 				total = Object.values(weights).reduce((sum, val) => sum + val, 0);
@@ -1759,6 +1802,70 @@ var InterfaceMaster = (function () {
 					'1-2': parseInt($(".shield-weight[data-scenario='1-2']").val()) || 3,
 					'0-2': parseInt($(".shield-weight[data-scenario='0-2']").val()) || 1
 				};
+			}
+
+			/**
+			 * NEW: Rank alternatives by team composition improvement
+			 * Evaluates each alternative by simulating team with that Pokemon
+			 */
+			this.rankAlternativesByCompositionImprovement = function(currentTeam, counterTeam, cp, cup, exclusionList) {
+				var pokemonList = gm.generateFilteredPokemonList(battle, cup.include, cup.exclude);
+				var alternativesLength = parseInt($(".alternatives-length-select option:selected").val()) || 100;
+				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
+				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
+				
+				// Remove excluded Pokemon
+				if (exclusionList && exclusionList.length > 0) {
+					pokemonList = pokemonList.filter(function(pokemon) {
+						return exclusionList.indexOf(pokemon.speciesId) === -1;
+					});
+				}
+
+				var evaluatedAlternatives = [];
+
+				// Evaluate each potential alternative
+				for (var i = 0; i < Math.min(pokemonList.length, alternativesLength * 3); i++) {
+					var pokemon = pokemonList[i];
+					
+					// Apply filters
+					if (!allowShadows && pokemon.speciesId.indexOf("_shadow") > -1) continue;
+					if (!allowXL && pokemon.needsXLCandy && pokemon.needsXLCandy()) continue;
+					
+					// Select best moveset
+					if (typeof pokemon.selectRecommendedMoveset === 'function') {
+						pokemon.selectRecommendedMoveset();
+					}
+
+					// Find best team slot for this alternative
+					var slotResult = ranker.findBestTeamSlot(pokemon, currentTeam, counterTeam, cp);
+					
+					if (slotResult && slotResult.evaluation) {
+						evaluatedAlternatives.push({
+							pokemon: pokemon,
+							speciesId: pokemon.speciesId,
+							speciesName: pokemon.speciesName,
+							rating: slotResult.evaluation.compositeScore,
+							score: slotResult.evaluation.compositeScore,
+							matchupAltScore: slotResult.evaluation.compositeScore,
+							replacementIndex: slotResult.slotIndex,
+							replacedPokemon: slotResult.evaluation.replacedPokemon,
+							improvements: slotResult.evaluation.improvements,
+							threatCoverage: slotResult.evaluation.threatCoverageScore,
+							moveset: {
+								fastMove: pokemon.fastMove,
+								chargedMoves: pokemon.chargedMoves.slice()
+							}
+						});
+					}
+				}
+
+				// Sort by composite score (descending)
+				evaluatedAlternatives.sort(function(a, b) {
+					return b.score - a.score;
+				});
+
+				// Return top alternatives
+				return evaluatedAlternatives.slice(0, alternativesLength);
 			}
 		};
 
