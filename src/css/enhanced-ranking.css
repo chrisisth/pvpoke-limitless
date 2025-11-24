@@ -150,21 +150,56 @@
     font-weight: 500;
 }
 
-.improvements-info {
-    background: #d4edda;
-    border-left: 3px solid #28a745;
-    padding: 4px 8px;
+.improvements-list {
+    padding: 8px;
     margin: 4px 0;
-    font-size: 10px;
-    color: #155724;
+    font-size: 12px;
+    line-height: 1.8;
+}
+
+.improvement-positive {
+    color: #28a745;
+    font-weight: 600;
+    margin: 0 4px;
+    padding: 2px 6px;
+    background: #d4edda;
+    border-radius: 3px;
+    cursor: help;
+}
+
+.improvement-negative {
+    color: #dc3545;
+    font-weight: 600;
+    margin: 0 4px;
+    padding: 2px 6px;
+    background: #f8d7da;
+    border-radius: 3px;
+    cursor: help;
+}
+
+.improvements-neutral {
+    color: #6c757d;
+    font-style: italic;
+    padding: 8px;
+    font-size: 11px;
+}
+
+.threat-coverage {
+    background: #e3f2fd;
+    border-top: 1px solid #90caf9;
+    padding: 6px 8px;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #1565c0;
+    font-weight: 500;
+    cursor: help;
 }
 
 .composition-summary {
     text-align: center;
     background: #f8f9fa;
-    font-style: italic;
-    color: #6c757d;
     vertical-align: middle;
+    padding: 8px;
 }
 
 .composition-label {

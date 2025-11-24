@@ -761,6 +761,9 @@ var InterfaceMaster = (function () {
 				var useCompositionAnalysis = $(".enhanced-option .check.advanced-synergy").hasClass("on");
 				
 				if (useCompositionAnalysis && typeof ranker.evaluateTeamImprovement === 'function') {
+					// Update weights from UI before evaluating
+					ranker.setEnhancedWeights(self.getEnhancedWeights());
+					
 					// New algorithm: Evaluate alternatives by team composition improvement
 					try {
 						altRankings = self.rankAlternativesByCompositionImprovement(
@@ -1138,41 +1141,45 @@ var InterfaceMaster = (function () {
 						// For composition-based alternatives, show a single summary cell with improvement details
 						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
 						
-						// Show which Pokemon is being replaced
-						if (r.replacedPokemon) {
-							var replacedName = r.replacedPokemon.speciesName || r.replacedPokemon;
-							$summaryCell.append("<div class=\"replacement-info\" title=\"Replacing this team member produces the best overall composition improvement\">Replace: " + replacedName + "</div>");
-						}
-						
-						// Show the specific improvements as formatted text with tooltips
+						// Show meaningful improvements based on what's significant
 						if (r.improvements) {
-							var improvementTexts = [];
-							var tooltips = [];
+							var improvements = [];
 							
-							if (r.improvements.bulkDelta && Math.abs(r.improvements.bulkDelta) > 1) {
-								var bulkText = "Bulk " + (r.improvements.bulkDelta > 0 ? "+" : "") + r.improvements.bulkDelta.toFixed(1);
-								improvementTexts.push(bulkText);
-								tooltips.push("Defense × HP improvement: " + (r.improvements.bulkDelta > 0 ? "increases" : "decreases") + " team survivability");
-							}
-							if (r.improvements.eptDptDelta && Math.abs(r.improvements.eptDptDelta) > 1) {
-								var eptText = "EPT/DPT " + (r.improvements.eptDptDelta > 0 ? "+" : "") + r.improvements.eptDptDelta.toFixed(1);
-								improvementTexts.push(eptText);
-								tooltips.push("Energy/Damage balance: " + (r.improvements.eptDptDelta > 0 ? "improves" : "worsens") + " fast move effectiveness");
-							}
-							if (r.improvements.roleDelta && Math.abs(r.improvements.roleDelta) > 1) {
-								var roleText = "Role " + (r.improvements.roleDelta > 0 ? "+" : "") + r.improvements.roleDelta.toFixed(1);
-								improvementTexts.push(roleText);
-								tooltips.push("Role coverage: " + (r.improvements.roleDelta > 0 ? "fills" : "disrupts") + " Lead/Safe Swap/Closer balance");
-							}
-							if (r.improvements.typeCoverageDelta && Math.abs(r.improvements.typeCoverageDelta) > 1) {
-								var covText = "Coverage " + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + r.improvements.typeCoverageDelta.toFixed(1);
-								improvementTexts.push(covText);
-								tooltips.push("Type synergy: " + (r.improvements.typeCoverageDelta > 0 ? "reduces shared weaknesses" : "increases weakness overlap"));
+							// Only show significant changes (>5 points for positive, >2 points for negative)
+							if (r.improvements.bulkDelta > 5) {
+								improvements.push("<span class=\"improvement-positive\" title=\"Increases team survivability and shield pressure\">+Bulk</span>");
+							} else if (r.improvements.bulkDelta < -5) {
+								improvements.push("<span class=\"improvement-negative\" title=\"Decreases team survivability\">-Bulk</span>");
 							}
 							
-							if (improvementTexts.length > 0) {
-								var tooltipText = tooltips.join(" | ");
-								$summaryCell.append("<div class=\"improvements-info\" title=\"" + tooltipText + "\">" + improvementTexts.join(", ") + "</div>");
+							if (r.improvements.eptDptDelta > 5) {
+								improvements.push("<span class=\"improvement-positive\" title=\"Better fast move energy generation and damage\">+Energy Balance</span>");
+							} else if (r.improvements.eptDptDelta < -5) {
+								improvements.push("<span class=\"improvement-negative\" title=\"Worse fast move effectiveness\">-Energy Balance</span>");
+							}
+							
+							if (r.improvements.roleDelta > 5) {
+								improvements.push("<span class=\"improvement-positive\" title=\"Fills missing Lead/Safe Swap/Closer role\">+Role Coverage</span>");
+							} else if (r.improvements.roleDelta < -5) {
+								improvements.push("<span class=\"improvement-negative\" title=\"Creates role imbalance\">-Role Coverage</span>");
+							}
+							
+							if (r.improvements.typeCoverageDelta > 5) {
+								improvements.push("<span class=\"improvement-positive\" title=\"Reduces shared weaknesses and improves type diversity\">+Type Synergy</span>");
+							} else if (r.improvements.typeCoverageDelta < -5) {
+								improvements.push("<span class=\"improvement-negative\" title=\"Increases weakness overlap or removes unique type\">-Type Synergy</span>");
+							}
+							
+							if (improvements.length > 0) {
+								$summaryCell.append("<div class=\"improvements-list\">" + improvements.join(" ") + "</div>");
+							} else {
+								$summaryCell.append("<div class=\"improvements-neutral\">Minor adjustments</div>");
+							}
+							
+							// Show threat coverage score if available
+							if (r.threatCoverage !== undefined) {
+								var threatScore = r.threatCoverage.toFixed(1);
+								$summaryCell.append("<div class=\"threat-coverage\" title=\"Average performance against identified threats (0-100 scale)\">Threat Coverage: " + threatScore + "/100</div>");
 							}
 						}
 						
