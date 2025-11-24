@@ -761,8 +761,9 @@ var InterfaceMaster = (function () {
 				var useCompositionAnalysis = $(".enhanced-option .check.advanced-synergy").hasClass("on");
 				
 				if (useCompositionAnalysis && typeof ranker.evaluateTeamImprovement === 'function') {
-					// Update weights from UI before evaluating
+					// Update weights and options from UI before evaluating
 					ranker.setEnhancedWeights(self.getEnhancedWeights());
+					ranker.setEnhancedOptions(self.getEnhancedOptions());
 					
 					// New algorithm: Evaluate alternatives by team composition improvement
 					try {
