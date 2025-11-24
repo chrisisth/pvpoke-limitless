@@ -1140,12 +1140,29 @@ var InterfaceMaster = (function () {
 						
 						// Show which Pokemon is being replaced
 						if (r.replacedPokemon) {
-							$summaryCell.append("<div class=\"replacement-info\">Replace: " + r.replacedPokemon + "</div>");
+							var replacedName = r.replacedPokemon.speciesName || r.replacedPokemon;
+							$summaryCell.append("<div class=\"replacement-info\">Replace: " + replacedName + "</div>");
 						}
 						
-						// Show the specific improvements
-						if (r.improvements && r.improvements.length > 0) {
-							$summaryCell.append("<div class=\"improvements-info\">" + r.improvements.join(", ") + "</div>");
+						// Show the specific improvements as formatted text
+						if (r.improvements) {
+							var improvementTexts = [];
+							if (r.improvements.bulkDelta && Math.abs(r.improvements.bulkDelta) > 1) {
+								improvementTexts.push("Bulk " + (r.improvements.bulkDelta > 0 ? "+" : "") + r.improvements.bulkDelta.toFixed(1));
+							}
+							if (r.improvements.eptDptDelta && Math.abs(r.improvements.eptDptDelta) > 1) {
+								improvementTexts.push("EPT/DPT " + (r.improvements.eptDptDelta > 0 ? "+" : "") + r.improvements.eptDptDelta.toFixed(1));
+							}
+							if (r.improvements.roleDelta && Math.abs(r.improvements.roleDelta) > 1) {
+								improvementTexts.push("Role " + (r.improvements.roleDelta > 0 ? "+" : "") + r.improvements.roleDelta.toFixed(1));
+							}
+							if (r.improvements.typeCoverageDelta && Math.abs(r.improvements.typeCoverageDelta) > 1) {
+								improvementTexts.push("Coverage " + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + r.improvements.typeCoverageDelta.toFixed(1));
+							}
+							
+							if (improvementTexts.length > 0) {
+								$summaryCell.append("<div class=\"improvements-info\">" + improvementTexts.join(", ") + "</div>");
+							}
 						}
 						
 						$row.append($summaryCell);
