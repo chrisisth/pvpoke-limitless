@@ -760,7 +760,7 @@ var InterfaceMaster = (function () {
 				// NEW: Use team composition-based ranking instead of just counter-team performance
 				var useCompositionAnalysis = $(".enhanced-option .check.advanced-synergy").hasClass("on");
 				
-				if (useCompositionAnalysis && typeof ranker.findBestTeamSlot === 'function') {
+				if (useCompositionAnalysis && typeof ranker.evaluateTeamImprovement === 'function') {
 					// New algorithm: Evaluate alternatives by team composition improvement
 					try {
 						altRankings = self.rankAlternativesByCompositionImprovement(

@@ -48,13 +48,14 @@ var RankerMaster = (function () {
 
 			// Enhanced ranking algorithm weights - now focused on TEAM COMPOSITION improvements
 			var enhancedWeights = {
+				// New composition-based weights (used when Advanced Team Synergy is ON)
 				threatCoverage: 0.30,   // How well alternative counters your threats
 				bulkImprovement: 0.20,  // Bulk/survivability improvement
 				eptDptBalance: 0.15,    // Energy generation and pressure balance
 				roleCompletion: 0.15,   // Filling missing Lead/Safe Swap/Closer roles
 				typeCoverage: 0.15,     // Defensive and offensive type synergy
 				metaRelevance: 0.05,    // Current usage and consistency
-				// Legacy properties for backward compatibility
+				// Legacy weights (used when Advanced Team Synergy is OFF)
 				battle: 0.40,
 				statProduct: 0.15,
 				role: 0.15,
@@ -674,11 +675,50 @@ var RankerMaster = (function () {
 					overallDelta: newComposition.overall - currentComposition.overall
 				};
 				
-				// CRITICAL: Penalize if removing unique type coverage
+				// CRITICAL: Penalize based on team weakness overlap and type diversity
 				var removedPokemon = currentTeam[replacementIndex];
 				var typeRedundancyPenalty = 0;
 				
-				// Check if removed Pokemon has unique types
+				// Helper function to get weaknesses for a Pokemon (effectiveness >= 1.6)
+				var getWeaknesses = function(pokemon) {
+					var weaknesses = [];
+					if (pokemon.typeEffectiveness) {
+						for (var type in pokemon.typeEffectiveness) {
+							if (pokemon.typeEffectiveness[type] >= 1.6) {
+								weaknesses.push(type);
+							}
+						}
+					}
+					return weaknesses;
+				};
+				
+				// Get weaknesses for alternative and remaining team
+				var altWeaknesses = getWeaknesses(alternative);
+				var sharedWeaknessCount = 0;
+				
+				// Check how many weaknesses the alternative shares with remaining team
+				for (var i = 0; i < currentTeam.length; i++) {
+					if (i === replacementIndex) continue;
+					
+					var teamMemberWeaknesses = getWeaknesses(currentTeam[i]);
+					
+					// Count shared weaknesses
+					for (var w = 0; w < altWeaknesses.length; w++) {
+						if (teamMemberWeaknesses.indexOf(altWeaknesses[w]) > -1) {
+							sharedWeaknessCount++;
+							// Extra penalty if it's a common attacking type (Fighting, Rock, Steel, Fire, Water, Ground)
+							var commonTypes = ['fighting', 'rock', 'steel', 'fire', 'water', 'ground', 'ice'];
+							if (commonTypes.indexOf(altWeaknesses[w]) > -1) {
+								sharedWeaknessCount += 0.5; // 50% extra penalty for common attacking types
+							}
+						}
+					}
+				}
+				
+				// Heavy penalty for shared weaknesses (each shared weakness = 20 points)
+				typeRedundancyPenalty += sharedWeaknessCount * 20;
+				
+				// Check if removed Pokemon has unique types not on alternative
 				for (var t = 0; t < removedPokemon.types.length; t++) {
 					var removedType = removedPokemon.types[t];
 					var typeIsUnique = true;
@@ -694,7 +734,7 @@ var RankerMaster = (function () {
 					
 					// If type is unique and alternative doesn't have it, heavy penalty
 					if (typeIsUnique && alternative.types.indexOf(removedType) === -1) {
-						typeRedundancyPenalty += 30; // Major penalty for losing unique type
+						typeRedundancyPenalty += 25; // Major penalty for losing unique type
 					}
 				}
 				
@@ -710,9 +750,9 @@ var RankerMaster = (function () {
 						}
 					}
 					
-					// Penalty for each redundant type (more redundancy = higher penalty)
+					// Penalty for each redundant type
 					if (typeCount > 0) {
-						typeRedundancyPenalty += typeCount * 15;
+						typeRedundancyPenalty += typeCount * 12;
 					}
 				}
 
@@ -769,31 +809,6 @@ var RankerMaster = (function () {
 					replacedPokemon: currentTeam[replacementIndex],
 					newComposition: newComposition,
 					currentComposition: currentComposition
-				};
-			}
-
-			/**
-			 * NEW: Find best team position for an alternative
-			 * Tries replacing each team member and returns best improvement
-			 */
-			this.findBestTeamSlot = function(alternative, currentTeam, counterTeam, cp) {
-				var bestSlot = 0;
-				var bestEval = null;
-				var bestScore = -Infinity;
-
-				for (var i = 0; i < currentTeam.length; i++) {
-					var evaluation = this.evaluateTeamImprovement(alternative, currentTeam, i, counterTeam, cp);
-					
-					if (evaluation.compositeScore > bestScore) {
-						bestScore = evaluation.compositeScore;
-						bestSlot = i;
-						bestEval = evaluation;
-					}
-				}
-
-				return {
-					slotIndex: bestSlot,
-					evaluation: bestEval
 				};
 			}
 
