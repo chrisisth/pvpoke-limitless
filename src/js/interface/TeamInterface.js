@@ -1135,9 +1135,19 @@ var InterfaceMaster = (function () {
 							$row.append($cell);
 						}
 					} else if (isCompositionBased) {
-						// For composition-based alternatives, show a single summary cell
+						// For composition-based alternatives, show a single summary cell with improvement details
 						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
-						$summaryCell.append("<div class=\"composition-label\">Team Composition Improvement</div>");
+						
+						// Show which Pokemon is being replaced
+						if (r.replacedPokemon) {
+							$summaryCell.append("<div class=\"replacement-info\">Replace: " + r.replacedPokemon + "</div>");
+						}
+						
+						// Show the specific improvements
+						if (r.improvements && r.improvements.length > 0) {
+							$summaryCell.append("<div class=\"improvements-info\">" + r.improvements.join(", ") + "</div>");
+						}
+						
 						$row.append($summaryCell);
 					}
 					
@@ -1831,13 +1841,7 @@ var InterfaceMaster = (function () {
 			 * Evaluates each alternative by simulating team with that Pokemon
 			 */
 			this.rankAlternativesByCompositionImprovement = function(ranker, currentTeam, counterTeam, cp, cup, exclusionList) {
-				console.log('Starting composition-based ranking...');
-				console.log('Current team:', currentTeam.map(p => p.speciesName));
-				console.log('Counter team:', counterTeam.map(p => p.speciesName));
-				
 				var pokemonList = gm.generateFilteredPokemonList(battle, cup.include, cup.exclude);
-				console.log('Total Pokemon in pool:', pokemonList.length);
-				
 				var alternativesLength = parseInt($(".alternatives-length-select option:selected").val()) || 100;
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
@@ -1848,8 +1852,6 @@ var InterfaceMaster = (function () {
 						return exclusionList.indexOf(pokemon.speciesId) === -1;
 					});
 				}
-				
-				console.log('After exclusions:', pokemonList.length);
 
 				var evaluatedAlternatives = [];
 
@@ -1893,16 +1895,12 @@ var InterfaceMaster = (function () {
 					}
 				}
 
-				console.log('Evaluated alternatives:', evaluatedAlternatives.length);
-
 				// Sort by composite score (descending)
 				evaluatedAlternatives.sort(function(a, b) {
 					return b.score - a.score;
 				});
 
-				var result = evaluatedAlternatives.slice(0, alternativesLength);
-				console.log('Returning top', result.length, 'alternatives');
-				return result;
+				return evaluatedAlternatives.slice(0, alternativesLength);
 			}
 		};
 
