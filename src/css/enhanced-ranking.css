@@ -159,6 +159,19 @@
     color: #155724;
 }
 
+.composition-summary {
+    text-align: center;
+    background: #f8f9fa;
+    font-style: italic;
+    color: #6c757d;
+    vertical-align: middle;
+}
+
+.composition-label {
+    font-size: 11px;
+    padding: 4px;
+}
+
 .score-cell {
     text-align: center;
     vertical-align: middle;

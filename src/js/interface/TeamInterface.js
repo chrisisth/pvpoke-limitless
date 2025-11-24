@@ -762,14 +762,27 @@ var InterfaceMaster = (function () {
 				
 				if (useCompositionAnalysis && typeof ranker.findBestTeamSlot === 'function') {
 					// New algorithm: Evaluate alternatives by team composition improvement
-					altRankings = self.rankAlternativesByCompositionImprovement(
-						ranker,
-						team, 
-						counterTeam, 
-						battle.getCP(), 
-						battle.getCup(), 
-						exclusionList
-					);
+					try {
+						altRankings = self.rankAlternativesByCompositionImprovement(
+							ranker,
+							team, 
+							counterTeam, 
+							battle.getCP(), 
+							battle.getCup(), 
+							exclusionList
+						);
+						
+						if (!altRankings || altRankings.length === 0) {
+							console.warn('Composition analysis returned no results, falling back to old algorithm');
+							altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
+							altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
+						}
+					} catch (e) {
+						console.error('Error in composition analysis:', e);
+						// Fallback to old algorithm
+						altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
+						altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
+					}
 				} else {
 					// Fallback to old algorithm
 					altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
@@ -1097,7 +1110,7 @@ var InterfaceMaster = (function () {
 					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					// Only show matchup cells if we have matchup data
-					if (r.matchups && r.matchups.length > 0) {
+					if (!isCompositionBased && r.matchups && r.matchups.length > 0) {
 						for(var n = 0; n < r.matchups.length; n++){
 							var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
 							var rating = r.matchups[n].rating;
@@ -1121,10 +1134,18 @@ var InterfaceMaster = (function () {
 
 							$row.append($cell);
 						}
+					} else if (isCompositionBased) {
+						// For composition-based alternatives, show a single summary cell
+						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
+						$summaryCell.append("<div class=\"composition-label\">Team Composition Improvement</div>");
+						$row.append($summaryCell);
 					}
 					
 					// Add score column
-					var $scoreCell = $("<td class=\"score-cell\" title=\"" + scoreTooltip + "\"><span class=\"total-score\">" + totalScore + "</span><div class=\"score-breakdown\">Base: " + baseScore + " + Bonus: " + winBonus + "</div></td>");
+					var scoreBreakdown = isCompositionBased ? 
+						"Composition: " + totalScore :
+						"Base: " + baseScore + " + Bonus: " + winBonus;
+					var $scoreCell = $("<td class=\"score-cell\" title=\"" + scoreTooltip + "\"><span class=\"total-score\">" + totalScore + "</span><div class=\"score-breakdown\">" + scoreBreakdown + "</div></td>");
 					$row.append($scoreCell);
 
 					// Add region for alternative Pokemon for Continentals
@@ -1810,7 +1831,13 @@ var InterfaceMaster = (function () {
 			 * Evaluates each alternative by simulating team with that Pokemon
 			 */
 			this.rankAlternativesByCompositionImprovement = function(ranker, currentTeam, counterTeam, cp, cup, exclusionList) {
+				console.log('Starting composition-based ranking...');
+				console.log('Current team:', currentTeam.map(p => p.speciesName));
+				console.log('Counter team:', counterTeam.map(p => p.speciesName));
+				
 				var pokemonList = gm.generateFilteredPokemonList(battle, cup.include, cup.exclude);
+				console.log('Total Pokemon in pool:', pokemonList.length);
+				
 				var alternativesLength = parseInt($(".alternatives-length-select option:selected").val()) || 100;
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
@@ -1821,6 +1848,8 @@ var InterfaceMaster = (function () {
 						return exclusionList.indexOf(pokemon.speciesId) === -1;
 					});
 				}
+				
+				console.log('After exclusions:', pokemonList.length);
 
 				var evaluatedAlternatives = [];
 
@@ -1838,35 +1867,42 @@ var InterfaceMaster = (function () {
 					}
 
 					// Find best team slot for this alternative
-					var slotResult = ranker.findBestTeamSlot(pokemon, currentTeam, counterTeam, cp);
-					
-					if (slotResult && slotResult.evaluation) {
-						evaluatedAlternatives.push({
-							pokemon: pokemon,
-							speciesId: pokemon.speciesId,
-							speciesName: pokemon.speciesName,
-							rating: slotResult.evaluation.compositeScore,
-							score: slotResult.evaluation.compositeScore,
-							matchupAltScore: slotResult.evaluation.compositeScore,
-							replacementIndex: slotResult.slotIndex,
-							replacedPokemon: slotResult.evaluation.replacedPokemon,
-							improvements: slotResult.evaluation.improvements,
-							threatCoverage: slotResult.evaluation.threatCoverageScore,
-							moveset: {
-								fastMove: pokemon.fastMove,
-								chargedMoves: pokemon.chargedMoves.slice()
-							}
-						});
+					try {
+						var slotResult = ranker.findBestTeamSlot(pokemon, currentTeam, counterTeam, cp);
+						
+						if (slotResult && slotResult.evaluation) {
+							evaluatedAlternatives.push({
+								pokemon: pokemon,
+								speciesId: pokemon.speciesId,
+								speciesName: pokemon.speciesName,
+								rating: slotResult.evaluation.compositeScore,
+								score: slotResult.evaluation.compositeScore,
+								matchupAltScore: slotResult.evaluation.compositeScore,
+								replacementIndex: slotResult.slotIndex,
+								replacedPokemon: slotResult.evaluation.replacedPokemon,
+								improvements: slotResult.evaluation.improvements,
+								threatCoverage: slotResult.evaluation.threatCoverageScore,
+								moveset: {
+									fastMove: pokemon.fastMove,
+									chargedMoves: pokemon.chargedMoves.slice()
+								}
+							});
+						}
+					} catch (e) {
+						console.error('Error evaluating', pokemon.speciesName, ':', e);
 					}
 				}
+
+				console.log('Evaluated alternatives:', evaluatedAlternatives.length);
 
 				// Sort by composite score (descending)
 				evaluatedAlternatives.sort(function(a, b) {
 					return b.score - a.score;
 				});
 
-				// Return top alternatives
-				return evaluatedAlternatives.slice(0, alternativesLength);
+				var result = evaluatedAlternatives.slice(0, alternativesLength);
+				console.log('Returning top', result.length, 'alternatives');
+				return result;
 			}
 		};
 
