@@ -763,6 +763,7 @@ var InterfaceMaster = (function () {
 				if (useCompositionAnalysis && typeof ranker.findBestTeamSlot === 'function') {
 					// New algorithm: Evaluate alternatives by team composition improvement
 					altRankings = self.rankAlternativesByCompositionImprovement(
+						ranker,
 						team, 
 						counterTeam, 
 						battle.getCP(), 
@@ -1808,7 +1809,7 @@ var InterfaceMaster = (function () {
 			 * NEW: Rank alternatives by team composition improvement
 			 * Evaluates each alternative by simulating team with that Pokemon
 			 */
-			this.rankAlternativesByCompositionImprovement = function(currentTeam, counterTeam, cp, cup, exclusionList) {
+			this.rankAlternativesByCompositionImprovement = function(ranker, currentTeam, counterTeam, cp, cup, exclusionList) {
 				var pokemonList = gm.generateFilteredPokemonList(battle, cup.include, cup.exclude);
 				var alternativesLength = parseInt($(".alternatives-length-select option:selected").val()) || 100;
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
