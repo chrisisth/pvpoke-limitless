@@ -1126,8 +1126,17 @@ var InterfaceMaster = (function () {
 							role.primary.charAt(0).toUpperCase() + role.primary.slice(1) + "</div>";
 					}
 
+					// Show which team member this alternative would replace
+					var replacementInfo = "";
+					if (r.replacementIndex !== undefined && team[r.replacementIndex]) {
+						var replacedPokemon = team[r.replacementIndex];
+						var positionNames = ["Lead", "Safe Swap", "Closer"];
+						var positionName = positionNames[r.replacementIndex] || ("Position " + (r.replacementIndex + 1));
+						replacementInfo = "<div class=\"replaces-info\" title=\"This Pokemon would replace " + replacedPokemon.speciesName + " in the " + positionName + " position\">Replaces: " + replacedPokemon.speciesName + " (" + positionName + ")</div>";
+					}
+
 					var recordDisplay = isCompositionBased ? "" : "<div class=\"record\">"+wins+"-"+losses+"</div>";
-					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + replacementInfo + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					// Only show matchup cells if we have matchup data
 					if (!isCompositionBased && r.matchups && r.matchups.length > 0) {
