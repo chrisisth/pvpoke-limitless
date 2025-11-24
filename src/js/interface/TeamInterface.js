@@ -1053,8 +1053,8 @@ var InterfaceMaster = (function () {
 
 					// Add results to alternatives table
 					
-					// Check if this is a composition-based recommendation
-					var isCompositionBased = (r.replacedPokemon !== undefined);
+					// Check if we're using composition-based analysis (based on checkbox state, not data structure)
+					var isCompositionBased = $(".enhanced-option .check.advanced-synergy").hasClass("on");
 					
 					// Calculate win/loss record and score breakdown
 					var wins = r.matchups ? r.matchups.filter(m => m.rating > 500).length : 0;
