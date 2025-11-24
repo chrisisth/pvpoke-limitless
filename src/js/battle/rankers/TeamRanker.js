@@ -53,7 +53,13 @@ var RankerMaster = (function () {
 				eptDptBalance: 0.15,    // Energy generation and pressure balance
 				roleCompletion: 0.15,   // Filling missing Lead/Safe Swap/Closer roles
 				typeCoverage: 0.15,     // Defensive and offensive type synergy
-				metaRelevance: 0.05     // Current usage and consistency
+				metaRelevance: 0.05,    // Current usage and consistency
+				// Legacy properties for backward compatibility
+				battle: 0.40,
+				statProduct: 0.15,
+				role: 0.15,
+				quality: 0.15,
+				meta: 0.15
 			};
 
 			// Initialize composition analyzer
@@ -243,7 +249,7 @@ var RankerMaster = (function () {
 						var avgPokeRating = 0;
 						var avgOpRating = 0;
 						var shieldRatings = [];
-						var shieldWeights = []; // Weight for each shield scenario
+						var scenarioWeights = []; // Renamed to avoid shadowing the shieldWeights object
 
 						for(var j = 0; j < shieldTestArr.length; j++){
 							pokemon.setShields(shieldTestArr[j][1]);
@@ -281,7 +287,7 @@ var RankerMaster = (function () {
 
 							avgPokeRating += (rating * weight);
 							avgOpRating += (opRating * weight);
-							shieldWeights.push(weight);
+							scenarioWeights.push(weight);
 
 							shieldRatings.push(rating);
 						}
@@ -292,7 +298,7 @@ var RankerMaster = (function () {
 								avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
 							} else if(shieldMode == 'all'){
 								// Calculate weighted average
-								var totalWeight = shieldWeights.reduce((a, b) => a + b, 0);
+								var totalWeight = scenarioWeights.reduce((a, b) => a + b, 0);
 								avgPokeRating = Math.round(avgPokeRating / totalWeight);
 								avgOpRating = Math.round(avgOpRating / totalWeight);
 							}
@@ -346,7 +352,7 @@ var RankerMaster = (function () {
 						matchupScore += score;
 						matchupAltScore += alternativeScore;
 
-						if(settings.matrixDirection == "column"){
+						if(typeof settings !== 'undefined' && settings.matrixDirection == "column"){
 							avgPokeRating = 1000 - avgPokeRating;
 						}
 
@@ -357,7 +363,7 @@ var RankerMaster = (function () {
 							opponent: opponent,
 							rating: avgPokeRating,
 							score: score,
-							alternativeScore: score,
+							alternativeScore: alternativeScore,
 							time: battle.getDuration()
 						};
 
@@ -621,8 +627,26 @@ var RankerMaster = (function () {
 					return { compositeScore: 0, improvements: {} };
 				}
 
-				// Evaluate current team
-				var currentComposition = compositionAnalyzer.evaluateTeamComposition(currentTeam, cp);
+				// Ensure battle is initialized
+				if (!battle) {
+					battle = new Battle();
+				}
+				
+				// Parse CP value (might be "1500" or "1500-40")
+				var cpValue = cp;
+				if (typeof cp === 'string' && cp.indexOf('-') > -1) {
+					var parts = cp.split("-");
+					cpValue = parseInt(parts[0]);
+					var levelCap = parseInt(parts[1]);
+					battle.setCP(cpValue);
+					battle.setLevelCap(levelCap);
+				} else {
+					cpValue = parseInt(cp);
+					battle.setCP(cpValue);
+				}
+
+				// Evaluate current team (use numeric CP for benchmarks)
+				var currentComposition = compositionAnalyzer.evaluateTeamComposition(currentTeam, cpValue);
 				compositionAnalyzer.calculateOverallScore(currentComposition, {
 					bulk: 0.25, eptDpt: 0.20, roles: 0.25, typeCoverage: 0.30
 				});
@@ -631,28 +655,35 @@ var RankerMaster = (function () {
 				var newTeam = currentTeam.slice(); // Clone array
 				newTeam[replacementIndex] = alternative;
 
-				// Evaluate new team
-				var newComposition = compositionAnalyzer.evaluateTeamComposition(newTeam, cp);
+				// Evaluate new team (use numeric CP for benchmarks)
+				var newComposition = compositionAnalyzer.evaluateTeamComposition(newTeam, cpValue);
 				compositionAnalyzer.calculateOverallScore(newComposition, {
 					bulk: 0.25, eptDpt: 0.20, roles: 0.25, typeCoverage: 0.30
 				});
 
-				// Calculate improvements (deltas)
+				// Calculate improvements (deltas) - safe access with fallbacks
 				var improvements = {
-					bulkDelta: newComposition.bulk.score - currentComposition.bulk.score,
-					eptDptDelta: newComposition.eptDpt.score - currentComposition.eptDpt.score,
-					roleDelta: newComposition.roles.score - currentComposition.roles.score,
-					typeCoverageDelta: newComposition.typeCoverage.score - currentComposition.typeCoverage.score,
+					bulkDelta: (newComposition.bulk && currentComposition.bulk) ? 
+						newComposition.bulk.score - currentComposition.bulk.score : 0,
+					eptDptDelta: (newComposition.eptDpt && currentComposition.eptDpt) ? 
+						newComposition.eptDpt.score - currentComposition.eptDpt.score : 0,
+					roleDelta: (newComposition.roles && currentComposition.roles) ? 
+						newComposition.roles.score - currentComposition.roles.score : 0,
+					typeCoverageDelta: (newComposition.typeCoverage && currentComposition.typeCoverage) ? 
+						newComposition.typeCoverage.score - currentComposition.typeCoverage.score : 0,
 					overallDelta: newComposition.overall - currentComposition.overall
 				};
 
 				// Evaluate threat coverage (how well alternative performs against counterTeam)
 				var threatCoverageScore = 0;
 				if (counterTeam && counterTeam.length > 0) {
-					var wins = 0;
 					var totalRating = 0;
 					
 					for (var i = 0; i < counterTeam.length; i++) {
+						// Set default shields (1v1)
+						alternative.setShields(1);
+						counterTeam[i].setShields(1);
+						
 						battle.setNewPokemon(alternative, 0, false);
 						battle.setNewPokemon(counterTeam[i], 1, false);
 						battle.simulate();
@@ -661,23 +692,30 @@ var RankerMaster = (function () {
 						var damageRating = ((counterTeam[i].stats.hp - counterTeam[i].hp) / counterTeam[i].stats.hp);
 						var rating = (healthRating + damageRating) * 500;
 						
-						if (rating > 500) wins++;
 						totalRating += rating;
 						
+						// Reset Pokemon for next simulation
 						alternative.reset();
 						counterTeam[i].reset();
 					}
 					
-					threatCoverageScore = (totalRating / counterTeam.length) / 10; // Scale to 0-100
+					// Safe division
+					threatCoverageScore = counterTeam.length > 0 ? (totalRating / counterTeam.length) / 10 : 0; // Scale to 0-100
 				}
 
 				// Calculate weighted composite score
+				// Normalize deltas to 0-100 range (deltas can be -100 to +100, so we shift by 50 to get 0-100)
+				var normalizedBulk = Math.max(0, Math.min(100, improvements.bulkDelta + 50));
+				var normalizedEPT = Math.max(0, Math.min(100, improvements.eptDptDelta + 50));
+				var normalizedRole = Math.max(0, Math.min(100, improvements.roleDelta + 50));
+				var normalizedCoverage = Math.max(0, Math.min(100, improvements.typeCoverageDelta + 50));
+				
 				var compositeScore = 
 					(threatCoverageScore * enhancedWeights.threatCoverage) +
-					(Math.max(0, improvements.bulkDelta + 50) * enhancedWeights.bulkImprovement) +
-					(Math.max(0, improvements.eptDptDelta + 50) * enhancedWeights.eptDptBalance) +
-					(Math.max(0, improvements.roleDelta + 50) * enhancedWeights.roleCompletion) +
-					(Math.max(0, improvements.typeCoverageDelta + 50) * enhancedWeights.typeCoverage);
+					(normalizedBulk * enhancedWeights.bulkImprovement) +
+					(normalizedEPT * enhancedWeights.eptDptBalance) +
+					(normalizedRole * enhancedWeights.roleCompletion) +
+					(normalizedCoverage * enhancedWeights.typeCoverage);
 
 				return {
 					compositeScore: compositeScore,

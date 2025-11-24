@@ -42,12 +42,18 @@ var TeamCompositionAnalyzer = (function () {
                 if (!team || team.length === 0) {
                     return this.getEmptyScore();
                 }
+                
+                // Filter out any undefined/null Pokemon
+                var validTeam = team.filter(function(p) { return p != null && p != undefined; });
+                if (validTeam.length === 0) {
+                    return this.getEmptyScore();
+                }
 
                 return {
-                    bulk: this.calculateBulkScore(team, cp),
-                    eptDpt: this.calculateEnergyBalance(team),
-                    roles: this.analyzeRoleDistribution(team),
-                    typeCoverage: this.analyzeTypeCoverage(team),
+                    bulk: this.calculateBulkScore(validTeam, cp),
+                    eptDpt: this.calculateEnergyBalance(validTeam),
+                    roles: this.analyzeRoleDistribution(validTeam),
+                    typeCoverage: this.analyzeTypeCoverage(validTeam),
                     overall: 0  // Will be calculated as weighted average
                 };
             };
@@ -63,13 +69,19 @@ var TeamCompositionAnalyzer = (function () {
 
                 for (var i = 0; i < team.length; i++) {
                     var pokemon = team[i];
+                    if (!pokemon || !pokemon.stats) continue;
+                    
                     // Bulk = Defense × HP
                     var bulk = pokemon.stats.def * pokemon.stats.hp;
                     bulkValues.push(bulk);
                     totalBulk += bulk;
                 }
+                
+                if (bulkValues.length === 0) {
+                    return { score: 0, average: 0, benchmark: benchmark, hasGlassCannon: false, hasTank: false, distribution: 'unknown' };
+                }
 
-                var averageBulk = totalBulk / team.length;
+                var averageBulk = totalBulk / bulkValues.length;
                 
                 // Calculate distribution (avoid all-glass or all-tank)
                 var bulkVariance = this.calculateVariance(bulkValues);
@@ -110,8 +122,11 @@ var TeamCompositionAnalyzer = (function () {
                     var pokemon = team[i];
                     if (!pokemon.fastMove) continue;
                     
-                    var ept = pokemon.fastMove.energyGain / pokemon.fastMove.duration;
-                    var dpt = pokemon.fastMove.power / pokemon.fastMove.duration;
+                    // EPT and DPT calculations
+                    // cooldown is in milliseconds, 500ms = 1 turn
+                    var turns = pokemon.fastMove.cooldown / 500;
+                    var ept = pokemon.fastMove.energyGain / turns;
+                    var dpt = pokemon.fastMove.power / turns;
                     
                     eptValues.push(ept);
                     dptValues.push(dpt);
@@ -195,48 +210,58 @@ var TeamCompositionAnalyzer = (function () {
              * Analyze type coverage - both defensive and offensive
              */
             this.analyzeTypeCoverage = function(team) {
-                var typeChart = gm.getTypeChart();
                 var resistances = {};  // Type -> count of Pokemon that resist it
                 var weaknesses = {};    // Type -> count of Pokemon weak to it
                 var offensiveCoverage = {}; // Type -> count of Pokemon that hit it super-effectively
                 var doubleWeaknesses = [];
 
-                // Initialize all types
-                for (var type in typeChart) {
-                    resistances[type] = 0;
-                    weaknesses[type] = 0;
-                    offensiveCoverage[type] = 0;
-                }
-
                 // Analyze each Pokemon
                 for (var i = 0; i < team.length; i++) {
                     var pokemon = team[i];
+                    if (!pokemon) continue;
                     
-                    // Defensive analysis
-                    for (var attackType in typeChart) {
-                        var effectiveness = pokemon.typeEffectiveness[attackType];
-                        
-                        if (effectiveness < 1) {
-                            resistances[attackType]++;
-                        } else if (effectiveness > 1) {
-                            weaknesses[attackType]++;
+                    // Defensive analysis - use Pokemon's typeEffectiveness property
+                    if (pokemon.typeEffectiveness) {
+                        for (var attackType in pokemon.typeEffectiveness) {
+                            // Initialize counters if not yet done
+                            if (resistances[attackType] === undefined) {
+                                resistances[attackType] = 0;
+                                weaknesses[attackType] = 0;
+                            }
                             
-                            // Check for double weakness
-                            if (effectiveness >= 1.96) {  // 1.6 * 1.6 = 2.56, but checking 1.96 for safety
-                                doubleWeaknesses.push({
-                                    pokemon: pokemon.speciesName,
-                                    type: attackType
-                                });
+                            var effectiveness = pokemon.typeEffectiveness[attackType];
+                            
+                            if (effectiveness < 1) {
+                                resistances[attackType]++;
+                            } else if (effectiveness > 1) {
+                                weaknesses[attackType]++;
+                                
+                                // Check for double weakness
+                                if (effectiveness >= 1.96) {  // 1.6 * 1.6 = 2.56, but checking 1.96 for safety
+                                    doubleWeaknesses.push({
+                                        pokemon: pokemon.speciesName,
+                                        type: attackType
+                                    });
+                                }
                             }
                         }
                     }
 
                     // Offensive analysis
                     if (pokemon.fastMove) {
-                        this.markOffensiveCoverage(pokemon.fastMove.type, typeChart, offensiveCoverage);
+                        if (offensiveCoverage[pokemon.fastMove.type] === undefined) {
+                            offensiveCoverage[pokemon.fastMove.type] = 0;
+                        }
+                        offensiveCoverage[pokemon.fastMove.type]++;
                     }
-                    for (var j = 0; j < pokemon.chargedMoves.length; j++) {
-                        this.markOffensiveCoverage(pokemon.chargedMoves[j].type, typeChart, offensiveCoverage);
+                    if (pokemon.chargedMoves && pokemon.chargedMoves.length > 0) {
+                        for (var j = 0; j < pokemon.chargedMoves.length; j++) {
+                            var moveType = pokemon.chargedMoves[j].type;
+                            if (offensiveCoverage[moveType] === undefined) {
+                                offensiveCoverage[moveType] = 0;
+                            }
+                            offensiveCoverage[moveType]++;
+                        }
                     }
                 }
 
@@ -261,24 +286,12 @@ var TeamCompositionAnalyzer = (function () {
             };
 
             /**
-             * Mark which types a move can hit super-effectively
-             */
-            this.markOffensiveCoverage = function(moveType, typeChart, offensiveCoverage) {
-                if (!typeChart[moveType]) return;
-                
-                for (var defendType in typeChart) {
-                    var effectiveness = typeChart[moveType][defendType];
-                    if (effectiveness && effectiveness > 1) {
-                        offensiveCoverage[defendType]++;
-                    }
-                }
-            };
-
-            /**
              * Calculate how well types are covered
              */
             this.calculateCoverageScore = function(coverage, teamSize) {
                 var totalTypes = Object.keys(coverage).length;
+                if (totalTypes === 0) return 0; // Prevent division by zero
+                
                 var coveredTypes = 0;
                 var wellCoveredTypes = 0;
 
