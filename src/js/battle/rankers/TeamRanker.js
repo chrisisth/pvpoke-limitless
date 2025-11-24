@@ -718,6 +718,23 @@ var RankerMaster = (function () {
 				// Heavy penalty for shared weaknesses (each shared weakness = 20 points)
 				typeRedundancyPenalty += sharedWeaknessCount * 20;
 				
+				// CRITICAL: Penalize inherently fragile types (Ice, Bug, Grass) that have excessive weaknesses
+				// Ice has 4 weaknesses (Fighting, Rock, Steel, Fire), Bug has 3 (Fire, Flying, Rock), Grass has 5
+				var fragileTypes = {
+					'ice': 30,      // Ice types are extremely vulnerable
+					'bug': 20,      // Bug types have many common weaknesses
+					'grass': 25,    // Grass types are weak to many meta types
+					'rock': 20,     // Rock has 5 weaknesses (Water, Grass, Fighting, Ground, Steel)
+					'psychic': 15   // Psychic weak to common Dark/Ghost
+				};
+				
+				for (var t = 0; t < alternative.types.length; t++) {
+					var altType = alternative.types[t].toLowerCase();
+					if (fragileTypes[altType]) {
+						typeRedundancyPenalty += fragileTypes[altType];
+					}
+				}
+				
 				// Check if removed Pokemon has unique types not on alternative
 				for (var t = 0; t < removedPokemon.types.length; t++) {
 					var removedType = removedPokemon.types[t];

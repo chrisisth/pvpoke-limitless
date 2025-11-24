@@ -1083,29 +1083,29 @@ var InterfaceMaster = (function () {
 					if (isCompositionBased && r.improvements) {
 						var improvementTags = [];
 						
-						// Only show significant changes (>5 points for positive, >5 points for negative)
+						// Only show significant changes (>5 points) with detailed tooltips
 						if (r.improvements.bulkDelta > 5) {
-							improvementTags.push("<span class=\"improvement-tag positive\">+Bulk</span>");
+							improvementTags.push("<span class=\"improvement-tag positive\" title=\"Defense × HP increases by " + r.improvements.bulkDelta.toFixed(1) + " points - improves survivability and shield pressure\">+Bulk</span>");
 						} else if (r.improvements.bulkDelta < -5) {
-							improvementTags.push("<span class=\"improvement-tag negative\">-Bulk</span>");
+							improvementTags.push("<span class=\"improvement-tag negative\" title=\"Defense × HP decreases by " + Math.abs(r.improvements.bulkDelta).toFixed(1) + " points - reduces team survivability\">-Bulk</span>");
 						}
 						
 						if (r.improvements.eptDptDelta > 5) {
-							improvementTags.push("<span class=\"improvement-tag positive\">+Energy</span>");
+							improvementTags.push("<span class=\"improvement-tag positive\" title=\"Energy/Damage balance improves by " + r.improvements.eptDptDelta.toFixed(1) + " points - better fast move effectiveness (EPT ≥3.5, DPT ≥3.0)\">+Energy</span>");
 						} else if (r.improvements.eptDptDelta < -5) {
-							improvementTags.push("<span class=\"improvement-tag negative\">-Energy</span>");
+							improvementTags.push("<span class=\"improvement-tag negative\" title=\"Energy/Damage balance decreases by " + Math.abs(r.improvements.eptDptDelta).toFixed(1) + " points - worse fast move effectiveness\">-Energy</span>");
 						}
 						
 						if (r.improvements.roleDelta > 5) {
-							improvementTags.push("<span class=\"improvement-tag positive\">+Role</span>");
+							improvementTags.push("<span class=\"improvement-tag positive\" title=\"Role coverage improves by " + r.improvements.roleDelta.toFixed(1) + " points - fills missing Lead/Safe Swap/Closer role\">+Role</span>");
 						} else if (r.improvements.roleDelta < -5) {
-							improvementTags.push("<span class=\"improvement-tag negative\">-Role</span>");
+							improvementTags.push("<span class=\"improvement-tag negative\" title=\"Role coverage decreases by " + Math.abs(r.improvements.roleDelta).toFixed(1) + " points - disrupts team role balance\">-Role</span>");
 						}
 						
 						if (r.improvements.typeCoverageDelta > 5) {
-							improvementTags.push("<span class=\"improvement-tag positive\">+Coverage</span>");
+							improvementTags.push("<span class=\"improvement-tag positive\" title=\"Type synergy improves by " + r.improvements.typeCoverageDelta.toFixed(1) + " points - reduces shared weaknesses and type overlap\">+Coverage</span>");
 						} else if (r.improvements.typeCoverageDelta < -5) {
-							improvementTags.push("<span class=\"improvement-tag negative\">-Coverage</span>");
+							improvementTags.push("<span class=\"improvement-tag negative\" title=\"Type synergy decreases by " + Math.abs(r.improvements.typeCoverageDelta).toFixed(1) + " points - increases weakness overlap or removes unique type\">-Coverage</span>");
 						}
 						
 						if (improvementTags.length > 0) {
@@ -1168,7 +1168,8 @@ var InterfaceMaster = (function () {
 						if (weights.threatCoverage > 0 && r.threatCoverage !== undefined) {
 							var threatScore = r.threatCoverage.toFixed(1);
 							var threatPct = (weights.threatCoverage * 100).toFixed(0);
-							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Threat Coverage (" + threatPct + "%):</span> <span class=\"factor-value\">" + threatScore + "/100</span></div>";
+							var threatTooltip = "Average battle rating against your identified threats in 1v1 shield scenarios. Higher = better matchups. Weighted at " + threatPct + "% in final score.";
+							detailsHTML += "<div class=\"factor-row\" title=\"" + threatTooltip + "\"><span class=\"factor-name\">Threat Coverage (" + threatPct + "%):</span> <span class=\"factor-value\">" + threatScore + "/100</span></div>";
 						}
 						
 						// Bulk Improvement
@@ -1176,7 +1177,8 @@ var InterfaceMaster = (function () {
 							var bulkPct = (weights.bulkImprovement * 100).toFixed(0);
 							var bulkValue = r.improvements.bulkDelta.toFixed(1);
 							var bulkClass = r.improvements.bulkDelta > 0 ? "positive" : (r.improvements.bulkDelta < 0 ? "negative" : "neutral");
-							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Bulk (" + bulkPct + "%):</span> <span class=\"factor-value " + bulkClass + "\">" + (r.improvements.bulkDelta > 0 ? "+" : "") + bulkValue + "</span></div>";
+							var bulkTooltip = "Change in team's Defense × HP stat product. Great League benchmark: 22,000 | Ultra League: 35,000. Higher bulk = better survivability and shield pressure. Weighted at " + bulkPct + "%.";
+							detailsHTML += "<div class=\"factor-row\" title=\"" + bulkTooltip + "\"><span class=\"factor-name\">Bulk (" + bulkPct + "%):</span> <span class=\"factor-value " + bulkClass + "\">" + (r.improvements.bulkDelta > 0 ? "+" : "") + bulkValue + "</span></div>";
 						}
 						
 						// EPT/DPT Balance
@@ -1184,7 +1186,8 @@ var InterfaceMaster = (function () {
 							var eptPct = (weights.eptDptBalance * 100).toFixed(0);
 							var eptValue = r.improvements.eptDptDelta.toFixed(1);
 							var eptClass = r.improvements.eptDptDelta > 0 ? "positive" : (r.improvements.eptDptDelta < 0 ? "negative" : "neutral");
-							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Energy Balance (" + eptPct + "%):</span> <span class=\"factor-value " + eptClass + "\">" + (r.improvements.eptDptDelta > 0 ? "+" : "") + eptValue + "</span></div>";
+							var eptTooltip = "Change in fast move effectiveness. Target thresholds: EPT (Energy Per Turn) ≥3.5, DPT (Damage Per Turn) ≥3.0. Ensures good energy generation and fast move pressure. Weighted at " + eptPct + "%.";
+							detailsHTML += "<div class=\"factor-row\" title=\"" + eptTooltip + "\"><span class=\"factor-name\">Energy Balance (" + eptPct + "%):</span> <span class=\"factor-value " + eptClass + "\">" + (r.improvements.eptDptDelta > 0 ? "+" : "") + eptValue + "</span></div>";
 						}
 						
 						// Role Completion
@@ -1192,7 +1195,8 @@ var InterfaceMaster = (function () {
 							var rolePct = (weights.roleCompletion * 100).toFixed(0);
 							var roleValue = r.improvements.roleDelta.toFixed(1);
 							var roleClass = r.improvements.roleDelta > 0 ? "positive" : (r.improvements.roleDelta < 0 ? "negative" : "neutral");
-							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span> <span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span></div>";
+							var roleTooltip = "Change in team role balance. Ideal teams have: Lead (high consistency), Safe Swap (counters threats), Closer (sweep potential). Missing roles create strategic vulnerabilities. Weighted at " + rolePct + "%.";
+							detailsHTML += "<div class=\"factor-row\" title=\"" + roleTooltip + "\"><span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span> <span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span></div>";
 						}
 						
 						// Type Coverage
@@ -1200,7 +1204,8 @@ var InterfaceMaster = (function () {
 							var covPct = (weights.typeCoverage * 100).toFixed(0);
 							var covValue = r.improvements.typeCoverageDelta.toFixed(1);
 							var covClass = r.improvements.typeCoverageDelta > 0 ? "positive" : (r.improvements.typeCoverageDelta < 0 ? "negative" : "neutral");
-							detailsHTML += "<div class=\"factor-row\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
+							var covTooltip = "Change in type synergy and weakness distribution. Penalties for: shared weaknesses (especially Fighting/Rock/Steel/Fire), removing unique types, creating type redundancy. Weighted at " + covPct + "%.";
+							detailsHTML += "<div class=\"factor-row\" title=\"" + covTooltip + "\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
 						}
 						
 						detailsHTML += "</div>";
