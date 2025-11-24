@@ -673,6 +673,48 @@ var RankerMaster = (function () {
 						newComposition.typeCoverage.score - currentComposition.typeCoverage.score : 0,
 					overallDelta: newComposition.overall - currentComposition.overall
 				};
+				
+				// CRITICAL: Penalize if removing unique type coverage
+				var removedPokemon = currentTeam[replacementIndex];
+				var typeRedundancyPenalty = 0;
+				
+				// Check if removed Pokemon has unique types
+				for (var t = 0; t < removedPokemon.types.length; t++) {
+					var removedType = removedPokemon.types[t];
+					var typeIsUnique = true;
+					
+					// Check if any other team member shares this type
+					for (var i = 0; i < currentTeam.length; i++) {
+						if (i === replacementIndex) continue;
+						if (currentTeam[i].types.indexOf(removedType) > -1) {
+							typeIsUnique = false;
+							break;
+						}
+					}
+					
+					// If type is unique and alternative doesn't have it, heavy penalty
+					if (typeIsUnique && alternative.types.indexOf(removedType) === -1) {
+						typeRedundancyPenalty += 30; // Major penalty for losing unique type
+					}
+				}
+				
+				// Check if alternative creates type redundancy with remaining team
+				for (var t = 0; t < alternative.types.length; t++) {
+					var altType = alternative.types[t];
+					var typeCount = 0;
+					
+					for (var i = 0; i < currentTeam.length; i++) {
+						if (i === replacementIndex) continue;
+						if (currentTeam[i].types.indexOf(altType) > -1) {
+							typeCount++;
+						}
+					}
+					
+					// Penalty for each redundant type (more redundancy = higher penalty)
+					if (typeCount > 0) {
+						typeRedundancyPenalty += typeCount * 15;
+					}
+				}
 
 				// Evaluate threat coverage (how well alternative performs against counterTeam)
 				var threatCoverageScore = 0;
@@ -716,6 +758,9 @@ var RankerMaster = (function () {
 					(normalizedEPT * enhancedWeights.eptDptBalance) +
 					(normalizedRole * enhancedWeights.roleCompletion) +
 					(normalizedCoverage * enhancedWeights.typeCoverage);
+				
+				// Apply type redundancy penalty
+				compositeScore = Math.max(0, compositeScore - typeRedundancyPenalty);
 
 				return {
 					compositeScore: compositeScore,

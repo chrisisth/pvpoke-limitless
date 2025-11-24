@@ -1885,27 +1885,29 @@ var InterfaceMaster = (function () {
 						pokemon.selectRecommendedMoveset();
 					}
 
-					// Find best team slot for this alternative
+					// Evaluate this alternative for ALL team slots (not just the best one)
 					try {
-						var slotResult = ranker.findBestTeamSlot(pokemon, currentTeam, counterTeam, cp);
-						
-						if (slotResult && slotResult.evaluation) {
-							evaluatedAlternatives.push({
-								pokemon: pokemon,
-								speciesId: pokemon.speciesId,
-								speciesName: pokemon.speciesName,
-								rating: slotResult.evaluation.compositeScore,
-								score: slotResult.evaluation.compositeScore,
-								matchupAltScore: slotResult.evaluation.compositeScore,
-								replacementIndex: slotResult.slotIndex,
-								replacedPokemon: slotResult.evaluation.replacedPokemon,
-								improvements: slotResult.evaluation.improvements,
-								threatCoverage: slotResult.evaluation.threatCoverageScore,
-								moveset: {
-									fastMove: pokemon.fastMove,
-									chargedMoves: pokemon.chargedMoves.slice()
-								}
-							});
+						for (var slotIndex = 0; slotIndex < currentTeam.length; slotIndex++) {
+							var evaluation = ranker.evaluateTeamImprovement(pokemon, currentTeam, slotIndex, counterTeam, cp);
+							
+							if (evaluation && evaluation.compositeScore > 0) {
+								evaluatedAlternatives.push({
+									pokemon: pokemon,
+									speciesId: pokemon.speciesId,
+									speciesName: pokemon.speciesName,
+									rating: evaluation.compositeScore,
+									score: evaluation.compositeScore,
+									matchupAltScore: evaluation.compositeScore,
+									replacementIndex: slotIndex,
+									replacedPokemon: evaluation.replacedPokemon,
+									improvements: evaluation.improvements,
+									threatCoverage: evaluation.threatCoverageScore,
+									moveset: {
+										fastMove: pokemon.fastMove,
+										chargedMoves: pokemon.chargedMoves.slice()
+									}
+								});
+							}
 						}
 					} catch (e) {
 						console.error('Error evaluating', pokemon.speciesName, ':', e);
