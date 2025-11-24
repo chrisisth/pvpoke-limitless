@@ -13,7 +13,7 @@ require_once 'header.php';
 <h1>Team Builder</h1>
 
 <div class="section league-select-container team-content white">
-	<p>Select your Pokemon and movesets below. You'll see how your team matches up against top Pokemon, which Pokemon pose a potential threat, and potential alternatives for your team. You can also use this tool to identify strong team cores and how to break them.</p>
+	<p>Build and optimize your team for Pokemon GO Trainer Battles. The Team Builder analyzes your Pokemon's matchups against top threats and provides intelligent alternative suggestions based on team composition fundamentals—not just individual performance. Enable <strong>Advanced Team Synergy</strong> to get recommendations that improve bulk, energy balance, role coverage, and type synergy while avoiding shared defensive weaknesses.</p>
 	<?php require 'modules/formatselect.php'; ?>
 
 	<a class="toggle" href="#">Advanced <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
@@ -123,77 +123,77 @@ require_once 'header.php';
 		
 		<!-- Enhanced Ranking Algorithm Settings -->
 		<div class="enhanced-ranking-section">
-			<h3 class="section-title">Team Composition Analysis Weights <span class="info-tooltip" title="Configure how different factors influence alternative Pokemon recommendations. Higher values = more importance.">ⓘ</span></h3>
-			<p>Customize the importance of various factors when evaluating potential team improvements. This algorithm analyzes how well alternatives fit into your team composition, not just how they perform against threats.</p>
+			<h3 class="section-title">Team Composition Analysis Weights <span class="info-tooltip" title="These weights determine how alternatives are evaluated when Advanced Team Synergy is enabled. The algorithm analyzes overall team composition rather than just individual matchups.">ⓘ</span></h3>
+			<p>When <strong>Advanced Team Synergy</strong> is enabled, alternatives are ranked by how they improve your overall team composition—not just matchup performance. The algorithm considers bulk, energy balance, roles, type synergy, and defensive weaknesses to prevent "glassy" or unbalanced teams.</p>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label>Threat Coverage</label>
+					<label title="How well the alternative performs in 1v1 battles against your identified threats">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="30" />
 					<span class="weight-value">30%</span>
-					<span class="weight-description">How well alternative counters your identified threats</span>
+					<span class="weight-description">How well alternative wins battles against identified threats</span>
 				</div>
 				<div class="weight-option">
-					<label>Bulk Improvement</label>
+					<label title="Evaluates Defense × HP stat product relative to league benchmarks (Great League: 22,000 / Ultra League: 35,000). Higher bulk = better survivability and shield economy.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="20" />
 					<span class="weight-value">20%</span>
-					<span class="weight-description">Survivability and shield economy improvement</span>
+					<span class="weight-description">Defense × HP improvement (prevents glassy teams)</span>
 				</div>
 				<div class="weight-option">
-					<label>EPT/DPT Balance</label>
+					<label title="Energy Per Turn (EPT ≥3.5) and Damage Per Turn (DPT ≥3.0) thresholds. Ensures your team has good fast move pressure and doesn't rely solely on charge moves.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="15" />
 					<span class="weight-value">15%</span>
-					<span class="weight-description">Energy generation and pressure balance</span>
+					<span class="weight-description">Fast move energy generation & damage output balance</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label>Role Completion</label>
+					<label title="Ensures your team has balanced roles: Lead (high consistency), Safe Swap (counter threats), and Closer (sweep potential). Missing roles create strategic vulnerabilities.">Role Completion <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="15" />
 					<span class="weight-value">15%</span>
-					<span class="weight-description">Filling missing Lead/Safe Swap/Closer roles</span>
+					<span class="weight-description">Filling missing Lead / Safe Swap / Closer roles</span>
 				</div>
 				<div class="weight-option">
-					<label>Type Coverage</label>
+					<label title="Analyzes defensive resistances and shared weaknesses. Heavy penalty for stacking weaknesses to common types (Fighting, Rock, Steel, Fire). Also penalizes removing unique types or creating type redundancy.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="15" />
 					<span class="weight-value">15%</span>
-					<span class="weight-description">Defensive resistances and offensive coverage</span>
+					<span class="weight-description">Type synergy & weakness distribution (avoids shared weaknesses)</span>
 				</div>
 				<div class="weight-option">
-					<label>Meta Relevance</label>
+					<label title="Considers current meta usage and move consistency. Shadow Pokemon and meta-relevant species receive small bonuses.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
 					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
 					<span class="weight-value">5%</span>
-					<span class="weight-description">Current usage and consistency</span>
+					<span class="weight-description">Current usage and consistency in the meta</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="enhanced-option">
-					<h3>Role Detection</h3>
-					<div class="check role-detection on"><span></span>Automatically detect optimal Pokemon roles</div>
+					<h3 title="Automatically identifies whether each Pokemon is best suited as a Lead, Safe Swap, or Closer based on stats and moveset">Role Detection <span class="info-tooltip">ⓘ</span></h3>
+					<div class="check role-detection on"><span></span>Auto-detect optimal Pokemon roles (Lead/Swap/Closer)</div>
 				</div>
 				<div class="enhanced-option">
-					<h3>Stat Product Display</h3>
-					<div class="check stat-product-display on"><span></span>Show stat product values in results</div>
+					<h3 title="Shows Atk × Def × HP stat product and efficiency grade for each Pokemon at the current CP cap">Stat Product Display <span class="info-tooltip">ⓘ</span></h3>
+					<div class="check stat-product-display on"><span></span>Show stat product values and grades</div>
 				</div>
 				<div class="enhanced-option">
-					<h3>Advanced Synergy</h3>
-					<div class="check advanced-synergy on"><span></span>Enable detailed team synergy analysis</div>
+					<h3 title="ENABLE to use composition-based ranking (bulk, EPT/DPT, roles, type synergy). DISABLE for traditional matchup-based ranking (simple counter performance).">Advanced Team Synergy <span class="info-tooltip">ⓘ</span></h3>
+					<div class="check advanced-synergy on"><span></span>Composition-based ranking (recommended)</div>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="enhanced-option">
-					<h3>Quality Scoring</h3>
-					<div class="check quality-scoring on"><span></span>Factor in win margins and switch safety</div>
+					<h3 title="Factors in win margins and decisiveness of matchups, not just win/loss">Quality Scoring <span class="info-tooltip">ⓘ</span></h3>
+					<div class="check quality-scoring on"><span></span>Factor in win margins and decisiveness</div>
 				</div>
 				<div class="enhanced-option">
-					<h3>Position Weighting</h3>
-					<div class="check position-weighting"><span></span>Weight threats by team position vulnerability</div>
+					<h3 title="Weights threats based on which team position they counter (lead, safe swap, closer vulnerabilities)">Position Weighting <span class="info-tooltip">ⓘ</span></h3>
+					<div class="check position-weighting"><span></span>Weight threats by position vulnerability</div>
 				</div>
 				<div class="enhanced-option">
-					<button class="button reset-enhanced">Reset Enhanced Settings</button>
+					<button class="button reset-enhanced" title="Reset all weights and options to recommended defaults">Reset Enhanced Settings</button>
 				</div>
 			</div>
 		</div>
@@ -423,7 +423,8 @@ require_once 'header.php';
 
 	<a href="#" class="toggle active">Potential Alternatives <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
-		<p>The Pokemon below have the best overall matchups against this team's potential threats. Results are taken from 0 and 1 shield simulations. Scores also factor in a Pokemon's overall strength and consistency. See the team's Coverage grade for more on its potential threats.</p>
+		<p><strong>With Advanced Team Synergy enabled:</strong> Alternatives are ranked by how they improve your overall team composition (bulk, EPT/DPT balance, role coverage, and type synergy) while avoiding shared weaknesses. Each alternative shows which team member it would replace and specific composition improvements.</p>
+		<p><strong>With Advanced Team Synergy disabled:</strong> Alternatives are ranked purely by matchup performance against your identified threats using 0 and 1 shield simulations.</p>
 
 		<div class="poke-search-container">
 			<input class="poke-search" context="alternative-search" type="text" placeholder="Search Pokemon" />

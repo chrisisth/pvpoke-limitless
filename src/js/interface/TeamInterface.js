@@ -1141,27 +1141,38 @@ var InterfaceMaster = (function () {
 						// Show which Pokemon is being replaced
 						if (r.replacedPokemon) {
 							var replacedName = r.replacedPokemon.speciesName || r.replacedPokemon;
-							$summaryCell.append("<div class=\"replacement-info\">Replace: " + replacedName + "</div>");
+							$summaryCell.append("<div class=\"replacement-info\" title=\"Replacing this team member produces the best overall composition improvement\">Replace: " + replacedName + "</div>");
 						}
 						
-						// Show the specific improvements as formatted text
+						// Show the specific improvements as formatted text with tooltips
 						if (r.improvements) {
 							var improvementTexts = [];
+							var tooltips = [];
+							
 							if (r.improvements.bulkDelta && Math.abs(r.improvements.bulkDelta) > 1) {
-								improvementTexts.push("Bulk " + (r.improvements.bulkDelta > 0 ? "+" : "") + r.improvements.bulkDelta.toFixed(1));
+								var bulkText = "Bulk " + (r.improvements.bulkDelta > 0 ? "+" : "") + r.improvements.bulkDelta.toFixed(1);
+								improvementTexts.push(bulkText);
+								tooltips.push("Defense × HP improvement: " + (r.improvements.bulkDelta > 0 ? "increases" : "decreases") + " team survivability");
 							}
 							if (r.improvements.eptDptDelta && Math.abs(r.improvements.eptDptDelta) > 1) {
-								improvementTexts.push("EPT/DPT " + (r.improvements.eptDptDelta > 0 ? "+" : "") + r.improvements.eptDptDelta.toFixed(1));
+								var eptText = "EPT/DPT " + (r.improvements.eptDptDelta > 0 ? "+" : "") + r.improvements.eptDptDelta.toFixed(1);
+								improvementTexts.push(eptText);
+								tooltips.push("Energy/Damage balance: " + (r.improvements.eptDptDelta > 0 ? "improves" : "worsens") + " fast move effectiveness");
 							}
 							if (r.improvements.roleDelta && Math.abs(r.improvements.roleDelta) > 1) {
-								improvementTexts.push("Role " + (r.improvements.roleDelta > 0 ? "+" : "") + r.improvements.roleDelta.toFixed(1));
+								var roleText = "Role " + (r.improvements.roleDelta > 0 ? "+" : "") + r.improvements.roleDelta.toFixed(1);
+								improvementTexts.push(roleText);
+								tooltips.push("Role coverage: " + (r.improvements.roleDelta > 0 ? "fills" : "disrupts") + " Lead/Safe Swap/Closer balance");
 							}
 							if (r.improvements.typeCoverageDelta && Math.abs(r.improvements.typeCoverageDelta) > 1) {
-								improvementTexts.push("Coverage " + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + r.improvements.typeCoverageDelta.toFixed(1));
+								var covText = "Coverage " + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + r.improvements.typeCoverageDelta.toFixed(1);
+								improvementTexts.push(covText);
+								tooltips.push("Type synergy: " + (r.improvements.typeCoverageDelta > 0 ? "reduces shared weaknesses" : "increases weakness overlap"));
 							}
 							
 							if (improvementTexts.length > 0) {
-								$summaryCell.append("<div class=\"improvements-info\">" + improvementTexts.join(", ") + "</div>");
+								var tooltipText = tooltips.join(" | ");
+								$summaryCell.append("<div class=\"improvements-info\" title=\"" + tooltipText + "\">" + improvementTexts.join(", ") + "</div>");
 							}
 						}
 						
