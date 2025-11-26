@@ -1197,30 +1197,101 @@ var InterfaceMaster = (function () {
 									var newBulk = newStatProd.product;
 									var bulkDiff = newBulk - oldBulk;
 									var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
+									var bulkChangePercent = ((bulkDiff / oldBulk) * 100).toFixed(1);
 									
 									// Get fast move stats
 									var oldFast = oldPoke.fastMove;
 									var newFast = newPoke.fastMove;
 									
+									// Calculate EPT/DPT comparison
+									var oldEPT = oldFast ? oldFast.energyGain / oldFast.cooldown : 0;
+									var newEPT = newFast ? newFast.energyGain / newFast.cooldown : 0;
+									var oldDPT = oldFast ? oldFast.power / oldFast.cooldown : 0;
+									var newDPT = newFast ? newFast.power / newFast.cooldown : 0;
+									
 									// Grade comparison
 									var gradeBetter = newStatProd.grade < oldStatProd.grade; // A < B means better
 									var gradeClass = gradeBetter ? "positive" : (newStatProd.grade > oldStatProd.grade ? "negative" : "neutral");
 									
-									detailsHTML += "<div class=\"factor-row comparison-header\" style=\"background: rgba(255,193,7,0.1); padding: 6px; margin-bottom: 8px; border-left: 3px solid #ffc107;\">";
-									detailsHTML += "<strong>vs " + oldPoke.speciesName + ":</strong> ";
-									detailsHTML += "Bulk <span class=\"factor-value " + bulkDiffClass + "\">" + oldBulk.toFixed(0) + " → " + newBulk.toFixed(0) + " (" + (bulkDiff > 0 ? "+" : "") + bulkDiff.toFixed(0) + ")</span>";
+									detailsHTML += "<div class=\"stat-comparison-box\">";
+									detailsHTML += "<div class=\"comparison-title\">Replacing: <strong>" + oldPoke.speciesName + "</strong></div>";
 									
+									// Bulk comparison with visual bar
+									var maxBulk = Math.max(oldBulk, newBulk);
+									var oldBulkBar = (oldBulk / maxBulk * 100).toFixed(1);
+									var newBulkBar = (newBulk / maxBulk * 100).toFixed(1);
+									detailsHTML += "<div class=\"stat-compare-item\">";
+									detailsHTML += "<span class=\"stat-compare-label\">Bulk:</span>";
+									detailsHTML += "<div class=\"stat-bars\">";
+									detailsHTML += "<div class=\"stat-bar-row\"><span class=\"bar-label old\">Old:</span><div class=\"stat-bar-bg\"><div class=\"stat-bar old\" style=\"width:" + oldBulkBar + "%\"></div></div><span class=\"bar-value\">" + oldBulk.toFixed(0) + "</span></div>";
+									detailsHTML += "<div class=\"stat-bar-row\"><span class=\"bar-label new\">New:</span><div class=\"stat-bar-bg\"><div class=\"stat-bar new " + bulkDiffClass + "\" style=\"width:" + newBulkBar + "%\"></div></div><span class=\"bar-value " + bulkDiffClass + "\">" + newBulk.toFixed(0) + " <strong>(" + (bulkDiff > 0 ? "+" : "") + bulkChangePercent + "%)</strong></span></div>";
+									detailsHTML += "</div></div>";
+									
+									// Fast move comparison
 									if (oldFast && newFast) {
-										detailsHTML += ", Fast <span class=\"factor-value\">" + oldFast.name + " → " + newFast.name + "</span>";
+										detailsHTML += "<div class=\"stat-compare-item\">";
+										detailsHTML += "<span class=\"stat-compare-label\">Fast Move:</span>";
+										detailsHTML += "<div class=\"move-comparison\">";
+										detailsHTML += "<div class=\"move-row old\"><strong>" + oldFast.name + "</strong>: " + oldEPT.toFixed(2) + " EPT, " + oldDPT.toFixed(2) + " DPT</div>";
+										detailsHTML += "<div class=\"move-row new\"><strong>" + newFast.name + "</strong>: " + newEPT.toFixed(2) + " EPT, " + newDPT.toFixed(2) + " DPT</div>";
+										detailsHTML += "</div></div>";
 									}
 									
-									detailsHTML += ", Grade <span class=\"factor-value " + gradeClass + "\">" + oldStatProd.grade + " → " + newStatProd.grade + "</span>";
-									detailsHTML += "</div>";
+									// Grade comparison with visual
+									detailsHTML += "<div class=\"stat-compare-item\">";
+									detailsHTML += "<span class=\"stat-compare-label\">Grade:</span>";
+									detailsHTML += "<div class=\"grade-comparison\">";
+									detailsHTML += "<span class=\"grade-badge old grade-" + oldStatProd.grade + "\">" + oldStatProd.grade + "</span>";
+									detailsHTML += "<span class=\"arrow\">→</span>";
+									detailsHTML += "<span class=\"grade-badge new grade-" + newStatProd.grade + " " + gradeClass + "\">" + newStatProd.grade + "</span>";
+									detailsHTML += "</div></div>";
+									
+									detailsHTML += "</div>"; // close stat-comparison-box
 								}
 							} catch (e) {
 								console.log("Error calculating comparison stats:", e);
 								// If comparison fails, just skip it and continue with normal display
 							}
+						}
+						
+						// Add threat matchup preview (top 5 threats)
+						if (counterTeam && counterTeam.length > 0) {
+							detailsHTML += "<div class=\"threat-matchups-preview\">";
+							detailsHTML += "<div class=\"threat-matchups-title\">Top Threats:</div>";
+							detailsHTML += "<div class=\"threat-matchup-row\">";
+							
+							var previewCount = Math.min(5, counterTeam.length);
+							for (var tm = 0; tm < previewCount; tm++) {
+								var threat = counterTeam[tm];
+								
+								// Run quick battle simulation
+								pokemon.reset();
+								threat.reset();
+								var battleResult = battle.simulate(pokemon, threat, shieldCount, shieldCount);
+								var rating = battleResult.rating;
+								var ratingClass = battle.getRatingClass(rating);
+								
+								// Create battle link
+								if (!baitShields) {
+									pokemon.isCustom = true;
+									pokemon.baitShields = 0;
+									threat.isCustom = true;
+									threat.baitShields = 0;
+								}
+								
+								var pokeStr = pokemon.generateURLPokeStr();
+								var moveStr = pokemon.generateURLMoveStr();
+								var opPokeStr = threat.generateURLPokeStr();
+								var opMoveStr = threat.generateURLMoveStr();
+								var shieldStr = shieldCount + "" + shieldCount;
+								var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
+								
+								detailsHTML += "<a class=\"threat-matchup-cell rating " + ratingClass + "\" href=\"" + battleLink + "\" target=\"_blank\" title=\"" + threat.speciesName + " (" + rating + ")\"><span></span></a>";
+							}
+							
+							detailsHTML += "</div>";
+							detailsHTML += "<div class=\"view-all-matchups\"><a href=\"#\" class=\"expand-matchups\" data-pokemon=\"" + pokemon.speciesId + "\">View all matchups »</a></div>";
+							detailsHTML += "</div>";
 						}
 						
 						// Threat Coverage (always show if weight > 0)
