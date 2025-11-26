@@ -4105,6 +4105,102 @@ a.download-csv {
   color: #666;
   margin-top: 2px;
 }
+
+/* Compact stat comparison in name cell */
+.stat-comparison-compact {
+  background: linear-gradient(135deg, rgba(255,193,7,0.08) 0%, rgba(255,193,7,0.12) 100%);
+  border-left: 2px solid #ffc107;
+  padding: 6px 8px;
+  margin: 6px 0 4px 0;
+  font-size: 11px;
+  line-height: 1.4;
+  border-radius: 3px;
+}
+
+.stat-comparison-compact .comparison-vs {
+  font-size: 10px;
+  font-weight: bold;
+  color: #856404;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.stat-comparison-compact .stat-row {
+  margin: 2px 0;
+  font-size: 11px;
+}
+
+.stat-comparison-compact .stat-subrow {
+  margin-left: 10px;
+  font-size: 10px;
+  color: #666;
+}
+
+.stat-comparison-compact .stat-label {
+  font-weight: 600;
+  color: #555;
+  display: inline-block;
+  min-width: 45px;
+}
+
+.stat-comparison-compact .stat-old {
+  color: #999;
+  font-weight: normal;
+}
+
+.stat-comparison-compact .stat-new {
+  color: #333;
+  font-weight: 600;
+}
+
+.stat-comparison-compact .stat-new.positive {
+  color: #28a745;
+}
+
+.stat-comparison-compact .stat-new.negative {
+  color: #dc3545;
+}
+
+.stat-comparison-compact .stat-diff {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.stat-comparison-compact .stat-diff.positive {
+  color: #28a745;
+}
+
+.stat-comparison-compact .stat-diff.negative {
+  color: #dc3545;
+}
+
+.stat-comparison-compact .grade-badge-mini {
+  display: inline-block;
+  padding: 1px 5px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 18px;
+  background: #e9ecef;
+  color: #495057;
+}
+
+.stat-comparison-compact .grade-badge-mini.old {
+  opacity: 0.6;
+}
+
+.stat-comparison-compact .grade-badge-mini.new.positive {
+  background: #28a745;
+  color: white;
+}
+
+.stat-comparison-compact .grade-badge-mini.new.negative {
+  background: #dc3545;
+  color: white;
+}
+
 .article .threats-table .region-label,
 .article .alternatives-table .region-label,
 .article .meta-table .region-label {

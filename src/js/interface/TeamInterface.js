@@ -1137,15 +1137,81 @@ var InterfaceMaster = (function () {
 
 					// Show which team member this alternative would replace
 					var replacementInfo = "";
+					var statComparisonHTML = "";
 					if (r.replacementIndex !== undefined && team[r.replacementIndex]) {
 						var replacedPokemon = team[r.replacementIndex];
 						var positionNames = ["Lead", "Safe Swap", "Closer"];
 						var positionName = positionNames[r.replacementIndex] || ("Position " + (r.replacementIndex + 1));
 						replacementInfo = "<div class=\"replaces-info\" title=\"This Pokemon would replace " + replacedPokemon.speciesName + " in the " + positionName + " position\">Replaces: " + replacedPokemon.speciesName + " (" + positionName + ")</div>";
+						
+						// Build stat comparison for the name cell
+						if (isCompositionBased) {
+							try {
+								var oldStatProd = replacedPokemon.calculateStatProduct(battle.getCP());
+								var newStatProd = pokemon.calculateStatProduct(battle.getCP());
+								
+								if (oldStatProd && newStatProd && oldStatProd.product !== undefined && newStatProd.product !== undefined) {
+									var oldBulk = oldStatProd.product;
+									var newBulk = newStatProd.product;
+									var bulkDiff = newBulk - oldBulk;
+									var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
+									var bulkChangePercent = ((bulkDiff / oldBulk) * 100).toFixed(1);
+									
+									// Get fast move stats
+									var oldFast = replacedPokemon.fastMove;
+									var newFast = pokemon.fastMove;
+									
+									statComparisonHTML += "<div class=\"stat-comparison-compact\">";
+									statComparisonHTML += "<div class=\"comparison-vs\">vs " + replacedPokemon.speciesName + "</div>";
+									
+									// Bulk comparison
+									statComparisonHTML += "<div class=\"stat-row\">";
+									statComparisonHTML += "<span class=\"stat-label\">Bulk:</span> ";
+									statComparisonHTML += "<span class=\"stat-old\">" + oldBulk.toFixed(0) + "</span> → ";
+									statComparisonHTML += "<span class=\"stat-new " + bulkDiffClass + "\">" + newBulk.toFixed(0) + "</span>";
+									statComparisonHTML += " <span class=\"stat-diff " + bulkDiffClass + "\">(" + (bulkDiff > 0 ? "+" : "") + bulkChangePercent + "%)</span>";
+									statComparisonHTML += "</div>";
+									
+									// Fast move comparison
+									if (oldFast && newFast && oldFast.name !== newFast.name) {
+										var oldEPT = (oldFast.energyGain / oldFast.cooldown).toFixed(2);
+										var newEPT = (newFast.energyGain / newFast.cooldown).toFixed(2);
+										var oldDPT = (oldFast.power / oldFast.cooldown).toFixed(2);
+										var newDPT = (newFast.power / newFast.cooldown).toFixed(2);
+										
+										statComparisonHTML += "<div class=\"stat-row\">";
+										statComparisonHTML += "<span class=\"stat-label\">Fast:</span> ";
+										statComparisonHTML += "<span class=\"stat-old\">" + oldFast.name + "</span> → ";
+										statComparisonHTML += "<span class=\"stat-new\">" + newFast.name + "</span>";
+										statComparisonHTML += "</div>";
+										
+										statComparisonHTML += "<div class=\"stat-row stat-subrow\">";
+										statComparisonHTML += "<span class=\"stat-old\">" + oldEPT + " EPT, " + oldDPT + " DPT</span> → ";
+										statComparisonHTML += "<span class=\"stat-new\">" + newEPT + " EPT, " + newDPT + " DPT</span>";
+										statComparisonHTML += "</div>";
+									}
+									
+									// Grade comparison
+									if (oldStatProd.grade !== newStatProd.grade) {
+										var gradeBetter = newStatProd.grade < oldStatProd.grade;
+										var gradeClass = gradeBetter ? "positive" : "negative";
+										statComparisonHTML += "<div class=\"stat-row\">";
+										statComparisonHTML += "<span class=\"stat-label\">Grade:</span> ";
+										statComparisonHTML += "<span class=\"grade-badge-mini old\">" + oldStatProd.grade + "</span> → ";
+										statComparisonHTML += "<span class=\"grade-badge-mini new " + gradeClass + "\">" + newStatProd.grade + "</span>";
+										statComparisonHTML += "</div>";
+									}
+									
+									statComparisonHTML += "</div>";
+								}
+							} catch (e) {
+								console.log("Error building stat comparison:", e);
+							}
+						}
 					}
 
 					var recordDisplay = isCompositionBased ? "" : "<div class=\"record\">"+wins+"-"+losses+"</div>";
-					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + replacementInfo + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + replacementInfo + statComparisonHTML + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					// Only show matchup cells if we have matchup data
 					if (!isCompositionBased && r.matchups && r.matchups.length > 0) {
@@ -1173,6 +1239,61 @@ var InterfaceMaster = (function () {
 							$row.append($cell);
 						}
 					} else if (isCompositionBased) {
+						// For composition-based alternatives, show matchup cells like the old design
+						// Generate matchups if they don't exist
+						if (!r.matchups || r.matchups.length === 0) {
+							r.matchups = [];
+							for (var n = 0; n < counterTeam.length; n++) {
+								var threat = counterTeam[n];
+								
+								if (!baitShields) {
+									pokemon.isCustom = true;
+									pokemon.baitShields = 0;
+									threat.isCustom = true;
+									threat.baitShields = 0;
+								}
+								
+								// Simulate the battle
+								battle.setNewPokemon(pokemon, 0, false, "emulate");
+								battle.setNewPokemon(threat, 1, false, "emulate");
+								battle.simulate();
+								
+								var rating = battle.getRating(0);
+								r.matchups.push({
+									opponent: threat,
+									rating: rating
+								});
+							}
+						}
+						
+						// Display matchup cells
+						for (var n = 0; n < r.matchups.length; n++) {
+							var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
+							var rating = r.matchups[n].rating;
+
+							$cell.find("a").addClass(battle.getRatingClass(rating));
+
+							if (!baitShields) {
+								pokemon.isCustom = true;
+								pokemon.baitShields = 0;
+								r.matchups[n].opponent.isCustom = true;
+								r.matchups[n].opponent.baitShields = 0;
+							}
+
+							var pokeStr = pokemon.generateURLPokeStr();
+							var moveStr = pokemon.generateURLMoveStr();
+							var opPokeStr = r.matchups[n].opponent.generateURLPokeStr();
+							var opMoveStr = r.matchups[n].opponent.generateURLMoveStr();
+							var shieldStr = shieldCount + "" + shieldCount;
+							var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
+							$cell.find("a").attr("href", battleLink);
+
+							$row.append($cell);
+						}
+					}
+					
+					// Add old colspan summary section that was removed - keeping it for reference but not displaying
+					if (false && isCompositionBased) {
 						// For composition-based alternatives, show detailed breakdown in middle section
 						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
 						
@@ -1358,7 +1479,12 @@ var InterfaceMaster = (function () {
 					}
 					
 					detailsHTML += "</div>";
-					$summaryCell.append(detailsHTML);						$row.append($summaryCell);
+					
+					// Skip the colspan summary - we're showing matchups in individual cells now
+					if (false) {
+						$summaryCell.append(detailsHTML);
+						$row.append($summaryCell);
+					}
 					}
 					
 					// Add score column
