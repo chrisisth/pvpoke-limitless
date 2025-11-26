@@ -1247,11 +1247,16 @@ var InterfaceMaster = (function () {
 									detailsHTML += "</div></div>";
 									
 									detailsHTML += "</div>"; // close stat-comparison-box
+									console.log("Stat comparison HTML generated for", newPoke.speciesName, "vs", oldPoke.speciesName);
 								}
 							} catch (e) {
 								console.log("Error calculating comparison stats:", e);
+								console.log("oldStatProd:", oldStatProd);
+								console.log("newStatProd:", newStatProd);
 								// If comparison fails, just skip it and continue with normal display
 							}
+						} else {
+							console.log("No replacedPokemon found in result");
 						}
 						
 						// Add threat matchup preview (top 5 threats) - just show links, don't simulate
