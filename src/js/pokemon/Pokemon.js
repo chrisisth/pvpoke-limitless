@@ -2324,7 +2324,7 @@ function Pokemon(id, i, b, d){
 			pvpWeighted: pvpWeighted,
 			relativeProduct: product / baseline.product,
 			relativeEfficiency: bulkEfficiency / baseline.efficiency,
-			grade: this.calculateStatProductGrade(bulkEfficiency, baseline.efficiency)
+			grade: this.calculateStatProductGrade(bulkEfficiency / baseline.efficiency, 1.0) // Use relative efficiency for grading
 		};
 	};
 
@@ -2417,14 +2417,16 @@ function Pokemon(id, i, b, d){
 	};
 
 	// Calculate stat product grade
-	this.calculateStatProductGrade = function(efficiency, baseline) {
-		var ratio = efficiency / baseline;
+	this.calculateStatProductGrade = function(relativeEfficiency, baseline) {
+		// relativeEfficiency is now already normalized (e.g., 0.95 for 95%)
+		// baseline is 1.0 for comparison
+		var ratio = relativeEfficiency / baseline;
 		
-		if (ratio >= 1.4) return 'A';
-		if (ratio >= 1.2) return 'B'; 
-		if (ratio >= 1.0) return 'C';
-		if (ratio >= 0.8) return 'D';
-		return 'F';
+		if (ratio >= 1.10) return 'A';  // ≥110% of league average
+		if (ratio >= 0.95) return 'B';  // 95-109% 
+		if (ratio >= 0.80) return 'C';  // 80-94%
+		if (ratio >= 0.65) return 'D';  // 65-79%
+		return 'F';                      // <65%
 	};
 
 	// Return an array of slot numbers which contain this Pokemon in a slot based meta

@@ -1926,6 +1926,17 @@ var InterfaceMaster = (function () {
 				}
 
 				var evaluatedAlternatives = [];
+				
+				// Parse CP limit (might be "2500" or "2500-40")
+				var cpLimit = cp;
+				var levelCap = 40;
+				if (typeof cp === 'string' && cp.indexOf('-') > -1) {
+					var parts = cp.split("-");
+					cpLimit = parseInt(parts[0]);
+					levelCap = parseInt(parts[1]);
+				} else {
+					cpLimit = parseInt(cp);
+				}
 
 				// Evaluate each potential alternative
 				for (var i = 0; i < Math.min(pokemonList.length, alternativesLength * 3); i++) {
