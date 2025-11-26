@@ -1306,6 +1306,9 @@ var GameMaster = (function () {
 									pokemon.selectMove("charged", chargedMoves[0].moveId, 0);
 
 									pokemon.weightModifier = 1;
+									
+									// Store ranking position for meta relevance calculations
+									pokemon.index = n + 1; // 1-based index (rank 1 = first place)
 
 									if(chargedMoves.length > 1){
 										pokemon.selectMove("charged", chargedMoves[1].moveId, 1);

@@ -1881,9 +1881,7 @@ var InterfaceMaster = (function () {
 				return {
 					roleDetection: $('.enhanced-option .check.role-detection').hasClass('on'),
 					statProductDisplay: $('.enhanced-option .check.stat-product-display').hasClass('on'),
-					advancedSynergy: $('.enhanced-option .check.advanced-synergy').hasClass('on'),
-					qualityScoring: $('.enhanced-option .check.quality-scoring').hasClass('on'),
-					positionWeighting: $('.enhanced-option .check.position-weighting').hasClass('on')
+					advancedSynergy: $('.enhanced-option .check.advanced-synergy').hasClass('on')
 				};
 			}
 

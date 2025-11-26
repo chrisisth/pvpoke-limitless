@@ -162,9 +162,9 @@ require_once 'header.php';
 				</div>
 				<div class="weight-option">
 					<label title="Considers current meta usage and move consistency. Shadow Pokemon and meta-relevant species receive small bonuses.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
-					<span class="weight-value">5%</span>
-					<span class="weight-description">Current usage and consistency in the meta</span>
+					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="15" />
+					<span class="weight-value">15%</span>
+					<span class="weight-description">Current rankings position and meta usage (Top 10 = highest bonus)</span>
 				</div>
 			</div>
 			
@@ -184,14 +184,6 @@ require_once 'header.php';
 			</div>
 			
 			<div class="flex poke">
-				<div class="enhanced-option">
-					<h3 title="Factors in win margins and decisiveness of matchups, not just win/loss">Quality Scoring <span class="info-tooltip">ⓘ</span></h3>
-					<div class="check quality-scoring on"><span></span>Factor in win margins and decisiveness</div>
-				</div>
-				<div class="enhanced-option">
-					<h3 title="Weights threats based on which team position they counter (lead, safe swap, closer vulnerabilities)">Position Weighting <span class="info-tooltip">ⓘ</span></h3>
-					<div class="check position-weighting"><span></span>Weight threats by position vulnerability</div>
-				</div>
 				<div class="enhanced-option">
 					<button class="button reset-enhanced" title="Reset all weights and options to recommended defaults">Reset Enhanced Settings</button>
 				</div>

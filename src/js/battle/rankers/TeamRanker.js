@@ -73,9 +73,7 @@ var RankerMaster = (function () {
 			var enhancedOptions = {
 				roleDetection: true,
 				statProductDisplay: true,
-				advancedSynergy: true,
-				qualityScoring: true,
-				positionWeighting: false
+				advancedSynergy: true
 			};
 
 			var useRecommendedMoves = true;
@@ -588,9 +586,23 @@ var RankerMaster = (function () {
 			this.calculateMetaRelevance = function(pokemon) {
 				var relevance = 1.0;
 				
-				// Check if Pokemon is in meta group
+				// Check if Pokemon is in meta group (top picks)
 				if(metaGroup.some(poke => poke.speciesId === pokemon.speciesId)) {
 					relevance += 0.3;
+				}
+				
+				// NEW: Bonus based on current rankings position
+				// Pokemon in top 10 = highest bonus, top 25 = moderate, top 50 = small
+				if (pokemon.index !== undefined) {
+					if (pokemon.index <= 10) {
+						relevance += 0.5; // Top 10: massive bonus
+					} else if (pokemon.index <= 25) {
+						relevance += 0.3; // Top 25: solid bonus
+					} else if (pokemon.index <= 50) {
+						relevance += 0.15; // Top 50: small bonus
+					} else if (pokemon.index <= 100) {
+						relevance += 0.05; // Top 100: tiny bonus
+					}
 				}
 				
 				// Factor in usage patterns (simplified)
@@ -598,7 +610,7 @@ var RankerMaster = (function () {
 					relevance += 0.1; // Shadow bonus
 				}
 				
-				return Math.min(relevance, 1.5); // Cap at 50% bonus
+				return Math.min(relevance, 2.0); // Cap at 100% bonus
 			}
 
 			// Calculate matchup quality beyond win/loss
@@ -809,17 +821,35 @@ var RankerMaster = (function () {
 				var normalizedRole = Math.max(0, Math.min(100, improvements.roleDelta + 50));
 				var normalizedCoverage = Math.max(0, Math.min(100, improvements.typeCoverageDelta + 50));
 				
+				// Calculate meta relevance bonus (0-100 scale)
+				var metaRelevance = this.calculateMetaRelevance(alternative);
+				var metaScore = metaRelevance * 50; // Scale 1.0-1.5 to 50-75 range
+				
 				var compositeScore = 
 					(threatCoverageScore * enhancedWeights.threatCoverage) +
 					(normalizedBulk * enhancedWeights.bulkImprovement) +
 					(normalizedEPT * enhancedWeights.eptDptBalance) +
 					(normalizedRole * enhancedWeights.roleCompletion) +
-					(normalizedCoverage * enhancedWeights.typeCoverage);
+					(normalizedCoverage * enhancedWeights.typeCoverage) +
+					(metaScore * enhancedWeights.metaRelevance);
 				
-				// CRITICAL: Disqualify alternatives with poor threat coverage
-				// If threat coverage < 40/100, the Pokemon loses most matchups and should not be recommended
-				if (threatCoverageScore < 40) {
-					compositeScore = compositeScore * (threatCoverageScore / 40); // Severe penalty scaling
+				// CRITICAL: Apply quality filters to prevent garbage recommendations
+				
+				// 1. Severe penalty for poor threat coverage (< 50 = losing most matchups)
+				if (threatCoverageScore < 50) {
+					var coveragePenalty = (50 - threatCoverageScore) * 2; // 2 points per point below 50
+					compositeScore -= coveragePenalty;
+				}
+				
+				// 2. Severe penalty for losing bulk (makes team glassier)
+				if (improvements.bulkDelta < -5) {
+					var bulkPenalty = Math.abs(improvements.bulkDelta) * 2; // 2 points per bulk lost
+					compositeScore -= bulkPenalty;
+				}
+				
+				// 3. Disqualify completely if both threat coverage AND bulk are bad
+				if (threatCoverageScore < 45 && improvements.bulkDelta < -10) {
+					compositeScore = 0; // No excuse for recommending glass cannons that lose
 				}
 				
 				// Apply type redundancy penalty
