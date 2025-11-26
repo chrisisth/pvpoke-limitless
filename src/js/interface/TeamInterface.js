@@ -1208,19 +1208,31 @@ var InterfaceMaster = (function () {
 							detailsHTML += "<div class=\"factor-row\" title=\"" + roleTooltip + "\"><span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span> <span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span></div>";
 						}
 						
-						// Type Coverage
-						if (weights.typeCoverage > 0 && r.improvements && r.improvements.typeCoverageDelta !== undefined) {
-							var covPct = (weights.typeCoverage * 100).toFixed(0);
-							var covValue = r.improvements.typeCoverageDelta.toFixed(1);
-							var covClass = r.improvements.typeCoverageDelta > 0 ? "positive" : (r.improvements.typeCoverageDelta < 0 ? "negative" : "neutral");
-							var covTooltip = "Change in type synergy and weakness distribution. Penalties for: shared weaknesses (especially Fighting/Rock/Steel/Fire), removing unique types, creating type redundancy. Weighted at " + covPct + "%.";
-							detailsHTML += "<div class=\"factor-row\" title=\"" + covTooltip + "\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
-						}
-						
-						detailsHTML += "</div>";
-						$summaryCell.append(detailsHTML);
-						
-						$row.append($summaryCell);
+					// Type Coverage
+					if (weights.typeCoverage > 0 && r.improvements && r.improvements.typeCoverageDelta !== undefined) {
+						var covPct = (weights.typeCoverage * 100).toFixed(0);
+						var covValue = r.improvements.typeCoverageDelta.toFixed(1);
+						var covClass = r.improvements.typeCoverageDelta > 0 ? "positive" : (r.improvements.typeCoverageDelta < 0 ? "negative" : "neutral");
+						var covTooltip = "Change in type synergy and weakness distribution. Penalties for: shared weaknesses (especially Fighting/Rock/Steel/Fire), removing unique types, creating type redundancy. Weighted at " + covPct + "%.";
+						detailsHTML += "<div class=\"factor-row\" title=\"" + covTooltip + "\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
+					}
+					
+					// Meta Relevance
+					if (weights.metaRelevance > 0 && r.improvements && r.improvements.metaRelevance !== undefined) {
+						var metaPct = (weights.metaRelevance * 100).toFixed(0);
+						var metaValue = r.improvements.metaRelevance.toFixed(2);
+						var metaClass = r.improvements.metaRelevance > 1.0 ? "positive" : "neutral";
+						var rankingBonus = "";
+						if (r.improvements.metaRelevance >= 1.5) rankingBonus = " (Top 10)";
+						else if (r.improvements.metaRelevance >= 1.3) rankingBonus = " (Top 25)";
+						else if (r.improvements.metaRelevance >= 1.15) rankingBonus = " (Top 50)";
+						else if (r.improvements.metaRelevance >= 1.05) rankingBonus = " (Top 100)";
+						var metaTooltip = "Meta relevance multiplier based on current rankings position. Top 10: ×1.5, Top 25: ×1.3, Top 50: ×1.15, Top 100: ×1.05. Baseline: ×1.0. Weighted at " + metaPct + "%.";
+						detailsHTML += "<div class=\"factor-row\" title=\"" + metaTooltip + "\"><span class=\"factor-name\">Meta Relevance (" + metaPct + "%):</span> <span class=\"factor-value " + metaClass + "\">×" + metaValue + rankingBonus + "</span></div>";
+					}
+					
+					detailsHTML += "</div>";
+					$summaryCell.append(detailsHTML);						$row.append($summaryCell);
 					}
 					
 					// Add score column

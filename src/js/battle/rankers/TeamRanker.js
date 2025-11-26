@@ -675,19 +675,18 @@ var RankerMaster = (function () {
 				});
 
 				// Calculate improvements (deltas) - safe access with fallbacks
-				var improvements = {
-					bulkDelta: (newComposition.bulk && currentComposition.bulk) ? 
-						newComposition.bulk.score - currentComposition.bulk.score : 0,
-					eptDptDelta: (newComposition.eptDpt && currentComposition.eptDpt) ? 
-						newComposition.eptDpt.score - currentComposition.eptDpt.score : 0,
-					roleDelta: (newComposition.roles && currentComposition.roles) ? 
-						newComposition.roles.score - currentComposition.roles.score : 0,
-					typeCoverageDelta: (newComposition.typeCoverage && currentComposition.typeCoverage) ? 
-						newComposition.typeCoverage.score - currentComposition.typeCoverage.score : 0,
-					overallDelta: newComposition.overall - currentComposition.overall
-				};
-				
-				// CRITICAL: Penalize based on team weakness overlap and type diversity
+			var improvements = {
+				bulkDelta: (newComposition.bulk && currentComposition.bulk) ? 
+					newComposition.bulk.score - currentComposition.bulk.score : 0,
+				eptDptDelta: (newComposition.eptDpt && currentComposition.eptDpt) ? 
+					newComposition.eptDpt.score - currentComposition.eptDpt.score : 0,
+				roleDelta: (newComposition.roles && currentComposition.roles) ? 
+					newComposition.roles.score - currentComposition.roles.score : 0,
+				typeCoverageDelta: (newComposition.typeCoverage && currentComposition.typeCoverage) ? 
+					newComposition.typeCoverage.score - currentComposition.typeCoverage.score : 0,
+				overallDelta: newComposition.overall - currentComposition.overall,
+				metaRelevance: this.calculateMetaRelevance(alternative) // Store meta relevance for display
+			};				// CRITICAL: Penalize based on team weakness overlap and type diversity
 				var removedPokemon = currentTeam[replacementIndex];
 				var typeRedundancyPenalty = 0;
 				
@@ -833,35 +832,38 @@ var RankerMaster = (function () {
 					(normalizedCoverage * enhancedWeights.typeCoverage) +
 					(metaScore * enhancedWeights.metaRelevance);
 				
-				// CRITICAL: Apply quality filters to prevent garbage recommendations
-				
-				// 1. SEVERE penalty for poor threat coverage
-				// Pokemon MUST win at least 50% of matchups to be recommended
-				if (threatCoverageScore < 55) {
-					var coveragePenalty = (55 - threatCoverageScore) * 3; // 3 points per point below 55
-					compositeScore -= coveragePenalty;
-				}
-				
-				// 2. Penalty for losing bulk (makes team glassier)
-				if (improvements.bulkDelta < -5) {
-					var bulkPenalty = Math.abs(improvements.bulkDelta) * 1.5; // 1.5 points per bulk lost
-					compositeScore -= bulkPenalty;
-				}
-				
-				// 3. DISQUALIFY if threat coverage is terrible (< 50 = losing more than winning)
-				if (threatCoverageScore < 50) {
-					compositeScore = compositeScore * 0.5; // Cut score in half
-				}
-				
-				// 4. MASSIVE penalty for both bad coverage AND bad bulk
-				if (threatCoverageScore < 52 && improvements.bulkDelta < -8) {
-					compositeScore = 0; // Completely disqualify glass cannons that lose
-				}
-				
-				// Apply type redundancy penalty
-				compositeScore = Math.max(0, compositeScore - typeRedundancyPenalty);
-
-				return {
+			// CRITICAL: Apply quality filters to prevent garbage recommendations
+			
+			// 1. Penalty for mediocre threat coverage
+			// Pokemon should ideally win 60%+ of matchups against identified threats
+			if (threatCoverageScore < 58) {
+				var coveragePenalty = (58 - threatCoverageScore) * 2; // 2 points per point below 58
+				compositeScore -= coveragePenalty;
+			}
+			
+			// 2. Stronger penalty for poor coverage
+			if (threatCoverageScore < 52) {
+				compositeScore = compositeScore * 0.7; // Reduce score by 30%
+			}
+			
+			// 3. Disqualify Pokemon that lose more than they win
+			if (threatCoverageScore < 50) {
+				compositeScore = compositeScore * 0.4; // Reduce score by 60%
+			}
+			
+			// 4. Penalty for losing bulk (makes team glassier)
+			if (improvements.bulkDelta < -5) {
+				var bulkPenalty = Math.abs(improvements.bulkDelta) * 1.5; // 1.5 points per bulk lost
+				compositeScore -= bulkPenalty;
+			}
+			
+			// 5. Completely disqualify terrible combinations
+			if (threatCoverageScore < 48 && improvements.bulkDelta < -10) {
+				compositeScore = 0; // Glass cannons that lose badly = unacceptable
+			}
+			
+			// Apply type redundancy penalty
+			compositeScore = Math.max(0, compositeScore - typeRedundancyPenalty);				return {
 					compositeScore: compositeScore,
 					improvements: improvements,
 					threatCoverageScore: threatCoverageScore,
