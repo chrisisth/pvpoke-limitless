@@ -156,14 +156,14 @@ require_once 'header.php';
 				</div>
 				<div class="weight-option">
 					<label title="Analyzes defensive resistances and shared weaknesses. Heavy penalty for stacking weaknesses to common types (Fighting, Rock, Steel, Fire). Also penalizes removing unique types or creating type redundancy.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="15" />
-					<span class="weight-value">15%</span>
+					<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="10" />
+					<span class="weight-value">10%</span>
 					<span class="weight-description">Type synergy & weakness distribution (avoids shared weaknesses)</span>
 				</div>
 				<div class="weight-option">
 					<label title="Considers current meta usage and move consistency. Shadow Pokemon and meta-relevant species receive small bonuses.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="15" />
-					<span class="weight-value">15%</span>
+					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
+					<span class="weight-value">5%</span>
 					<span class="weight-description">Current rankings position and meta usage (Top 10 = highest bonus)</span>
 				</div>
 			</div>
