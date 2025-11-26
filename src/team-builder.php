@@ -2,7 +2,7 @@
 
 $META_TITLE = 'Team Builder';
 
-$META_DESCRIPTION = 'Build your team for Pokemon GO Trainer Battles. See how your Pokemon match up offensively and defensively, discover which Pokemon are the best counters to yours, and get suggestions for how to make your team better.';
+$META_DESCRIPTION = 'Build and optimize your Pokemon GO PvP team with intelligent composition analysis. Get alternative suggestions ranked by threat coverage, bulk, type synergy, and meta relevance—not just matchup performance. Advanced algorithms prevent glass cannon recommendations and ensure competitive team building.';
 
 $CANONICAL = '/team-builder/';
 
@@ -13,7 +13,7 @@ require_once 'header.php';
 <h1>Team Builder</h1>
 
 <div class="section league-select-container team-content white">
-	<p>Build and optimize your team for Pokemon GO Trainer Battles. The Team Builder analyzes your Pokemon's matchups against top threats and provides intelligent alternative suggestions based on team composition fundamentals—not just individual performance. Enable <strong>Advanced Team Synergy</strong> to get recommendations that improve bulk, energy balance, role coverage, and type synergy while avoiding shared defensive weaknesses.</p>
+	<p>Build and optimize your team for Pokemon GO Trainer Battles. The Team Builder analyzes your Pokemon's matchups against the top 30 meta threats and provides intelligent alternative suggestions based on comprehensive team composition analysis. Enable <strong>Advanced Team Synergy</strong> to get recommendations that balance threat coverage, bulk, type synergy, and meta relevance—ensuring you get competitive alternatives instead of just high-scoring glass cannons.</p>
 	<?php require 'modules/formatselect.php'; ?>
 
 	<a class="toggle" href="#">Advanced <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
@@ -123,63 +123,63 @@ require_once 'header.php';
 		
 		<!-- Enhanced Ranking Algorithm Settings -->
 		<div class="enhanced-ranking-section">
-			<h3 class="section-title">Team Composition Analysis Weights <span class="info-tooltip" title="These weights determine how alternatives are evaluated when Advanced Team Synergy is enabled. The algorithm analyzes overall team composition rather than just individual matchups.">ⓘ</span></h3>
-			<p>When <strong>Advanced Team Synergy</strong> is enabled, alternatives are ranked by how they improve your overall team composition—not just matchup performance. The algorithm considers bulk, energy balance, roles, type synergy, and defensive weaknesses to prevent "glassy" or unbalanced teams.</p>
+			<h3 class="section-title">Team Composition Analysis Weights <span class="info-tooltip" title="Controls how alternatives are scored when Advanced Team Synergy is enabled. All alternatives are evaluated against the same top 30 meta threats for consistency.">ⓘ</span></h3>
+			<p>When <strong>Advanced Team Synergy</strong> is enabled, alternatives are ranked by overall team composition quality. The algorithm evaluates each Pokemon against the <strong>top 30 meta threats</strong> (regardless of Counter Team Size display setting) and scores them on threat coverage, bulk contribution, type synergy, and meta relevance. This prevents recommending glass cannons or Pokemon with poor threat coverage.</p>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-				<label title="Simulates 1v1 battles against the threats you've identified. Pokemon with 60%+ coverage win most matchups. Below 55% means losing nearly half your battles - avoid these!">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
+				<label title="Win rate in simulated 1v1 battles against top 30 meta threats. 60%+ = excellent coverage, 55-59% = good, 52-54% = marginal, <52% = poor (heavily penalized). This is the primary factor—set to 50% weight.">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="50" />
 				<span class="weight-value">50%</span>
-				<span class="weight-description">Win rate against identified threats (most important factor)</span>
+				<span class="weight-description">Most important: Win rate vs top 30 meta threats</span>
 				</div>
 				<div class="weight-option">
-				<label title="Defense × HP stat product. Higher bulk = better survivability and shield economy. Prevents glassy teams that fold under pressure. Losing bulk makes your team more fragile.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
+				<label title="Change in team's Defense × HP stat product. Prevents recommending glass cannons that ruin your team's survivability. Great League target: 22,000 | Ultra League: 35,000. Positive bulk = better shield pressure and endurance.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="25" />
 				<span class="weight-value">25%</span>
-				<span class="weight-description">Stat product improvement (prevents glassy teams)</span>
+				<span class="weight-description">Defense × HP improvement (prevents fragile teams)</span>
 				</div>
 				<div class="weight-option">
-				<label title="Energy Per Turn (EPT ≥3.5) and Damage Per Turn (DPT ≥3.0) thresholds. Ensures fast moves generate good energy and deal respectable damage. Low EPT/DPT forces excessive reliance on charge moves.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
+				<label title="Fast move effectiveness: EPT (Energy Per Turn) ≥3.5 ideal, DPT (Damage Per Turn) ≥3.0 ideal. Good fast moves generate energy efficiently while dealing respectable damage. Low values force excessive charge move reliance.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="5" />
 				<span class="weight-value">5%</span>
-				<span class="weight-description">Fast move quality (energy generation & damage)</span>
+				<span class="weight-description">Fast move quality check (energy & damage)</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-				<label title="Rewards Pokemon that fill missing team roles. Lead = high consistency, Safe Swap = counter threats, Closer = sweep potential. Keep this weight LOW (5%) to avoid recommending bad Pokemon just because they fill a role.">Role Completion <span class="info-tooltip">ⓘ</span></label>
+				<label title="Bonus for Pokemon that fill missing team roles (Lead/Safe Swap/Closer). KEEP THIS LOW (5%)! High role weight can recommend poor performers just because they fill a role. Performance should matter more than role completion.">Role Completion <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="5" />
 				<span class="weight-value">5%</span>
-				<span class="weight-description">Filling missing roles (keep low to prioritize performance)</span>
+				<span class="weight-description">Keep low! Avoids recommending bad Pokemon just for role</span>
 				</div>
 				<div class="weight-option">
-				<label title="Analyzes defensive type matchups and shared weaknesses. Heavy penalties for fragile types (Ice, Grass, Bug, Rock, Psychic) and stacking weaknesses to common offensive types. Also penalizes type redundancy within your team.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
+				<label title="Type synergy and defensive weakness analysis. Penalizes fragile types (Ice: -30pts, Grass: -25pts, Bug/Rock: -20pts, Psychic: -15pts) and shared weaknesses to Fighting/Fire/Rock/Steel. Rewards balanced type coverage.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="10" />
 				<span class="weight-value">10%</span>
-				<span class="weight-description">Type synergy (penalizes fragile types & shared weaknesses)</span>
+				<span class="weight-description">Penalizes fragile types & stacked weaknesses</span>
 				</div>
 				<div class="weight-option">
-				<label title="Bonus for Pokemon ranked highly in current meta. Top 10 ranked Pokemon get the highest bonus (+0.5), Top 25 (+0.3), Top 50 (+0.15), Top 100 (+0.05). Helps identify proven performers vs theoretical picks.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
+				<label title="Rankings-based multiplier. Top 10: ×1.5 bonus, Top 25: ×1.3, Top 50: ×1.15, Top 100: ×1.05. Also +0.3 for meta group Pokemon and +0.1 for Shadow variants. Helps distinguish proven meta picks from theory picks.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
 				<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
 				<span class="weight-value">5%</span>
-				<span class="weight-description">Rankings position bonus (Top 10 = highest bonus)</span>
+				<span class="weight-description">Bonus for highly-ranked Pokemon (proven performers)</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="enhanced-option">
-				<h3 title="Automatically identifies whether each Pokemon is best suited as a Lead (high consistency stats), Safe Swap (counter common threats), or Closer (sweep potential with strong closing stats)">Role Detection <span class="info-tooltip">ⓘ</span></h3>
-				<div class="check role-detection on"><span></span>Auto-detect optimal Pokemon roles (Lead/Swap/Closer)</div>
+				<h3 title="Analyzes stats to identify optimal role: Lead (high consistency/bulk), Safe Swap (counters common threats), or Closer (high attack/closing power). Displayed as colored badge on each Pokemon.">Role Detection <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check role-detection on"><span></span>Auto-detect Pokemon roles (Lead/Safe Swap/Closer)</div>
 				</div>
 				<div class="enhanced-option">
-				<h3 title="Shows Attack × Defense × HP stat product and efficiency grade (A/B/C/D/F) for each Pokemon at the current CP cap. Higher stat product = more bulk and better shield economy.">Stat Product Display <span class="info-tooltip">ⓘ</span></h3>
-				<div class="check stat-product-display on"><span></span>Show stat product values and grades</div>
+				<h3 title="Shows (Attack × Defense × HP) stat product with efficiency grade. A = 110%+, B = 95-110%, C = 80-95%, D = 65-80%, F = <65%. Higher stat product = better bulk and survivability at this CP cap.">Stat Product Display <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check stat-product-display on"><span></span>Show stat product efficiency grades (A/B/C/D/F)</div>
 				</div>
 				<div class="enhanced-option">
-				<h3 title="ENABLE for composition-based ranking (considers bulk, role coverage, type synergy, and threat coverage). DISABLE for simple matchup-only ranking. Recommended: ENABLED for better team building.">Advanced Team Synergy <span class="info-tooltip">ⓘ</span></h3>
-				<div class="check advanced-synergy on"><span></span>Composition-based ranking (recommended)</div>
+				<h3 title="RECOMMENDED: Enables composition-based ranking that evaluates threat coverage, bulk, type synergy, and meta relevance. Prevents glass cannon recommendations. DISABLE for old algorithm (matchup-only ranking).">Advanced Team Synergy <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check advanced-synergy on"><span></span>Composition-based ranking (RECOMMENDED)</div>
 				</div>
 			</div>
 			
@@ -310,18 +310,18 @@ require_once 'header.php';
 <div class="section typings white">
 	<a href="#" class="toggle active">Overview <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
-		<p>Below is a high-level evaluation of your team. Use this as a general guideline for any adjustments you may want to make. Some unique strategies can score lower marks.</p>
+		<p>Below is a high-level evaluation of your team based on matchups against top meta threats, stat products, type synergy, and overall consistency. Use this as a guideline for adjustments—some specialized strategies may score lower but still be effective.</p>
 		<div class="overview-section coverage">
 			<div class="flex">
 				<h3>Coverage</h3>
 				<div class="grade"></div>
 			</div>
 			<div class="notes">
-				<div grade="A">This team has excellent coverage against top meta threats. It has few or no major vulnerabilities.</div>
-				<div grade="B">This team covers most top meta threats. There may be a few vulnerabilities to look out for.</div>
-				<div grade="C">This team has coverage gaps and may be vulnerable to certain threats. Consider alternative picks or movesets to shore up your weaknesses.</div>
-				<div grade="D">This team is highly vulnerable to certain threats. Consider alternative picks to avoid doubling up on weaknesses or look for Pokemon that perform well against the top meta.</div>
-				<div grade="F">This team has extremely poor coverage against multiple threats. Consider strong meta alternatives to anchor this team.</div>
+				<div grade="A">This team has excellent coverage against top meta threats. Strong matchup spread with few vulnerabilities.</div>
+				<div grade="B">This team covers most top meta threats well. May have 1-2 notable weaknesses to monitor.</div>
+				<div grade="C">This team has coverage gaps and may struggle against certain meta Pokemon. Consider alternatives that counter your weak matchups.</div>
+				<div grade="D">This team is vulnerable to several meta threats. Review the Potential Threats section and consider Pokemon with better coverage.</div>
+				<div grade="F">This team has critical coverage problems against multiple top threats. Strongly consider meta alternatives with proven threat coverage (55%+ recommended).</div>
 			</div>
 		</div>
 		<div class="overview-section bulk">
@@ -330,11 +330,11 @@ require_once 'header.php';
 				<div class="grade"></div>
 			</div>
 			<div class="notes">
-				<div grade="A">This team has excellent average bulk. It will help manage shields and overcome difficult scenarios.</div>
-				<div grade="B">This team has good average bulk. Make sure to save shields for your more fragile teammates.</div>
-				<div grade="C">This team has moderate average bulk. You may be pressured to shield more often. Consider a bulky alternative to absorb damage.</div>
-				<div grade="D">This team has low average bulk. You will be pressured to shield often. Consider bulkier alternatives to ease shield pressure.</div>
-				<div grade="F">This team is extremely fragile and will have a hard time climbing out of bad situations. Use bulkier Pokemon to make this team more forgiving.</div>
+				<div grade="A">This team has excellent bulk (Defense × HP stat products). Strong survivability and shield economy.</div>
+				<div grade="B">This team has good bulk overall. Most Pokemon can absorb damage well—manage shields carefully for frailer teammates.</div>
+				<div grade="C">This team has moderate bulk. Shield wisely to protect frailer Pokemon. Consider a bulkier alternative if shield pressure becomes problematic.</div>
+				<div grade="D">This team has low bulk. You'll need to shield frequently to survive. Consider bulkier Pokemon (higher stat products) to reduce shield dependency.</div>
+				<div grade="F">This team is extremely fragile. Glass cannons may win matchups but struggle with shield pressure and inconsistent performance. Use Pokemon with stat product grades B or higher.</div>
 			</div>
 		</div>
 		<div class="overview-section safety">
@@ -404,19 +404,19 @@ require_once 'header.php';
 
 	<a href="#" class="toggle active">Potential Threats <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
-		<p>The Pokemon below have the best overall matchups against this team. Results are taken from 0 and 1 shield simulations. Scores also factor in a Pokemon's overall strength and consistency.</p>
+		<p>The Pokemon below have the strongest matchups against your team. Threat calculations use 0 and 1 shield scenarios and factor in each Pokemon's meta relevance, overall strength, and consistency against your team.</p>
 		<div class="table-container">
 			<table class="threats-table rating-table" cellspacing="0">
 			</table>
 		</div>
 		<p class="center">This team has a threat score of <b class="threat-score"></b></p>
-		<p class="small"><strong>Threat score</strong> measures how vulnerable your team may be to specific Pokemon. The smaller the number, the better. It factors in how many Pokemon on your team can be threatened, how hard they're threatened, a threat's overall ranking (how likely you may be to encounter it), and how consistently it performs.</p>
+		<p class="small"><strong>Threat score</strong> measures overall team vulnerability. Lower = better. Factors: number of Pokemon threatened, severity of threats, threat rankings (encounter likelihood), and performance consistency. Use this to identify which meta Pokemon pose the biggest problems.</p>
 	</div>
 
 	<a href="#" class="toggle active">Potential Alternatives <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
-		<p><strong>With Advanced Team Synergy enabled:</strong> Alternatives are ranked by how they improve your overall team composition (bulk, EPT/DPT balance, role coverage, and type synergy) while avoiding shared weaknesses. Each alternative shows which team member it would replace and specific composition improvements.</p>
-		<p><strong>With Advanced Team Synergy disabled:</strong> Alternatives are ranked purely by matchup performance against your identified threats using 0 and 1 shield simulations.</p>
+		<p><strong>With Advanced Team Synergy enabled:</strong> Alternatives are evaluated against the <strong>top 30 meta threats</strong> and scored on threat coverage (50%), bulk contribution (25%), type synergy (10%), role coverage (5%), EPT/DPT balance (5%), and meta relevance (5%). Each shows which Pokemon it replaces and composition changes. This prevents glass cannon recommendations and ensures competitive alternatives.</p>
+		<p><strong>With Advanced Team Synergy disabled:</strong> Alternatives are ranked purely by matchup performance against your identified threats using 0 and 1 shield simulations. This is the legacy algorithm.</p>
 
 		<div class="poke-search-container">
 			<input class="poke-search" context="alternative-search" type="text" placeholder="Search Pokemon" />
