@@ -1835,24 +1835,22 @@ var InterfaceMaster = (function () {
 				}
 			}
 
-			// Reset enhanced settings to defaults
-			function resetEnhancedSettings(e) {
-				e.preventDefault();
-				
-				// Reset weight sliders to new defaults
-				$('.ranking-weight[data-factor="threatCoverage"]').val(30).trigger('input');
-				$('.ranking-weight[data-factor="bulkImprovement"]').val(20).trigger('input');
-				$('.ranking-weight[data-factor="eptDptBalance"]').val(15).trigger('input');
-				$('.ranking-weight[data-factor="roleCompletion"]').val(15).trigger('input');
-				$('.ranking-weight[data-factor="typeCoverage"]').val(15).trigger('input');
-				$('.ranking-weight[data-factor="metaRelevance"]').val(5).trigger('input');
-				
-				// Reset checkboxes
-				$('.enhanced-option .check').addClass('on');
-				$('.enhanced-option .check.position-weighting').removeClass('on');
-			}
-
-			// Get enhanced ranking weights from UI
+		// Reset enhanced settings to defaults
+		function resetEnhancedSettings(e) {
+			e.preventDefault();
+			
+			// Reset weight sliders to new defaults (sum to 100%)
+			$('.ranking-weight[data-factor="threatCoverage"]').val(50).trigger('input');
+			$('.ranking-weight[data-factor="bulkImprovement"]').val(25).trigger('input');
+			$('.ranking-weight[data-factor="eptDptBalance"]').val(5).trigger('input');
+			$('.ranking-weight[data-factor="roleCompletion"]').val(5).trigger('input');
+			$('.ranking-weight[data-factor="typeCoverage"]').val(10).trigger('input');
+			$('.ranking-weight[data-factor="metaRelevance"]').val(5).trigger('input');
+			
+			// Reset checkboxes
+			$('.enhanced-option .check').addClass('on');
+			$('.enhanced-option .check.position-weighting').removeClass('on');
+		}			// Get enhanced ranking weights from UI
 			this.getEnhancedWeights = function() {
 				var total = 0;
 				var weights = {};

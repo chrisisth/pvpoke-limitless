@@ -128,58 +128,58 @@ require_once 'header.php';
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label title="How well the alternative performs in 1v1 battles against your identified threats">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="50" />
-					<span class="weight-value">50%</span>
-					<span class="weight-description">How well alternative wins battles against identified threats</span>
+				<label title="Simulates 1v1 battles against the threats you've identified. Pokemon with 60%+ coverage win most matchups. Below 55% means losing nearly half your battles - avoid these!">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="50" />
+				<span class="weight-value">50%</span>
+				<span class="weight-description">Win rate against identified threats (most important factor)</span>
 				</div>
 				<div class="weight-option">
-					<label title="Evaluates Defense × HP stat product relative to league benchmarks (Great League: 22,000 / Ultra League: 35,000). Higher bulk = better survivability and shield economy.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="25" />
-					<span class="weight-value">25%</span>
-					<span class="weight-description">Defense × HP improvement (prevents glassy teams)</span>
+				<label title="Defense × HP stat product. Higher bulk = better survivability and shield economy. Prevents glassy teams that fold under pressure. Losing bulk makes your team more fragile.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="25" />
+				<span class="weight-value">25%</span>
+				<span class="weight-description">Stat product improvement (prevents glassy teams)</span>
 				</div>
 				<div class="weight-option">
-					<label title="Energy Per Turn (EPT ≥3.5) and Damage Per Turn (DPT ≥3.0) thresholds. Ensures your team has good fast move pressure and doesn't rely solely on charge moves.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="5" />
-					<span class="weight-value">5%</span>
-					<span class="weight-description">Fast move energy generation & damage output balance</span>
+				<label title="Energy Per Turn (EPT ≥3.5) and Damage Per Turn (DPT ≥3.0) thresholds. Ensures fast moves generate good energy and deal respectable damage. Low EPT/DPT forces excessive reliance on charge moves.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="5" />
+				<span class="weight-value">5%</span>
+				<span class="weight-description">Fast move quality (energy generation & damage)</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="weight-option">
-					<label title="Ensures your team has balanced roles: Lead (high consistency), Safe Swap (counter threats), and Closer (sweep potential). Missing roles create strategic vulnerabilities.">Role Completion <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="5" />
-					<span class="weight-value">5%</span>
-					<span class="weight-description">Filling missing Lead / Safe Swap / Closer roles</span>
+				<label title="Rewards Pokemon that fill missing team roles. Lead = high consistency, Safe Swap = counter threats, Closer = sweep potential. Keep this weight LOW (5%) to avoid recommending bad Pokemon just because they fill a role.">Role Completion <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="5" />
+				<span class="weight-value">5%</span>
+				<span class="weight-description">Filling missing roles (keep low to prioritize performance)</span>
 				</div>
 				<div class="weight-option">
-					<label title="Analyzes defensive resistances and shared weaknesses. Heavy penalty for stacking weaknesses to common types (Fighting, Rock, Steel, Fire). Also penalizes removing unique types or creating type redundancy.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="10" />
-					<span class="weight-value">10%</span>
-					<span class="weight-description">Type synergy & weakness distribution (avoids shared weaknesses)</span>
+				<label title="Analyzes defensive type matchups and shared weaknesses. Heavy penalties for fragile types (Ice, Grass, Bug, Rock, Psychic) and stacking weaknesses to common offensive types. Also penalizes type redundancy within your team.">Type Coverage <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="typeCoverage" min="0" max="100" value="10" />
+				<span class="weight-value">10%</span>
+				<span class="weight-description">Type synergy (penalizes fragile types & shared weaknesses)</span>
 				</div>
 				<div class="weight-option">
-					<label title="Considers current meta usage and move consistency. Shadow Pokemon and meta-relevant species receive small bonuses.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
-					<span class="weight-value">5%</span>
-					<span class="weight-description">Current rankings position and meta usage (Top 10 = highest bonus)</span>
+				<label title="Bonus for Pokemon ranked highly in current meta. Top 10 ranked Pokemon get the highest bonus (+0.5), Top 25 (+0.3), Top 50 (+0.15), Top 100 (+0.05). Helps identify proven performers vs theoretical picks.">Meta Relevance <span class="info-tooltip">ⓘ</span></label>
+				<input type="range" class="ranking-weight" data-factor="metaRelevance" min="0" max="100" value="5" />
+				<span class="weight-value">5%</span>
+				<span class="weight-description">Rankings position bonus (Top 10 = highest bonus)</span>
 				</div>
 			</div>
 			
 			<div class="flex poke">
 				<div class="enhanced-option">
-					<h3 title="Automatically identifies whether each Pokemon is best suited as a Lead, Safe Swap, or Closer based on stats and moveset">Role Detection <span class="info-tooltip">ⓘ</span></h3>
-					<div class="check role-detection on"><span></span>Auto-detect optimal Pokemon roles (Lead/Swap/Closer)</div>
+				<h3 title="Automatically identifies whether each Pokemon is best suited as a Lead (high consistency stats), Safe Swap (counter common threats), or Closer (sweep potential with strong closing stats)">Role Detection <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check role-detection on"><span></span>Auto-detect optimal Pokemon roles (Lead/Swap/Closer)</div>
 				</div>
 				<div class="enhanced-option">
-					<h3 title="Shows Atk × Def × HP stat product and efficiency grade for each Pokemon at the current CP cap">Stat Product Display <span class="info-tooltip">ⓘ</span></h3>
-					<div class="check stat-product-display on"><span></span>Show stat product values and grades</div>
+				<h3 title="Shows Attack × Defense × HP stat product and efficiency grade (A/B/C/D/F) for each Pokemon at the current CP cap. Higher stat product = more bulk and better shield economy.">Stat Product Display <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check stat-product-display on"><span></span>Show stat product values and grades</div>
 				</div>
 				<div class="enhanced-option">
-					<h3 title="ENABLE to use composition-based ranking (bulk, EPT/DPT, roles, type synergy). DISABLE for traditional matchup-based ranking (simple counter performance).">Advanced Team Synergy <span class="info-tooltip">ⓘ</span></h3>
-					<div class="check advanced-synergy on"><span></span>Composition-based ranking (recommended)</div>
+				<h3 title="ENABLE for composition-based ranking (considers bulk, role coverage, type synergy, and threat coverage). DISABLE for simple matchup-only ranking. Recommended: ENABLED for better team building.">Advanced Team Synergy <span class="info-tooltip">ⓘ</span></h3>
+				<div class="check advanced-synergy on"><span></span>Composition-based ranking (recommended)</div>
 				</div>
 			</div>
 			
