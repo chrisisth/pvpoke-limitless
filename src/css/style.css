@@ -6701,198 +6701,53 @@ iframe#bh-div {
   }
 }
 
-/* Compact Alternative Display Styles */
+/* Team Builder - Composition Summary Improvements */
 .composition-summary {
-  padding: 8px 12px !important;
-  vertical-align: top !important;
+  padding: 10px !important;
+  font-size: 13px;
+  line-height: 1.5;
 }
 
 .composition-details {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  font-size: 13px;
+  max-width: 100%;
 }
 
-.stats-comparison {
-  background: rgba(0, 123, 255, 0.08);
-  border-left: 3px solid #007bff;
-  padding: 8px 10px;
-  border-radius: 4px;
-  margin-bottom: 6px;
-}
-
-.comparison-header {
-  font-size: 12px;
-  color: #555;
-  margin-bottom: 6px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-.stat-compare-row {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.composition-details .factor-row {
   margin: 4px 0;
-  font-size: 12px;
-  line-height: 1.4;
+  padding: 3px 0;
 }
 
-.stat-compare-row .stat-label {
-  font-weight: bold;
-  min-width: 75px;
-  color: #333;
-}
-
-.stat-compare-row .old-value {
-  color: #888;
-  font-size: 11px;
-}
-
-.stat-compare-row .new-value {
-  font-weight: bold;
-  color: #333;
-}
-
-.stat-compare-row .new-value.better {
-  color: #28a745;
-}
-
-.stat-compare-row .new-value.worse {
-  color: #dc3545;
-}
-
-.stat-compare-row .new-value.grade-A { color: #28a745; }
-.stat-compare-row .new-value.grade-B { color: #5cb85c; }
-.stat-compare-row .new-value.grade-C { color: #f0ad4e; }
-.stat-compare-row .new-value.grade-D { color: #d9534f; }
-.stat-compare-row .new-value.grade-F { color: #c9302c; }
-
-.stat-compare-row .old-value.grade-A { color: #888; }
-.stat-compare-row .old-value.grade-B { color: #888; }
-.stat-compare-row .old-value.grade-C { color: #888; }
-.stat-compare-row .old-value.grade-D { color: #888; }
-.stat-compare-row .old-value.grade-F { color: #888; }
-
-.factors-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px 12px;
-  background: rgba(0, 0, 0, 0.02);
-  padding: 8px;
-  border-radius: 4px;
-}
-
-.factor-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 12px;
-}
-
-.factor-label {
-  color: #666;
-  font-weight: normal;
-  min-width: 50px;
-}
-
-.factor-item strong {
-  font-size: 13px;
-  font-weight: bold;
-}
-
-.factor-item strong.positive {
-  color: #28a745;
-}
-
-.factor-item strong.negative {
-  color: #dc3545;
-}
-
-.factor-item strong.neutral {
-  color: #333;
-}
-
-.replaces-info {
-  margin-top: 6px;
-  padding: 6px 8px;
-  background: rgba(255, 193, 7, 0.15);
-  border-left: 3px solid #ffc107;
-  border-radius: 3px;
-  font-size: 12px;
-  color: #856404;
-  font-weight: normal;
-}
-
-.composition-tags {
-  margin-top: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
-.improvement-tag {
+.composition-details .factor-name {
   display: inline-block;
-  padding: 2px 8px;
-  border-radius: 12px;
-  font-size: 11px;
+  min-width: 140px;
+  font-weight: normal;
+  color: #555;
+}
+
+.composition-details .factor-value {
   font-weight: bold;
-  cursor: help;
+  color: #333;
 }
 
-.improvement-tag.positive {
-  background: #d4edda;
-  color: #155724;
-  border: 1px solid #c3e6cb;
+.composition-details .factor-value.positive {
+  color: #28a745;
 }
 
-.improvement-tag.negative {
-  background: #f8d7da;
-  color: #721c24;
-  border: 1px solid #f5c6cb;
+.composition-details .factor-value.negative {
+  color: #dc3545;
 }
 
-.score-cell {
-  text-align: center;
-  vertical-align: middle !important;
-  min-width: 80px;
-}
-
-.score-cell .total-score {
-  display: block;
-  font-size: 18px;
-  font-weight: bold;
-  color: #007bff;
-  margin-bottom: 2px;
-}
-
-.score-cell .score-breakdown {
-  font-size: 10px;
+.composition-details .factor-value.neutral {
   color: #666;
 }
 
-/* Make table cells more compact */
-.alternatives-table td.composition-summary {
-  line-height: 1.3;
+.composition-details .comparison-header {
+  font-size: 12px;
+  line-height: 1.6;
 }
 
-.alternatives-table th.name {
-  max-width: 250px;
-  line-height: 1.4;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .factors-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  
-  .stat-compare-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-  }
+.composition-details .comparison-header strong {
+  color: #856404;
 }
 
 /*# sourceMappingURL=style.css.map */
