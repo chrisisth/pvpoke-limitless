@@ -491,32 +491,35 @@ var InterfaceMaster = (function () {
 						continue;
 					}
 
-					var pokemon = r.pokemon;
+				var pokemon = r.pokemon;
 
-					// Push to both display counterTeam and calculation counterTeam
-					let similarCounterExists = counterTeam.some(counter => {
-						let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
-						return similarityScore == -1 || similarityScore >= 1000;
-					});
+				// Check similarity separately for display and calculation lists
+				let similarDisplayCounterExists = counterTeam.some(counter => {
+					let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
+					return similarityScore == -1 || similarityScore >= 1000;
+				});
+				
+				let similarCalculationCounterExists = calculationCounterTeam.some(counter => {
+					let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
+					return similarityScore == -1 || similarityScore >= 1000;
+				});
 
-					let customThreatsListLength = multiSelectors[1].getPokemonList().length;
-					
-					// Push to display counterTeam (limited by counterTeamSize)
-					if(counterTeam.length < counterTeamSize){
-						if(! similarCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
-							counterTeam.push(pokemon);
-							avgThreatScore += r.rating;
-						}
+				let customThreatsListLength = multiSelectors[1].getPokemonList().length;
+				
+				// Push to display counterTeam (limited by counterTeamSize)
+				if(counterTeam.length < counterTeamSize){
+					if(! similarDisplayCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
+						counterTeam.push(pokemon);
+						avgThreatScore += r.rating;
 					}
-					
-					// Push to calculation counterTeam (fixed at 30 for consistency)
-					if(calculationCounterTeam.length < CALCULATION_THREAT_SIZE){
-						if(! similarCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
-							calculationCounterTeam.push(pokemon);
-						}
+				}
+				
+				// Push to calculation counterTeam (fixed at 30 for consistency)
+				if(calculationCounterTeam.length < CALCULATION_THREAT_SIZE){
+					if(! similarCalculationCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
+						calculationCounterTeam.push(pokemon);
 					}
-
-					// Add results to threats table
+				}					// Add results to threats table
 					if(count >= total){
 						i++;
 						continue;
