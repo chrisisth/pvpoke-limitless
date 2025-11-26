@@ -1258,7 +1258,10 @@ var InterfaceMaster = (function () {
 								battle.setNewPokemon(threat, 1, false, "emulate");
 								battle.simulate();
 								
-								var rating = battle.getRating(0);
+								// Get the battle rating from the results
+								var battleRatings = battle.getBattleRatings();
+								var rating = battleRatings[0]; // First player's rating
+								
 								r.matchups.push({
 									opponent: threat,
 									rating: rating
