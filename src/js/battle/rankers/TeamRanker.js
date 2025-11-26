@@ -816,6 +816,12 @@ var RankerMaster = (function () {
 					(normalizedRole * enhancedWeights.roleCompletion) +
 					(normalizedCoverage * enhancedWeights.typeCoverage);
 				
+				// CRITICAL: Disqualify alternatives with poor threat coverage
+				// If threat coverage < 40/100, the Pokemon loses most matchups and should not be recommended
+				if (threatCoverageScore < 40) {
+					compositeScore = compositeScore * (threatCoverageScore / 40); // Severe penalty scaling
+				}
+				
 				// Apply type redundancy penalty
 				compositeScore = Math.max(0, compositeScore - typeRedundancyPenalty);
 
