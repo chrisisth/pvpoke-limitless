@@ -1183,32 +1183,44 @@ var InterfaceMaster = (function () {
 						var detailsHTML = "<div class=\"composition-details\">";
 						
 						// Add comparison stats if this replaces a team member
-						if (r.replacementIndex !== undefined && team[r.replacementIndex]) {
-							var oldPoke = team[r.replacementIndex];
+						if (r.replacedPokemon) {
+							var oldPoke = r.replacedPokemon;
 							var newPoke = pokemon;
 							
-							// Calculate stats for both
-							var oldStatProd = oldPoke.calculateStatProduct(battle.getCP());
-							var newStatProd = newPoke.calculateStatProduct(battle.getCP());
-							var oldBulk = oldStatProd.product;
-							var newBulk = newStatProd.product;
-							var bulkDiff = newBulk - oldBulk;
-							var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
-							
-							// Get fast move stats
-							var oldFast = oldPoke.fastMove;
-							var newFast = newPoke.fastMove;
-							
-							// Grade comparison
-							var gradeBetter = newStatProd.grade < oldStatProd.grade; // A < B means better
-							var gradeClass = gradeBetter ? "positive" : (newStatProd.grade > oldStatProd.grade ? "negative" : "neutral");
-							
-							detailsHTML += "<div class=\"factor-row comparison-header\" style=\"background: rgba(255,193,7,0.1); padding: 6px; margin-bottom: 8px; border-left: 3px solid #ffc107;\">";
-							detailsHTML += "<strong>vs " + oldPoke.speciesName + ":</strong> ";
-							detailsHTML += "Bulk <span class=\"factor-value " + bulkDiffClass + "\">" + oldBulk.toFixed(0) + " → " + newBulk.toFixed(0) + " (" + (bulkDiff > 0 ? "+" : "") + bulkDiff.toFixed(0) + ")</span>, ";
-							detailsHTML += "Fast <span class=\"factor-value\">" + oldFast.name + " → " + newFast.name + "</span>, ";
-							detailsHTML += "Grade <span class=\"factor-value " + gradeClass + "\">" + oldStatProd.grade + " → " + newStatProd.grade + "</span>";
-							detailsHTML += "</div>";
+							try {
+								// Calculate stats for both
+								var oldStatProd = oldPoke.calculateStatProduct(battle.getCP());
+								var newStatProd = newPoke.calculateStatProduct(battle.getCP());
+								
+								if (oldStatProd && newStatProd && oldStatProd.product !== undefined && newStatProd.product !== undefined) {
+									var oldBulk = oldStatProd.product;
+									var newBulk = newStatProd.product;
+									var bulkDiff = newBulk - oldBulk;
+									var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
+									
+									// Get fast move stats
+									var oldFast = oldPoke.fastMove;
+									var newFast = newPoke.fastMove;
+									
+									// Grade comparison
+									var gradeBetter = newStatProd.grade < oldStatProd.grade; // A < B means better
+									var gradeClass = gradeBetter ? "positive" : (newStatProd.grade > oldStatProd.grade ? "negative" : "neutral");
+									
+									detailsHTML += "<div class=\"factor-row comparison-header\" style=\"background: rgba(255,193,7,0.1); padding: 6px; margin-bottom: 8px; border-left: 3px solid #ffc107;\">";
+									detailsHTML += "<strong>vs " + oldPoke.speciesName + ":</strong> ";
+									detailsHTML += "Bulk <span class=\"factor-value " + bulkDiffClass + "\">" + oldBulk.toFixed(0) + " → " + newBulk.toFixed(0) + " (" + (bulkDiff > 0 ? "+" : "") + bulkDiff.toFixed(0) + ")</span>";
+									
+									if (oldFast && newFast) {
+										detailsHTML += ", Fast <span class=\"factor-value\">" + oldFast.name + " → " + newFast.name + "</span>";
+									}
+									
+									detailsHTML += ", Grade <span class=\"factor-value " + gradeClass + "\">" + oldStatProd.grade + " → " + newStatProd.grade + "</span>";
+									detailsHTML += "</div>";
+								}
+							} catch (e) {
+								console.log("Error calculating comparison stats:", e);
+								// If comparison fails, just skip it and continue with normal display
+							}
 						}
 						
 						// Threat Coverage (always show if weight > 0)
