@@ -582,38 +582,48 @@ var RankerMaster = (function () {
 				return alignments[context] && alignments[context][role] ? alignments[context][role] : 1.0;
 			}
 
-			// Calculate meta relevance
-			this.calculateMetaRelevance = function(pokemon) {
-				var relevance = 1.0;
-				
-				// Check if Pokemon is in meta group (top picks)
-				if(metaGroup.some(poke => poke.speciesId === pokemon.speciesId)) {
-					relevance += 0.3;
-				}
-				
-				// NEW: Bonus based on current rankings position
-				// Pokemon in top 10 = highest bonus, top 25 = moderate, top 50 = small
-				if (pokemon.index !== undefined) {
-					if (pokemon.index <= 10) {
-						relevance += 0.5; // Top 10: massive bonus
-					} else if (pokemon.index <= 25) {
-						relevance += 0.3; // Top 25: solid bonus
-					} else if (pokemon.index <= 50) {
-						relevance += 0.15; // Top 50: small bonus
-					} else if (pokemon.index <= 100) {
-						relevance += 0.05; // Top 100: tiny bonus
+		// Calculate meta relevance
+		this.calculateMetaRelevance = function(pokemon) {
+			var relevance = 1.0;
+			
+			// Check if Pokemon is in meta group (top picks)
+			if(metaGroup.some(poke => poke.speciesId === pokemon.speciesId)) {
+				relevance += 0.3;
+			}
+			
+			// NEW: Bonus based on current rankings position
+			// Get ranking from battle ranker instead of pokemon.index
+			var rankings = battle.getRanker().rankings;
+			var pokemonRank = null;
+			
+			if (rankings && rankings.length > 0) {
+				for (var i = 0; i < rankings.length; i++) {
+					if (rankings[i].speciesId === pokemon.speciesId) {
+						pokemonRank = i + 1; // 1-based ranking
+						break;
 					}
 				}
-				
-				// Factor in usage patterns (simplified)
-				if(pokemon.speciesName.includes("Shadow")) {
-					relevance += 0.1; // Shadow bonus
-				}
-				
-				return Math.min(relevance, 2.0); // Cap at 100% bonus
 			}
-
-			// Calculate matchup quality beyond win/loss
+			
+			if (pokemonRank !== null) {
+				if (pokemonRank <= 10) {
+					relevance += 0.5; // Top 10: massive bonus
+				} else if (pokemonRank <= 25) {
+					relevance += 0.3; // Top 25: solid bonus
+				} else if (pokemonRank <= 50) {
+					relevance += 0.15; // Top 50: small bonus
+				} else if (pokemonRank <= 100) {
+					relevance += 0.05; // Top 100: tiny bonus
+				}
+			}
+			
+			// Factor in usage patterns (simplified)
+			if(pokemon.speciesName.includes("Shadow")) {
+				relevance += 0.1; // Shadow bonus
+			}
+			
+			return Math.min(relevance, 2.0); // Cap at 100% bonus
+		}			// Calculate matchup quality beyond win/loss
 			this.calculateMatchupQuality = function(rating) {
 				var quality = 1.0;
 				
