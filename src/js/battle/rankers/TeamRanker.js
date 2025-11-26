@@ -592,8 +592,7 @@ var RankerMaster = (function () {
 			}
 			
 			// NEW: Bonus based on current rankings position
-			// Get ranking from battle ranker instead of pokemon.index
-			var rankings = battle.getRanker().rankings;
+			// Look up Pokemon in rankings array (populated during rank() call)
 			var pokemonRank = null;
 			
 			if (rankings && rankings.length > 0) {
