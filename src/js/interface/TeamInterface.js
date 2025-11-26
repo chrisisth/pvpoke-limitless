@@ -462,6 +462,10 @@ var InterfaceMaster = (function () {
 				// Create a separate comprehensive threat list for calculations (always top 30)
 				var calculationCounterTeam = [];
 				var CALCULATION_THREAT_SIZE = 30; // Fixed size for consistent alternative calculations
+				
+				console.log("=== THREAT LIST DEBUG ===");
+				console.log("Counter Team Size setting:", counterTeamSize);
+				console.log("Calculation threat size (fixed):", CALCULATION_THREAT_SIZE);
 
 				while((count < total || counterTeam.length < counterTeamSize || calculationCounterTeam.length < CALCULATION_THREAT_SIZE)&&(i < counterRankings.length)){
 					var r = counterRankings[i];
@@ -573,6 +577,10 @@ var InterfaceMaster = (function () {
 
 					$(".threats-table tbody").append($row);
 				}
+				
+				console.log("Display counterTeam size:", counterTeam.length);
+				console.log("Calculation counterTeam size:", calculationCounterTeam.length);
+				console.log("=========================");
 
 				// Display average threat score
 				avgThreatScore = Math.round(avgThreatScore / counterTeamSize);
