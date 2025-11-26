@@ -129,20 +129,20 @@ require_once 'header.php';
 			<div class="flex poke">
 				<div class="weight-option">
 					<label title="How well the alternative performs in 1v1 battles against your identified threats">Threat Coverage <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="45" />
-					<span class="weight-value">45%</span>
+					<input type="range" class="ranking-weight" data-factor="threatCoverage" min="0" max="100" value="50" />
+					<span class="weight-value">50%</span>
 					<span class="weight-description">How well alternative wins battles against identified threats</span>
 				</div>
 				<div class="weight-option">
 					<label title="Evaluates Defense × HP stat product relative to league benchmarks (Great League: 22,000 / Ultra League: 35,000). Higher bulk = better survivability and shield economy.">Bulk Improvement <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="20" />
-					<span class="weight-value">20%</span>
+					<input type="range" class="ranking-weight" data-factor="bulkImprovement" min="0" max="100" value="25" />
+					<span class="weight-value">25%</span>
 					<span class="weight-description">Defense × HP improvement (prevents glassy teams)</span>
 				</div>
 				<div class="weight-option">
 					<label title="Energy Per Turn (EPT ≥3.5) and Damage Per Turn (DPT ≥3.0) thresholds. Ensures your team has good fast move pressure and doesn't rely solely on charge moves.">EPT/DPT Balance <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="10" />
-					<span class="weight-value">10%</span>
+					<input type="range" class="ranking-weight" data-factor="eptDptBalance" min="0" max="100" value="5" />
+					<span class="weight-value">5%</span>
 					<span class="weight-description">Fast move energy generation & damage output balance</span>
 				</div>
 			</div>
@@ -150,8 +150,8 @@ require_once 'header.php';
 			<div class="flex poke">
 				<div class="weight-option">
 					<label title="Ensures your team has balanced roles: Lead (high consistency), Safe Swap (counter threats), and Closer (sweep potential). Missing roles create strategic vulnerabilities.">Role Completion <span class="info-tooltip">ⓘ</span></label>
-					<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="10" />
-					<span class="weight-value">10%</span>
+					<input type="range" class="ranking-weight" data-factor="roleCompletion" min="0" max="100" value="5" />
+					<span class="weight-value">5%</span>
 					<span class="weight-description">Filling missing Lead / Safe Swap / Closer roles</span>
 				</div>
 				<div class="weight-option">

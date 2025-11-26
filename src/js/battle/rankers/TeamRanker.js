@@ -835,21 +835,27 @@ var RankerMaster = (function () {
 				
 				// CRITICAL: Apply quality filters to prevent garbage recommendations
 				
-				// 1. Severe penalty for poor threat coverage (< 50 = losing most matchups)
-				if (threatCoverageScore < 50) {
-					var coveragePenalty = (50 - threatCoverageScore) * 2; // 2 points per point below 50
+				// 1. SEVERE penalty for poor threat coverage
+				// Pokemon MUST win at least 50% of matchups to be recommended
+				if (threatCoverageScore < 55) {
+					var coveragePenalty = (55 - threatCoverageScore) * 3; // 3 points per point below 55
 					compositeScore -= coveragePenalty;
 				}
 				
-				// 2. Severe penalty for losing bulk (makes team glassier)
+				// 2. Penalty for losing bulk (makes team glassier)
 				if (improvements.bulkDelta < -5) {
-					var bulkPenalty = Math.abs(improvements.bulkDelta) * 2; // 2 points per bulk lost
+					var bulkPenalty = Math.abs(improvements.bulkDelta) * 1.5; // 1.5 points per bulk lost
 					compositeScore -= bulkPenalty;
 				}
 				
-				// 3. Disqualify completely if both threat coverage AND bulk are bad
-				if (threatCoverageScore < 45 && improvements.bulkDelta < -10) {
-					compositeScore = 0; // No excuse for recommending glass cannons that lose
+				// 3. DISQUALIFY if threat coverage is terrible (< 50 = losing more than winning)
+				if (threatCoverageScore < 50) {
+					compositeScore = compositeScore * 0.5; // Cut score in half
+				}
+				
+				// 4. MASSIVE penalty for both bad coverage AND bad bulk
+				if (threatCoverageScore < 52 && improvements.bulkDelta < -8) {
+					compositeScore = 0; // Completely disqualify glass cannons that lose
 				}
 				
 				// Apply type redundancy penalty
