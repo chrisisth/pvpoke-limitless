@@ -1262,31 +1262,52 @@ var InterfaceMaster = (function () {
 							
 							var previewCount = Math.min(5, counterTeam.length);
 							for (var tm = 0; tm < previewCount; tm++) {
-								var threat = counterTeam[tm];
-								
-								// Run quick battle simulation
-								pokemon.reset();
-								threat.reset();
-								var battleResult = battle.simulate(pokemon, threat, shieldCount, shieldCount);
-								var rating = battleResult.rating;
-								var ratingClass = battle.getRatingClass(rating);
-								
-								// Create battle link
-								if (!baitShields) {
-									pokemon.isCustom = true;
-									pokemon.baitShields = 0;
-									threat.isCustom = true;
-									threat.baitShields = 0;
+								try {
+									var threat = counterTeam[tm];
+									
+									if (!threat || !pokemon) continue;
+									
+									// Safely reset Pokemon
+									if (typeof pokemon.reset === 'function') {
+										pokemon.reset();
+									}
+									if (typeof threat.reset === 'function') {
+										threat.reset();
+									}
+									
+									// Run quick battle simulation with safety checks
+									var battleResult = null;
+									var rating = 500;
+									var ratingClass = "tie";
+									
+									if (battle && typeof battle.simulate === 'function') {
+										battleResult = battle.simulate(pokemon, threat, shieldCount, shieldCount);
+										if (battleResult && battleResult.rating !== undefined) {
+											rating = battleResult.rating;
+											ratingClass = battle.getRatingClass(rating);
+										}
+									}
+									
+									// Create battle link
+									if (!baitShields) {
+										pokemon.isCustom = true;
+										pokemon.baitShields = 0;
+										threat.isCustom = true;
+										threat.baitShields = 0;
+									}
+									
+									var pokeStr = pokemon.generateURLPokeStr();
+									var moveStr = pokemon.generateURLMoveStr();
+									var opPokeStr = threat.generateURLPokeStr();
+									var opMoveStr = threat.generateURLMoveStr();
+									var shieldStr = shieldCount + "" + shieldCount;
+									var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
+									
+									detailsHTML += "<a class=\"threat-matchup-cell rating " + ratingClass + "\" href=\"" + battleLink + "\" target=\"_blank\" title=\"" + threat.speciesName + " (" + rating + ")\"><span></span></a>";
+								} catch (e) {
+									console.log("Error simulating threat matchup:", e);
+									// Skip this threat and continue
 								}
-								
-								var pokeStr = pokemon.generateURLPokeStr();
-								var moveStr = pokemon.generateURLMoveStr();
-								var opPokeStr = threat.generateURLPokeStr();
-								var opMoveStr = threat.generateURLMoveStr();
-								var shieldStr = shieldCount + "" + shieldCount;
-								var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
-								
-								detailsHTML += "<a class=\"threat-matchup-cell rating " + ratingClass + "\" href=\"" + battleLink + "\" target=\"_blank\" title=\"" + threat.speciesName + " (" + rating + ")\"><span></span></a>";
 							}
 							
 							detailsHTML += "</div>";
