@@ -1137,81 +1137,15 @@ var InterfaceMaster = (function () {
 
 					// Show which team member this alternative would replace
 					var replacementInfo = "";
-					var statComparisonHTML = "";
 					if (r.replacementIndex !== undefined && team[r.replacementIndex]) {
 						var replacedPokemon = team[r.replacementIndex];
 						var positionNames = ["Lead", "Safe Swap", "Closer"];
 						var positionName = positionNames[r.replacementIndex] || ("Position " + (r.replacementIndex + 1));
 						replacementInfo = "<div class=\"replaces-info\" title=\"This Pokemon would replace " + replacedPokemon.speciesName + " in the " + positionName + " position\">Replaces: " + replacedPokemon.speciesName + " (" + positionName + ")</div>";
-						
-						// Build stat comparison for the name cell
-						if (isCompositionBased) {
-							try {
-								var oldStatProd = replacedPokemon.calculateStatProduct(battle.getCP());
-								var newStatProd = pokemon.calculateStatProduct(battle.getCP());
-								
-								if (oldStatProd && newStatProd && oldStatProd.product !== undefined && newStatProd.product !== undefined) {
-									var oldBulk = oldStatProd.product;
-									var newBulk = newStatProd.product;
-									var bulkDiff = newBulk - oldBulk;
-									var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
-									var bulkChangePercent = ((bulkDiff / oldBulk) * 100).toFixed(1);
-									
-									// Get fast move stats
-									var oldFast = replacedPokemon.fastMove;
-									var newFast = pokemon.fastMove;
-									
-									statComparisonHTML += "<div class=\"stat-comparison-compact\">";
-									statComparisonHTML += "<div class=\"comparison-vs\">vs " + replacedPokemon.speciesName + "</div>";
-									
-									// Bulk comparison
-									statComparisonHTML += "<div class=\"stat-row\">";
-									statComparisonHTML += "<span class=\"stat-label\">Bulk:</span> ";
-									statComparisonHTML += "<span class=\"stat-old\">" + oldBulk.toFixed(0) + "</span> → ";
-									statComparisonHTML += "<span class=\"stat-new " + bulkDiffClass + "\">" + newBulk.toFixed(0) + "</span>";
-									statComparisonHTML += " <span class=\"stat-diff " + bulkDiffClass + "\">(" + (bulkDiff > 0 ? "+" : "") + bulkChangePercent + "%)</span>";
-									statComparisonHTML += "</div>";
-									
-									// Fast move comparison
-									if (oldFast && newFast && oldFast.name !== newFast.name) {
-										var oldEPT = (oldFast.energyGain / oldFast.cooldown).toFixed(2);
-										var newEPT = (newFast.energyGain / newFast.cooldown).toFixed(2);
-										var oldDPT = (oldFast.power / oldFast.cooldown).toFixed(2);
-										var newDPT = (newFast.power / newFast.cooldown).toFixed(2);
-										
-										statComparisonHTML += "<div class=\"stat-row\">";
-										statComparisonHTML += "<span class=\"stat-label\">Fast:</span> ";
-										statComparisonHTML += "<span class=\"stat-old\">" + oldFast.name + "</span> → ";
-										statComparisonHTML += "<span class=\"stat-new\">" + newFast.name + "</span>";
-										statComparisonHTML += "</div>";
-										
-										statComparisonHTML += "<div class=\"stat-row stat-subrow\">";
-										statComparisonHTML += "<span class=\"stat-old\">" + oldEPT + " EPT, " + oldDPT + " DPT</span> → ";
-										statComparisonHTML += "<span class=\"stat-new\">" + newEPT + " EPT, " + newDPT + " DPT</span>";
-										statComparisonHTML += "</div>";
-									}
-									
-									// Grade comparison
-									if (oldStatProd.grade !== newStatProd.grade) {
-										var gradeBetter = newStatProd.grade < oldStatProd.grade;
-										var gradeClass = gradeBetter ? "positive" : "negative";
-										statComparisonHTML += "<div class=\"stat-row\">";
-										statComparisonHTML += "<span class=\"stat-label\">Grade:</span> ";
-										statComparisonHTML += "<span class=\"grade-badge-mini old\">" + oldStatProd.grade + "</span> → ";
-										statComparisonHTML += "<span class=\"grade-badge-mini new " + gradeClass + "\">" + newStatProd.grade + "</span>";
-										statComparisonHTML += "</div>";
-									}
-									
-									statComparisonHTML += "</div>";
-								}
-							} catch (e) {
-								console.log("Error building stat comparison:", e);
-							}
-						}
 					}
 
 					var recordDisplay = isCompositionBased ? "" : "<div class=\"record\">"+wins+"-"+losses+"</div>";
-					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + replacementInfo + statComparisonHTML + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					$row = $("<tr><th class=\"name\" title=\"" + scoreTooltip + "\"><b>"+(count+1)+". "+pokemon.speciesName+recordDisplay + replacementInfo + enhancedInfo + "<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
 
 					// Only show matchup cells if we have matchup data
 					if (!isCompositionBased && r.matchups && r.matchups.length > 0) {
@@ -1239,224 +1173,83 @@ var InterfaceMaster = (function () {
 							$row.append($cell);
 						}
 					} else if (isCompositionBased) {
-						// For composition-based alternatives, show matchup cells like the old design
-						// Generate matchups if they don't exist
-						if (!r.matchups || r.matchups.length === 0) {
-							r.matchups = [];
-							for (var n = 0; n < counterTeam.length; n++) {
-								var threat = counterTeam[n];
-								
-								if (!baitShields) {
-									pokemon.isCustom = true;
-									pokemon.baitShields = 0;
-									threat.isCustom = true;
-									threat.baitShields = 0;
-								}
-								
-								// Simulate the battle
-								battle.setNewPokemon(pokemon, 0, false, "emulate");
-								battle.setNewPokemon(threat, 1, false, "emulate");
-								battle.simulate();
-								
-								// Get the battle rating from the results
-								var battleRatings = battle.getBattleRatings();
-								var rating = battleRatings[0]; // First player's rating
-								
-								r.matchups.push({
-									opponent: threat,
-									rating: rating
-								});
-							}
-						}
-						
-						// Display matchup cells
-						for (var n = 0; n < r.matchups.length; n++) {
-							var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
-							var rating = r.matchups[n].rating;
-
-							$cell.find("a").addClass(battle.getRatingClass(rating));
-
-							if (!baitShields) {
-								pokemon.isCustom = true;
-								pokemon.baitShields = 0;
-								r.matchups[n].opponent.isCustom = true;
-								r.matchups[n].opponent.baitShields = 0;
-							}
-
-							var pokeStr = pokemon.generateURLPokeStr();
-							var moveStr = pokemon.generateURLMoveStr();
-							var opPokeStr = r.matchups[n].opponent.generateURLPokeStr();
-							var opMoveStr = r.matchups[n].opponent.generateURLMoveStr();
-							var shieldStr = shieldCount + "" + shieldCount;
-							var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
-							$cell.find("a").attr("href", battleLink);
-
-							$row.append($cell);
-						}
+					// For composition-based alternatives, show detailed breakdown in middle section
+					var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
+					
+					// Get current weights to show what factors mattered
+					var weights = self.getEnhancedWeights();
+					
+					// Build detailed breakdown showing each factor's contribution
+					var detailsHTML = "<div class=\"composition-details\">";
+					
+					// Threat Coverage (always show if weight > 0)
+					if (weights.threatCoverage > 0 && r.threatCoverage !== undefined) {
+						var threatScore = r.threatCoverage.toFixed(1);
+						var threatPct = (weights.threatCoverage * 100).toFixed(0);
+						var threatBarWidth = Math.min(100, Math.max(0, (r.threatCoverage / 70) * 100)); // Scale to 70% max for visual
+						var threatClass = r.threatCoverage >= 60 ? "excellent" : (r.threatCoverage >= 55 ? "good" : (r.threatCoverage >= 52 ? "marginal" : "poor"));
+						var threatTooltip = "Average battle rating against your identified threats in 1v1 shield scenarios. Higher = better matchups. Weighted at " + threatPct + "% in final score.";
+						detailsHTML += "<div class=\"factor-row\" title=\"" + threatTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Threat Coverage (" + threatPct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + threatClass + "\" style=\"width: " + threatBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value\">" + threatScore + "%</span>";
+						detailsHTML += "</div>";
 					}
 					
-					// Add old colspan summary section that was removed - keeping it for reference but not displaying
-					if (false && isCompositionBased) {
-						// For composition-based alternatives, show detailed breakdown in middle section
-						var $summaryCell = $("<td colspan=\"" + (counterTeam.length) + "\" class=\"composition-summary\">");
+					// Bulk Improvement
+					if (weights.bulkImprovement > 0 && r.improvements && r.improvements.bulkDelta !== undefined) {
+						var bulkPct = (weights.bulkImprovement * 100).toFixed(0);
+						var bulkValue = r.improvements.bulkDelta.toFixed(1);
+						var bulkClass = r.improvements.bulkDelta > 0 ? "positive" : (r.improvements.bulkDelta < 0 ? "negative" : "neutral");
+						var bulkTooltip = "Change in team's Defense × HP stat product. Great League benchmark: 22,000 | Ultra League: 35,000. Higher bulk = better survivability and shield pressure. Weighted at " + bulkPct + "%.";
 						
-						// Get current weights to show what factors mattered
-						var weights = self.getEnhancedWeights();
+						// Scale bulk to a reasonable bar range (-5000 to +5000)
+						var bulkBarWidth = Math.min(100, Math.abs(r.improvements.bulkDelta) / 50); // Scale for visual
+						var bulkBarClass = r.improvements.bulkDelta > 1000 ? "excellent" : (r.improvements.bulkDelta > 0 ? "good" : (r.improvements.bulkDelta > -1000 ? "marginal" : "poor"));
 						
-						// Build detailed breakdown showing each factor's contribution
-						var detailsHTML = "<div class=\"composition-details\">";
+						detailsHTML += "<div class=\"factor-row\" title=\"" + bulkTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Bulk (" + bulkPct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + bulkBarClass + "\" style=\"width: " + bulkBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value " + bulkClass + "\">" + (r.improvements.bulkDelta > 0 ? "+" : "") + bulkValue + "</span>";
+						detailsHTML += "</div>";
+					}
 						
-						// Add comparison stats if this replaces a team member
-						if (r.replacedPokemon) {
-							var oldPoke = r.replacedPokemon;
-							var newPoke = pokemon;
-							
-							try {
-								// Calculate stats for both
-								var oldStatProd = oldPoke.calculateStatProduct(battle.getCP());
-								var newStatProd = newPoke.calculateStatProduct(battle.getCP());
-								
-								if (oldStatProd && newStatProd && oldStatProd.product !== undefined && newStatProd.product !== undefined) {
-									var oldBulk = oldStatProd.product;
-									var newBulk = newStatProd.product;
-									var bulkDiff = newBulk - oldBulk;
-									var bulkDiffClass = bulkDiff > 0 ? "positive" : (bulkDiff < 0 ? "negative" : "neutral");
-									var bulkChangePercent = ((bulkDiff / oldBulk) * 100).toFixed(1);
-									
-									// Get fast move stats
-									var oldFast = oldPoke.fastMove;
-									var newFast = newPoke.fastMove;
-									
-									// Calculate EPT/DPT comparison
-									var oldEPT = oldFast ? oldFast.energyGain / oldFast.cooldown : 0;
-									var newEPT = newFast ? newFast.energyGain / newFast.cooldown : 0;
-									var oldDPT = oldFast ? oldFast.power / oldFast.cooldown : 0;
-									var newDPT = newFast ? newFast.power / newFast.cooldown : 0;
-									
-									// Grade comparison
-									var gradeBetter = newStatProd.grade < oldStatProd.grade; // A < B means better
-									var gradeClass = gradeBetter ? "positive" : (newStatProd.grade > oldStatProd.grade ? "negative" : "neutral");
-									
-									detailsHTML += "<div class=\"stat-comparison-box\">";
-									detailsHTML += "<div class=\"comparison-title\">Replacing: <strong>" + oldPoke.speciesName + "</strong></div>";
-									
-									// Bulk comparison with visual bar
-									var maxBulk = Math.max(oldBulk, newBulk);
-									var oldBulkBar = (oldBulk / maxBulk * 100).toFixed(1);
-									var newBulkBar = (newBulk / maxBulk * 100).toFixed(1);
-									detailsHTML += "<div class=\"stat-compare-item\">";
-									detailsHTML += "<span class=\"stat-compare-label\">Bulk:</span>";
-									detailsHTML += "<div class=\"stat-bars\">";
-									detailsHTML += "<div class=\"stat-bar-row\"><span class=\"bar-label old\">Old:</span><div class=\"stat-bar-bg\"><div class=\"stat-bar old\" style=\"width:" + oldBulkBar + "%\"></div></div><span class=\"bar-value\">" + oldBulk.toFixed(0) + "</span></div>";
-									detailsHTML += "<div class=\"stat-bar-row\"><span class=\"bar-label new\">New:</span><div class=\"stat-bar-bg\"><div class=\"stat-bar new " + bulkDiffClass + "\" style=\"width:" + newBulkBar + "%\"></div></div><span class=\"bar-value " + bulkDiffClass + "\">" + newBulk.toFixed(0) + " <strong>(" + (bulkDiff > 0 ? "+" : "") + bulkChangePercent + "%)</strong></span></div>";
-									detailsHTML += "</div></div>";
-									
-									// Fast move comparison
-									if (oldFast && newFast) {
-										detailsHTML += "<div class=\"stat-compare-item\">";
-										detailsHTML += "<span class=\"stat-compare-label\">Fast Move:</span>";
-										detailsHTML += "<div class=\"move-comparison\">";
-										detailsHTML += "<div class=\"move-row old\"><strong>" + oldFast.name + "</strong>: " + oldEPT.toFixed(2) + " EPT, " + oldDPT.toFixed(2) + " DPT</div>";
-										detailsHTML += "<div class=\"move-row new\"><strong>" + newFast.name + "</strong>: " + newEPT.toFixed(2) + " EPT, " + newDPT.toFixed(2) + " DPT</div>";
-										detailsHTML += "</div></div>";
-									}
-									
-									// Grade comparison with visual
-									detailsHTML += "<div class=\"stat-compare-item\">";
-									detailsHTML += "<span class=\"stat-compare-label\">Grade:</span>";
-									detailsHTML += "<div class=\"grade-comparison\">";
-									detailsHTML += "<span class=\"grade-badge old grade-" + oldStatProd.grade + "\">" + oldStatProd.grade + "</span>";
-									detailsHTML += "<span class=\"arrow\">→</span>";
-									detailsHTML += "<span class=\"grade-badge new grade-" + newStatProd.grade + " " + gradeClass + "\">" + newStatProd.grade + "</span>";
-									detailsHTML += "</div></div>";
-									
-									detailsHTML += "</div>"; // close stat-comparison-box
-									console.log("Stat comparison HTML generated for", newPoke.speciesName, "vs", oldPoke.speciesName);
-								}
-							} catch (e) {
-								console.log("Error calculating comparison stats:", e);
-								console.log("oldStatProd:", oldStatProd);
-								console.log("newStatProd:", newStatProd);
-								// If comparison fails, just skip it and continue with normal display
-							}
-						} else {
-							console.log("No replacedPokemon found in result");
-						}
+					
+					// EPT/DPT Balance
+					if (weights.eptDptBalance > 0 && r.improvements && r.improvements.eptDptDelta !== undefined) {
+						var eptPct = (weights.eptDptBalance * 100).toFixed(0);
+						var eptValue = r.improvements.eptDptDelta.toFixed(1);
+						var eptClass = r.improvements.eptDptDelta > 0 ? "positive" : (r.improvements.eptDptDelta < 0 ? "negative" : "neutral");
+						var eptTooltip = "Change in fast move effectiveness. Target thresholds: EPT (Energy Per Turn) ≥3.5, DPT (Damage Per Turn) ≥3.0. Ensures good energy generation and fast move pressure. Weighted at " + eptPct + "%.";
 						
-						// Add threat matchup preview (top 5 threats) - just show links, don't simulate
-						if (counterTeam && counterTeam.length > 0) {
-							detailsHTML += "<div class=\"threat-matchups-preview\">";
-							detailsHTML += "<div class=\"threat-matchups-title\">Check Matchups vs Top Threats:</div>";
-							detailsHTML += "<div class=\"threat-matchup-links\">";
-							
-							var previewCount = Math.min(5, counterTeam.length);
-							for (var tm = 0; tm < previewCount; tm++) {
-								try {
-									var threat = counterTeam[tm];
-									
-									if (!threat || !pokemon) continue;
-									
-									// Create battle link without simulating
-									if (!baitShields) {
-										pokemon.isCustom = true;
-										pokemon.baitShields = 0;
-										threat.isCustom = true;
-										threat.baitShields = 0;
-									}
-									
-									var pokeStr = pokemon.generateURLPokeStr();
-									var moveStr = pokemon.generateURLMoveStr();
-									var opPokeStr = threat.generateURLPokeStr();
-									var opMoveStr = threat.generateURLMoveStr();
-									var shieldStr = shieldCount + "" + shieldCount;
-									var battleLink = host + "battle/" + battle.getCP(true) + "/" + pokeStr + "/" + opPokeStr + "/" + shieldStr + "/" + moveStr + "/" + opMoveStr + "/";
-									
-									detailsHTML += "<a class=\"threat-link\" href=\"" + battleLink + "\" target=\"_blank\" title=\"Battle vs " + threat.speciesName + "\">" + threat.speciesName + "</a>";
-									if (tm < previewCount - 1) {
-										detailsHTML += "<span class=\"separator\">•</span>";
-									}
-								} catch (e) {
-									console.log("Error creating threat link:", e);
-								}
-							}
-							
-							detailsHTML += "</div></div>";
-						}
+						// Scale EPT/DPT to reasonable range (-20 to +20)
+						var eptBarWidth = Math.min(100, Math.abs(r.improvements.eptDptDelta) / 0.2); // Scale for visual
+						var eptBarClass = r.improvements.eptDptDelta > 10 ? "excellent" : (r.improvements.eptDptDelta > 0 ? "good" : (r.improvements.eptDptDelta > -10 ? "marginal" : "poor"));
 						
-						// Threat Coverage (always show if weight > 0)
-						if (weights.threatCoverage > 0 && r.threatCoverage !== undefined) {
-							var threatScore = r.threatCoverage.toFixed(1);
-							var threatPct = (weights.threatCoverage * 100).toFixed(0);
-							var threatTooltip = "Average battle rating against your identified threats in 1v1 shield scenarios. Higher = better matchups. Weighted at " + threatPct + "% in final score.";
-							detailsHTML += "<div class=\"factor-row\" title=\"" + threatTooltip + "\"><span class=\"factor-name\">Threat Coverage (" + threatPct + "%):</span> <span class=\"factor-value\">" + threatScore + "/100</span></div>";
-						}
+						detailsHTML += "<div class=\"factor-row\" title=\"" + eptTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Energy Balance (" + eptPct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + eptBarClass + "\" style=\"width: " + eptBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value " + eptClass + "\">" + (r.improvements.eptDptDelta > 0 ? "+" : "") + eptValue + "</span>";
+						detailsHTML += "</div>";
+					}
+					
+					// Role Completion
+					if (weights.roleCompletion > 0 && r.improvements && r.improvements.roleDelta !== undefined) {
+						var rolePct = (weights.roleCompletion * 100).toFixed(0);
+						var roleValue = r.improvements.roleDelta.toFixed(1);
+						var roleClass = r.improvements.roleDelta > 0 ? "positive" : (r.improvements.roleDelta < 0 ? "negative" : "neutral");
+						var roleTooltip = "Change in team role balance. Ideal teams have: Lead (high consistency), Safe Swap (counters threats), Closer (sweep potential). Missing roles create strategic vulnerabilities. Weighted at " + rolePct + "%.";
 						
-						// Bulk Improvement
-						if (weights.bulkImprovement > 0 && r.improvements && r.improvements.bulkDelta !== undefined) {
-							var bulkPct = (weights.bulkImprovement * 100).toFixed(0);
-							var bulkValue = r.improvements.bulkDelta.toFixed(1);
-							var bulkClass = r.improvements.bulkDelta > 0 ? "positive" : (r.improvements.bulkDelta < 0 ? "negative" : "neutral");
-							var bulkTooltip = "Change in team's Defense × HP stat product. Great League benchmark: 22,000 | Ultra League: 35,000. Higher bulk = better survivability and shield pressure. Weighted at " + bulkPct + "%.";
-							detailsHTML += "<div class=\"factor-row\" title=\"" + bulkTooltip + "\"><span class=\"factor-name\">Bulk (" + bulkPct + "%):</span> <span class=\"factor-value " + bulkClass + "\">" + (r.improvements.bulkDelta > 0 ? "+" : "") + bulkValue + "</span></div>";
-						}
+						// Scale role to reasonable range (-50 to +50)
+						var roleBarWidth = Math.min(100, Math.abs(r.improvements.roleDelta) / 0.5); // Scale for visual
+						var roleBarClass = r.improvements.roleDelta > 15 ? "excellent" : (r.improvements.roleDelta > 0 ? "good" : (r.improvements.roleDelta > -15 ? "marginal" : "poor"));
 						
-						// EPT/DPT Balance
-						if (weights.eptDptBalance > 0 && r.improvements && r.improvements.eptDptDelta !== undefined) {
-							var eptPct = (weights.eptDptBalance * 100).toFixed(0);
-							var eptValue = r.improvements.eptDptDelta.toFixed(1);
-							var eptClass = r.improvements.eptDptDelta > 0 ? "positive" : (r.improvements.eptDptDelta < 0 ? "negative" : "neutral");
-							var eptTooltip = "Change in fast move effectiveness. Target thresholds: EPT (Energy Per Turn) ≥3.5, DPT (Damage Per Turn) ≥3.0. Ensures good energy generation and fast move pressure. Weighted at " + eptPct + "%.";
-							detailsHTML += "<div class=\"factor-row\" title=\"" + eptTooltip + "\"><span class=\"factor-name\">Energy Balance (" + eptPct + "%):</span> <span class=\"factor-value " + eptClass + "\">" + (r.improvements.eptDptDelta > 0 ? "+" : "") + eptValue + "</span></div>";
-						}
-						
-						// Role Completion
-						if (weights.roleCompletion > 0 && r.improvements && r.improvements.roleDelta !== undefined) {
-							var rolePct = (weights.roleCompletion * 100).toFixed(0);
-							var roleValue = r.improvements.roleDelta.toFixed(1);
-							var roleClass = r.improvements.roleDelta > 0 ? "positive" : (r.improvements.roleDelta < 0 ? "negative" : "neutral");
-							var roleTooltip = "Change in team role balance. Ideal teams have: Lead (high consistency), Safe Swap (counters threats), Closer (sweep potential). Missing roles create strategic vulnerabilities. Weighted at " + rolePct + "%.";
-							detailsHTML += "<div class=\"factor-row\" title=\"" + roleTooltip + "\"><span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span> <span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span></div>";
-						}
+						detailsHTML += "<div class=\"factor-row\" title=\"" + roleTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Role Coverage (" + rolePct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + roleBarClass + "\" style=\"width: " + roleBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value " + roleClass + "\">" + (r.improvements.roleDelta > 0 ? "+" : "") + roleValue + "</span>";
+						detailsHTML += "</div>";
+					}
 						
 					// Type Coverage
 					if (weights.typeCoverage > 0 && r.improvements && r.improvements.typeCoverageDelta !== undefined) {
@@ -1464,7 +1257,16 @@ var InterfaceMaster = (function () {
 						var covValue = r.improvements.typeCoverageDelta.toFixed(1);
 						var covClass = r.improvements.typeCoverageDelta > 0 ? "positive" : (r.improvements.typeCoverageDelta < 0 ? "negative" : "neutral");
 						var covTooltip = "Change in type synergy and weakness distribution. Penalties for: shared weaknesses (especially Fighting/Rock/Steel/Fire), removing unique types, creating type redundancy. Weighted at " + covPct + "%.";
-						detailsHTML += "<div class=\"factor-row\" title=\"" + covTooltip + "\"><span class=\"factor-name\">Type Synergy (" + covPct + "%):</span> <span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span></div>";
+						
+						// Scale type coverage to reasonable range (-30 to +30)
+						var covBarWidth = Math.min(100, Math.abs(r.improvements.typeCoverageDelta) / 0.3); // Scale for visual
+						var covBarClass = r.improvements.typeCoverageDelta > 10 ? "excellent" : (r.improvements.typeCoverageDelta > 0 ? "good" : (r.improvements.typeCoverageDelta > -10 ? "marginal" : "poor"));
+						
+						detailsHTML += "<div class=\"factor-row\" title=\"" + covTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Type Synergy (" + covPct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + covBarClass + "\" style=\"width: " + covBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value " + covClass + "\">" + (r.improvements.typeCoverageDelta > 0 ? "+" : "") + covValue + "</span>";
+						detailsHTML += "</div>";
 					}
 					
 					// Meta Relevance
@@ -1478,16 +1280,20 @@ var InterfaceMaster = (function () {
 						else if (r.improvements.metaRelevance >= 1.15) rankingBonus = " (Top 50)";
 						else if (r.improvements.metaRelevance >= 1.05) rankingBonus = " (Top 100)";
 						var metaTooltip = "Meta relevance multiplier based on current rankings position. Top 10: ×1.5, Top 25: ×1.3, Top 50: ×1.15, Top 100: ×1.05. Baseline: ×1.0. Weighted at " + metaPct + "%.";
-						detailsHTML += "<div class=\"factor-row\" title=\"" + metaTooltip + "\"><span class=\"factor-name\">Meta Relevance (" + metaPct + "%):</span> <span class=\"factor-value " + metaClass + "\">×" + metaValue + rankingBonus + "</span></div>";
+						
+						// Scale meta relevance to show multiplier (1.0 to 1.8+)
+						var metaBarWidth = Math.min(100, ((r.improvements.metaRelevance - 0.5) / 1.3) * 100); // Scale 0.5-1.8 to 0-100%
+						var metaBarClass = r.improvements.metaRelevance >= 1.5 ? "excellent" : (r.improvements.metaRelevance >= 1.15 ? "good" : (r.improvements.metaRelevance >= 1.0 ? "marginal" : "poor"));
+						
+						detailsHTML += "<div class=\"factor-row\" title=\"" + metaTooltip + "\">";
+						detailsHTML += "<span class=\"factor-name\">Meta Relevance (" + metaPct + "%):</span>";
+						detailsHTML += "<div class=\"factor-bar-container\"><div class=\"factor-bar " + metaBarClass + "\" style=\"width: " + metaBarWidth + "%\"></div></div>";
+						detailsHTML += "<span class=\"factor-value " + metaClass + "\">×" + metaValue + rankingBonus + "</span>";
+						detailsHTML += "</div>";
 					}
 					
 					detailsHTML += "</div>";
-					
-					// Skip the colspan summary - we're showing matchups in individual cells now
-					if (false) {
-						$summaryCell.append(detailsHTML);
-						$row.append($summaryCell);
-					}
+					$summaryCell.append(detailsHTML);						$row.append($summaryCell);
 					}
 					
 					// Add score column

@@ -203,11 +203,46 @@
     background: white;
     border-radius: 3px;
     border-left: 3px solid #dee2e6;
+    gap: 8px;
 }
 
 .factor-name {
     color: #495057;
     font-weight: 500;
+    min-width: 140px;
+    flex-shrink: 0;
+}
+
+.factor-bar-container {
+    flex: 1;
+    height: 18px;
+    background: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+    min-width: 80px;
+}
+
+.factor-bar {
+    height: 100%;
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.factor-bar.excellent {
+    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+}
+
+.factor-bar.good {
+    background: linear-gradient(90deg, #17a2b8 0%, #6610f2 100%);
+}
+
+.factor-bar.marginal {
+    background: linear-gradient(90deg, #ffc107 0%, #fd7e14 100%);
+}
+
+.factor-bar.poor {
+    background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
 }
 
 .factor-value {
@@ -215,6 +250,9 @@
     font-size: 12px;
     padding: 2px 8px;
     border-radius: 3px;
+    min-width: 60px;
+    text-align: right;
+    flex-shrink: 0;
 }
 
 .factor-value.positive {
