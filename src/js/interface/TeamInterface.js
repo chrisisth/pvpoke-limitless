@@ -779,7 +779,7 @@ var InterfaceMaster = (function () {
 						altRankings = self.rankAlternativesByCompositionImprovement(
 							ranker,
 							team, 
-							counterTeam, 
+							calculationCounterTeam, 
 							battle.getCP(), 
 							battle.getCup(), 
 							exclusionList
@@ -1971,8 +1971,8 @@ var InterfaceMaster = (function () {
 					// Evaluate this alternative for ALL team slots (not just the best one)
 					try {
 						for (var slotIndex = 0; slotIndex < currentTeam.length; slotIndex++) {
-							// Use calculationCounterTeam for consistent threat coverage evaluation
-							var evaluation = ranker.evaluateTeamImprovement(pokemon, currentTeam, slotIndex, calculationCounterTeam, cp);
+							// counterTeam parameter now contains calculationCounterTeam for consistent threat coverage
+							var evaluation = ranker.evaluateTeamImprovement(pokemon, currentTeam, slotIndex, counterTeam, cp);
 							
 							if (evaluation && evaluation.compositeScore > 0) {
 								evaluatedAlternatives.push({
