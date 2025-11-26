@@ -29,7 +29,7 @@ require_once 'header.php';
 				</select>
 			</div>
 			<div class="team-option">
-				<h3>Counter Team Size</h3>
+				<h3 class="help" title="Number of threats displayed in the table header. Alternative calculations always use top 30 threats for consistency.">Counter Team Size</h3>
 				<select class="counter-team-size-select">
 					<option value="3">3</option>
 					<option value="4">4</option>

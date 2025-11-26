@@ -458,8 +458,12 @@ var InterfaceMaster = (function () {
 				}
 
 				var i = 0;
+				
+				// Create a separate comprehensive threat list for calculations (always top 30)
+				var calculationCounterTeam = [];
+				var CALCULATION_THREAT_SIZE = 30; // Fixed size for consistent alternative calculations
 
-				while((count < total || counterTeam.length < counterTeamSize)&&(i < counterRankings.length)){
+				while((count < total || counterTeam.length < counterTeamSize || calculationCounterTeam.length < CALCULATION_THREAT_SIZE)&&(i < counterRankings.length)){
 					var r = counterRankings[i];
 
 					// Don't exclude threats that are part of a custom threat list
@@ -489,21 +493,26 @@ var InterfaceMaster = (function () {
 
 					var pokemon = r.pokemon;
 
-					// Push to counter team
+					// Push to both display counterTeam and calculation counterTeam
+					let similarCounterExists = counterTeam.some(counter => {
+						let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
+						return similarityScore == -1 || similarityScore >= 1000;
+					});
+
+					let customThreatsListLength = multiSelectors[1].getPokemonList().length;
+					
+					// Push to display counterTeam (limited by counterTeamSize)
 					if(counterTeam.length < counterTeamSize){
-						let similarCounterExists = counterTeam.some(counter => {
-							let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
-
-							return similarityScore == -1 || similarityScore >= 1000;
-						});
-
-						//let isMeta = (metaGroup.some(poke => poke.speciesId.replace("_shadow", "") == pokemon.speciesId.replace("_shadow", "")));
-
-						let customThreatsListLength = multiSelectors[1].getPokemonList().length;
 						if(! similarCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
 							counterTeam.push(pokemon);
-
 							avgThreatScore += r.rating;
+						}
+					}
+					
+					// Push to calculation counterTeam (fixed at 30 for consistency)
+					if(calculationCounterTeam.length < CALCULATION_THREAT_SIZE){
+						if(! similarCounterExists || (customThreatsListLength != 0 && customThreatsListLength <= 12)){
+							calculationCounterTeam.push(pokemon);
 						}
 					}
 
@@ -1962,7 +1971,8 @@ var InterfaceMaster = (function () {
 					// Evaluate this alternative for ALL team slots (not just the best one)
 					try {
 						for (var slotIndex = 0; slotIndex < currentTeam.length; slotIndex++) {
-							var evaluation = ranker.evaluateTeamImprovement(pokemon, currentTeam, slotIndex, counterTeam, cp);
+							// Use calculationCounterTeam for consistent threat coverage evaluation
+							var evaluation = ranker.evaluateTeamImprovement(pokemon, currentTeam, slotIndex, calculationCounterTeam, cp);
 							
 							if (evaluation && evaluation.compositeScore > 0) {
 								evaluatedAlternatives.push({
