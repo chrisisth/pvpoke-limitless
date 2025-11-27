@@ -682,6 +682,12 @@ var InterfaceMaster = (function () {
 				return metaGroup;
 			}
 
+			// Return all displayed rankings (for export/save)
+			
+			this.getRankingsExport = function(){
+				return metaGroupExport;
+			}
+
 			// Open and scroll to a specified Pokemon
 
 			this.jumpToPokemon = function(id){
