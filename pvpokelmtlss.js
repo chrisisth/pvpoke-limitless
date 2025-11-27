@@ -96,6 +96,7 @@
 
 
   const CDN = 'https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/master/src/js/interface';
+  const CDN_BATTLE = 'https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/master/src/js/battle';
   const MODULES = [
     {
       name: 'Pokebox.js',
@@ -114,6 +115,27 @@
       url: `${CDN}/RankingInterface.js`,
       expectGlobal: 'RankingInterface',
       verify: () => typeof uw.RankingInterface === 'function' || !!uw.InterfaceMaster,
+    },
+  ];
+  
+  const TEAM_BUILDER_MODULES = [
+    {
+      name: 'TeamCompositionAnalyzer.js',
+      url: `${CDN_BATTLE}/TeamCompositionAnalyzer.js`,
+      expectGlobal: 'TeamCompositionAnalyzer',
+      verify: () => typeof uw.TeamCompositionAnalyzer === 'function',
+    },
+    {
+      name: 'TeamRanker.js',
+      url: `${CDN_BATTLE}/rankers/TeamRanker.js`,
+      expectGlobal: null, // TeamRanker is not a global, it's loaded as part of the system
+      verify: () => true, // Just check it loaded
+    },
+    {
+      name: 'TeamInterface.js',
+      url: `${CDN}/TeamInterface.js`,
+      expectGlobal: 'TeamInterface',
+      verify: () => typeof uw.TeamInterface === 'function',
     },
   ];
 
@@ -148,21 +170,73 @@
       return err('Benötigte Globals fehlen für SaveRankingButton');
     }
 
-    const customMetaSelector = new PokeMultiSelect($('.poke.multi').eq(0));
-    const data = GameMaster.getInstance().data;
-    customMetaSelector.init(data.pokemon, new Battle());
-    customMetaSelector.setPokemonList(InterfaceMaster.getInstance().getMetaGroup());
+    try {
+      // Get current rankings data
+      const currentMeta = InterfaceMaster.getInstance().getMetaGroup();
+      
+      if (!currentMeta || currentMeta.length === 0) {
+        warn('Keine Rankings zum Speichern gefunden');
+        return;
+      }
 
-    let cup = document.getElementsByClassName('format-select')[0];
-    cup = cup.options[cup.selectedIndex];
-    const cp = cup.value;
-    const cupGroup = cup.getAttribute('meta-group');
+      // Get format information
+      const formatSelect = document.querySelector('.format-select');
+      if (!formatSelect) {
+        err('Format-Select nicht gefunden');
+        return;
+      }
+      
+      const selectedOption = formatSelect.options[formatSelect.selectedIndex];
+      const cp = selectedOption.value;
+      const cupGroup = selectedOption.getAttribute('meta-group') || '';
 
-    let category = document.getElementsByClassName('category-select')[0];
-    category = category.options[category.selectedIndex];
-    const categoryValue = category.value;
+      // Get category
+      const categorySelect = document.querySelector('.category-select');
+      const categoryValue = categorySelect ? categorySelect.options[categorySelect.selectedIndex].value : '';
 
-    customMetaSelector.saveCustomList(cp + cupGroup + categoryValue, false);
+      // Create unique key for this ranking
+      const saveKey = `${cp}${cupGroup}${categoryValue}`;
+      
+      log('Speichere Rankings:', {
+        cp: cp,
+        cupGroup: cupGroup,
+        category: categoryValue,
+        pokemonCount: currentMeta.length,
+        key: saveKey
+      });
+
+      // Check if multi-select container exists, if not create it
+      let multiSelectContainer = $('.custom-ranking-selector');
+      if (multiSelectContainer.length === 0) {
+        // Create container for the multi-select
+        multiSelectContainer = $('<div class="poke multi custom-ranking-selector" style="margin: 20px 0;"></div>');
+        // Insert it before the rankings table or after the controls
+        const insertPoint = $('.rankings-container, .format-select-container').first();
+        if (insertPoint.length > 0) {
+          insertPoint.after(multiSelectContainer);
+        } else {
+          $('.main').prepend(multiSelectContainer);
+        }
+      }
+
+      // Initialize PokeMultiSelect with the container
+      const customMetaSelector = new PokeMultiSelect(multiSelectContainer);
+      const data = GameMaster.getInstance().data;
+      customMetaSelector.init(data.pokemon, new Battle());
+      
+      // Set the current meta group
+      customMetaSelector.setPokemonList(currentMeta);
+      
+      // Save to localStorage
+      customMetaSelector.saveCustomList(saveKey, false);
+      
+      log(`✓ ${currentMeta.length} Pokemon gespeichert unter Schlüssel: ${saveKey}`);
+      alert(`Rankings gespeichert!\n${currentMeta.length} Pokemon unter "${saveKey}"`);
+      
+    } catch (e) {
+      err('Fehler beim Speichern:', e);
+      alert('Fehler beim Speichern der Rankings. Siehe Konsole für Details.');
+    }
   }
 
 
@@ -224,8 +298,12 @@
   async function initTeamBuilder() {
     log('Init Team Builder');
     await ensurePvpokeGlobals();
-    // Pokebox + PokeMultiSelect
+    
+    // Load Pokebox + PokeMultiSelect first
     await loadCustomModulesSequential(MODULES.slice(0, 2));
+    
+    // Then load team-builder specific modules
+    await loadCustomModulesSequential(TEAM_BUILDER_MODULES);
 
     await whenReady;
 
