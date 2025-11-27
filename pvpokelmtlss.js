@@ -165,29 +165,61 @@
     const GameMaster = uw.GameMaster;
     const InterfaceMaster = uw.InterfaceMaster;
     const Battle = uw.Battle;
+    const Pokemon = uw.Pokemon;
 
-    if (!($ && PokeMultiSelect && GameMaster && InterfaceMaster && Battle)) {
+    if (!($ && PokeMultiSelect && GameMaster && InterfaceMaster && Battle && Pokemon)) {
       return err('Benötigte Globals fehlen für SaveRankingButton');
     }
 
     try {
-      // Get current rankings data
-      const currentMeta = InterfaceMaster.getInstance().getMetaGroup();
+      // Get current rankings data from visible rank elements
+      const rankElements = $('.rankings-container .rank');
       
-      if (!currentMeta || currentMeta.length === 0) {
+      if (!rankElements || rankElements.length === 0) {
         warn('Keine Rankings zum Speichern gefunden');
         return;
       }
-
-      // Get format information
+      
+      // Build Pokemon list from displayed rankings
+      const currentMeta = [];
+      const battle = new Battle();
+      
+      // Get current format info for Battle setup
       const formatSelect = document.querySelector('.format-select');
       if (!formatSelect) {
         err('Format-Select nicht gefunden');
         return;
       }
+      const cp = formatSelect.options[formatSelect.selectedIndex].value;
+      battle.setCP(cp);
       
+      // Extract Pokemon from each rank element
+      rankElements.each(function() {
+        const speciesId = $(this).attr('data');
+        if (!speciesId) return;
+        
+        const pokemon = new Pokemon(speciesId, 0, battle);
+        pokemon.initialize(true);
+        
+        // Get moveset from data attributes or visible content
+        const fastMove = $(this).find('.move-list .move.fast').first().attr('move');
+        const chargedMove1 = $(this).find('.move-list .move.charged').eq(0).attr('move');
+        const chargedMove2 = $(this).find('.move-list .move.charged').eq(1).attr('move');
+        
+        if (fastMove) pokemon.selectMove("fast", fastMove);
+        if (chargedMove1) pokemon.selectMove("charged", chargedMove1, 0);
+        if (chargedMove2) pokemon.selectMove("charged", chargedMove2, 1);
+        
+        currentMeta.push(pokemon);
+      });
+      
+      if (currentMeta.length === 0) {
+        warn('Keine Pokemon aus Rankings extrahiert');
+        return;
+      }
+
+      // Get format information for save key
       const selectedOption = formatSelect.options[formatSelect.selectedIndex];
-      const cp = selectedOption.value;
       const cupGroup = selectedOption.getAttribute('meta-group') || '';
 
       // Get category
