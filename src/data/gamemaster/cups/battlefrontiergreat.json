@@ -2,19 +2,19 @@
     "name": "battlefrontiergreat",
     "title": "Battle Frontier (Great)",
     "include": [],
-    "exclude": [],
+    "exclude": [{
+        "filterType": "tag",
+        "values": ["mega"]
+    }],
     "tierRules": {
-        "max": 11,
+        "max": 2,
         "floor": 0,
         "tiers": [{
-            "points": 6,
-            "pokemon": ["annihilape", "azumarill", "carbink", "gligar", "lanturn", "lickitung", "registeel", "sableye_mega", "skarmory"]
-        }, {
-            "points": 4,
-            "pokemon": ["altaria", "bastiodon", "charjabug", "clodsire", "cresselia", "deoxys_defense", "dewgong", "feraligatr", "giratina_origin", "mandibuzz", "mantine", "medicham", "ninetales_alolan", "poliwrath", "quagsire", "sableye", "sandslash_alolan", "stunfisk_galarian", "swampert", "talonflame", "toxapex", "umbreon", "vigoroth", "whiscash", "wigglytuff"]
+            "points": 2,
+            "pokemon": ["cradily","furret"]
         }, {
             "points": 1,
-            "pokemon": ["altaria_mega", "charizard", "clefable", "diggersby", "dragonair", "dragonite", "empoleon", "froslass", "goodra", "greedent", "guzzlord", "heatran", "jellicent", "pelipper", "pidgeot", "serperior", "skeledirge", "steelix", "steelix_mega", "swampert_mega", "tapu_fini", "venusaur", "venusaur_mega"]
+            "pokemon": ["altaria","annihilape","azumarill","corsola_galarian","corviknight","empoleon","florges","gastrodon","jellicent","marowak","primeape","sableye","scizor","talonflame","wigglytuff", "stunfisk"]
         }]
     },
     "allowSameSpecies": true

@@ -14,21 +14,36 @@ $formats = array (
   ),
   1 => 
   array (
-    'title' => 'Scroll Cup',
-    'cup' => 'scroll',
+    'title' => 'Sunshine Cup',
+    'cup' => 'sunshine',
     'cp' => 1500,
-    'meta' => 'scroll',
+    'meta' => 'sunshine',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Water-, Fighting-, and Dark-type Pokémon are eligible.',
-      2 => 'The following Pokémon will not be allowed: Primarina',
+      1 => 'Only Normal-, Fire-, Grass-, and Ground-type Pokémon are eligible.',
+      2 => 'The following Pokémon will not be allowed: Charizard',
     ),
   ),
   2 => 
+  array (
+    'title' => 'Retro Cup',
+    'cup' => 'retro',
+    'cp' => 1500,
+    'meta' => 'retro',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Dark-, Steel-, and Fairy-type Pokémon are not eligible.',
+    ),
+  ),
+  3 => 
   array (
     'title' => 'EUIC 2026 Championship Series Cup',
     'cup' => 'euic2026',
@@ -38,27 +53,38 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  3 => 
-  array (
-    'title' => 'Battle Frontier (Calamity)',
-    'cup' => 'calamity',
-    'cp' => 1500,
-    'meta' => 'calamity',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-  ),
   4 => 
   array (
-    'title' => 'Battle Frontier (Ultra)',
-    'cup' => 'battlefrontierultra',
-    'cp' => 2500,
-    'meta' => 'ultra',
+    'title' => 'Battle Frontier (Majestic)',
+    'cup' => 'majestic',
+    'cp' => 1500,
+    'meta' => 'majestic',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
   ),
   5 => 
+  array (
+    'title' => 'Battle Frontier (Crucible)',
+    'cup' => 'crucible',
+    'cp' => 2500,
+    'meta' => 'crucible',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  6 => 
+  array (
+    'title' => 'Battle Frontier (Great)',
+    'cup' => 'battlefrontiergreat',
+    'cp' => 1500,
+    'meta' => 'great',
+    'showCup' => false,
+    'showFormat' => true,
+    'showMeta' => false,
+    'hideRankings' => true,
+  ),
+  7 => 
   array (
     'title' => 'Battle Frontier (Master)',
     'cup' => 'battlefrontiermaster',
@@ -68,27 +94,27 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  6 => 
-  array (
-    'title' => 'Devon Metamorphosis Cup',
-    'cup' => 'metamorphosis',
-    'cp' => 1500,
-    'meta' => 'metamorphosis',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-  ),
-  7 => 
-  array (
-    'title' => 'Gymbreakers Pillar Cup Remix',
-    'cup' => 'pillar3',
-    'cp' => 1500,
-    'meta' => 'pillar3',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-  ),
   8 => 
+  array (
+    'title' => 'Devon Nettle Cup',
+    'cup' => 'nettle',
+    'cp' => 1500,
+    'meta' => 'nettle',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  9 => 
+  array (
+    'title' => 'Gymbreakers LAIC 2025 Remix',
+    'cup' => 'laic2025remix',
+    'cp' => 1500,
+    'meta' => 'laic2025remix',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  10 => 
   array (
     'title' => 'Zygarden Chrono Meta',
     'cup' => 'chrono',
@@ -98,7 +124,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  9 => 
+  11 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -108,7 +134,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  10 => 
+  12 => 
   array (
     'title' => 'Catch Cup',
     'cup' => 'catch',
@@ -118,7 +144,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  11 => 
+  13 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',

@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-12-03 22:27:25",
+    "timestamp": "2026-01-06 16:06:24",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -115,22 +115,23 @@
             "name": "battlefrontiergreat",
             "title": "Battle Frontier (Great)",
             "include": [],
-            "exclude": [],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ],
             "tierRules": {
-                "max": 11,
+                "max": 2,
                 "floor": 0,
                 "tiers": [
                     {
-                        "points": 6,
-                        "pokemon": ["annihilape", "azumarill", "carbink", "gligar", "lanturn", "lickitung", "registeel", "sableye_mega", "skarmory"]
-                    },
-                    {
-                        "points": 4,
-                        "pokemon": ["altaria", "bastiodon", "charjabug", "clodsire", "cresselia", "deoxys_defense", "dewgong", "feraligatr", "giratina_origin", "mandibuzz", "mantine", "medicham", "ninetales_alolan", "poliwrath", "quagsire", "sableye", "sandslash_alolan", "stunfisk_galarian", "swampert", "talonflame", "toxapex", "umbreon", "vigoroth", "whiscash", "wigglytuff"]
+                        "points": 2,
+                        "pokemon": ["cradily", "furret"]
                     },
                     {
                         "points": 1,
-                        "pokemon": ["altaria_mega", "charizard", "clefable", "diggersby", "dragonair", "dragonite", "empoleon", "froslass", "goodra", "greedent", "guzzlord", "heatran", "jellicent", "pelipper", "pidgeot", "serperior", "skeledirge", "steelix", "steelix_mega", "swampert_mega", "tapu_fini", "venusaur", "venusaur_mega"]
+                        "pokemon": ["altaria", "annihilape", "azumarill", "corsola_galarian", "corviknight", "empoleon", "florges", "gastrodon", "jellicent", "marowak", "primeape", "sableye", "scizor", "talonflame", "wigglytuff", "stunfisk"]
                     }
                 ]
             },
@@ -143,7 +144,7 @@
             "exclude": [
                 {
                     "filterType": "id",
-                    "values": ["eternatus", "groudon_primal", "gyarados_mega", "kyogre_primal", "latios_mega", "latias_mega", "rayquaza_mega", "zacian_crowned_sword", "zamazenta_crowned_shield", "metagross_mega", "dialga_origin", "palkia_origin", "reshiram", "necrozma_dusk_mane", "kyurem_white", "metagross", "zekrom", "zygarde_complete", "salamence_mega"]
+                    "values": ["eternatus", "zacian_crowned_sword", "zamazenta_crowned_shield", "dialga_origin", "palkia_origin", "necrozma_dawn_wings", "necrozma_dusk_mane", "kyurem_black", "kyurem_white", "kyogre_primal", "groudon_primal", "rayquaza_mega", "garchomp_mega", "lucario_mega", "gallade_mega", "latias_mega", "latios_mega", "blaziken_mega", "swampert_mega", "gardevoir_mega", "aggron_mega", "salamence_mega", "metagross_mega", "charizard_mega_y", "blastoise_mega", "gengar_mega", "gyarados_mega", "steelix_mega", "scizor_mega", "heracross_mega", "tyranitar_mega", "zygarde_complete"]
                 }
             ]
         },
@@ -291,6 +292,34 @@
             ],
             "partySize": 3,
             "levelCap": 40
+        },
+        {
+            "name": "crucible",
+            "title": "Crucible Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["normal", "fighting", "ghost", "dark", "fairy", "steel", "grass", "bug", "ice", "fire", "ground", "flying", "psychic", "poison"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["lairon", "lairon_shadow", "kleavor", "armaldo", "armaldo_shadow", "avalugg_hisuian", "empoleon", "empoleon_shadow", "ludicolo", "golisopod", "araquanid", "lapras", "lapras_shadow", "walrein", "walrein_shadow", "dewgong", "cloyster", "cloyster_shadow", "sealeo", "sealeo_shadow", "dialga", "dialga_origin", "dialga_shadow", "duraludon", "dipplin", "hydrapple", "appletun", "flapple", "exeggutor_alolan", "exeggutor_alolan_shadow", "kyurem", "arctibax", "baxcalibur", "kyurem_black", "kyurem_white", "magnezone", "magnezone_shadow", "magneton", "magneton_shadow", "togedemaru", "electrode_hisuian", "rotom_mow", "galvantula", "galvantula_shadow", "vikavolt", "vikavolt_shadow", "rotom_frost", "volcarona", "volcanion", "reshiram", "zapdos", "zapdos_shadow", "zekrom", "raikou", "raikou_shadow", "tapu_koko", "thundurus_therian", "thundurus_incarnate", "regieleki"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "type",
+                    "values": ["rock", "water", "dragon", "electric"]
+                },
+                {
+                    "filterType": "move",
+                    "values": ["ROCK_THROW", "SMACK_DOWN"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["moltres_galarian", "umbreon", "florges", "mewtwo_armored"]
+                }
+            ]
         },
         {
             "name": "custom",
@@ -502,6 +531,29 @@
             "presetOnly": true
         },
         {
+            "name": "holiday",
+            "title": "Holiday Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["grass", "normal", "ice", "ghost", "flying", "electric"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["smeargle", "articuno", "celebi", "ho_oh", "hoopa", "lugia", "moltres", "rayquaza", "regice", "regieleki", "regigigas", "shaymin", "shaymin_sky", "zapdos", "morpeko_full_belly"],
+                    "leagues": [500]
+                }
+            ],
+            "partySize": 3,
+            "presetOnly": true
+        },
+        {
             "name": "illusion",
             "title": "illusionT",
             "restrictedPicks": 1,
@@ -655,6 +707,36 @@
             ]
         },
         {
+            "name": "laic2025remix",
+            "title": "Gymbreakers LAIC 2025 Remix",
+            "link": "https://discord.gg/Gymbreakers",
+            "league": 1500,
+            "include": [
+                {
+                    "filterType": "id",
+                    "values": ["barbaracle", "crustle", "dudunsparce", "feraligatr", "milotic"]
+                },
+                {
+                    "filterType": "type",
+                    "values": ["dragon", "flying", "ghost", "ice", "psychic"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "type",
+                    "values": ["dark", "rock"]
+                },
+                {
+                    "filterType": "tag",
+                    "values": ["mega", "legendary", "mythical", "shadow", "ultrabeast"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["sandslash_alolan", "sandshrew_alolan", "corsola_galarian", "corviknight", "jellicent", "kingdra", "ninetales_alolan", "honedge", "doublade", "aegislash_shield", "aegislash_blade", "oranguru", "runerigus", "walrein", "dewgong"]
+                }
+            ]
+        },
+        {
             "name": "little",
             "title": "Little Cup",
             "include": [
@@ -670,6 +752,34 @@
                 }
             ],
             "levelCap": 50
+        },
+        {
+            "name": "majestic",
+            "title": "Majestic Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["fairy", "ice", "psychic", "ghost", "water", "normal"]
+                },
+                {
+                    "filterType": "id",
+                    "values": []
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "type",
+                    "values": ["dark", "none", "electric", "rock", "steel", "fire"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["azumarill", "oranguru", "fearow", "toucannon", "trumbeak", "dodrio", "rufflet", "toxapex", "ninetales_alolan", "sealeo", "dewgong", "wigglytuff", "walrein", "jellicent", "araquanid", "girafarig", "tentacruel", "weezing_galarian", "lapras", "abomasnow"]
+                }
+            ]
         },
         {
             "name": "mega",
@@ -712,6 +822,43 @@
             "overrides": [],
             "league": 1500,
             "useDefaultMovesets": 1,
+            "excludeLowPokemon": 1
+        },
+        {
+            "name": "nettle",
+            "title": "Devon Nettle Cup",
+            "link": "https://devon.gg/nettle-cup",
+            "include": [
+                {
+                    "filterType": "id",
+                    "values": ["empoleon", "empoleon_shadow", "escavalier", "pawniard", "perrserker", "tinkaton"]
+                },
+                {
+                    "filterType": "type",
+                    "name": "Type",
+                    "values": ["bug", "dark", "electric", "fairy", "fighting", "grass", "normal", "poison", "rock", "water"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "type",
+                    "name": "Type",
+                    "values": ["dragon", "fire", "flying", "ghost", "ground", "ice", "psychic", "steel"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["clodsire", "cradily", "cradily_shadow", "dachsbun", "nidoqueen", "nidoqueen_shadow", "wigglytuff"]
+                },
+                {
+                    "filterType": "tag",
+                    "name": "Tag",
+                    "values": ["mega"]
+                }
+            ],
+            "overrides": [],
+            "league": 1500,
+            "useDefaultMovesets": 1,
+            "levelCap": 50,
             "excludeLowPokemon": 1
         },
         {
@@ -1100,14 +1247,24 @@
             "hideRankings": true
         },
         {
-            "title": "Scroll Cup",
-            "cup": "scroll",
+            "title": "Sunshine Cup",
+            "cup": "sunshine",
             "cp": 1500,
-            "meta": "scroll",
+            "meta": "sunshine",
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Water-,  Fighting-,  and Dark-type Pokémon are eligible.", "The following Pokémon will not be allowed: Primarina"]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Fire-,  Grass-,  and Ground-type Pokémon are eligible.", "The following Pokémon will not be allowed: Charizard"]
+        },
+        {
+            "title": "Retro Cup",
+            "cup": "retro",
+            "cp": 1500,
+            "meta": "retro",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Dark-,  Steel-,  and Fairy-type Pokémon are not eligible."]
         },
         {
             "title": "EUIC 2026 Championship Series Cup",
@@ -1119,22 +1276,32 @@
             "showMeta": true
         },
         {
-            "title": "Battle Frontier (Calamity)",
-            "cup": "calamity",
+            "title": "Battle Frontier (Majestic)",
+            "cup": "majestic",
             "cp": 1500,
-            "meta": "calamity",
+            "meta": "majestic",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
         },
         {
-            "title": "Battle Frontier (Ultra)",
-            "cup": "battlefrontierultra",
+            "title": "Battle Frontier (Crucible)",
+            "cup": "crucible",
             "cp": 2500,
-            "meta": "ultra",
+            "meta": "crucible",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
+        },
+        {
+            "title": "Battle Frontier (Great)",
+            "cup": "battlefrontiergreat",
+            "cp": 1500,
+            "meta": "great",
+            "showCup": false,
+            "showFormat": true,
+            "showMeta": false,
+            "hideRankings": true
         },
         {
             "title": "Battle Frontier (Master)",
@@ -1146,19 +1313,19 @@
             "showMeta": true
         },
         {
-            "title": "Devon Metamorphosis Cup",
-            "cup": "metamorphosis",
+            "title": "Devon Nettle Cup",
+            "cup": "nettle",
             "cp": 1500,
-            "meta": "metamorphosis",
+            "meta": "nettle",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
         },
         {
-            "title": "Gymbreakers Pillar Cup Remix",
-            "cup": "pillar3",
+            "title": "Gymbreakers LAIC 2025 Remix",
+            "cup": "laic2025remix",
             "cp": 1500,
-            "meta": "pillar3",
+            "meta": "laic2025remix",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
@@ -39063,13 +39230,14 @@
             },
             "types": ["fire", "ghost"],
             "fastMoves": ["INCINERATE", "ASTONISH"],
-            "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT"],
+            "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT", "MIND_BLOWN"],
+            "eliteMoves": ["MIND_BLOWN"],
             "defaultIVs": {
                 "cp500": [6, 4, 9, 5],
                 "cp1500": [16.5, 5, 15, 13],
                 "cp2500": [27.5, 5, 14, 14]
             },
-            "tags": ["ultrabeast"],
+            "tags": ["ultrabeast", "include1500", "include2500", "include10000"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
             "released": true
@@ -39865,7 +40033,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "evolutions": ["carkol"]
@@ -39881,7 +40049,7 @@
                 "hp": 190
             },
             "types": ["rock", "fire"],
-            "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+            "fastMoves": ["SMACK_DOWN"],
             "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
             "defaultIVs": {
                 "cp500": [13, 4, 12, 8],
@@ -39891,7 +40059,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "parent": "boltund",
@@ -39908,7 +40076,7 @@
                 "hp": 242
             },
             "types": ["rock", "fire"],
-            "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+            "fastMoves": ["SMACK_DOWN", "FIRE_SPIN"],
             "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
             "defaultIVs": {
                 "cp500": [8, 6, 15, 14],
@@ -39918,7 +40086,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "parent": "rolycoly"
@@ -40294,7 +40462,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_CLOBBOPUS",
                 "evolutions": ["grapploct"]
@@ -40319,7 +40487,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_CLOBBOPUS",
                 "parent": "clobbopus"
@@ -43247,7 +43415,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 75000,
-            "released": false
+            "released": true
         },
         {
             "dex": 951,
@@ -47349,6 +47517,21 @@
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
+            "turns": 1
+        },
+        {
+            "moveId": "MIND_BLOWN",
+            "name": "Mind Blown",
+            "abbreviation": "MdB",
+            "type": "fire",
+            "power": 90,
+            "energy": 35,
+            "energyGain": 0,
+            "cooldown": 500,
+            "buffs": [0, -4],
+            "buffTarget": "self",
+            "buffApplyChance": "1",
+            "archetype": "Debuff",
             "turns": 1
         },
         {

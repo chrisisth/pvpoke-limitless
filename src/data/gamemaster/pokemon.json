@@ -37791,13 +37791,14 @@
         },
         "types": ["fire", "ghost"],
         "fastMoves": ["INCINERATE", "ASTONISH"],
-        "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT"],
+        "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT", "MIND_BLOWN"],
+        "eliteMoves": ["MIND_BLOWN"],
         "defaultIVs": {
             "cp500": [6, 4, 9, 5],
             "cp1500": [16.5, 5, 15, 13],
             "cp2500": [27.5, 5, 14, 14]
         },
-        "tags": ["ultrabeast"],
+        "tags": ["ultrabeast", "include1500", "include2500", "include10000"],
         "buddyDistance": 20,
         "thirdMoveCost": 100000,
         "released": true
@@ -38593,7 +38594,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 10000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_ROLYCOLY",
             "evolutions": ["carkol"]
@@ -38609,7 +38610,7 @@
             "hp": 190
         },
         "types": ["rock", "fire"],
-        "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+        "fastMoves": ["SMACK_DOWN"],
         "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
         "defaultIVs": {
             "cp500": [13, 4, 12, 8],
@@ -38619,7 +38620,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 10000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_ROLYCOLY",
             "parent": "boltund",
@@ -38636,7 +38637,7 @@
             "hp": 242
         },
         "types": ["rock", "fire"],
-        "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+        "fastMoves": ["SMACK_DOWN", "FIRE_SPIN"],
         "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
         "defaultIVs": {
             "cp500": [8, 6, 15, 14],
@@ -38646,7 +38647,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 10000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_ROLYCOLY",
             "parent": "rolycoly"
@@ -39022,7 +39023,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_CLOBBOPUS",
             "evolutions": ["grapploct"]
@@ -39047,7 +39048,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 50000,
-        "released": false,
+        "released": true,
         "family": {
             "id": "FAMILY_CLOBBOPUS",
             "parent": "clobbopus"
@@ -41975,7 +41976,7 @@
         },
         "buddyDistance": 3,
         "thirdMoveCost": 75000,
-        "released": false
+        "released": true
     },
     {
         "dex": 951,

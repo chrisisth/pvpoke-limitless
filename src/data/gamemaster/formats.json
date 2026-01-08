@@ -10,17 +10,30 @@
 		"hideRankings": true
 	},
 	{
-		"title": "Scroll Cup",
-		"cup": "scroll",
+		"title": "Sunshine Cup",
+		"cup": "sunshine",
 		"cp": 1500,
-		"meta": "scroll",
+		"meta": "sunshine",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true,
 		"rules": [
 			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Water-, Fighting-, and Dark-type Pokémon are eligible.",
-			"The following Pokémon will not be allowed: Primarina"
+			"Only Normal-, Fire-, Grass-, and Ground-type Pokémon are eligible.",
+			"The following Pokémon will not be allowed: Charizard"
+		]
+	},
+	{
+		"title": "Retro Cup",
+		"cup": "retro",
+		"cp": 1500,
+		"meta": "retro",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 1,500 CP to enter.",
+			"Dark-, Steel-, and Fairy-type Pokémon are not eligible."
 		]
 	},
 	{
@@ -33,22 +46,32 @@
 		"showMeta": true
 	},
 	{
-		"title": "Battle Frontier (Calamity)",
-		"cup": "calamity",
+		"title": "Battle Frontier (Majestic)",
+		"cup": "majestic",
 		"cp": 1500,
-		"meta": "calamity",
+		"meta": "majestic",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
 	{
-		"title": "Battle Frontier (Ultra)",
-		"cup": "battlefrontierultra",
+		"title": "Battle Frontier (Crucible)",
+		"cup": "crucible",
 		"cp": 2500,
-		"meta": "ultra",
+		"meta": "crucible",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
+	},
+	{
+		"title": "Battle Frontier (Great)",
+		"cup": "battlefrontiergreat",
+		"cp": 1500,
+		"meta": "great",
+		"showCup": false,
+		"showFormat": true,
+		"showMeta": false,
+		"hideRankings": true
 	},
 	{
 		"title": "Battle Frontier (Master)",
@@ -60,19 +83,19 @@
 		"showMeta": true
 	},
 	{
-		"title": "Devon Metamorphosis Cup",
-		"cup": "metamorphosis",
+		"title": "Devon Nettle Cup",
+		"cup": "nettle",
 		"cp": 1500,
-		"meta": "metamorphosis",
+		"meta": "nettle",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
 	{
-		"title": "Gymbreakers Pillar Cup Remix",
-		"cup": "pillar3",
+		"title": "Gymbreakers LAIC 2025 Remix",
+		"cup": "laic2025remix",
 		"cp": 1500,
-		"meta": "pillar3",
+		"meta": "laic2025remix",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
