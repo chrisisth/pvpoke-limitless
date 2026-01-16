@@ -21,4 +21,4 @@ jobs:
 
       - name: Run deploy script
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ~/ubuntu/pvpoke-limitless && bash deploy.sh"
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} "cd ~/pvpoke-limitless/ && bash deploy.sh"
