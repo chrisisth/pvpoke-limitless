@@ -12,7 +12,7 @@ function SynergyFinderInterface() {
 	let synergyAnalyzer = null;
 	let currentResults = [];
 	let battle = new Battle();
-	let ranker = RankerMaster.getInstance();
+	let ranker = (typeof RankerMaster !== 'undefined') ? RankerMaster.getInstance() : null;
 
 	this.init = function() {
 		// Get parameters from URL
