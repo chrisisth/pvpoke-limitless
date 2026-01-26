@@ -6781,6 +6781,12 @@ iframe#bh-div {
   }
 
   /* Synergy Finder Styles */
+  .rank .details .synergy-finder-link {
+  width: 100%;
+  margin: 10px 0;
+  text-align: center;
+  }
+  
   .synergy-finder-link {
     margin-top: 15px;
     text-align: center;
