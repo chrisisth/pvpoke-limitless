@@ -44,13 +44,19 @@ var GameMaster = (function () {
 				console.log("gamemaster loaded");
 
 				// Insert cup and format values into cup and format select dropdowns
-			if(typeof updateFormatSelect === "function" && typeof InterfaceMaster !== 'undefined'){
+			if(typeof updateFormatSelect === "function"){
 				updateFormatSelect(object.data.formats, InterfaceMaster.getInstance());
 			}
 
-			if(typeof updateCupSelect === "function" && typeof InterfaceMaster !== 'undefined'){
-					if(formats[i].showFormat && ! formats[i].hideRankings && formats[i].title != "Custom"){
-						var $link = $("<a href=\""+(host + "rankings/" + formats[i].cup + "/" + formats[i].cp + "/overall/"+"\">"+formats[i].title+"</a>"));
+			if(typeof updateCupSelect === "function"){
+				updateCupSelect(object.data.formats, InterfaceMaster.getInstance());
+			}
+
+			// Insert format links into ranking submenu
+			var formats = object.data.formats;
+
+			for(var i = formats.length - 1; i >= 0; i--){
+				if(formats[i].showFormat && ! formats[i].hideRankings && formats[i].title != "Custom"){
 						$link.insertAfter($(".icon-rankings + .submenu a").eq(2));
 					}
 				}
