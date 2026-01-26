@@ -16,7 +16,7 @@ function PokeMultiSelect(element){
 	var selectedIndex = -1;
 	var pokeSelector;
 
-	var maxPokemonCount = 1000;
+	var maxPokemonCount = 1000; // Changed from default to support more Pokemon
 	var selectedGroup = "";
 	var selectedGroupType = "";
 	var pokebox;
@@ -785,6 +785,7 @@ function PokeMultiSelect(element){
 	// Set the maximum number of selectable pokemon
 
 	this.setMaxPokemonCount = function(val){
+		console.log('[PokeMultiSelect] setMaxPokemonCount called with value:', val, 'Stack:', new Error().stack);
 		maxPokemonCount = val;
 		pokemonList = pokemonList.splice(0, maxPokemonCount);
 		$el.find(".poke-max-count").html(maxPokemonCount);

@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         PVPokeLimitless
 // @namespace    http://tampermonkey.net/
-// @version      2.0
-// @description  Lädt eigene pvpoke-Skripte via CDN robust nach.
+// @version      4.0
+// @description  Loads custom pvpoke scripts from GitHub with 1000 Pokemon limit
 // @author       Chris
 // @match        *://pvpoke.com/*
 // @run-at       document-start
@@ -45,9 +45,9 @@
       GM.xmlHttpRequest({
         method: 'GET',
         headers: {
-        "Cache-Control": "no-cache, no-store, must-revalidate",
-        "Pragma": "no-cache",
-        "Expires": "0"
+          "Cache-Control": "no-cache, no-store, must-revalidate",
+          "Pragma": "no-cache",
+          "Expires": "0"
         },
         url,
         onload: (res) => {
@@ -69,7 +69,6 @@
   function injectCode(code, name = 'injected.js') {
     const s = document.createElement('script');
     s.type = 'text/javascript';
-    // ensure page context execution
     s.textContent = `try {\n${code}\n} catch (e) { console.error('[PVPokeLimitless][${name}]', e); }\n//# sourceURL=${name}`;
     (document.head || document.documentElement).appendChild(s);
     s.remove();
@@ -78,7 +77,7 @@
   async function loadAndVerify({ url, expectGlobal, verify = () => !!uw[expectGlobal], name }, retries = 3) {
     for (let attempt = 1; attempt <= retries; attempt++) {
       try {
-        log(`Lade ${name} (${attempt}/${retries})`, url);
+        log(`Loading ${name} (${attempt}/${retries})`, url);
         const code = await gmGet(url, { timeout: 20000 });
         injectCode(code, name);
         if (expectGlobal) {
@@ -87,23 +86,15 @@
         log(`OK: ${name}`);
         return true;
       } catch (e) {
-        warn(`Fehler beim Laden ${name}:`, e.message || e);
-        if (attempt < retries) await sleep(400 * attempt); // simple backoff
+        warn(`Error loading ${name}:`, e.message || e);
+        if (attempt < retries) await sleep(400 * attempt);
       }
     }
-    throw new Error(`Fehlgeschlagen: ${name}`);
+    throw new Error(`Failed: ${name}`);
   }
 
-
-  const CDN = 'https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/master/src/js/interface';
-  const CDN_BATTLE = 'https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/master/src/js/battle';
+  const CDN = 'https://raw.githubusercontent.com/chrisisth/pvpoke-limitless/refs/heads/master/src/js/interface';
   const MODULES = [
-    {
-      name: 'Pokebox.js',
-      url: `${CDN}/Pokebox.js`,
-      expectGlobal: 'Pokebox',
-      verify: () => typeof uw.Pokebox === 'function',
-    },
     {
       name: 'PokeMultiSelect.js',
       url: `${CDN}/PokeMultiSelect.js`,
@@ -114,135 +105,9 @@
       name: 'RankingInterface.js',
       url: `${CDN}/RankingInterface.js`,
       expectGlobal: 'RankingInterface',
-      verify: () => typeof uw.RankingInterface === 'function' || !!uw.InterfaceMaster,
+      verify: () => typeof uw.RankingInterface === 'function',
     },
   ];
-  
-  const TEAM_BUILDER_MODULES = [
-    {
-      name: 'TeamCompositionAnalyzer.js',
-      url: `${CDN_BATTLE}/TeamCompositionAnalyzer.js`,
-      expectGlobal: 'TeamCompositionAnalyzer',
-      verify: () => typeof uw.TeamCompositionAnalyzer === 'function',
-    },
-    {
-      name: 'TeamRanker.js',
-      url: `${CDN_BATTLE}/rankers/TeamRanker.js`,
-      expectGlobal: null, // TeamRanker is not a global, it's loaded as part of the system
-      verify: () => true, // Just check it loaded
-    },
-    {
-      name: 'TeamInterface.js',
-      url: `${CDN}/TeamInterface.js`,
-      expectGlobal: 'TeamInterface',
-      verify: () => typeof uw.TeamInterface === 'function',
-    },
-  ];
-
-  const HARD_BLOCK_ORIGINALS = false;
-
-  if (HARD_BLOCK_ORIGINALS) {
-    const patterns = [/Pokebox\.js/i, /PokeMultiSelect\.js/i, /RankingInterface\.js/i];
-    const originalAppend = Element.prototype.appendChild;
-    Element.prototype.appendChild = function patchedAppend(child) {
-      try {
-        if (child && child.tagName === 'SCRIPT') {
-          const src = child.src || '';
-          if (patterns.some((re) => re.test(src))) {
-            log('Blockiere originales Script:', src);
-            return child;
-          }
-        }
-      } catch (_) { /* ignore */ }
-      return originalAppend.call(this, child);
-    };
-  }
-
-
-  function SaveRankingButton() {
-    const $ = uw.$;
-    const PokeMultiSelect = uw.PokeMultiSelect;
-    const GameMaster = uw.GameMaster;
-    const InterfaceMaster = uw.InterfaceMaster;
-    const Battle = uw.Battle;
-
-    if (!($ && PokeMultiSelect && GameMaster && InterfaceMaster && Battle)) {
-      return err('Benötigte Globals fehlen für SaveRankingButton');
-    }
-
-    try {
-      // Get current rankings data using the new method
-      const currentMeta = InterfaceMaster.getInstance().getRankingsExport();
-      
-      if (!currentMeta || currentMeta.length === 0) {
-        warn('Keine Rankings zum Speichern gefunden');
-        return;
-      }
-      
-      // Get current format info
-      const formatSelect = document.querySelector('.format-select');
-      if (!formatSelect) {
-        err('Format-Select nicht gefunden');
-        return;
-      }
-      const cp = formatSelect.options[formatSelect.selectedIndex].value;
-
-      // Get format information for save key
-      const selectedOption = formatSelect.options[formatSelect.selectedIndex];
-      const cupGroup = selectedOption.getAttribute('meta-group') || '';
-
-      // Get category
-      const categorySelect = document.querySelector('.category-select');
-      const categoryValue = categorySelect ? categorySelect.options[categorySelect.selectedIndex].value : '';
-
-      // Create unique key for this ranking
-      const saveKey = `${cp}${cupGroup}${categoryValue}`;
-      
-      log('Speichere Rankings:', {
-        cp: cp,
-        cupGroup: cupGroup,
-        category: categoryValue,
-        pokemonCount: currentMeta.length,
-        key: saveKey
-      });
-
-      // Check if multi-select container exists, if not create it
-      let multiSelectContainer = $('.custom-ranking-selector');
-      if (multiSelectContainer.length === 0) {
-        // Create container for the multi-select
-        multiSelectContainer = $('<div class="poke multi custom-ranking-selector" style="margin: 20px 0;"></div>');
-        // Insert it before the rankings table or after the controls
-        const insertPoint = $('.rankings-container, .format-select-container').first();
-        if (insertPoint.length > 0) {
-          insertPoint.after(multiSelectContainer);
-        } else {
-          $('.main').prepend(multiSelectContainer);
-        }
-      }
-
-      // Initialize PokeMultiSelect with the container
-      const customMetaSelector = new PokeMultiSelect(multiSelectContainer);
-      const data = GameMaster.getInstance().data;
-      customMetaSelector.init(data.pokemon, new Battle());
-      
-      // Set max pokemon count to 1000 before setting the list
-      customMetaSelector.setMaxPokemonCount(1000);
-      
-      // Set the current meta group
-      customMetaSelector.setPokemonList(currentMeta);
-      
-      // Save to localStorage
-      customMetaSelector.saveCustomList(saveKey, false);
-      
-      log(`✓ ${currentMeta.length} Pokemon gespeichert unter Schlüssel: ${saveKey}`);
-      alert(`Rankings gespeichert!\n${currentMeta.length} Pokemon unter "${saveKey}"`);
-      
-    } catch (e) {
-      err('Fehler beim Speichern:', e);
-      alert('Fehler beim Speichern der Rankings. Siehe Konsole für Details.');
-    }
-  }
-
 
   async function ensurePvpokeGlobals() {
     await waitFor(() => uw.$ && uw.GameMaster && uw.InterfaceMaster, {
@@ -259,116 +124,65 @@
     log('Init Rankings');
     await ensurePvpokeGlobals();
     await loadCustomModulesSequential(MODULES);
-
     await waitFor(() => typeof uw.Main === 'function', { timeout: 20000, label: 'Main()' });
-
     await whenReady;
+    
+    uw.Main();
+    
+    // Add Save Rankings button
     const button = document.createElement('a');
     button.className = 'button';
     button.textContent = 'Save Rankings';
-    button.addEventListener('click', SaveRankingButton);
-
-    const exportButton = document.querySelector('a.download-csv');
-    if (exportButton && exportButton.parentNode) {
-      exportButton.parentNode.insertBefore(button, exportButton.nextSibling);
-    } else {
-      document.body.appendChild(button);
-    }
-
-    try {
-      uw.Main();
-    } catch (e) {
-      err('Main() Fehler:', e);
-    }
+    button.addEventListener('click', () => {
+      const iface = uw.InterfaceMaster.getInstance();
+      const meta = iface.getRankingsExport?.();
+      if (!meta?.length) return warn('No rankings to save');
+      
+      const fs = document.querySelector('.format-select');
+      const cs = document.querySelector('.category-select');
+      const key = `${fs.value}${fs.selectedOptions[0].getAttribute('meta-group')}${cs?.value || ''}`;
+      
+      const csv = meta.map(p => {
+        let line = p.speciesId;
+        if (p.shadowType && p.shadowType !== 'normal') line += '-' + p.shadowType;
+        line += ',' + p.fastMove.moveId;
+        line += ',' + (p.chargedMoves[0]?.moveId || 'none');
+        line += ',' + (p.chargedMoves[1]?.moveId || 'none');
+        if (p.isCustom) line += `,${p.level},${p.ivs.atk},${p.ivs.def},${p.ivs.hp}`;
+        return line;
+      }).join('\n');
+      
+      localStorage.setItem(key, csv);
+      alert(`Saved ${meta.length} Pokemon to "${key}"`);
+    });
+    
+    const exportBtn = document.querySelector('a.download-csv');
+    (exportBtn?.parentNode || document.body)[exportBtn ? 'insertBefore' : 'appendChild'](button, exportBtn?.nextSibling);
   }
 
   async function initBattle() {
     log('Init Battle');
     await ensurePvpokeGlobals();
-    await loadCustomModulesSequential(MODULES.slice(0, 2));
-
+    await loadCustomModulesSequential([MODULES[0]]); // Load PokeMultiSelect only
     await waitFor(() => typeof uw.Main === 'function', { timeout: 20000, label: 'Main()' });
     await whenReady;
-    try {
-      uw.Main();
-    } catch (e) {
-      err('Main() Fehler:', e);
-    }
-    if (uw.$) {
-      uw.$('.poke-max-count').text('1000');
-    }
+    
+    uw.Main();
+    await sleep(500);
+    
+    // Update display to show 1000
+    uw.$('.poke-max-count').text('1000');
   }
 
-  async function initTeamBuilder() {
-    log('Init Team Builder');
-    await ensurePvpokeGlobals();
-    
-    // Load Pokebox + PokeMultiSelect first
-    await loadCustomModulesSequential(MODULES.slice(0, 2));
-    
-    // Then load team-builder specific modules
-    await loadCustomModulesSequential(TEAM_BUILDER_MODULES);
-
-    await whenReady;
-
-    // Teamsize 3
-    const teamOption = document.querySelector('.team-option .team-size-select');
-    if (teamOption && !Array.from(teamOption.options).some(o => o.value === '3')) {
-      const newOption = document.createElement('option');
-      newOption.value = '3';
-      newOption.textContent = '3';
-      teamOption.appendChild(newOption);
-    }
-
-    // Scorecard: 100..1000
-    const scorecardSelect = document.querySelector('.team-option .scorecard-length-select');
-    if (scorecardSelect) {
-      const values = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
-      const existing = new Set(Array.from(scorecardSelect.options).map(o => Number(o.value)));
-      values.forEach((value) => {
-        if (!existing.has(value)) {
-          const option = document.createElement('option');
-          option.value = String(value);
-          option.textContent = String(value);
-          scorecardSelect.appendChild(option);
-        }
-      });
-    }
-
-    await waitFor(() => typeof uw.Main === 'function', { timeout: 20000, label: 'Main()' });
+  // Router
+  (async function() {
     try {
-      uw.Main();
+      const path = location.pathname;
+      if (path.includes('/rankings')) await initRankings();
+      else if (path.includes('/battle')) await initBattle();
     } catch (e) {
-      err('Main() Error:', e);
-    }
-
-    if (uw.$) {
-      uw.$('.custom-alternatives .poke-max-count').text('1000');
-      uw.$('.custom-threats .poke-max-count').text('1000');
-      uw.$('.exclude-alternatives .poke-max-count').text('1000');
-      uw.$('.exclude-threats .poke-max-count').text('1000');
-    }
-  }
-
-  // --- Router ----------------------------------------------------------------
-
-  (async function mainRouter() {
-    try {
-      const path = location.pathname || '';
-      if (path.includes('/rankings')) {
-        await initRankings();
-      } else if (path.includes('/battle')) {
-        await initBattle();
-      } else if (path.includes('/team-builder')) {
-        await initTeamBuilder();
-      } else {
-        // Keine Aktion auf anderen Seiten notwendig
-        log('Seite nicht relevant für PVPokeLimitless:', path);
-      }
-    } catch (e) {
-      err('Initialisierung fehlgeschlagen:', e);
-      // Sichtbares Fallback für den Nutzer
-      try { alert('PVPokeLimitless: Fehler bei der Initialisierung. Details in der Konsole.'); } catch (_) {}
+      err('Init failed:', e);
+      alert('PVPokeLimitless: Initialization failed. Check console for details.');
     }
   })();
 
