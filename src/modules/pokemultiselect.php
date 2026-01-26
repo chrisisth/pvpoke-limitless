@@ -48,7 +48,7 @@
 			</div>
 		</div>
 
-		<div class="options multi-battle-options" style="display: none;">
+		<div class="options multi-battle-options">
 			<h3 class="section-title">Filter</h3>
 			<div class="form-group filter-picker">
 				<div class="option on" value="meta">Meta</div>
