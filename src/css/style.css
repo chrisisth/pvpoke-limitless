@@ -6784,6 +6784,8 @@ iframe#bh-div {
   .synergy-finder-link {
     margin-top: 15px;
     text-align: center;
+    width: 100%;
+    margin: 10px 0;
   }
 
   .synergy-finder-link .button {
