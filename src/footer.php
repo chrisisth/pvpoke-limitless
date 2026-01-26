@@ -108,7 +108,7 @@
 		// Service worker handler
 		if ('serviceWorker' in navigator) {
 			console.log("Attempting to register service worker");
-			navigator.serviceWorker.register('service-worker.js')
+			navigator.serviceWorker.register(webRoot +'service-worker.js')
 			  .then(function(reg){
 				console.log("Service worker registered.");
 			  }).catch(function(err) {

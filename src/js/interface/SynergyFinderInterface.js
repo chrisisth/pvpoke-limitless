@@ -1,332 +1,455 @@
-/**
- * Synergy Finder Interface
- * Handles the UI for finding team synergies
- */
+// SynergyFinderInterface.js
+// Fully rewritten, robust integration between SynergyAnalyzer and the Synergy Finder UI.
+// - Builds Pokemon instances once and caches them
+// - Uses delegated event handlers
+// - Uses <button> for Details to avoid link overlay issues
+// - Defensive checks and progress callback support
 
-function SynergyFinderInterface() {
-	const self = this;
-	const gm = GameMaster.getInstance();
-	let currentPokemon = null;
-	let currentCup = 'all';
-	let currentCp = '1500';
-	let synergyAnalyzer = null;
-	let currentResults = [];
-	let battle = new Battle();
-	let ranker = (typeof RankerMaster !== 'undefined') ? RankerMaster.getInstance() : null;
+var SynergyFinderInterface = (function () {
+  var instance;
 
-	this.init = function() {
-		// Get parameters from URL
-		const params = new URLSearchParams(window.location.search);
-		if (window.location.pathname.includes('/synergy-finder/')) {
-			const pathParts = window.location.pathname.split('/').filter(p => p);
-			const finderIndex = pathParts.indexOf('synergy-finder');
-			if (finderIndex !== -1 && finderIndex + 3 < pathParts.length) {
-				currentCup = pathParts[finderIndex + 1];
-				currentCp = pathParts[finderIndex + 2];
-				const pokeParam = pathParts[finderIndex + 3];
-				if (pokeParam) {
-					this.loadPokemonFromParam(pokeParam);
-				}
-			}
-		}
+  function createInstance() {
+    var object = new SynergyFinder();
 
-		// Initialize Pokemon Search
-		const pokeSearch = new PokeSearch($(".synergy-input-container"));
-		pokeSearch.setBattle(battle);
-		pokeSearch.init(gm.data.pokemon, battle);
-		pokeSearch.setContext("synergy-search");
+    function SynergyFinder() {
+      var gm = null;
+      var battle = null;
+      var analyzer = null;
+      var self = this;
+      var results = [];
+      var running = false;
 
-		// Pokemon selection via PokeSearch callback
-		pokeSearch.onSelect(function(pokemon) {
-			if (pokemon) {
-				self.startSynergyAnalysis(pokemon);
-			}
-		});
+      // Cache for Pokemon instances (built once)
+      var allPokemonInstances = null;
 
-		// Set up format select
-		$(".format-select").on("change", function() {
-			const format = $(this).val().split('-');
-			currentCup = format[1];
-			currentCp = format[0];
-		});
+      // Public init called from page (or via wait-for-GM wrapper)
+      this.init = function () {
+        // Defensive: wait for GameMaster to be available and populated
+        waitForGameMaster(function () {
+          gm = GameMaster.getInstance();
+          battle = new Battle();
 
-		// Detail modal
-		$(".synergy-detail-modal .close-btn").on("click", function(e) {
-			e.preventDefault();
-			$(".synergy-detail-modal").removeClass("active");
-		});
+          if (typeof pokeSearch !== "undefined") {
+            pokeSearch.setBattle(battle);
+          }
 
-		$("body").on("click", ".synergy-detail-btn", function(e) {
-			e.preventDefault();
-			const index = $(this).attr("data-index");
-			if (currentResults[index]) {
-				self.showSynergyDetail(currentResults[index]);
-			}
-		});
+          bindUI();
 
-		// Set initial format if in URL
-		$(".format-select").val(currentCp + "-" + currentCup);
-		$(".league-select").val(currentCp);
-	};
+          // If URL params exist, load them
+          self.loadGetData();
+        });
+      };
 
-	/**
-	 * Load Pokemon from URL parameter
-	 */
-	this.loadPokemonFromParam = function(pokeParam) {
-		const pokemon = gm.getPokemonById(pokeParam);
-		if (pokemon) {
-			this.startSynergyAnalysis(pokemon);
-		}
-	};
+      // Wait until GameMaster exists and has pokemon data
+      function waitForGameMaster(cb) {
+        try {
+          var gmCandidate = window.GameMaster && GameMaster.getInstance && GameMaster.getInstance();
+          if (gmCandidate && gmCandidate.data && Array.isArray(gmCandidate.data.pokemon) && gmCandidate.data.pokemon.length > 0) {
+            cb();
+          } else {
+            setTimeout(function () {
+              waitForGameMaster(cb);
+            }, 50);
+          }
+        } catch (e) {
+          setTimeout(function () {
+            waitForGameMaster(cb);
+          }, 50);
+        }
+      }
 
-	/**
-	 * Start synergy analysis for selected pokemon
-	 */
-	this.startSynergyAnalysis = function(pokemon) {
-		currentPokemon = pokemon;
-		
-		// Update UI
-		$(".synergy-results-container").show();
-		$(".synergy-results-table").hide();
-		$(".synergy-analysis-info").show();
-		
-		$(".synergy-pokemon-name").html(pokemon.speciesName);
-		$(".synergy-pokemon-description").html(
-			"Finding the best team partners for <strong>" + pokemon.speciesName + "</strong> in <strong>" + 
-			this._getCupName(currentCup, currentCp) + "</strong>. This analysis tests different movesets for each candidate Pokemon."
-		);
+      /**
+       * Build Pokemon instances from GameMaster raw data.
+       * Cached to avoid repeated heavy instantiation.
+       */
+      function buildAllPokemonInstances() {
+        if (allPokemonInstances && allPokemonInstances.length) return allPokemonInstances;
 
-		// Create analyzer
-		synergyAnalyzer = new SynergyAnalyzer(pokemon, gm.data.pokemon, battle, ranker);
+        var raw = (gm && gm.data && gm.data.pokemon) ? gm.data.pokemon : [];
+        allPokemonInstances = [];
 
-		// Run analysis
-		this._runAnalysis();
-	};
+        for (var i = 0; i < raw.length; i++) {
+          try {
+            var p = raw[i];
+            var poke = new Pokemon(p.speciesId, 0, battle);
+            // initialize for current CP so move pools and stats are populated
+            poke.initialize(battle.getCP());
+            allPokemonInstances.push(poke);
+          } catch (err) {
+            // Skip problematic entries but continue building
+            console.warn("SynergyFinder: failed to instantiate", raw[i] && raw[i].speciesId, err);
+          }
+        }
 
-	/**
-	 * Run synergy analysis with progress tracking
-	 */
-	this._runAnalysis = function() {
-		const results = synergyAnalyzer.findBestPartners(currentCp, currentCup, 50, (progress) => {
-			const percent = Math.round(progress * 100);
-			$(".progress").css("width", percent + "%");
-		});
+        return allPokemonInstances;
+      }
 
-		currentResults = results;
+      // --- UI binding ---
+      function bindUI() {
+        // Basic logs for debugging
+        // console.log("SynergyFinderInterface: bindUI");
 
-		// Display results
-		$(".synergy-analysis-info").hide();
-		$(".synergy-results-table").show();
-		$(".synergy-results-list").html("");
+        // Format select (cp / cup)
+        $("body").on("change", ".format-select", function () {
+          selectFormat();
+        });
 
-		for (let i = 0; i < results.length; i++) {
-			const result = results[i];
-			const scorePercent = Math.round(result.score.total);
-			
-			const $row = $(
-				"<div class='synergy-result-row'>" +
-					"<div class='item rank'>#" + result.rank + "</div>" +
-					"<div class='item pokemon-name'>" +
-						"<span class='poke-image' style='background-image: url(" + webRoot + "img/pokemon/" + result.pokemon.dex + ".png)'></span>" +
-						"<span class='name'>" + result.pokemon.speciesName + "</span>" +
-					"</div>" +
-					"<div class='item score'>" +
-						"<div class='score-bar'>" +
-							"<div class='score-fill' style='width: " + scorePercent + "%'></div>" +
-						"</div>" +
-						"<div class='score-text'>" + scorePercent + "%</div>" +
-					"</div>" +
-					"<div class='item details-btn'>" +
-						"<button class='synergy-detail-btn button' data-index='" + i + "'>Details</button>" +
-					"</div>" +
-				"</div>"
-			);
+        // Search input handlers
+        $("body").on("input", ".poke-search[context='synergy-search']", onSearchInput);
+        $("body").on("keydown", ".poke-search[context='synergy-search']", onSearchKeyDown);
 
-			$(".synergy-results-list").append($row);
-		}
-	};
+        // Delegated row click: ignore clicks that originate from the details button
+        $("body").on("click", ".synergy-results-list .result-row", function (e) {
+          if ($(e.target).closest('.details-btn, .details-btn-button').length) {
+            // Click came from details area — ignore here
+            return;
+          }
 
-	/**
-	 * Show detailed synergy information
-	 */
-	this.showSynergyDetail = function(result) {
-		const poke1 = currentPokemon;
-		const poke2 = result.pokemon;
-		const score = result.score;
+          var id = $(this).attr("data-id");
+          var idx = $(this).attr("data-index");
 
-		$(".detail-pokemon-name").html(poke1.speciesName + " ↔ " + poke2.speciesName);
+          if (id) {
+            selectPokemonById(id);
+          } else if (typeof idx !== "undefined" && idx !== null) {
+            openDetailModal(parseInt(idx, 10));
+          }
+        });
 
-		// Type Analysis
-		const typeHtml = this._generateTypeAnalysis(poke1, poke2);
-		$(".type-analysis").html(typeHtml);
+        // Details button (uses <button> to avoid link overlay issues)
+        $("body").on("click", ".synergy-results-list .details-btn-button", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var idx = $(this).closest(".result-row").attr("data-index");
+          if (typeof idx !== "undefined" && idx !== null) {
+            openDetailModal(parseInt(idx, 10));
+          }
+        });
 
-		// Scores
-		$(".weakness-score").html(Math.round(score.weaknessAbsorption) + "%");
-		$(".resistance-score").html(Math.round(score.mutualResistances) + "%");
-		$(".coverage-score").html(Math.round(score.offensiveCoverage) + "%");
-		$(".role-score").html(Math.round(score.roleComplement) + "%");
-		$(".meta-score").html(Math.round(score.metaRobustness) + "%");
-		$(".total-score").html(Math.round(score.total) + "%");
+        // Quick-result click (from search suggestions)
+        $("body").on("click", ".synergy-results-list .synergy-quick-result", function (e) {
+          e.preventDefault();
+          var id = $(this).attr("data-id");
+          if (id) selectPokemonById(id);
+        });
 
-		// Movesets tested
-		const movesetHtml = this._generateMovesetInfo(poke2);
-		$(".movesets-tested").html(movesetHtml);
+        // Find button (if present)
+        $("body").on("click", ".synergy-find-btn", function (e) {
+          e.preventDefault();
+          var val = $(".poke-search[context='synergy-search']").val().trim();
+          if (val) selectPokemonByString(val);
+        });
 
-		// Key matchups
-		const matchupHtml = this._generateKeyMatchups(poke1, poke2);
-		$(".key-matchups").html(matchupHtml);
+        // Close modal
+        $("body").on("click", ".synergy-detail-modal .close-btn", function (e) {
+          e.preventDefault();
+          $(".synergy-detail-modal").addClass("hide");
+        });
 
-		// Team suggestion
-		const teamHtml = this._generateTeamSuggestion(poke1, poke2);
-		$(".team-suggestion").html(teamHtml);
+        // Popstate for back/forward navigation
+        window.addEventListener('popstate', function (e) {
+          get = e.state;
+          self.loadGetData();
+        });
+      }
 
-		// Show modal
-		$(".synergy-detail-modal").addClass("active");
-	};
+      // Handle format change (cp/cup)
+      function selectFormat() {
+        var cp = $(".format-select option:selected").val();
+        var cup = $(".format-select option:selected").attr("cup");
 
-	/**
-	 * Generate type analysis HTML
-	 */
-	this._generateTypeAnalysis = function(poke1, poke2) {
-		let html = "<div class='type-sync-grid'>";
-		
-		html += "<div class='pokemon-types'>";
-		html += "<strong>" + poke1.speciesName + "</strong> Types: ";
-		for (let i = 0; i < poke1.types.length; i++) {
-			if (poke1.types[i] !== "none") {
-				html += "<span class='type-badge " + poke1.types[i] + "'>" + poke1.types[i] + "</span>";
-			}
-		}
-		html += "</div>";
+        if (!battle) battle = new Battle();
+        battle.setCP(cp);
+        battle.setCup(cup);
 
-		html += "<div class='pokemon-types'>";
-		html += "<strong>" + poke2.speciesName + "</strong> Types: ";
-		for (let i = 0; i < poke2.types.length; i++) {
-			if (poke2.types[i] !== "none") {
-				html += "<span class='type-badge " + poke2.types[i] + "'>" + poke2.types[i] + "</span>";
-			}
-		}
-		html += "</div>";
+        var current = $(".synergy-results-container").data("selected");
+        if (current) {
+          // Re-run analysis for the same pokemon with new format
+          selectPokemonById(current);
+        }
+      }
 
-		html += "</div>";
-		return html;
-	};
+      // Search input handler: show quick matches
+      function onSearchInput(e) {
+        var q = $(e.target).val().trim().toLowerCase();
+        var $list = $(".synergy-results-list");
+        $list.empty();
 
-	/**
-	 * Generate moveset testing info
-	 */
-	this._generateMovesetInfo = function(pokemon) {
-		let html = "<p>Multiple movesets tested for <strong>" + pokemon.speciesName + "</strong>:</p>";
-		html += "<ul>";
-		html += "<li><strong>Optimal moveset:</strong> " + pokemon.fastMove.displayName + " / ";
-		if (pokemon.chargedMoves) {
-			for (let i = 0; i < pokemon.chargedMoves.length; i++) {
-				html += pokemon.chargedMoves[i].displayName;
-				if (i < pokemon.chargedMoves.length - 1) html += ", ";
-			}
-		}
-		html += "</li>";
-		html += "<li><strong>Alternative movesets:</strong> Up to 9 variations tested with different fast moves and charged move combinations</li>";
-		html += "<li><strong>Best result displayed:</strong> The synergy score shown is from the best-performing moveset</li>";
-		html += "</ul>";
-		return html;
-	};
+        if (!q) {
+          $(".synergy-results-container").addClass("hide");
+          return;
+        }
 
-	/**
-	 * Generate key matchups between the pair
-	 */
-	this._generateKeyMatchups = function(poke1, poke2) {
-		let html = "<p>This pairing provides complementary coverage:</p>";
-		html += "<ul>";
-		
-		// Type weaknesses
-		const weak1 = this._getWeaknesses(poke1.types);
-		const weak2 = this._getWeaknesses(poke2.types);
-		
-		const covered = weak1.filter(w => weak2.indexOf(w) === -1);
-		if (covered.length > 0) {
-			html += "<li><strong>" + poke2.speciesName + "</strong> covers weaknesses to: " + covered.join(", ") + "</li>";
-		}
-		
-		html += "</ul>";
-		return html;
-	};
+        var pool = (gm && gm.data && gm.data.pokemon) ? gm.data.pokemon : [];
+        var matches = [];
 
-	/**
-	 * Generate team suggestion
-	 */
-	this._generateTeamSuggestion = function(poke1, poke2) {
-		let html = "<p>To complete this pairing, consider a third Pokemon that:</p>";
-		html += "<ul>";
-		html += "<li>Covers the weaknesses of both " + poke1.speciesName + " and " + poke2.speciesName + "</li>";
-		html += "<li>Has different roles (lead, safe switch, or closer)</li>";
-		html += "<li>Provides type coverage against meta threats</li>";
-		html += "</ul>";
-		return html;
-	};
+        for (var i = 0; i < pool.length; i++) {
+          var p = pool[i];
+          var name = (p.speciesName || p.speciesId || "").toLowerCase();
+          var id = (p.speciesId || "").toLowerCase();
 
-	/**
-	 * Get weaknesses for types (with fallback to embedded type system)
-	 */
-	this._getWeaknesses = function(types) {
-		const weaknesses = new Set();
-		
-		// Type weakness fallback table (same as in SynergyAnalyzer)
-		const typeWeaknesses = {
-			'normal': ['fighting'],
-			'fire': ['water', 'ground', 'rock'],
-			'water': ['grass', 'electric'],
-			'grass': ['fire', 'ice', 'poison', 'flying', 'bug'],
-			'electric': ['ground'],
-			'ice': ['fire', 'fighting', 'rock', 'steel'],
-			'fighting': ['flying', 'psychic', 'fairy'],
-			'poison': ['ground', 'psychic'],
-			'ground': ['water', 'grass', 'ice'],
-			'flying': ['electric', 'ice', 'rock'],
-			'psychic': ['bug', 'ghost', 'dark'],
-			'bug': ['fire', 'flying', 'rock'],
-			'rock': ['water', 'grass', 'fighting', 'ground', 'steel'],
-			'ghost': ['ghost', 'dark'],
-			'dragon': ['ice', 'dragon', 'fairy'],
-			'dark': ['fighting', 'bug', 'fairy'],
-			'steel': ['fire', 'water', 'ground'],
-			'fairy': ['poison', 'steel']
-		};
-		
-		for (let i = 0; i < types.length; i++) {
-			const typeData = gm.getType(types[i]);
-			if (typeData && typeData.weaknesses) {
-				// Try GameMaster API first
-				typeData.weaknesses.forEach(w => weaknesses.add(w));
-			} else if (typeWeaknesses[types[i]]) {
-				// Fallback to embedded type system
-				typeWeaknesses[types[i]].forEach(w => weaknesses.add(w));
-			}
-		}
-		
-		return Array.from(weaknesses);
-	};
+          if (name.indexOf(q) > -1 || id.indexOf(q) > -1) {
+            matches.push(p);
+          }
 
-	/**
-	 * Get cup name for display
-	 */
-	this._getCupName = function(cup, cp) {
-		if (cup === 'all') {
-			switch(cp) {
-				case '500': return 'Little League';
-				case '1500': return 'Great League';
-				case '2500': return 'Ultra League';
-				case '10000': return 'Master League';
-				case '10000-40': return 'Master League Classic';
-				default: return 'League';
-			}
-		}
-		return cup.charAt(0).toUpperCase() + cup.slice(1) + ' Cup';
-	};
-}
+          if (matches.length >= 12) break;
+        }
 
-// Initialize when page loads
-$(document).ready(function() {
-	const synergyInterface = new SynergyFinderInterface();
-	synergyInterface.init();
-});
+        if (matches.length === 0) {
+          $(".synergy-results-container").removeClass("hide");
+          $(".synergy-results-table").addClass("hide");
+          $(".synergy-analysis-info").removeClass("hide").find("p").text("No matches found.");
+          return;
+        }
+
+        $(".synergy-results-container").removeClass("hide");
+        $(".synergy-analysis-info").removeClass("hide").find("p").text("Select a Pokémon to analyze...");
+        $(".synergy-results-table").addClass("hide");
+
+        for (var j = 0; j < matches.length; j++) {
+          var mp = matches[j];
+          var $row = $("<div class='result-row synergy-quick-result' data-id='" + mp.speciesId + "'>" +
+            "<div class='pokemon-name'>" + mp.speciesName + "</div>" +
+            "<div class='pokemon-id'>" + mp.speciesId + "</div>" +
+            "</div>");
+          $list.append($row);
+        }
+      }
+
+      // Keyboard support: Enter selects first match
+      function onSearchKeyDown(e) {
+        if (e.key === "Enter") {
+          var first = $(".synergy-results-list .synergy-quick-result").first();
+          if (first.length) {
+            selectPokemonById(first.attr("data-id"));
+          } else {
+            var val = $(e.target).val().trim();
+            if (val) selectPokemonByString(val);
+          }
+        }
+      }
+
+      // Resolve free text to speciesId
+      function selectPokemonByString(str) {
+        var pool = (gm && gm.data && gm.data.pokemon) ? gm.data.pokemon : [];
+        var q = str.trim().toLowerCase();
+
+        for (var i = 0; i < pool.length; i++) {
+          if (pool[i].speciesId && pool[i].speciesId.toLowerCase() === q) {
+            return selectPokemonById(pool[i].speciesId);
+          }
+        }
+
+        for (var j = 0; j < pool.length; j++) {
+          if (pool[j].speciesName && pool[j].speciesName.toLowerCase() === q) {
+            return selectPokemonById(pool[j].speciesId);
+          }
+        }
+
+        for (var k = 0; k < pool.length; k++) {
+          if ((pool[k].speciesName || "").toLowerCase().indexOf(q) > -1) {
+            return selectPokemonById(pool[k].speciesId);
+          }
+        }
+
+        $(".synergy-analysis-info").removeClass("hide").find("p").text("No Pokémon matched your search.");
+      }
+
+      // Select by speciesId and start analysis
+      function selectPokemonById(speciesId) {
+        if (!speciesId || !gm || !gm.data) return;
+
+        if (!battle) battle = new Battle();
+
+        var base = new Pokemon(speciesId, 0, battle);
+        base.initialize(battle.getCP());
+
+        $(".synergy-results-container").removeClass("hide");
+        $(".synergy-pokemon-name").text(base.speciesName);
+        $(".synergy-pokemon-description").text((base.types || []).join(" / ") || "—");
+        $(".synergy-results-table").addClass("hide");
+        $(".synergy-analysis-info").removeClass("hide");
+        $(".synergy-analysis-info .progress").css("width", "0%");
+
+        $(".synergy-results-container").data("selected", speciesId);
+
+        // Build instances and instantiate analyzer
+        var allPokemon = buildAllPokemonInstances();
+        analyzer = new SynergyAnalyzer(base, allPokemon, battle, null);
+
+        runAnalysis(base);
+      }
+
+      // Run analyzer.findBestPartners with progress callback and render results
+      function runAnalysis(basePokemon) {
+        if (!analyzer) return;
+
+        running = true;
+        var cp = battle.getCP();
+        var cup = battle.getCup().name;
+        var limit = 100;
+
+        try {
+          var progressCallback = function (progress) {
+            var pct = Math.round(progress * 100);
+            $(".synergy-analysis-info .progress").css("width", pct + "%");
+          };
+
+          // Analyzer is synchronous in current implementation; adapt if async later
+          var synergies = analyzer.findBestPartners(cp, cup, limit, progressCallback) || [];
+
+          results = synergies;
+          renderResults();
+        } catch (err) {
+          console.error("SynergyFinder: analysis failed", err);
+          $(".synergy-analysis-info .progress").css("width", "0%");
+          $(".synergy-analysis-info p").text("Analysis failed. See console for details.");
+        } finally {
+          running = false;
+        }
+      }
+
+      // Render results table (uses <button> for details)
+      function renderResults() {
+        $(".synergy-analysis-info").addClass("hide");
+        $(".synergy-results-table").removeClass("hide");
+        var $list = $(".synergy-results-list");
+        $list.empty();
+
+        if (!results || results.length === 0) {
+          $list.append("<div class='no-results'>No synergy partners found.</div>");
+          return;
+        }
+
+        for (var i = 0; i < results.length; i++) {
+          var r = results[i];
+          var partner = r.pokemon;
+          var score = Math.round((r.score && r.score.total) ? r.score.total : (r.score || 0));
+          var safeName = partner && partner.speciesName ? partner.speciesName : (partner && partner.speciesId ? partner.speciesId : "Unknown");
+
+          var $row = $(
+            "<div class='result-row' data-index='" + i + "'>" +
+              "<div class='header rank'>" + (i + 1) + "</div>" +
+              "<div class='header pokemon-name'>" + safeName + "</div>" +
+              "<div class='header score'>" + score + "%</div>" +
+              "<div class='header details-btn'><button class='button small details-btn-button' type='button'>Details</button></div>" +
+            "</div>"
+          );
+
+          $list.append($row);
+        }
+      }
+
+      // Open detail modal for a result index
+      function openDetailModal(index) {
+        console.log("SynergyFinder: openDetailModal", index);
+        if (!results || !results[index]) {
+          console.warn("SynergyFinder: no result at index", index);
+          return;
+        }
+
+        var entry = results[index];
+        var partner = entry.pokemon;
+        var score = entry.score || {};
+        var moveset = entry.moveset || {};
+
+        $(".synergy-detail-modal .detail-pokemon-name").text(partner.speciesName || partner.speciesId || "Unknown");
+
+        // Type analysis
+        var typeAnalysisHtml = "";
+        if (analyzer && typeof analyzer._getWeaknesses === "function") {
+          var weak = analyzer._getWeaknesses(partner.types || []);
+          var resList = [];
+          for (var t = 0; t < (partner.types || []).length; t++) {
+            var ty = partner.types[t];
+            if (analyzer.typeResistances && analyzer.typeResistances[ty]) {
+              resList = resList.concat(analyzer.typeResistances[ty]);
+            }
+          }
+          resList = Array.from(new Set(resList));
+          typeAnalysisHtml += "<div><b>Types:</b> " + ((partner.types || []).join(" / ") || "—") + "</div>";
+          typeAnalysisHtml += "<div><b>Weaknesses:</b> " + (weak.length ? weak.join(", ") : "None") + "</div>";
+          typeAnalysisHtml += "<div><b>Resistances:</b> " + (resList.length ? resList.join(", ") : "None") + "</div>";
+        } else {
+          typeAnalysisHtml = "<div>Type analysis unavailable.</div>";
+        }
+        $(".synergy-detail-modal .type-analysis").html(typeAnalysisHtml);
+
+        // Scores
+        $(".synergy-detail-modal .weakness-score").text(Math.round((score.weaknessAbsorption || 0)) + "%");
+        $(".synergy-detail-modal .resistance-score").text(Math.round((score.mutualResistances || 0)) + "%");
+        $(".synergy-detail-modal .coverage-score").text(Math.round((score.offensiveCoverage || 0)) + "%");
+        $(".synergy-detail-modal .role-score").text(Math.round((score.roleComplement || 0)) + "%");
+        $(".synergy-detail-modal .meta-score").text(Math.round((score.metaRobustness || 0)) + "%");
+        $(".synergy-detail-modal .total-score").text(Math.round((score.total || 0)) + "%");
+
+        // Movesets tested
+        var movesHtml = "";
+        if (moveset && (moveset.fast || moveset.charged)) {
+          if (moveset.fast) movesHtml += "<div><b>Fast:</b> " + moveset.fast + "</div>";
+          if (moveset.charged) movesHtml += "<div><b>Charged:</b> " + (Array.isArray(moveset.charged) ? moveset.charged.join(", ") : moveset.charged) + "</div>";
+          movesHtml += "<div class='muted'>Note: moveset IDs shown; UI can be extended to resolve names.</div>";
+        } else {
+          movesHtml = "<div>No moveset details available.</div>";
+        }
+        $(".synergy-detail-modal .movesets-tested").html(movesHtml);
+
+        // Placeholders for matchups and team suggestions
+        $(".synergy-detail-modal .key-matchups").html("<div class='muted'>Key matchups are not computed by the type-only analyzer.</div>");
+        $(".synergy-detail-modal .team-suggestion").html("<div class='muted'>Team suggestions require composition analysis integration.</div>");
+
+        $(".synergy-detail-modal").removeClass("hide");
+      }
+
+      // Load GET parameters (cp, cup, p)
+      this.loadGetData = function () {
+        if (!get) return;
+
+        for (var key in get) {
+          if (!get.hasOwnProperty(key)) continue;
+          var val = get[key];
+
+          switch (key) {
+            case "cp":
+              var cpVal = val;
+              if (val.indexOf("-") > -1) cpVal = val.split("-")[0];
+              if (!battle) battle = new Battle();
+              battle.setCP(cpVal);
+              $(".format-select option[value=\"" + cpVal + "\"]").prop("selected", "selected");
+              break;
+
+            case "cup":
+              if (!battle) battle = new Battle();
+              battle.setCup(val);
+              $(".format-select option[cup=\"" + val + "\"]").first().prop("selected", "selected");
+              break;
+
+            case "p":
+              (function (speciesId) {
+                setTimeout(function () {
+                  selectPokemonById(speciesId);
+                }, 50);
+              })(val);
+              break;
+          }
+        }
+      };
+
+      // Re-run analysis for currently selected pokemon
+      this.reanalyzeSelected = function () {
+        var selected = $(".synergy-results-container").data("selected");
+        if (selected) selectPokemonById(selected);
+      };
+    }
+
+    return object;
+  }
+
+  return {
+    getInstance: function () {
+      if (!instance) {
+        instance = createInstance();
+      }
+      return instance;
+    }
+  };
+})();

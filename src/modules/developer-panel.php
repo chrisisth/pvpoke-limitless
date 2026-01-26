@@ -69,3 +69,21 @@
 	});
 
 </script>
+<script>
+if (typeof InterfaceMaster === "undefined") {
+    var InterfaceMaster = (function () {
+        return {
+            getInstance: function () {
+                return {
+                    init: function(){},
+                    displayRankings: function(){},
+                    loadGetData: function(){},
+                    pushHistoryState: function(){},
+                    setContext: function(){}
+                };
+            }
+        };
+    })();
+}
+</script>
+
