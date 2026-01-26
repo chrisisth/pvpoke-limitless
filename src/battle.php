@@ -364,6 +364,25 @@ require_once 'header.php';
 		</div>
 	</div>
 
+	<div class="section white battle-results multi">
+		<a class="toggle" href="#">Losing Matchups (≤500) <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
+
+		<div class="toggle-content">
+			<p>Below is a list of all matchups you lost (rating ≤500). You can copy these Pokemon to a custom group to analyze them together.</p>
+			<div class="losing-matchups-actions">
+				<button class="copy-losing-matchups-btn button">Copy to Custom Group</button>
+				<span class="losing-matchups-count">(0 matchups)</span>
+			</div>
+			<div class="losing-matchups-list"></div>
+		</div>
+	</div>
+
+	<div class="section white custom-rankings-meta-group hide">
+		<h3>Losing Matchups Custom Group</h3>
+		<p>This group contains all the Pokemon from matchups you lost. You can save or copy this custom group to use in Multi-Battle or the Team Builder.</p>
+		<?php require 'modules/pokemultiselect.php'; ?>
+	</div>
+
 	<div class="battle-results multi">
 		<div class="share-link-container">
 			<p>Share this battle:</p>

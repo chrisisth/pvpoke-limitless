@@ -6722,6 +6722,59 @@ iframe#bh-div {
   .table-container {
     overflow-x: auto;
   }
+
+  /* Losing Matchups Styles */
+  .losing-matchups-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 15px 0;
+  }
+
+  .copy-losing-matchups-btn {
+    padding: 8px 16px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .copy-losing-matchups-btn:hover {
+    background: #45a049;
+  }
+
+  .losing-matchups-count {
+    color: #666;
+    font-size: 14px;
+  }
+
+  .losing-matchups-preview {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-top: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .matchup-item {
+    padding: 5px;
+    font-size: 13px;
+    color: #333;
+    border-bottom: 1px solid #eee;
+  }
+
+  .matchup-item:last-child {
+    border-bottom: none;
+  }
+
+  .matchup-item.more {
+    font-style: italic;
+    color: #999;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

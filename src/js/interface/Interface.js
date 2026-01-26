@@ -49,6 +49,9 @@ var InterfaceMaster = (function () {
 
 			var csv; // Store the CSV from last results
 
+			var losingMatchups = []; // Store Pokemon from matchups with rating <= 500
+			var losingMatchupsSelector; // Selector for the losing matchups custom group
+
 			var settingGetParams = false; // Flag to keep certain functions from running
 
 			var isLoadingPreset = false; // Flag that lets the sim know if it should wait for a preset list to finish loading
@@ -82,6 +85,13 @@ var InterfaceMaster = (function () {
 					multiSelectors.push(selector);
 				});
 
+				// Initialize the losing matchups custom group selector
+				var $customGroupEl = $(".custom-rankings-meta-group.hide .poke.multi");
+				if($customGroupEl.length > 0){
+					losingMatchupsSelector = new PokeMultiSelect($customGroupEl);
+					losingMatchupsSelector.init(data.pokemon, battle);
+				}
+
 
 				$(".league-select").on("change", selectLeague);
 				$(".mode-select a").on("click", selectMode);
@@ -96,6 +106,7 @@ var InterfaceMaster = (function () {
 				$(".poke a.swap").on("click", swapSelectedPokemon);
 				$(".poke.single").on("mousemove",".move-bar, .move-select.charged",moveBarHover);
 				$(".multi-battle-sort").on("click", sortMultiBattleResults);
+				$(".copy-losing-matchups-btn").on("click", copyLosingMatchupsToCustomGroup);
 				$(".battle-results.matrix .ranking-categories a").on("click", selectMatrixMode);
 				$(".battle-results.matrix select.breakpoint-mode").on("change", selectMatrixBreakpointMode);
 				$(".matrix-table").on("click", "th.col-sort", handleMatrixSort);
@@ -1105,6 +1116,9 @@ var InterfaceMaster = (function () {
 					pokemonList = [];
 				}
 
+				// Clear losing matchups for the new battle
+				losingMatchups = [];
+
 				// Order the rankings from best to worst or worst to best
 
 				if(multiBattleWorstToBest){
@@ -1181,7 +1195,15 @@ var InterfaceMaster = (function () {
 					}
 
 					$(".battle-results .rankings-container").append($el);
+
+					// Collect losing matchups (rating <= 500)
+					if(r.opRating <= 500){
+						losingMatchups.push(pokemon);
+					}
 				}
+
+				// Display losing matchups section and count
+				displayLosingMatchups(losingMatchups);
 
 				// Generate and display histogram
 
@@ -3165,6 +3187,67 @@ var InterfaceMaster = (function () {
 			function checkBox(e){
 				$(this).toggleClass("on");
 				$(this).trigger("change");
+			}
+
+			// Display losing matchups with count and list preview
+
+			function displayLosingMatchups(matchups){
+				if(!matchups || matchups.length === 0){
+					$(".losing-matchups-count").html("(0 matchups)");
+					$(".losing-matchups-list").html("");
+					return;
+				}
+
+				var count = matchups.length;
+				$(".losing-matchups-count").html("(" + count + " matchup" + (count !== 1 ? "s" : "") + ")");
+
+				// Display a simple list preview
+				var $list = $("<div class='losing-matchups-preview'></div>");
+				for(var i = 0; i < Math.min(matchups.length, 10); i++){
+					var $item = $("<div class='matchup-item'>" + matchups[i].speciesName + "</div>");
+					$list.append($item);
+				}
+
+				if(matchups.length > 10){
+					$list.append("<div class='matchup-item more'>... and " + (matchups.length - 10) + " more</div>");
+				}
+
+				$(".losing-matchups-list").html($list);
+			}
+
+			// Copy losing matchups to custom group
+
+			function copyLosingMatchupsToCustomGroup(e){
+				e.preventDefault();
+
+				if(!losingMatchups || losingMatchups.length === 0){
+					alert("No losing matchups to copy.");
+					return;
+				}
+
+				// Show the custom group container
+				var $customGroupContainer = $(".custom-rankings-meta-group.hide");
+				$customGroupContainer.removeClass("hide");
+
+				// Use the pre-initialized selector or create a new one
+				if(losingMatchupsSelector){
+					losingMatchupsSelector.setPokemonList(losingMatchups);
+				} else{
+					// Fallback: create a new selector if not initialized
+					var $multiDiv = $customGroupContainer.find(".poke.multi");
+					if($multiDiv.length === 0){
+						$multiDiv = $("<div class='poke multi'></div>");
+						$customGroupContainer.append($multiDiv);
+					}
+					losingMatchupsSelector = new PokeMultiSelect($multiDiv);
+					losingMatchupsSelector.init(gm.data.pokemon, battle);
+					losingMatchupsSelector.setPokemonList(losingMatchups);
+				}
+
+				// Scroll to the group
+				$("html, body").animate({ 
+					scrollTop: $customGroupContainer.offset().top - 100 
+				}, 500);
 			}
 
 		};
