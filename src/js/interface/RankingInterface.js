@@ -1264,8 +1264,7 @@ var InterfaceMaster = (function () {
 					$details.find(".multi-battle-link .name").html(pokemon.speciesName+"'s");
 
 					// Synergy Finder link
-					let synergyFinderLink = host+"synergy-finder/"+cup+"/"+battle.getCP(true)+"/"+pokemon.aliasId+"/";
-					$details.find(".synergy-finder-link a").attr("href", synergyFinderLink);
+				let synergyFinderLink = host+"synergy-finder.php?cup="+cup+"&cp="+battle.getCP(true)+"&p="+pokemon.aliasId;
 					$details.find(".synergy-finder-link .name").html(pokemon.speciesName+"'s");
 
 					// CMP chart link

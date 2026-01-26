@@ -373,12 +373,12 @@ require_once 'header.php';
 				<button class="copy-losing-matchups-btn button">Copy to Custom Group</button>
 				<span class="losing-matchups-count">(0 matchups)</span>
 			</div>
-		</div>
 
-		<div class="section white custom-rankings-meta-group hide losing-matchups-custom-group">
-			<h3>Losing Matchups Custom Group</h3>
-			<p>This group contains all the Pokemon from matchups you lost. You can save or copy this custom group to use in Multi-Battle or the Team Builder.</p>
-			<?php require 'modules/pokemultiselect.php'; ?>
+			<div class="section white custom-rankings-meta-group hide losing-matchups-custom-group">
+				<h3>Losing Matchups Custom Group</h3>
+				<p>This group contains all the Pokemon from matchups you lost. You can save or copy this custom group to use in Multi-Battle or the Team Builder.</p>
+				<?php require 'modules/pokemultiselect.php'; ?>
+			</div>
 		</div>
 	</div>
 
