@@ -171,10 +171,10 @@ require_once 'header.php';
 <script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/battle/Battle.js?v=<?php echo $SITE_VERSION; ?>"></script>
-<script src="<?php echo $WEB_ROOT; ?>js/battle/DamageCalculator.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/battle/SynergyAnalyzer.js?v=<?php echo $SITE_VERSION; ?>"></script>
-<script src="<?php echo $WEB_ROOT; ?>js/battle/rankers/Ranker.js?v=<?php echo $SITE_VERSION; ?>"></script>
+<script src="<?php echo $WEB_ROOT; ?>js/interface/ModalWindow.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/interface/PokeSearch.js?v=<?php echo $SITE_VERSION; ?>"></script>
+<script src="<?php echo $WEB_ROOT; ?>js/battle/rankers/Ranker.js?v=<?php echo $SITE_VERSION; ?>"></script>
 <script src="<?php echo $WEB_ROOT; ?>js/interface/SynergyFinderInterface.js?v=<?php echo $SITE_VERSION; ?>"></script>
 
 <?php require_once 'footer.php'; ?>
