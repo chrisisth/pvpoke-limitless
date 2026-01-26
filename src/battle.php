@@ -373,7 +373,6 @@ require_once 'header.php';
 				<button class="copy-losing-matchups-btn button">Copy to Custom Group</button>
 				<span class="losing-matchups-count">(0 matchups)</span>
 			</div>
-			<div class="losing-matchups-list"></div>
 		</div>
 
 		<div class="section white custom-rankings-meta-group hide losing-matchups-custom-group">

@@ -3244,6 +3244,11 @@ var InterfaceMaster = (function () {
 					losingMatchupsSelector.setPokemonList(losingMatchups);
 				}
 
+				// Set the specific options for the losing matchups custom group
+				$customGroupContainer.find(".custom-options").show();
+				$customGroupContainer.find(".multi-battle-options").hide();
+				$customGroupContainer.find(".charged-count-select").hide();
+
 				// Scroll to the group
 				$("html, body").animate({ 
 					scrollTop: $customGroupContainer.offset().top - 100 
