@@ -1263,6 +1263,11 @@ var InterfaceMaster = (function () {
 					$details.find(".multi-battle-link a").html(pokemon.speciesName+" vs. " + cupName);
 					$details.find(".multi-battle-link .name").html(pokemon.speciesName+"'s");
 
+					// Synergy Finder link
+					let synergyFinderLink = host+"synergy-finder/"+cup+"/"+battle.getCP(true)+"/"+pokemon.aliasId+"/";
+					$details.find(".synergy-finder-link a").attr("href", synergyFinderLink);
+					$details.find(".synergy-finder-link .name").html(pokemon.speciesName+"'s");
+
 					// CMP chart link
 					
 					let cmpChartLink = host+"attack-cmp-chart/"+cup+"/"+battle.getCP()+"/"+pokemon.aliasId+"/";

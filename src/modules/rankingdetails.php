@@ -19,6 +19,8 @@
 		</div>
 
 		<div class="multi-battle-link"><p>See all of <b class="name"></b> matchups:</p><a target="_blank" class="button" href="#">Pokemon vs. Great League</a></div>
+
+		<div class="synergy-finder-link"><p>Find synergy partners for <b class="name"></b>:</p><a target="_blank" class="button" href="#">Synergy Finder</a></div>
 	</div><!-- end tab matchups-->
 
 	<div class="detail-tab" tab="stats">
