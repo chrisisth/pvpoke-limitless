@@ -106,7 +106,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Run synergy analysis with progress tracking
 	 */
-	_runAnalysis() {
+	this._runAnalysis = function() {
 		const results = synergyAnalyzer.findBestPartners(currentCp, currentCup, 50, (progress) => {
 			const percent = Math.round(progress * 100);
 			$(".progress").css("width", percent + "%");
@@ -144,7 +144,7 @@ function SynergyFinderInterface() {
 
 			$(".synergy-results-list").append($row);
 		}
-	}
+	};
 
 	/**
 	 * Show detailed synergy information
@@ -187,7 +187,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Generate type analysis HTML
 	 */
-	_generateTypeAnalysis(poke1, poke2) {
+	this._generateTypeAnalysis = function(poke1, poke2) {
 		let html = "<div class='type-sync-grid'>";
 		
 		html += "<div class='pokemon-types'>";
@@ -215,7 +215,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Generate moveset testing info
 	 */
-	_generateMovesetInfo(pokemon) {
+	this._generateMovesetInfo = function(pokemon) {
 		let html = "<p>Multiple movesets tested for <strong>" + pokemon.speciesName + "</strong>:</p>";
 		html += "<ul>";
 		html += "<li><strong>Optimal moveset:</strong> " + pokemon.fastMove.displayName + " / ";
@@ -235,7 +235,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Generate key matchups between the pair
 	 */
-	_generateKeyMatchups(poke1, poke2) {
+	this._generateKeyMatchups = function(poke1, poke2) {
 		let html = "<p>This pairing provides complementary coverage:</p>";
 		html += "<ul>";
 		
@@ -255,7 +255,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Generate team suggestion
 	 */
-	_generateTeamSuggestion(poke1, poke2) {
+	this._generateTeamSuggestion = function(poke1, poke2) {
 		let html = "<p>To complete this pairing, consider a third Pokemon that:</p>";
 		html += "<ul>";
 		html += "<li>Covers the weaknesses of both " + poke1.speciesName + " and " + poke2.speciesName + "</li>";
@@ -266,15 +266,41 @@ function SynergyFinderInterface() {
 	};
 
 	/**
-	 * Get weaknesses for types
+	 * Get weaknesses for types (with fallback to embedded type system)
 	 */
-	_getWeaknesses(types) {
+	this._getWeaknesses = function(types) {
 		const weaknesses = new Set();
+		
+		// Type weakness fallback table (same as in SynergyAnalyzer)
+		const typeWeaknesses = {
+			'normal': ['fighting'],
+			'fire': ['water', 'ground', 'rock'],
+			'water': ['grass', 'electric'],
+			'grass': ['fire', 'ice', 'poison', 'flying', 'bug'],
+			'electric': ['ground'],
+			'ice': ['fire', 'fighting', 'rock', 'steel'],
+			'fighting': ['flying', 'psychic', 'fairy'],
+			'poison': ['ground', 'psychic'],
+			'ground': ['water', 'grass', 'ice'],
+			'flying': ['electric', 'ice', 'rock'],
+			'psychic': ['bug', 'ghost', 'dark'],
+			'bug': ['fire', 'flying', 'rock'],
+			'rock': ['water', 'grass', 'fighting', 'ground', 'steel'],
+			'ghost': ['ghost', 'dark'],
+			'dragon': ['ice', 'dragon', 'fairy'],
+			'dark': ['fighting', 'bug', 'fairy'],
+			'steel': ['fire', 'water', 'ground'],
+			'fairy': ['poison', 'steel']
+		};
 		
 		for (let i = 0; i < types.length; i++) {
 			const typeData = gm.getType(types[i]);
 			if (typeData && typeData.weaknesses) {
+				// Try GameMaster API first
 				typeData.weaknesses.forEach(w => weaknesses.add(w));
+			} else if (typeWeaknesses[types[i]]) {
+				// Fallback to embedded type system
+				typeWeaknesses[types[i]].forEach(w => weaknesses.add(w));
 			}
 		}
 		
@@ -284,7 +310,7 @@ function SynergyFinderInterface() {
 	/**
 	 * Get cup name for display
 	 */
-	_getCupName(cup, cp) {
+	this._getCupName = function(cup, cp) {
 		if (cup === 'all') {
 			switch(cp) {
 				case '500': return 'Little League';
@@ -296,7 +322,7 @@ function SynergyFinderInterface() {
 			}
 		}
 		return cup.charAt(0).toUpperCase() + cup.slice(1) + ' Cup';
-	}
+	};
 }
 
 // Initialize when page loads

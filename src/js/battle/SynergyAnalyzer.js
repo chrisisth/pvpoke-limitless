@@ -183,6 +183,7 @@ class SynergyAnalyzer {
 
 	/**
 	 * Get all possible movesets for a pokemon
+	 * FIX: Defensive checks - fastMove/chargedMoves könnten null sein
 	 */
 	_getMovesetsForPokemon(pokemon) {
 		const movesets = [];
@@ -196,21 +197,35 @@ class SynergyAnalyzer {
 			return movesets;
 		}
 		
-		// Always test the optimal moveset first
+		// Always test the optimal moveset first - but check if it exists
 		if (pokemon.fastMove && pokemon.chargedMoves && pokemon.chargedMoves.length > 0) {
 			movesets.push({
 				fast: pokemon.fastMove.moveId,
 				charged: pokemon.chargedMoves.map(m => m.moveId),
 				isOptimal: true
 			});
+		} else {
+			// If no selected moves, use first available from pools
+			if (fastMoves.length > 0 && chargedMoves.length > 0) {
+				movesets.push({
+					fast: fastMoves[0].moveId,
+					charged: [chargedMoves[0].moveId],
+					isOptimal: true
+				});
+			}
 		}
 		
 		// Test other fast moves with current charged moves
+		const chargedMoveIds = pokemon.chargedMoves && pokemon.chargedMoves.length > 0
+			? pokemon.chargedMoves.map(m => m.moveId)
+			: (chargedMoves.length > 0 ? [chargedMoves[0].moveId] : []);
+		
 		for (let i = 0; i < Math.min(fastMoves.length, 3); i++) {
-			if (fastMoves[i].moveId !== pokemon.fastMove.moveId) {
+			const currentFastId = pokemon.fastMove ? pokemon.fastMove.moveId : null;
+			if (fastMoves[i].moveId !== currentFastId && chargedMoveIds.length > 0) {
 				movesets.push({
 					fast: fastMoves[i].moveId,
-					charged: pokemon.chargedMoves.map(m => m.moveId),
+					charged: chargedMoveIds,
 					isAlternate: true
 				});
 			}
@@ -218,17 +233,18 @@ class SynergyAnalyzer {
 		
 		// Test alternative charged move combinations
 		if (chargedMoves.length > 2) {
+			const currentFastId = pokemon.fastMove ? pokemon.fastMove.moveId : fastMoves[0].moveId;
 			for (let i = 0; i < Math.min(chargedMoves.length, 4); i++) {
 				for (let j = i + 1; j < Math.min(chargedMoves.length, 4); j++) {
 					const newMoves = [chargedMoves[i].moveId, chargedMoves[j].moveId];
 					const exists = movesets.some(m => 
-						m.fast === pokemon.fastMove.moveId && 
+						m.fast === currentFastId && 
 						JSON.stringify(m.charged) === JSON.stringify(newMoves)
 					);
 					
 					if (!exists) {
 						movesets.push({
-							fast: pokemon.fastMove.moveId,
+							fast: currentFastId,
 							charged: newMoves,
 							isAlternate: true
 						});
@@ -326,30 +342,47 @@ class SynergyAnalyzer {
 
 	/**
 	 * Score offensive coverage together
-	 * FIX: moveset parameter für alternative Movesets
+	 * FIX: moveset parameter für alternative Movesets, AND prüfe ob fastMove existiert
 	 */
 	_calculateOffensiveCoverage(poke1, poke2, moveset) {
 		const types1 = new Set();
 		const types2 = new Set();
 		
-		// Collect offensive types from poke1
-		types1.add(poke1.fastMove.type);
-		if (poke1.chargedMoves) {
-			poke1.chargedMoves.forEach(m => types1.add(m.type));
+		// Collect offensive types from poke1 - defensive check for fastMove
+		if (poke1.fastMove && poke1.fastMove.type) {
+			types1.add(poke1.fastMove.type);
+		} else {
+			types1.add('normal'); // Fallback default
+		}
+		
+		if (poke1.chargedMoves && Array.isArray(poke1.chargedMoves)) {
+			poke1.chargedMoves.forEach(m => {
+				if (m && m.type) {
+					types1.add(m.type);
+				}
+			});
 		}
 		
 		// Collect offensive types from poke2 (use provided moveset if available)
 		if (moveset) {
 			// For now, use the moves from the moveset (fast move ID and charged move IDs)
 			// In a real implementation, look up the move objects and their types
-			types2.add(poke2.fastMove ? poke2.fastMove.type : 'normal');
-			if (poke2.chargedMoves) {
-				poke2.chargedMoves.forEach(m => types2.add(m.type));
+			types2.add(poke2.fastMove && poke2.fastMove.type ? poke2.fastMove.type : 'normal');
+			if (poke2.chargedMoves && Array.isArray(poke2.chargedMoves)) {
+				poke2.chargedMoves.forEach(m => {
+					if (m && m.type) {
+						types2.add(m.type);
+					}
+				});
 			}
 		} else {
-			types2.add(poke2.fastMove ? poke2.fastMove.type : 'normal');
-			if (poke2.chargedMoves) {
-				poke2.chargedMoves.forEach(m => types2.add(m.type));
+			types2.add(poke2.fastMove && poke2.fastMove.type ? poke2.fastMove.type : 'normal');
+			if (poke2.chargedMoves && Array.isArray(poke2.chargedMoves)) {
+				poke2.chargedMoves.forEach(m => {
+					if (m && m.type) {
+						types2.add(m.type);
+					}
+				});
 			}
 		}
 		
@@ -421,20 +454,15 @@ class SynergyAnalyzer {
 	}
 
 	/**
-	 * Helper: Get weaknesses for types
+	 * Helper: Get weaknesses for types (using embedded type system)
 	 */
 	_getWeaknesses(types) {
-		const gm = GameMaster.getInstance();
 		const weaknesses = new Set();
 		
-		if (!gm.data.types) {
-			return [];
-		}
-		
 		for (let i = 0; i < types.length; i++) {
-			const typeData = gm.getType(types[i]);
-			if (typeData && typeData.weaknesses) {
-				typeData.weaknesses.forEach(w => weaknesses.add(w));
+			const type = types[i];
+			if (this.typeWeaknesses[type]) {
+				this.typeWeaknesses[type].forEach(w => weaknesses.add(w));
 			}
 		}
 		
@@ -443,44 +471,47 @@ class SynergyAnalyzer {
 
 	/**
 	 * Helper: Get resistance multiplier for type against given attacking type
+	 * Uses embedded typeWeaknesses system for consistency
 	 */
 	_getResistanceMultiplier(types, attackType) {
-		const gm = GameMaster.getInstance();
-		let multiplier = 1;
-		
+		// If the attacking type is in the resistances, return 0.5 (resist)
+		// Otherwise return 1 (normal)
 		for (let i = 0; i < types.length; i++) {
-			const typeData = gm.getType(types[i]);
-			if (typeData && typeData.resistances) {
-				for (let j = 0; j < typeData.resistances.length; j++) {
-					if (typeData.resistances[j].type === attackType) {
-						multiplier *= typeData.resistances[j].multiplier;
-					}
-				}
+			const type = types[i];
+			if (this.typeResistances[type] && this.typeResistances[type].indexOf(attackType) > -1) {
+				return 0.5; // This type resists the attack
 			}
 		}
 		
-		return multiplier;
+		// Check for weaknesses (reverse lookup)
+		for (let i = 0; i < types.length; i++) {
+			const type = types[i];
+			if (this.typeWeaknesses[type] && this.typeWeaknesses[type].indexOf(attackType) > -1) {
+				return 2; // This type is weak to the attack
+			}
+		}
+		
+		return 1; // Normal damage
 	}
 
 	/**
-	 * Helper: Get common resistances
+	 * Helper: Get common resistances (using embedded type system)
 	 */
 	_getCommonResistances(types1, types2) {
-		const gm = GameMaster.getInstance();
 		const resistances1 = new Set();
 		const resistances2 = new Set();
 		
 		for (let i = 0; i < types1.length; i++) {
-			const typeData = gm.getType(types1[i]);
-			if (typeData && typeData.resistances) {
-				typeData.resistances.forEach(r => resistances1.add(r.type));
+			const type = types1[i];
+			if (this.typeResistances[type]) {
+				this.typeResistances[type].forEach(r => resistances1.add(r));
 			}
 		}
 		
 		for (let i = 0; i < types2.length; i++) {
-			const typeData = gm.getType(types2[i]);
-			if (typeData && typeData.resistances) {
-				typeData.resistances.forEach(r => resistances2.add(r.type));
+			const type = types2[i];
+			if (this.typeResistances[type]) {
+				this.typeResistances[type].forEach(r => resistances2.add(r));
 			}
 		}
 		
