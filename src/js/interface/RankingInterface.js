@@ -1143,7 +1143,7 @@ $modal.find(".simulate-top").off("click").on("click", function(e){
 
 function initCovererWeightsUI($root){
   const KEY = "covererWeights_v1";
-  const DEFAULTS = { wCov:0.78, wStat:0.18, wMeta:0.04 };
+  const DEFAULTS = { wCov:0.78, wStat:0.10, wMeta:0.19 };
 
   function load(){ try { const r = localStorage.getItem(KEY); return r ? Object.assign({}, DEFAULTS, JSON.parse(r)) : Object.assign({}, DEFAULTS); } catch(e){ return Object.assign({}, DEFAULTS); } }
   function save(obj){ try { localStorage.setItem(KEY, JSON.stringify(obj)); } catch(e){} }
