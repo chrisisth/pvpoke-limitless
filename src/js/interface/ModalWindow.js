@@ -34,6 +34,9 @@ function modalWindow(header, content){
 			closeModalWindow();
 		}
 	});
+
+return $modal;
+
 }
 
 function setModalClosePrevention(time){

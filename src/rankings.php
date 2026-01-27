@@ -86,6 +86,7 @@ require_once 'header.php';
 ?>
 
 <h1>Rankings</h1>
+
 <div class="section league-select-container white">
 	<div class="ranking-filters flex">
 		<div class="ranking-filter">
@@ -117,6 +118,33 @@ require_once 'header.php';
 			</select>
 		</div>
 	</div>
+	<br>
+<a class="toggle coverer-toggle" href="#">Advanced <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
+<div class="toggle-content coverer-advanced" style="display:none;">
+  <h3 class="section-title">Coverer Ranking Options</h3>
+  <div class="flex poke">
+    <div class="team-option weight-controls">
+      <h3 class="help" title="Adjust how coverers are ranked. Coverage = type coverage; Stat = bulk; Meta = meta priority.">Coverer Weights</h3>
+      <div class="weight-row">
+        <label>Coverage <span class="weight-val" data-key="wCov">0.78</span></label>
+        <input type="range" class="weight-slider" data-key="wCov" min="0" max="1" step="0.01" />
+      </div>
+      <div class="weight-row">
+        <label>Stat <span class="weight-val" data-key="wStat">0.10</span></label>
+        <input type="range" class="weight-slider" data-key="wStat" min="0" max="1" step="0.01" />
+      </div>
+      <div class="weight-row">
+        <label>Meta <span class="weight-val" data-key="wMeta">0.19</span></label>
+        <input type="range" class="weight-slider" data-key="wMeta" min="0" max="1" step="0.01" />
+      </div>
+      <div style="margin-top:6px;">
+        <div class="check small reset-weights"><span></span>Reset to defaults</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 	<p class="description overall"><b>The best Pokemon overall across multiple roles.</b> They have the typing, moves, and stats to succeed as top contenders.</p>
 

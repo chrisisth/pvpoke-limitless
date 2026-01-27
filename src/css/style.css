@@ -1393,10 +1393,10 @@ select.large {
 .button {
   position: relative;
   display: block;
-  font-size: 18px;
-  margin: 10px auto;
+  /*font-size: 18px;
+  margin: 10px auto;*/
   border-radius: 30px;
-  border: 2px solid #000;
+  /*border: 2px solid #000;*/
   padding: 10px 18px;
   cursor: pointer;
   text-decoration: none;
@@ -6780,13 +6780,8 @@ iframe#bh-div {
     color: #999;
   }
 
-  .cover-results.panel { background:#fff; border:1px solid #ddd; padding:12px; margin-bottom:12px; }
-.cover-list .cover-item { padding:6px 0; border-bottom:1px dashed #eee; }
-.cover-list .moves-small { font-size:12px; color:#666; margin-top:4px; }
-.sim-result { margin-left:8px; color:#2b7; font-weight:600; }
-
-
-}
+.modal .cover-list .cover-item .sim-result { margin-left:8px; color:#2b7; font-weight:600; }
+.modal .cover-list .cover-item .cover-moves { font-size:12px; color:#666; margin-top:6px; }}
 
 
 /*# sourceMappingURL=style.css.map */

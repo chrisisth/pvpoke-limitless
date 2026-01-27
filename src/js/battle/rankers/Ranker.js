@@ -643,8 +643,8 @@ var RankerMaster = (function () {
 						dataType:'json',
 						success : function(data) {
 							console.log(data);
-
-							delete rankings;
+							rankings = null;
+							//delete rankings;
 						},
 						error : function(request,error)
 						{
