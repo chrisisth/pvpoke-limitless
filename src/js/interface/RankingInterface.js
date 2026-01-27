@@ -68,6 +68,7 @@ var InterfaceMaster = (function () {
 				$("body").on("click", ".detail-section.similar-pokemon a", jumpToSimilarPokemon);
 				$("body").on("click", ".moveset.fast .move-detail-template", recalculateMoveCounts);
 				$("body").on("click", "button.ranking-compare", addPokemonToCompare);
+				$("body").on("click", ".button.find-coverers", function(e){ e.preventDefault(); var speciesId = $(this).attr("data-speciesid"); if(!speciesId) return; self.findCoverersForRankingPokemon(speciesId); });
 
 				pokeSearch.setBattle(battle);
 
@@ -265,6 +266,185 @@ var InterfaceMaster = (function () {
 				}, i);
 			}
 
+			// Fügt in das interfaceObject ein
+this.findCoverersForRankingPokemon = function(speciesId){
+    var cp = battle.getCP();
+    var cup = battle.getCup();
+
+    // Hole Ziel-Pokemon aus den geladenen Rankings (data) oder GameMaster
+    var r = data.find(item => item.speciesId == speciesId);
+    var target;
+    if(r){
+        target = new Pokemon(r.speciesId, 0, battle);
+        target.initialize(battle.getCP(), "gamemaster");
+        // Set recommended moves from ranking if vorhanden
+        if(r.moveset && r.moveset.length){
+            target.selectMove("fast", r.moveset[0]);
+            target.selectMove("charged", r.moveset[1], 0);
+            if(r.moveset.length > 2) target.selectMove("charged", r.moveset[2], 1);
+        } else {
+            target.selectRecommendedMoveset();
+        }
+    } else {
+        // Fallback: gm helper
+        target = gm.getPokemonBySpeciesId ? gm.getPokemonBySpeciesId(speciesId) : null;
+        if(target){
+            target = new Pokemon(target.speciesId, 0, battle);
+            target.initialize(battle.getCP(), "gamemaster");
+            target.selectRecommendedMoveset();
+        }
+    }
+
+    if(!target){
+        console.warn("Target pokemon not found:", speciesId);
+        return;
+    }
+
+    // Hilfsfunktion: Schwächen (types mit Effektivität >= 1.6)
+    var getWeaknesses = function(poke){
+        var weaknesses = [];
+        if(poke.typeEffectiveness){
+            for(var t in poke.typeEffectiveness){
+                if(poke.typeEffectiveness[t] >= 1.6){
+                    weaknesses.push(t);
+                }
+            }
+        }
+        return weaknesses;
+    };
+
+    var weaknesses = getWeaknesses(target);
+    if(weaknesses.length === 0){
+        // Einfaches UI-Feedback
+        var $msg = $("<div class='cover-results'><b>"+target.speciesName+"</b> has no strong type weaknesses detected.</div>");
+        $(".rankings-container").prepend($msg);
+        setTimeout(()=> $msg.fadeOut(800), 3000);
+        return;
+    }
+
+    // Kandidatenliste: gefilterte Pokemon (nutze vorhandene GM-Filter)
+    var candidates = gm.generateFilteredPokemonList ? gm.generateFilteredPokemonList(battle, cup.include, cup.exclude) : [];
+    // Entferne Ziel und evtl. eingeschränkte/limited Pokemon
+    candidates = candidates.filter(c => c.speciesId !== target.speciesId && limitedPokemon.indexOf(c.speciesId.replace("_shadow","")) === -1);
+
+    // Scoring-Funktion: bewertet Moveset-basierte Coverage
+    var scoreCandidate = function(candidate){
+        // Arbeite auf einer Kopie-Instanz, damit selectRecommendedMoveset nicht global verändert
+        var cand = new Pokemon(candidate.speciesId, 0, battle);
+        cand.initialize(battle.getCP(), "gamemaster");
+        cand.selectRecommendedMoveset();
+
+        // Stat-Faktor (leichte Gewichtung)
+        var statProduct = cand.calculateStatProduct ? cand.calculateStatProduct(cp) : { relativeEfficiency: 1 };
+        var statFactor = Math.max(0.6, Math.min(1.4, statProduct.relativeEfficiency || 1));
+
+        // Für jede Schwäche: bestes Move-Typ-Match des Kandidaten
+        var coverage = 0;
+        var maxPerWeakness = 100;
+        for(var i = 0; i < weaknesses.length; i++){
+            var weakType = weaknesses[i];
+            var bestForThisWeak = 0;
+
+            // Fast Move
+            var fastType = cand.fastMove.type;
+            var effFast = (gm.getTypeEffectiveness) ? gm.getTypeEffectiveness(fastType, weakType) : (cand.typeEffectiveness ? (cand.typeEffectiveness[fastType] || 1) : 1);
+            var fastPower = cand.fastMove.power || 10;
+            bestForThisWeak = Math.max(bestForThisWeak, effFast * fastPower);
+
+            // Charged Moves
+            for(var m = 0; m < cand.chargedMoves.length; m++){
+                var cm = cand.chargedMoves[m];
+                var eff = (gm.getTypeEffectiveness) ? gm.getTypeEffectiveness(cm.type, weakType) : 1;
+                var power = cm.power || 60;
+                var efficiency = (power * eff) / Math.max(1, cm.energy);
+                bestForThisWeak = Math.max(bestForThisWeak, efficiency * 10);
+            }
+
+            coverage += Math.min(maxPerWeakness, bestForThisWeak);
+        }
+
+        var coverageScore = (coverage / (weaknesses.length * maxPerWeakness)) * 100;
+        var metaBonus = (gm.isInMeta && gm.isInMeta(candidate.speciesId, cp)) ? 1.08 : 1.0;
+
+        var finalScore = coverageScore * statFactor * metaBonus;
+        return Math.round(finalScore * 10) / 10;
+    };
+
+    // Score alle Kandidaten (limitieren für Performance)
+    var MAX_CANDIDATES = 600;
+    var scored = [];
+    for(var i = 0; i < candidates.length && i < MAX_CANDIDATES; i++){
+        var c = candidates[i];
+        var s = scoreCandidate(c);
+        scored.push({pokemon: c, score: s});
+    }
+
+    scored.sort((a,b) => b.score - a.score);
+    var top = scored.slice(0, 12);
+
+    // Ergebnis-UI erstellen
+    var $out = $("<div class='cover-results panel'><h3>Top Coverers for "+target.speciesName+"</h3></div>");
+    var $list = $("<div class='cover-list'></div>");
+    top.forEach(function(t){
+        var moves = "";
+        // Versuche Moves anzuzeigen (falls verfügbar)
+        var cand = new Pokemon(t.pokemon.speciesId, 0, battle);
+        cand.initialize(battle.getCP(), "gamemaster");
+        cand.selectRecommendedMoveset();
+        moves = cand.fastMove ? cand.fastMove.name : "";
+        if(cand.chargedMoves[0]) moves += " / " + cand.chargedMoves[0].name;
+        if(cand.chargedMoves[1]) moves += " / " + cand.chargedMoves[1].name;
+
+        $list.append("<div class='cover-item'><b>"+cand.speciesName+"</b> — Score: "+t.score+"<div class='moves-small'>"+moves+"</div></div>");
+    });
+    $out.append($list);
+
+    // Button: simulate top 5 for exact rating
+    var $simBtn = $("<button class='button simulate-top'>Simulate Top 5</button>");
+    $out.append($simBtn);
+
+    // Insert UI at top of rankings container
+    $(".rankings-container").prepend($out);
+    $("html, body").animate({ scrollTop: $(".rankings-container").offset().top - 60 }, 300);
+
+    // Simulation handler (Top 5)
+    $simBtn.on("click", function(){
+        $simBtn.prop("disabled", true).text("Simulating...");
+        var sims = [];
+        var toSim = top.slice(0,5);
+        toSim.forEach(function(t, idx){
+            var cand = new Pokemon(t.pokemon.speciesId, 0, battle);
+            cand.initialize(battle.getCP(), "gamemaster");
+            cand.selectRecommendedMoveset();
+            // 1v1, 1 shield each as a representative test
+            battle.setNewPokemon(cand, 0, false);
+            battle.setNewPokemon(target, 1, false);
+            cand.setShields(1);
+            target.setShields(1);
+            battle.simulate();
+            var healthRating = (cand.hp / cand.stats.hp);
+            var damageRating = ((target.stats.hp - target.hp) / target.stats.hp);
+            var rating = Math.floor((healthRating + damageRating) * 500);
+            sims.push({speciesId: cand.speciesId, simRating: rating});
+            cand.reset();
+            target.reset();
+            battle.clearPokemon();
+        });
+
+        // Update UI with sim results
+        sims.forEach(function(s){
+            $out.find(".cover-item").each(function(){
+                if($(this).text().indexOf(gm.getPokemonBySpeciesId ? gm.getPokemonBySpeciesId(s.speciesId).speciesName : s.speciesId) > -1){
+                    $(this).append("<span class='sim-result'> (sim: "+s.simRating+")</span>");
+                }
+            });
+        });
+
+        $simBtn.prop("disabled", false).text("Simulate Top 5");
+    });
+};
+
+
 			this.displayRankingEntry = function(r, index){
 				var pokemon = new Pokemon(r.speciesId, 0, battle);
 
@@ -350,6 +530,7 @@ var InterfaceMaster = (function () {
 						"</div>" +
 						"<div class=\"type-container\"></div>" +
 					"</div>" +
+					"<div class=\"actions\">" + "<button class=\"button find-coverers\" data-speciesid=\"" + pokemon.speciesId + "\">Find Coverers</button>" + "</div>" +
 					"<div class=\"rating-container\">" +
 						"<div class=\"rating score-rating\">"+r.score+"</div>" +
 						"<div class=\"clear\"></div>" +
@@ -1262,11 +1443,6 @@ var InterfaceMaster = (function () {
 					$details.find(".multi-battle-link a").attr("href", multiBattleLink);
 					$details.find(".multi-battle-link a").html(pokemon.speciesName+" vs. " + cupName);
 					$details.find(".multi-battle-link .name").html(pokemon.speciesName+"'s");
-
-					// Synergy Finder link
-				let synergyFinderLink = host+"synergy-finder/"+cup+"/"+battle.getCP(true)+"/"+pokemon.aliasId+"/";
-				$details.find(".synergy-finder-link a").attr("href", synergyFinderLink);
-					// CMP chart link
 					
 					let cmpChartLink = host+"attack-cmp-chart/"+cup+"/"+battle.getCP()+"/"+pokemon.aliasId+"/";
 					$details.find(".ranking-cmp-link").html(pokemon.speciesName + " CMP Chart");
@@ -1295,7 +1471,7 @@ var InterfaceMaster = (function () {
 					}
 				}
 
-				if(scores && category == "overall" && context != "custom"){
+				if(scores && category == "overall" && context != "custom"){$el
 					// Display rating hexagon
 					drawRatingHexagon($rank, r);
 				} else{
