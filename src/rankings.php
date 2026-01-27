@@ -126,15 +126,15 @@ require_once 'header.php';
     <div class="team-option weight-controls">
       <h3 class="help" title="Adjust how coverers are ranked. Coverage = type coverage; Stat = bulk; Meta = meta priority.">Coverer Weights</h3>
       <div class="weight-row">
-        <label>Coverage <span class="weight-val" data-key="wCov">0.78</span></label>
+        <label>Coverage <span class="weight-val" data-key="wCov">1</span></label>
         <input type="range" class="weight-slider" data-key="wCov" min="0" max="1" step="0.01" />
       </div>
       <div class="weight-row">
-        <label>Stat <span class="weight-val" data-key="wStat">0.10</span></label>
+        <label>Stat <span class="weight-val" data-key="wStat">0.05</span></label>
         <input type="range" class="weight-slider" data-key="wStat" min="0" max="1" step="0.01" />
       </div>
       <div class="weight-row">
-        <label>Meta <span class="weight-val" data-key="wMeta">0.19</span></label>
+        <label>Meta <span class="weight-val" data-key="wMeta">0.5</span></label>
         <input type="range" class="weight-slider" data-key="wMeta" min="0" max="1" step="0.01" />
       </div>
       <div style="margin-top:6px;">
