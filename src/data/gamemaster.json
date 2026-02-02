@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-01-24 03:31:16",
+    "timestamp": "2026-02-02 00:23:34",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -327,7 +327,7 @@
                 },
                 {
                     "filterType": "id",
-                    "values": ["lairon", "lairon_shadow", "kleavor", "armaldo", "armaldo_shadow", "avalugg_hisuian", "empoleon", "empoleon_shadow", "ludicolo", "golisopod", "araquanid", "lapras", "lapras_shadow", "walrein", "walrein_shadow", "dewgong", "cloyster", "cloyster_shadow", "sealeo", "sealeo_shadow", "dialga", "dialga_origin", "dialga_shadow", "duraludon", "dipplin", "hydrapple", "appletun", "flapple", "exeggutor_alolan", "exeggutor_alolan_shadow", "kyurem", "arctibax", "baxcalibur", "kyurem_black", "kyurem_white", "magnezone", "magnezone_shadow", "magneton", "magneton_shadow", "togedemaru", "electrode_hisuian", "rotom_mow", "galvantula", "galvantula_shadow", "vikavolt", "vikavolt_shadow", "rotom_frost", "volcarona", "volcanion", "reshiram", "zapdos", "zapdos_shadow", "zekrom", "raikou", "raikou_shadow", "tapu_koko", "thundurus_therian", "thundurus_incarnate", "regieleki"]
+                    "values": ["lairon", "lairon_shadow", "kleavor", "armaldo", "armaldo_shadow", "avalugg_hisuian", "empoleon", "empoleon_shadow", "ludicolo", "golisopod", "araquanid", "lapras", "lapras_shadow", "walrein", "walrein_shadow", "dewgong", "cloyster", "cloyster_shadow", "sealeo", "sealeo_shadow", "dialga", "dialga_origin", "dialga_shadow", "duraludon", "dipplin", "hydrapple", "appletun", "flapple", "exeggutor_alolan", "exeggutor_alolan_shadow", "kyurem", "arctibax", "baxcalibur", "kyurem_black", "kyurem_white", "magnezone", "magnezone_shadow", "magneton", "magneton_shadow", "togedemaru", "electrode_hisuian", "rotom_mow", "galvantula", "galvantula_shadow", "vikavolt", "vikavolt_shadow", "rotom_frost", "volcarona", "volcanion", "reshiram", "zapdos", "zapdos_shadow", "zekrom", "raikou", "raikou_shadow", "tapu_koko", "thundurus_therian", "thundurus_incarnate", "thundurus_incarnate_shadow", "regieleki"]
                 }
             ],
             "exclude": [
@@ -1279,16 +1279,6 @@
             "showFormat": false,
             "showMeta": true,
             "hideRankings": true,
-            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
-        },
-        {
-            "title": "Ultra Premier Cup",
-            "cup": "premier",
-            "cp": 2500,
-            "meta": "premierultra",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
             "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
@@ -4018,7 +4008,7 @@
             },
             "types": ["fire", "none"],
             "fastMoves": ["EMBER", "FEINT_ATTACK", "FIRE_SPIN"],
-            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS"],
+            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS", "ENERGY_BALL"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 4],
                 "cp1500": [24.5, 4, 15, 14],
@@ -4027,7 +4017,7 @@
             },
             "level25CP": 1382,
             "tags": ["shadoweligible"],
-            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER"],
+            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER", "ENERGY_BALL"],
             "searchPriority": 3,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
@@ -4049,7 +4039,8 @@
             },
             "types": ["ice", "fairy"],
             "fastMoves": ["FEINT_ATTACK", "POWDER_SNOW", "CHARM"],
-            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE"],
+            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE", "CHILLING_WATER"],
+            "eliteMoves": ["CHILLING_WATER"],
             "tags": ["alolan", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [8, 8, 14, 15],
@@ -4079,7 +4070,8 @@
             },
             "types": ["ice", "fairy"],
             "fastMoves": ["FEINT_ATTACK", "POWDER_SNOW", "CHARM"],
-            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE"],
+            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE", "CHILLING_WATER"],
+            "eliteMoves": ["CHILLING_WATER"],
             "tags": ["alolan", "shadow"],
             "defaultIVs": {
                 "cp500": [8, 8, 14, 15],
@@ -4108,7 +4100,7 @@
             },
             "types": ["fire", "none"],
             "fastMoves": ["EMBER", "FEINT_ATTACK", "FIRE_SPIN"],
-            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS"],
+            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS", "ENERGY_BALL"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 4],
                 "cp1500": [24.5, 4, 15, 14],
@@ -4116,7 +4108,7 @@
                 "cp2500l40": [40, 15, 15, 15]
             },
             "tags": ["shadow"],
-            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER"],
+            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER", "ENERGY_BALL"],
             "searchPriority": 6,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
@@ -44351,7 +44343,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_GLIMMET",
                 "evolutions": ["glimmora"]
@@ -44376,7 +44368,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_GLIMMET",
                 "parent": "glimmet"
