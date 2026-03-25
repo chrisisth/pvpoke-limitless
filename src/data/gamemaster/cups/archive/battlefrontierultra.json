@@ -1,9 +1,0 @@
-{
-    "name": "battlefrontierultra",
-    "title": "Battle Frontier (Ultra League)",
-    "include": [],
-    "exclude": [{
-        "filterType": "id",
-        "values": ["lapras","gastrodon","feraligatr","corviknight","dusknoir","cradily","forretress","blastoise"]
-    }]
-}
