@@ -24,59 +24,58 @@
 		]
 	},
 	{
-		"title": "Kanto Cup",
-		"cup": "kanto",
+		"title": "Jungle Cup",
+		"cup": "jungle",
 		"cp": 1500,
-		"meta": "kanto",
+		"meta": "jungle",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true,
 		"rules": [
 			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Pokémon with a Pokédex number between #001 and #151 are eligible."
+			"Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible."
 		]
 	},
 	{
-		"title": "Spring Cup",
-		"cup": "spring",
+		"title": "Electric Cup",
+		"cup": "electric",
 		"cp": 1500,
-		"meta": "spring",
+		"meta": "electric",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true,
 		"rules": [
 			"Pokémon must be at or below 1,500 CP to enter.",
-			"Only Water-, Grass-, and Fairy-type Pokémon are eligible.",
-			"The following Pokemon are not allowed: Jumpluff, Roserade, Toxapex"
+			"Only Electric-type Pokémon are eligible.",
+			"The following Pokemon are not allowed: Stunfisk, Heliolisk, Charjabug, Vikavolt"
 		]
 	},
 	{
-		"title": "Battle Frontier (Majestic)",
-		"cup": "majestic",
+		"title": "Battle Frontier (Bayou Cup)",
+		"cup": "bayou",
 		"cp": 1500,
-		"meta": "majestic",
+		"meta": "bayou",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
 	},
 	{
-		"title": "Battle Frontier (Crucible)",
-		"cup": "crucible",
+		"title": "Battle Frontier (Spellcraft Cup)",
+		"cup": "spellcraft",
+		"cp": 1500,
+		"meta": "spellcraft",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Battle Frontier (UL Retro)",
+		"cup": "bfretro",
 		"cp": 2500,
-		"meta": "crucible",
+		"meta": "bfretro",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true
-	},
-	{
-		"title": "Battle Frontier (Great)",
-		"cup": "battlefrontiergreat",
-		"cp": 1500,
-		"meta": "great",
-		"showCup": false,
-		"showFormat": true,
-		"showMeta": false,
-		"hideRankings": true
 	},
 	{
 		"title": "Battle Frontier (Master)",
