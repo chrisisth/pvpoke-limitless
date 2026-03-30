@@ -99,6 +99,11 @@
         "chargedMoves": ["DOUBLE_IRON_BASH", "SUPER_POWER"]
     },
     {
+        "speciesId": "ninetales_alolan",
+        "fastMove": "POWDER_SNOW",
+        "chargedMoves": ["WEATHER_BALL_ICE", "CHILLING_WATER"]
+    },
+    {
         "speciesId": "primarina",
         "fastMove": "WATERFALL",
         "chargedMoves": ["DISARMING_VOICE", "HYDRO_CANNON"]
@@ -172,8 +177,8 @@
         "chargedMoves": ["ICY_WIND", "SWIFT"]
     },
     {
-        "speciesId": "ninetales_alolan",
-        "fastMove": "POWDER_SNOW",
-        "chargedMoves": ["WEATHER_BALL_ICE", "CHILLING_WATER"]
+        "speciesId": "doublade",
+        "fastMove": "SHADOW_CLAW",
+        "chargedMoves": ["SACRED_SWORD", "GYRO_BALL"]
     }
 ]
