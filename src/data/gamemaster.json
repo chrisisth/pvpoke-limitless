@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-03-25 02:08:24",
+    "timestamp": "2026-03-30 02:41:37",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -277,6 +277,22 @@
             "cup": "equinox"
         },
         {
+            "name": "fantasy",
+            "title": "Fantasy Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["steel", "dragon", "fairy"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
             "name": "gobattleleague",
             "title": "GO Battle League",
             "rankingAlias": "all",
@@ -419,16 +435,6 @@
             "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Jungle Cup",
-            "cup": "jungle",
-            "cp": 1500,
-            "meta": "jungle",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Grass-,  Electric-,  Poison-,  Ground-,  Flying-,  Bug-,  and Dark-type Pokémon are eligible."]
-        },
-        {
             "title": "Electric Cup",
             "cup": "electric",
             "cp": 1500,
@@ -437,6 +443,16 @@
             "showFormat": true,
             "showMeta": true,
             "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Electric-type Pokémon are eligible.", "The following Pokemon are not allowed: Stunfisk,  Heliolisk,  Charjabug,  Vikavolt"]
+        },
+        {
+            "title": "Fantasy Cup",
+            "cup": "fantasy",
+            "cp": 1500,
+            "meta": "fantasy",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
         },
         {
             "title": "Battle Frontier (Bayou Cup)",
@@ -46367,6 +46383,17 @@
             "type": "normal",
             "power": 150,
             "energy": 80,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Nuke",
+            "turns": 1
+        },
+        {
+            "moveId": "GIGATON_HAMMER",
+            "name": "Gigaton Hammer",
+            "type": "steel",
+            "power": 130,
+            "energy": 60,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "Nuke",
