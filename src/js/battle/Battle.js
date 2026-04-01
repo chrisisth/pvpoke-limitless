@@ -88,7 +88,13 @@ function Battle(){
 			poke.initialize(cp);
 		}
 		
-		poke.reset();
+		if(mode == "simulate"){
+			poke.reset();
+		} else if (mode == "emulate" && turns > 1){
+			poke.reset(true);
+			console.log(poke.statBuffs);
+		}
+		
 		poke.index = index;
 		pokemon[index] = poke;
 

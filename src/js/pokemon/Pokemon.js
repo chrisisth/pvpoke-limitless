@@ -1830,7 +1830,7 @@ function Pokemon(id, i, b, d){
 
 	// Resets Pokemon prior to battle
 
-	this.reset = function(){
+	this.reset = function(isSwitch = false){
 		self.hp = self.startHp;
 		self.energy = self.startEnergy;
 		self.cooldown = self.startCooldown;
@@ -1839,11 +1839,11 @@ function Pokemon(id, i, b, d){
 		self.statBuffs = [self.startStatBuffs[0], self.startStatBuffs[1]];
 		self.faintSource = '';
 
-		self.applyStatBuffs(self.nativeStatBuffs);
-
-		if(self.formChange){
+		if(self.formChange && (self.formChange.resetOnSwitch || ! isSwitch)){
 			self.changeForm(self.startFormId);
 		}
+
+		self.applyStatBuffs(self.nativeStatBuffs);
 
 		self.resetMoves();
 	}
@@ -1988,7 +1988,6 @@ function Pokemon(id, i, b, d){
 			self.statBuffs[i] = Math.min(self.statBuffs[i], maxBuffStages);
 			self.statBuffs[i] = Math.max(self.statBuffs[i], -maxBuffStages);
 		}
-
 	}
 
 	// Return effective stat after applying modifier, 0 - attack, 1 - defense

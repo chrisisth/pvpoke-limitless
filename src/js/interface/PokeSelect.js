@@ -68,7 +68,7 @@ function PokeSelect(element, i){
 
 		if(selectedPokemon){
 
-			selectedPokemon.fullReset();
+			selectedPokemon.reset();
 
 			$el.find(".poke-stats").show();
 
