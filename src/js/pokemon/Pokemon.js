@@ -1839,6 +1839,8 @@ function Pokemon(id, i, b, d){
 		self.statBuffs = [self.startStatBuffs[0], self.startStatBuffs[1]];
 		self.faintSource = '';
 
+		self.applyStatBuffs(self.nativeStatBuffs);
+
 		if(self.formChange){
 			self.changeForm(self.startFormId);
 		}
@@ -1853,6 +1855,7 @@ function Pokemon(id, i, b, d){
 		self.startEnergy = 0;
 		self.startCooldown = 0;
 		self.startStatBuffs = [0, 0];
+		self.nativeStatBuffs = [0, 0];
 		self.startFormId = self.originalFormId;
 
 		self.reset();
@@ -2023,9 +2026,9 @@ function Pokemon(id, i, b, d){
 		}
 
 		if(sourceBuffs[index] > 0){
-			multiplier = (buffDivisor + sourceBuffs[index] + self.nativeStatBuffs[index]) / buffDivisor;
+			multiplier = (buffDivisor + sourceBuffs[index]) / buffDivisor;
 		} else{
-			multiplier = buffDivisor / (buffDivisor - sourceBuffs[index] - self.nativeStatBuffs[index]);
+			multiplier = buffDivisor / (buffDivisor - sourceBuffs[index]);
 		}
 
 		return multiplier;
@@ -2367,6 +2370,8 @@ function Pokemon(id, i, b, d){
 		if(form?.nativeStatBuffs){
 			self.nativeStatBuffs[0] = form.nativeStatBuffs[0];
 			self.nativeStatBuffs[1] = form.nativeStatBuffs[1];
+
+			self.applyStatBuffs(self.nativeStatBuffs);
 		}
 
 		// Form specific functionality

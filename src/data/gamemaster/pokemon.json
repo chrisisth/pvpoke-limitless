@@ -37565,7 +37565,7 @@
             "def": 199,
             "hp": 146
         },
-        "nativeStatBuffs": [0, -4],
+        "nativeStatBuffs": [0, -1],
         "types": ["ghost", "fairy"],
         "fastMoves": ["SHADOW_CLAW", "HEX"],
         "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "THUNDER"],

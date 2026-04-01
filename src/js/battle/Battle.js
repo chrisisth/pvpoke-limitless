@@ -1256,20 +1256,24 @@ function Battle(){
 			}
 
 			// Special event for Mimikyu, copying shield functionality
-			if(defender.formChange && defender.formChange.trigger == "charged_move_damage" && defender.formChange.effect == "protect"){
+			if(defender.formChange && defender.formChange.trigger == "charged_move_damage" && defender.formChange.effect == "protect" && ! defenderUsedShield){''
 				let damageBlocked = damage-1;
-				let shieldTimelineDescriptions = [damageBlocked, "Form Change"];
+				let shieldTimelineDescriptions = [damageBlocked, "Form Change", "-1 Defense"];
 
 				damage = 1;
 				roundShieldUsed = true;
 
-				timeline.push(new TimelineEvent("shield", "Disguise Busted", defender.index, time+8500, turns, shieldTimelineDescriptions));
+				timeline.push(new TimelineEvent("shieldSpecial", "Disguise Busted", defender.index, time+8500, turns, shieldTimelineDescriptions));
 
 				if(mode == "emulate"){
-					turnMessages.push({ index: defender.index, str: "Disguise Busted!"});
+					turnMessages.push({ index: defender.index, str: "Blocked!"});
+					
+					if(defender.formChange.alternativeFormId == "mimikyu_busted"){
+						turnMessages.push({ index: defender.index, str: "Mimikyu's disguise was busted!"});
+					}
 				}
 
-				self.logDecision(defender, " blocked damage with its disguise");
+				self.logDecision(defender, "'s disguise was busted");
 
 				// If a shield has already been used, add time so events don't visually overlap
 
