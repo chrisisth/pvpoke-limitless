@@ -46,6 +46,7 @@ function Pokemon(id, i, b, d){
 	this.stats = { atk: 0, def: 0, hp: 0 };
 	this.statBuffs = [ 0, 0 ]; // 0 - attack, 1 - defense
 	this.startStatBuffs = [ 0, 0 ];
+	this.nativeStatBuffs = [ 0, 0 ]; // Form or species specific stat buffs
 	this.buffChanceModifier = 0;
 	this.ivs = { atk: 0, def: 0, hp: 0 };
 	this.types = [ data.types[0], data.types[1] ];
@@ -2022,9 +2023,9 @@ function Pokemon(id, i, b, d){
 		}
 
 		if(sourceBuffs[index] > 0){
-			multiplier = (buffDivisor + sourceBuffs[index]) / buffDivisor;
+			multiplier = (buffDivisor + sourceBuffs[index] + self.nativeStatBuffs[index]) / buffDivisor;
 		} else{
-			multiplier = buffDivisor / (buffDivisor - sourceBuffs[index]);
+			multiplier = buffDivisor / (buffDivisor - sourceBuffs[index] - self.nativeStatBuffs[index]);
 		}
 
 		return multiplier;
@@ -2360,6 +2361,12 @@ function Pokemon(id, i, b, d){
 			this.stats.atk = newStats.atk;
 			this.stats.def = newStats.def;
 			//this.stats.hp = newStats.hp;
+		}
+
+		// Apply form specific stat buffs or debuffs
+		if(form?.nativeStatBuffs){
+			self.nativeStatBuffs[0] = form.nativeStatBuffs[0];
+			self.nativeStatBuffs[1] = form.nativeStatBuffs[1];
 		}
 
 		// Form specific functionality
