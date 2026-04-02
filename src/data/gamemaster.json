@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-03-25 02:08:24",
+    "timestamp": "2026-04-01 16:02:37",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -277,6 +277,22 @@
             "cup": "equinox"
         },
         {
+            "name": "fantasy",
+            "title": "Fantasy Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["steel", "dragon", "fairy"]
+                }
+            ],
+            "exclude": [
+                {
+                    "filterType": "tag",
+                    "values": ["mega"]
+                }
+            ]
+        },
+        {
             "name": "gobattleleague",
             "title": "GO Battle League",
             "rankingAlias": "all",
@@ -356,6 +372,29 @@
             "levelCap": 50
         },
         {
+            "name": "maelstrom",
+            "title": "Maelstrom Cup",
+            "link": "https://devon.gg",
+            "cup": "maelstrom",
+            "include": [],
+            "exclude": [
+                {
+                    "filterType": "id",
+                    "name": "Species",
+                    "values": ["aegislash_shield", "altaria", "annihilape", "araquanid", "azumarill", "carbink", "corsola_galarian", "corviknight", "doublade", "empoleon", "florges", "forretress", "furret", "gastrodon", "guzzlord", "jellicent", "lickilicky", "marowak", "quagsire", "scizor", "stunfisk", "tinkaton", "wigglytuff"]
+                },
+                {
+                    "filterType": "tag",
+                    "name": "Tag",
+                    "values": ["mega"]
+                }
+            ],
+            "overrides": [],
+            "league": 1500,
+            "useDefaultMovesets": 1,
+            "excludeLowPokemon": 1
+        },
+        {
             "name": "premier",
             "title": "Premier Cup",
             "include": [],
@@ -419,16 +458,6 @@
             "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
         },
         {
-            "title": "Jungle Cup",
-            "cup": "jungle",
-            "cp": 1500,
-            "meta": "jungle",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Grass-,  Electric-,  Poison-,  Ground-,  Flying-,  Bug-,  and Dark-type Pokémon are eligible."]
-        },
-        {
             "title": "Electric Cup",
             "cup": "electric",
             "cp": 1500,
@@ -437,6 +466,16 @@
             "showFormat": true,
             "showMeta": true,
             "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Electric-type Pokémon are eligible.", "The following Pokemon are not allowed: Stunfisk,  Heliolisk,  Charjabug,  Vikavolt"]
+        },
+        {
+            "title": "Fantasy Cup",
+            "cup": "fantasy",
+            "cp": 1500,
+            "meta": "fantasy",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
         },
         {
             "title": "Battle Frontier (Bayou Cup)",
@@ -479,6 +518,15 @@
             "cup": "equinox",
             "cp": 1500,
             "meta": "equinox",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true
+        },
+        {
+            "title": "Devon Maelstrom Cup",
+            "cup": "maelstrom",
+            "cp": 1500,
+            "meta": "maelstrom",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
@@ -34362,7 +34410,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "activate_shield",
-                "alternativeFormId": "aegislash_shield"
+                "alternativeFormId": "aegislash_shield",
+                "resetOnSwitch": true
             }
         },
         {
@@ -34396,7 +34445,8 @@
                 "type": "set",
                 "trigger": "activate_charged",
                 "moveId": "ANY",
-                "alternativeFormId": "aegislash_blade"
+                "alternativeFormId": "aegislash_blade",
+                "resetOnSwitch": true
             }
         },
         {
@@ -38126,11 +38176,13 @@
             "dex": 778,
             "speciesName": "Mimikyu",
             "speciesId": "mimikyu",
+            "originalFormId": "mimikyu",
             "baseStats": {
                 "atk": 177,
                 "def": 199,
                 "hp": 146
             },
+            "nativeStatBuffs": [0, 0],
             "types": ["ghost", "fairy"],
             "fastMoves": ["SHADOW_CLAW", "HEX"],
             "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "THUNDER"],
@@ -38139,6 +38191,44 @@
                 "cp1500": [25, 5, 13, 15],
                 "cp2500": [50, 13, 15, 15],
                 "cp2500l40": [40, 15, 15, 15]
+            },
+            "formChange": {
+                "type": "set",
+                "trigger": "charged_move_damage",
+                "effect": "protect",
+                "moveId": "ANY",
+                "alternativeFormId": "mimikyu_busted",
+                "resetOnSwitch": false
+            },
+            "searchPriority": 4,
+            "buddyDistance": 5,
+            "thirdMoveCost": 50000,
+            "released": false
+        },
+        {
+            "dex": 778,
+            "speciesName": "Mimikyu (Busted)",
+            "speciesId": "mimikyu_busted",
+            "originalFormId": "mimikyu",
+            "baseStats": {
+                "atk": 177,
+                "def": 199,
+                "hp": 146
+            },
+            "nativeStatBuffs": [0, -1],
+            "types": ["ghost", "fairy"],
+            "fastMoves": ["SHADOW_CLAW", "HEX"],
+            "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "THUNDER"],
+            "defaultIVs": {
+                "cp500": [8.5, 4, 12, 14],
+                "cp1500": [25, 5, 13, 15],
+                "cp2500": [50, 13, 15, 15],
+                "cp2500l40": [40, 15, 15, 15]
+            },
+            "formChange": {
+                "type": "set",
+                "trigger": "none",
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
@@ -40829,7 +40919,8 @@
                 "trigger": "charged_move",
                 "moveId": "ANY",
                 "defaultFormId": "morpeko_full_belly",
-                "alternativeFormId": "morpeko_hangry"
+                "alternativeFormId": "morpeko_hangry",
+                "resetOnSwitch": true
             },
             "tags": ["include2500"],
             "searchPriority": 4,
@@ -46367,6 +46458,17 @@
             "type": "normal",
             "power": 150,
             "energy": 80,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Nuke",
+            "turns": 1
+        },
+        {
+            "moveId": "GIGATON_HAMMER",
+            "name": "Gigaton Hammer",
+            "type": "steel",
+            "power": 130,
+            "energy": 60,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "Nuke",

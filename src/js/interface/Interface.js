@@ -2595,7 +2595,7 @@ var InterfaceMaster = (function () {
 					}
 				}
 
-				if($(this).hasClass("shield")){
+				if($(this).hasClass("shield") || $(this).hasClass("shieldSpecial")){
 					let values = $(this).attr("values").split(',');
 
 					$tooltip.find(".details").html(values[0] + " blocked");
