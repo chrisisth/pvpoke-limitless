@@ -1,9 +1,0 @@
-{
-	"name": "championship",
-	"title": "2022 Championship Series",
-	"include": [],
-	"exclude": [{
-		"filterType": "tag",
-		"values": ["mega"]
-	}]
-}
