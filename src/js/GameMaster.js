@@ -1313,16 +1313,8 @@ var GameMaster = (function () {
 
 								
 
-									pokemon.weightModifier = 1;
-									
-									// Store ranking position for meta relevance calculations
-									pokemon.index = n + 1; // 1-based index (rank 1 = first place)
-
-									if(chargedMoves.length > 1){
-										pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
-									}
-
-									object.overrideMoveset(pokemon, battle.getCP(), battle.getCup().name, overrides);
+								if(chargedMoves.length > 1){
+									pokemon.selectMove("charged", chargedMoves[1].moveId, 1);
 								}
 							}
 						}
@@ -1786,9 +1778,11 @@ var GameMaster = (function () {
 					break;
 				}
 			}
-			return object;
-		} 
-    
+		}
+
+        return object;
+    }
+
     return {
         getInstance: function (interface) {
             if (!instance) {
