@@ -38,30 +38,6 @@
         "turns": 1
     },
     {
-        "moveId": "AEGISLASH_CHARGE_AIR_SLASH",
-        "name": "Air Slash",
-        "abbreviation": "AS",
-        "type": "flying",
-        "power": 0,
-        "energy": 0,
-        "energyGain": 6,
-        "cooldown": 1500,
-        "archetype": "Low Quality",
-        "turns": 3
-    },
-    {
-        "moveId": "AEGISLASH_CHARGE_PSYCHO_CUT",
-        "name": "Psycho Cut",
-        "abbreviation": "PC",
-        "type": "psychic",
-        "power": 0,
-        "energy": 0,
-        "energyGain": 6,
-        "cooldown": 1000,
-        "archetype": "Low Quality",
-        "turns": 2
-    },
-    {
         "moveId": "AERIAL_ACE",
         "name": "Aerial Ace",
         "type": "flying",
@@ -239,6 +215,21 @@
         "turns": 1
     },
     {
+        "moveId": "BEAK_BLAST",
+        "name": "Beak Blast",
+        "type": "flying",
+        "power": 110,
+        "energy": 55,
+        "energyGain": 0,
+        "turns": 1,
+        "cooldown": 500,
+        "archetype": "Debuff Nuke",
+        "abbreviation": "BBl",
+        "buffTarget": "opponent",
+        "buffs": [-1, 0],
+        "buffApplyChance": "1"
+    },
+    {
         "moveId": "BEHEMOTH_BASH",
         "name": "Behemoth Bash",
         "type": "steel",
@@ -390,7 +381,7 @@
         "name": "Brick Break",
         "abbreviation": "BkB",
         "type": "fighting",
-        "power": 40,
+        "power": 50,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -496,11 +487,11 @@
         "moveId": "BULLET_PUNCH",
         "name": "Bullet Punch",
         "type": "steel",
-        "power": 8,
+        "power": 7,
         "energy": 0,
         "energyGain": 7,
         "cooldown": 1000,
-        "archetype": "Multipurpose",
+        "archetype": "General",
         "turns": 2
     },
     {
@@ -842,7 +833,7 @@
         "name": "Dragon Energy",
         "abbreviation": "DrE",
         "type": "dragon",
-        "power": 100,
+        "power": 90,
         "energy": 45,
         "energyGain": 0,
         "cooldown": 500,
@@ -888,7 +879,7 @@
         "name": "Drain Punch",
         "abbreviation": "DrP",
         "type": "fighting",
-        "power": 20,
+        "power": 40,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -919,6 +910,21 @@
         "energyGain": 0,
         "cooldown": 500,
         "archetype": "General",
+        "turns": 1
+    },
+    {
+        "moveId": "DRUM_BEATING",
+        "name": "Drum Beating",
+        "abbreviation": "DrB",
+        "type": "grass",
+        "power": 60,
+        "energy": 35,
+        "energyGain": 0,
+        "cooldown": 500,
+        "buffs": [-1, 0],
+        "buffTarget": "opponent",
+        "buffApplyChance": "1",
+        "archetype": "Debuff Spam",
         "turns": 1
     },
     {
@@ -1234,7 +1240,7 @@
         "name": "Foul Play",
         "abbreviation": "FoP",
         "type": "dark",
-        "power": 60,
+        "power": 65,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -1340,7 +1346,7 @@
         "name": "Geomancy",
         "abbreviation": "Geo",
         "type": "fairy",
-        "power": 4,
+        "power": 8,
         "energy": 0,
         "energyGain": 13,
         "cooldown": 1500,
@@ -1364,6 +1370,17 @@
         "type": "normal",
         "power": 150,
         "energy": 80,
+        "energyGain": 0,
+        "cooldown": 500,
+        "archetype": "Nuke",
+        "turns": 1
+    },
+    {
+        "moveId": "GIGATON_HAMMER",
+        "name": "Gigaton Hammer",
+        "type": "steel",
+        "power": 130,
+        "energy": 60,
         "energyGain": 0,
         "cooldown": 500,
         "archetype": "Nuke",
@@ -1443,11 +1460,11 @@
         "moveId": "HEAT_WAVE",
         "name": "Heat Wave",
         "type": "fire",
-        "power": 95,
-        "energy": 75,
+        "power": 75,
+        "energy": 45,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "High Energy",
+        "archetype": "General",
         "turns": 1
     },
     {
@@ -1481,7 +1498,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_DARK",
@@ -1492,7 +1510,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_DRAGON",
@@ -1503,7 +1522,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_ELECTRIC",
@@ -1514,7 +1534,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_FIGHTING",
@@ -1525,7 +1546,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_FIRE",
@@ -1536,7 +1558,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_FLYING",
@@ -1547,7 +1570,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_GHOST",
@@ -1558,7 +1582,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_GRASS",
@@ -1569,7 +1594,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_GROUND",
@@ -1580,12 +1606,25 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_ICE",
         "name": "Hidden Power (Ice)",
         "type": "ice",
+        "power": 9,
+        "energy": 0,
+        "energyGain": 8,
+        "cooldown": 1500,
+        "archetype": "Low Quality",
+        "turns": 3,
+        "unlisted": true
+    },
+    {
+        "moveId": "HIDDEN_POWER_NORMAL",
+        "name": "Hidden Power",
+        "type": "normal",
         "power": 9,
         "energy": 0,
         "energyGain": 8,
@@ -1602,7 +1641,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_PSYCHIC",
@@ -1613,7 +1653,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_ROCK",
@@ -1624,7 +1665,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_STEEL",
@@ -1635,7 +1677,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIDDEN_POWER_WATER",
@@ -1646,7 +1689,8 @@
         "energyGain": 8,
         "cooldown": 1500,
         "archetype": "Low Quality",
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "HIGH_HORSEPOWER",
@@ -1815,7 +1859,7 @@
         "moveId": "ICICLE_SPEAR",
         "name": "Icicle Spear",
         "type": "ice",
-        "power": 65,
+        "power": 70,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -1997,11 +2041,11 @@
         "moveId": "LOW_KICK",
         "name": "Low Kick",
         "type": "fighting",
-        "power": 4,
+        "power": 5,
         "energy": 0,
-        "energyGain": 5,
+        "energyGain": 8,
         "cooldown": 1000,
-        "archetype": "Low Quality",
+        "archetype": "Fast Charge",
         "turns": 2
     },
     {
@@ -2146,10 +2190,25 @@
         "name": "Meteor Mash",
         "type": "steel",
         "power": 100,
-        "energy": 50,
+        "energy": 45,
         "energyGain": 0,
         "cooldown": 500,
         "archetype": "General",
+        "turns": 1
+    },
+    {
+        "moveId": "MIND_BLOWN",
+        "name": "Mind Blown",
+        "abbreviation": "MdB",
+        "type": "fire",
+        "power": 90,
+        "energy": 35,
+        "energyGain": 0,
+        "cooldown": 500,
+        "buffs": [0, -4],
+        "buffTarget": "self",
+        "buffApplyChance": "1",
+        "archetype": "Debuff",
         "turns": 1
     },
     {
@@ -2238,20 +2297,20 @@
         "moveId": "MUD_BOMB",
         "name": "Mud Bomb",
         "type": "ground",
-        "power": 60,
-        "energy": 40,
+        "power": 65,
+        "energy": 45,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "Spam/Bait",
+        "archetype": "General",
         "turns": 1
     },
     {
         "moveId": "MUD_SHOT",
         "name": "Mud Shot",
         "type": "ground",
-        "power": 4,
+        "power": 3,
         "energy": 0,
-        "energyGain": 8,
+        "energyGain": 9,
         "cooldown": 1000,
         "archetype": "Fast Charge",
         "turns": 2
@@ -2261,11 +2320,11 @@
         "name": "Mud Slap",
         "abbreviation": "MSl",
         "type": "ground",
-        "power": 12,
+        "power": 11,
         "energy": 0,
         "energyGain": 10,
         "cooldown": 1500,
-        "archetype": "Multipurpose",
+        "archetype": "Heavy Damage",
         "turns": 3
     },
     {
@@ -2316,7 +2375,7 @@
         "energy": 35,
         "energyGain": 0,
         "cooldown": 500,
-        "buffs": [2, 0],
+        "buffs": [1, 0],
         "buffTarget": "self",
         "buffApplyChance": ".125",
         "archetype": "Boost Spam",
@@ -2331,8 +2390,11 @@
         "energy": 50,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "General",
-        "turns": 1
+        "archetype": "Boost",
+        "turns": 1,
+        "buffTarget": "self",
+        "buffs": [0, 1],
+        "buffApplyChance": "1"
     },
     {
         "moveId": "OBSTRUCT",
@@ -2423,7 +2485,7 @@
         "abbreviation": "PbC",
         "type": "electric",
         "power": 70,
-        "energy": 45,
+        "energy": 50,
         "energyGain": 0,
         "cooldown": 500,
         "buffs": [0, 1],
@@ -2544,11 +2606,11 @@
         "moveId": "POWDER_SNOW",
         "name": "Powder Snow",
         "type": "ice",
-        "power": 5,
+        "power": 6,
         "energy": 0,
         "energyGain": 8,
         "cooldown": 1000,
-        "archetype": "Fast Charge",
+        "archetype": "Multipurpose",
         "turns": 2
     },
     {
@@ -2670,7 +2732,7 @@
         "moveId": "PSYCHO_CUT",
         "name": "Psycho Cut",
         "type": "psychic",
-        "power": 3,
+        "power": 4,
         "energy": 0,
         "energyGain": 9,
         "cooldown": 1000,
@@ -2711,6 +2773,17 @@
         "energyGain": 4,
         "cooldown": 500,
         "archetype": "Fast Charge",
+        "turns": 1
+    },
+    {
+        "moveId": "PYRO_BALL",
+        "name": "Pyro Ball",
+        "type": "fire",
+        "power": 75,
+        "energy": 40,
+        "energyGain": 0,
+        "cooldown": 500,
+        "archetype": "Spam/Bait",
         "turns": 1
     },
     {
@@ -2848,7 +2921,7 @@
         "moveId": "ROCK_TOMB",
         "name": "Rock Tomb",
         "type": "rock",
-        "power": 80,
+        "power": 75,
         "energy": 50,
         "energyGain": 0,
         "cooldown": 500,
@@ -2938,7 +3011,7 @@
         "moveId": "SAND_TOMB",
         "name": "Sand Tomb",
         "type": "ground",
-        "power": 25,
+        "power": 40,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -2991,6 +3064,18 @@
         "turns": 1
     },
     {
+        "moveId": "SECRET_SWORD",
+        "name": "Secret Sword",
+        "abbreviation": "SeS",
+        "type": "fighting",
+        "power": 70,
+        "energy": 35,
+        "energyGain": 0,
+        "cooldown": 500,
+        "archetype": "Spam/Bait",
+        "turns": 1
+    },
+    {
         "moveId": "SEED_BOMB",
         "name": "Seed Bomb",
         "abbreviation": "SeB",
@@ -3022,10 +3107,10 @@
         "name": "Shadow Ball",
         "type": "ghost",
         "power": 100,
-        "energy": 55,
+        "energy": 50,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "Nuke",
+        "archetype": "General",
         "turns": 1
     },
     {
@@ -3082,8 +3167,8 @@
         "moveId": "SHADOW_SNEAK",
         "name": "Shadow Sneak",
         "type": "ghost",
-        "power": 50,
-        "energy": 45,
+        "power": 75,
+        "energy": 50,
         "energyGain": 0,
         "cooldown": 500,
         "archetype": "General",
@@ -3184,7 +3269,7 @@
         "moveId": "SMACK_DOWN",
         "name": "Smack Down",
         "type": "rock",
-        "power": 12,
+        "power": 11,
         "energy": 0,
         "energyGain": 8,
         "cooldown": 1500,
@@ -3221,10 +3306,10 @@
         "name": "Spacial Rend",
         "type": "dragon",
         "power": 95,
-        "energy": 50,
+        "energy": 55,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "General",
+        "archetype": "High Energy",
         "turns": 1
     },
     {
@@ -3624,7 +3709,8 @@
         "energy": 0,
         "energyGain": 0,
         "cooldown": 1500,
-        "turns": 3
+        "turns": 3,
+        "unlisted": true
     },
     {
         "moveId": "TRIPLE_AXEL",
@@ -3660,11 +3746,11 @@
         "name": "Twister",
         "abbreviation": "Tw",
         "type": "dragon",
-        "power": 45,
-        "energy": 45,
+        "power": 70,
+        "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
-        "archetype": "General",
+        "archetype": "Spam/Bait",
         "turns": 1
     },
     {
@@ -3685,7 +3771,7 @@
         "moveId": "VICE_GRIP",
         "name": "Vise Grip",
         "type": "normal",
-        "power": 40,
+        "power": 70,
         "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
@@ -3719,7 +3805,7 @@
         "name": "Volt Tackle",
         "type": "electric",
         "power": 90,
-        "energy": 50,
+        "energy": 40,
         "energyGain": 0,
         "cooldown": 500,
         "buffs": [0, -1],
@@ -3746,9 +3832,9 @@
         "moveId": "WATERFALL",
         "name": "Waterfall",
         "type": "water",
-        "power": 12,
+        "power": 11,
         "energy": 0,
-        "energyGain": 8,
+        "energyGain": 10,
         "cooldown": 1500,
         "archetype": "Heavy Damage",
         "turns": 3
@@ -3773,7 +3859,8 @@
         "energyGain": 4,
         "cooldown": 1000,
         "archetype": "Low Quality",
-        "turns": 2
+        "turns": 2,
+        "unlisted": true
     },
     {
         "moveId": "WATER_PULSE",
@@ -3888,7 +3975,7 @@
         "type": "flying",
         "power": 5,
         "energy": 0,
-        "energyGain": 7,
+        "energyGain": 8,
         "cooldown": 1000,
         "archetype": "Fast Charge",
         "turns": 2
@@ -3954,5 +4041,31 @@
         "cooldown": 1500,
         "archetype": "Low Quality",
         "turns": 3
+    },
+    {
+        "moveId": "AEGISLASH_CHARGE_AIR_SLASH",
+        "name": "Air Slash",
+        "abbreviation": "AS",
+        "type": "flying",
+        "power": 0,
+        "energy": 0,
+        "energyGain": 6,
+        "cooldown": 1500,
+        "archetype": "Low Quality",
+        "turns": 3,
+        "unlisted": true
+    },
+    {
+        "moveId": "AEGISLASH_CHARGE_PSYCHO_CUT",
+        "name": "Psycho Cut",
+        "abbreviation": "PC",
+        "type": "psychic",
+        "power": 0,
+        "energy": 0,
+        "energyGain": 6,
+        "cooldown": 1000,
+        "archetype": "Low Quality",
+        "turns": 2,
+        "unlisted": true
     }
 ]

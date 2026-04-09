@@ -163,7 +163,7 @@ header{
     width: 100%;
     box-shadow: rgba(0,0,0,0.3) 0px 0px 6px;
 	top: 0;
-	//top:28px;
+	//top:37px;
 
 	.header-wrap{
 		max-width:800px;
@@ -276,7 +276,7 @@ header{
 	display: flex;
     justify-content: center;
     background: #4b8f56;
-    padding: 3px;
+    padding: 6px;
 	width: 100%;
 	position: fixed;
 	z-index: 25;
@@ -354,7 +354,7 @@ footer{
 	margin: auto;
 	padding:60px 10px 10px 10px;
     border-radius: 12px;
-	//padding: 90px 10px 10px 10px;
+	//padding: 100px 10px 10px 10px;
 
 	& > h1{
 		margin:0;
@@ -2636,6 +2636,14 @@ a.download-csv{
 				z-index: 10;
 			}
 
+			&.shieldSpecial{
+				width:25px;
+				height:22px;
+				top:-12px;
+				background:url('../img/shield_special.png');
+				z-index: 10;
+			}
+
 			&.faint{
 				color:$color-faint;
 				font-size:20px;
@@ -2869,6 +2877,10 @@ a.download-csv{
 
 	&.shield{
 		background:$color-shield;
+	}
+
+	&.shieldSpecial{
+		background:#fef4b5;
 	}
 
 	&.tap{
@@ -3903,6 +3915,30 @@ a.download-csv{
 .modal .sort-group .center .button{
 	display: block;
 	min-width: 200px;
+}
+
+th.col-sort {
+  cursor: pointer;
+  padding-right: 20px;
+  position: relative;
+}
+
+th.col-sort::after {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
+}
+
+th.col-sort[data-asc="true"]::after {
+  content: "▴";
+  visibility: visible;
+}
+
+th.col-sort[data-asc="false"]::after {
+  content: "▾";
+  visibility: visible;
 }
 
 .rankings-container > .rank,
@@ -5049,7 +5085,7 @@ a.rating{
 			display: flex;
 			justify-content: space-between;
 
-			a.json{
+			a{
 				font-size: 12px;
 			}
 		}
@@ -5337,7 +5373,7 @@ a.pokebattler{
     		box-sizing: border-box;
 			box-shadow: 0px 5px 5px rgba(0,0,0,0.4);
 			overflow-y: auto;
-			//top: 65px;
+			//top: 74px;
 
 			a{
 				padding: 9px 8px 9px 38px;
@@ -5424,10 +5460,6 @@ a.pokebattler{
 	.header-ticker{
 		position: fixed;
 		z-index: 50;
-
-		a{
-			font-size: 11px;
-		}
 	}
 
 	body{

@@ -14,81 +14,98 @@ $formats = array (
   ),
   1 => 
   array (
-    'title' => 'Halloween Cup',
-    'cup' => 'halloween',
-    'cp' => 1500,
-    'meta' => 'halloween',
+    'title' => 'Master Premier Cup',
+    'cup' => 'premier',
+    'cp' => 10000,
+    'meta' => 'premiermaster',
     'showCup' => true,
-    'showFormat' => true,
+    'showFormat' => false,
     'showMeta' => true,
+    'hideRankings' => true,
     'rules' => 
     array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Poison-, Bug-, Ghost-, Dark-, and Fairy-type Pokémon are eligible.',
+      0 => 'No CP limit.',
+      1 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
     ),
   ),
   2 => 
   array (
-    'title' => 'Jungle Cup',
-    'cup' => 'jungle',
+    'title' => 'Electric Cup',
+    'cup' => 'electric',
     'cp' => 1500,
-    'meta' => 'jungle',
+    'meta' => 'electric',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Normal-, Grass-, Electric-, Poison-, Ground-, Flying-, Bug-, and Dark-type Pokémon are eligible.',
-      2 => 'The following Pokémon will not be allowed: Gligar, Galarian Stunfisk',
+      1 => 'Only Electric-type Pokémon are eligible.',
+      2 => 'The following Pokemon are not allowed: Stunfisk, Heliolisk, Charjabug, Vikavolt',
     ),
   ),
   3 => 
   array (
-    'title' => 'Mega Master League',
-    'cup' => 'mega',
-    'cp' => 10000,
-    'meta' => 'mega',
+    'title' => 'Fantasy Cup',
+    'cup' => 'fantasy',
+    'cp' => 1500,
+    'meta' => 'fantasy',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
-      0 => 'No CP limit.',
-      1 => 'Mega-Evolved Pokémon are allowed.',
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
     ),
   ),
   4 => 
   array (
-    'title' => 'LAIC 2025 Championship Series Cup',
-    'cup' => 'laic2025',
+    'title' => 'Spring Cup',
+    'cup' => 'spring',
     'cp' => 1500,
-    'meta' => 'laic2025',
+    'meta' => 'spring',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
+    'rules' => 
+    array (
+      0 => 'Pokémon must be at or below 1,500 CP to enter.',
+      1 => 'Only Water-, Grass-, and Fairy-type Pokémon are eligible.',
+      2 => 'The following Pokemon are not allowed: Junpluff, Roserade, Toxapex',
+    ),
   ),
   5 => 
   array (
-    'title' => 'Battle Frontier (Calamity)',
-    'cup' => 'calamity',
+    'title' => 'Battle Frontier (Bayou Cup)',
+    'cup' => 'bayou',
     'cp' => 1500,
-    'meta' => 'calamity',
+    'meta' => 'bayou',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
   ),
   6 => 
   array (
-    'title' => 'Battle Frontier (Ultra)',
-    'cup' => 'battlefrontierultra',
-    'cp' => 2500,
-    'meta' => 'ultra',
+    'title' => 'Battle Frontier (Spellcraft Cup)',
+    'cup' => 'spellcraft',
+    'cp' => 1500,
+    'meta' => 'spellcraft',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
   ),
   7 => 
+  array (
+    'title' => 'Battle Frontier (UL Retro)',
+    'cup' => 'bfretro',
+    'cp' => 2500,
+    'meta' => 'bfretro',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  8 => 
   array (
     'title' => 'Battle Frontier (Master)',
     'cup' => 'battlefrontiermaster',
@@ -98,27 +115,37 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  8 => 
-  array (
-    'title' => 'Devon Metamorphosis Cup',
-    'cup' => 'metamorphosis',
-    'cp' => 1500,
-    'meta' => 'metamorphosis',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-  ),
   9 => 
   array (
-    'title' => 'Gymbreakers Pillar Cup Remix',
-    'cup' => 'pillar3',
+    'title' => 'Devon Equinox Cup',
+    'cup' => 'equinox',
     'cp' => 1500,
-    'meta' => 'pillar3',
+    'meta' => 'equinox',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
   ),
   10 => 
+  array (
+    'title' => 'Devon Maelstrom Cup',
+    'cup' => 'maelstrom',
+    'cp' => 1500,
+    'meta' => 'maelstrom',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  11 => 
+  array (
+    'title' => 'Gymbreakers LAIC 2025 Remix',
+    'cup' => 'laic2025remix',
+    'cp' => 1500,
+    'meta' => 'laic2025remix',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  12 => 
   array (
     'title' => 'Zygarden Chrono Meta',
     'cup' => 'chrono',
@@ -128,7 +155,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  11 => 
+  13 => 
   array (
     'title' => 'Little Cup',
     'cup' => 'little',
@@ -138,7 +165,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  12 => 
+  14 => 
   array (
     'title' => 'Catch Cup',
     'cup' => 'catch',
@@ -148,7 +175,7 @@ $formats = array (
     'showFormat' => false,
     'showMeta' => false,
   ),
-  13 => 
+  15 => 
   array (
     'title' => 'Custom',
     'cup' => 'custom',

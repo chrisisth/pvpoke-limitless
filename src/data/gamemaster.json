@@ -1,5 +1,5 @@
 {
-    "timestamp": "2025-11-06 23:46:42",
+    "timestamp": "2026-04-08 17:11:08",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -47,172 +47,84 @@
             ]
         },
         {
-            "name": "ascension",
-            "title": "Devon Corp (Ascension Cup)",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["electric", "fire", "psychic"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["lapras", "starmie"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dragon", "ghost", "ground", "rock", "steel", "water", "normal"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["shadow", "mega"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["bellibolt", "furret", "morpeko_full_belly", "dedenne", "malamar"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50,
-            "excludeLowPokemon": 1
-        },
-        {
-            "name": "aurora",
-            "title": "Aurora Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "type",
-                    "values": ["fire", "poison", "steel"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["carbink", "chansey", "pachirisu", "zapdos_galarian", "moltres_galarian", "articuno_galarian", "jumpluff", "araquanid", "corsola_galarian", "bellibolt", "dedenne", "morpeko_full_belly", "wigglytuff"]
-                },
-                {
-                    "filterType": "moveType",
-                    "values": ["fire", "poison", "steel"]
-                },
-                {
-                    "filterType": "move",
-                    "values": ["HIDDEN_POWER_WATER"]
-                }
-            ]
-        },
-        {
-            "name": "battlefrontiergreat",
-            "title": "Battle Frontier (Great)",
-            "include": [],
-            "exclude": [],
-            "tierRules": {
-                "max": 11,
-                "floor": 0,
-                "tiers": [
-                    {
-                        "points": 6,
-                        "pokemon": ["annihilape", "azumarill", "carbink", "gligar", "lanturn", "lickitung", "registeel", "sableye_mega", "skarmory"]
-                    },
-                    {
-                        "points": 4,
-                        "pokemon": ["altaria", "bastiodon", "charjabug", "clodsire", "cresselia", "deoxys_defense", "dewgong", "feraligatr", "giratina_origin", "mandibuzz", "mantine", "medicham", "ninetales_alolan", "poliwrath", "quagsire", "sableye", "sandslash_alolan", "stunfisk_galarian", "swampert", "talonflame", "toxapex", "umbreon", "vigoroth", "whiscash", "wigglytuff"]
-                    },
-                    {
-                        "points": 1,
-                        "pokemon": ["altaria_mega", "charizard", "clefable", "diggersby", "dragonair", "dragonite", "empoleon", "froslass", "goodra", "greedent", "guzzlord", "heatran", "jellicent", "pelipper", "pidgeot", "serperior", "skeledirge", "steelix", "steelix_mega", "swampert_mega", "tapu_fini", "venusaur", "venusaur_mega"]
-                    }
-                ]
-            },
-            "allowSameSpecies": true
-        },
-        {
             "name": "battlefrontiermaster",
             "title": "Battle Frontier (Master League)",
             "include": [],
             "exclude": [
                 {
                     "filterType": "id",
-                    "values": ["eternatus", "groudon_primal", "gyarados_mega", "kyogre_primal", "latios_mega", "latias_mega", "rayquaza_mega", "zacian_crowned_sword", "zamazenta_crowned_shield", "metagross_mega", "dialga_origin", "palkia_origin", "reshiram", "necrozma_dusk_mane", "landorus_therian", "groudon", "florges", "scizor_mega", "lugia"]
+                    "values": ["dragonite_mega", "garchomp_mega", "groudon_primal", "gyarados_mega", "heracross_mega", "kyogre_primal", "latias_mega", "latios_mega", "metagross_mega", "rayquaza_mega", "salamence_mega", "tyranitar_mega"]
                 }
-            ]
+            ],
+            "restrictedPicks": 1,
+            "restrictedPokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"],
+            "tierRules": {
+                "max": 11,
+                "floor": 0,
+                "tiers": [
+                    {
+                        "points": 5,
+                        "pokemon": ["eternatus", "palkia_origin", "swampert_mega", "zacian_crowned_sword", "zamazenta_crowned_shield"]
+                    },
+                    {
+                        "points": 4,
+                        "pokemon": ["aggron_mega", "charizard_mega_y", "gallade_mega", "gardevoir_mega", "kyurem_black", "kyurem_white", "scizor_mega", "zygarde_complete"]
+                    },
+                    {
+                        "points": 3,
+                        "pokemon": ["blastoise_mega", "blaziken_mega", "dialga_origin", "gengar_mega", "groudon", "kyogre", "landorus_therian", "lucario_mega", "lunala", "marshadow", "meloetta_aria", "metagross", "steelix_mega", "xerneas", "yveltal"]
+                    },
+                    {
+                        "points": 2,
+                        "pokemon": ["dialga", "florges", "giratina_origin", "ho_oh", "keldeo_ordinary", "keldeo_resolute", "lugia", "mewtwo", "necrozma_dawn_wings", "necrozma_dusk_mane", "palkia", "primarina", "reshiram", "rhyperior", "solgaleo", "tyranitar", "zekrom"]
+                    },
+                    {
+                        "points": 1,
+                        "pokemon": ["charizard_mega_x", "garchomp", "giratina_altered", "gyarados", "heatran", "kangaskhan_mega", "kyurem", "melmetal", "moltres", "moltres_galarian", "slowbro_mega", "tapu_lele", "urshifu_rapid_strike", "urshifu_single_strike", "volcanion", "zacian_hero", "zarude"]
+                    }
+                ]
+            }
         },
         {
-            "name": "battlefrontierultra",
-            "title": "Battle Frontier (Ultra League)",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "id",
-                    "values": ["lapras", "gastrodon", "florges", "zygarde_complete", "jellicent", "bellibolt", "regidrago", "moltres_galarian", "empoleon"]
-                }
-            ]
-        },
-        {
-            "name": "calamity",
-            "title": "Calamity Cup",
+            "name": "bayou",
+            "title": "Bayou Cup",
             "include": [
                 {
                     "filterType": "type",
-                    "values": ["flying", "fire", "poison", "normal"]
-                },
-                {
-                    "filterType": "id",
-                    "values": []
+                    "values": ["bug", "ghost", "grass", "poison", "water"]
                 }
             ],
             "exclude": [
                 {
                     "filterType": "tag",
-                    "values": ["mega", "shadow", "legendary"]
-                },
-                {
-                    "filterType": "type",
-                    "values": ["rock", "ground", "water", "electric", "steel", "dark"]
+                    "values": ["mega", "legendary", "mythical", "ultrabeast"]
                 },
                 {
                     "filterType": "id",
-                    "values": ["dunsparce", "lickilicky", "miltank", "altaria", "dragalge", "turtonator", "spinda", "fletchinder", "rufflet", "talonflame", "oranguru", "chansey", "blissey", "wigglytuff", "furret", "dudunsparce"]
-                },
-                {
-                    "filterType": "move",
-                    "values": ["MUD_SLAP"]
+                    "values": ["aegislash_shield", "araquanid", "charjabug", "clodsire", "corsola_galarian", "cradily", "crustle", "dragalge", "drapion", "dusclops", "dusknoir", "empoleon", "forretress", "jellicent", "kingdra", "lapras", "lanturn", "mantine", "overqwil", "qwilfish_hisuian", "sableye", "scizor", "spidops", "spiritomb", "toxapex", "toxtricity", "walrein", "wormadam_trash"]
                 }
             ]
         },
         {
-            "name": "cascade",
-            "title": "Cascade Cup",
-            "include": [
+            "name": "bfretro",
+            "title": "UL Retro Cup",
+            "include": [],
+            "exclude": [
                 {
                     "filterType": "type",
-                    "values": ["dragon", "ice", "water", "poison", "psychic"]
-                }
-            ],
-            "exclude": [
+                    "values": ["dark", "fairy", "steel"]
+                },
                 {
                     "filterType": "tag",
                     "values": ["mega"]
                 },
                 {
-                    "filterType": "type",
-                    "values": ["fairy", "fighting", "steel"]
-                },
-                {
                     "filterType": "id",
-                    "values": ["gastrodon", "malamar", "araquanid", "clodsire", "toxapex", "lanturn", "zweilous", "hydreigon", "guzzlord", "cresselia", "drapion", "feraligatr", "skuntank", "muk_alolan", "grimer_alolan", "stunky", "qwilfish_hisuian", "overqwil", "giratina_origin", "suicune", "zygarde", "zygarde_10", "amaura", "aurorus", "lapras", "grumpig", "blastoise", "wailmer", "armarouge", "jellicent", "ariados"]
+                    "values": ["bellibolt", "cradily", "cresselia", "dusknoir", "giratina_altered", "jellicent", "lapras", "lickilicky", "mewtwo_armored", "oranguru", "regidrago", "zygarde_complete"]
                 }
-            ]
+            ],
+            "partySize": 3,
+            "presetOnly": true
         },
         {
             "name": "catch",
@@ -232,6 +144,7 @@
         {
             "name": "championshipseries",
             "title": "P!P Championship Series",
+            "rankingAlias": "all",
             "include": [],
             "exclude": [
                 {
@@ -299,18 +212,13 @@
             "exclude": []
         },
         {
-            "name": "devonchampionship",
-            "title": "Devon (Championship Invitational)",
+            "name": "electric",
+            "title": "Electric Cup",
             "include": [
                 {
                     "filterType": "type",
                     "name": "Type",
-                    "values": ["electric", "ghost", "poison", "rock"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["feraligatr", "feraligatr_shadow", "golisopod", "typhlosion", "typhlosion_shadow", "leavanny"]
+                    "values": ["electric"]
                 }
             ],
             "exclude": [
@@ -320,34 +228,53 @@
                     "values": ["mega"]
                 },
                 {
+                    "filterType": "id",
+                    "name": "Species",
+                    "values": ["stunfisk", "charjabug", "vikavolt", "heliolisk"]
+                }
+            ],
+            "partySize": 3,
+            "presetOnly": true
+        },
+        {
+            "name": "equinox",
+            "title": "Equinox Cup",
+            "link": "https://devon.gg",
+            "include": [
+                {
                     "filterType": "type",
                     "name": "Type",
-                    "values": ["dark", "ground", "ice", "steel"]
+                    "values": ["fire", "flying", "grass", "ground", "normal"]
                 },
                 {
                     "filterType": "id",
                     "name": "Species",
-                    "values": ["boltund", "bellibolt", "dusknoir", "carbink", "golurk", "corsola_galarian", "hakamo_o", "dragonair"]
+                    "values": ["wailmer", "wailmer_shadow", "wailord", "wailord_shadow"]
                 }
             ],
-            "levelCap": 50
-        },
-        {
-            "name": "element",
-            "title": "Element Cup",
-            "include": [
-                {
-                    "filterType": "evolution",
-                    "values": [1]
-                },
+            "exclude": [
                 {
                     "filterType": "type",
-                    "values": ["fire", "water", "grass"]
+                    "name": "Type",
+                    "values": ["electric", "rock"]
+                },
+                {
+                    "filterType": "tag",
+                    "name": "Tag",
+                    "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "name": "Species",
+                    "values": ["altaria", "dudunsparce", "dunsparce", "lickilicky", "miltank", "piloswine", "whimsicott", "wigglytuff"]
                 }
             ],
-            "exclude": [],
-            "partySize": 3,
-            "presetOnly": true
+            "overrides": [],
+            "league": 1500,
+            "useDefaultMovesets": 1,
+            "levelCap": 50,
+            "excludeLowPokemon": 1,
+            "cup": "equinox"
         },
         {
             "name": "fantasy",
@@ -366,63 +293,9 @@
             ]
         },
         {
-            "name": "fossil",
-            "title": "Fossil Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["water", "rock", "steel"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "gbinvitational",
-            "title": "Gymbreakers Invitational Remix",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dark", "ice", "poison", "steel", "water"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["goodra", "lurantis", "ursaring", "ursaring_shadow", "gliscor", "gliscor_shadow", "dunsparce", "charjabug"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["fighting"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["morpeko", "morpeko_full_belly", "skarmory", "registeel", "gastrodon", "medicham", "corviknight"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50
-        },
-        {
             "name": "gobattleleague",
             "title": "GO Battle League",
+            "rankingAlias": "all",
             "include": [],
             "exclude": [
                 {
@@ -432,152 +305,6 @@
             ],
             "partySize": 3,
             "presetOnly": true
-        },
-        {
-            "name": "halloween",
-            "title": "Halloween Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["poison", "ghost", "bug", "dark", "fairy"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "hisui",
-            "title": "Hisui Cup",
-            "include": [
-                {
-                    "filterType": "dex",
-                    "values": [387, 493]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["sneasel_hisuian", "sneasel_hisuian_shadow", "sneasler", "sneasler_shadow", "qwilfish_hisuian", "overqwil", "growlithe_hisuian", "arcanine_hisuian", "braviary_hisuian", "voltorb_hisuian", "electrode_hisuian", "typhlosion_hisuian", "samurott_hisuian", "decidueye_hisuian", "wyrdeer", "kleavor", "ursaluna", "zoroark_hisuian", "lilligant_hisuian", "avalugg_hisuian"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "illusion",
-            "title": "illusionT",
-            "restrictedPicks": 1,
-            "restrictedPokemon": ["flygon", "grumpig", "slowbro_galarian", "dubwool", "goodra", "druddigon", "cresselia", "deoxys_defense", "baxcalibur", "kingdra", "bronzong", "drampa"],
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dragon", "grass", "normal", "psychic"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dark", "fairy", "flying"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["medicham", "delphox", "turtonator", "wobbuffet", "zygarde", "zygarde_10", "grafaiai", "arctibax", "dragonair", "furret", "dragalge", "pyroar", "hakamo_o", "kommo_o", "litleo", "armarouge", "lickilicky", "lickitung", "abomasnow", "diggersby", "ursaring"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "excludeLowPokemon": 0,
-            "levelCap": 50,
-            "includeLowStatProduct": true
-        },
-        {
-            "name": "ingot",
-            "title": "Ingot",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dark", "electric", "fighting", "fire", "poison", "steel"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["rotom_wash", "wormadam_sandy", "archen", "archeops", "qwilfish_hisuian", "arctibax", "tyrunt", "stunfisk_galarian", "toxapex", "tentacruel", "cloyster", "araquanid", "cradily", "amaura", "avalugg_hisuian", "armaldo", "lairon", "", "steelix", "nidoking", "nidoqueen", "piloswine", "ursaluna", "", "camerupt", "munchlax", "lileep"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dragon", "ground", "rock", "water", "ghost", "fighting"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["gligar", "drapion", "vikavolt", "heliolisk", "morpeko_full_belly", "marowak_alolan", "grimer", "malamar", "salazzle", "nidorina", "qwilfish_hisuian", "pachirisu", "mandibuzz", "pangoro", "bellibolt", "corviknight", "grafaiai"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["shadow", "mega"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50,
-            "includeLowStatProduct": true
-        },
-        {
-            "name": "iridescent",
-            "title": "Iridescent Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["bug", "fairy", "ghost", "grass", "ground"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["whimsicott", "slurpuff", "girafarig"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega", "shadow"]
-                },
-                {
-                    "filterType": "type",
-                    "values": ["fire", "poison", "steel", "flying", "ice", "dark"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["diggersby", "buzzwole", "carbink", "annihilape", "giratina_origin", "gogoat", "zygarde", "corsola_galarian", "azumarill", "araquanid", "golisopod"]
-                },
-                {
-                    "filterType": "move",
-                    "values": ["CHARM"]
-                }
-            ]
         },
         {
             "name": "jungle",
@@ -590,10 +317,6 @@
             ],
             "exclude": [
                 {
-                    "filterType": "id",
-                    "values": ["gligar", "stunfisk_galarian"]
-                },
-                {
                     "filterType": "tag",
                     "values": ["mega"]
                 }
@@ -602,10 +325,15 @@
             "presetOnly": true
         },
         {
-            "name": "laic2025",
-            "title": "LAIC 2025 Championship Series Cup",
-            "link": "https://laic.gg/competitor_info/pokemon_go/",
+            "name": "laic2025remix",
+            "title": "Gymbreakers LAIC 2025 Remix",
+            "link": "https://discord.gg/Gymbreakers",
+            "league": 1500,
             "include": [
+                {
+                    "filterType": "id",
+                    "values": ["barbaracle", "crustle", "dudunsparce", "feraligatr", "milotic"]
+                },
                 {
                     "filterType": "type",
                     "values": ["dragon", "flying", "ghost", "ice", "psychic"]
@@ -622,7 +350,7 @@
                 },
                 {
                     "filterType": "id",
-                    "values": ["sandslash_alolan", "sandshrew_alolan", "corsola_galarian", "corviknight", "jellicent", "lapras", "kingdra", "ninetales_alolan", "honedge", "doublade", "aegislash_shield", "aegislash_blade"]
+                    "values": ["sandslash_alolan", "sandshrew_alolan", "corsola_galarian", "corviknight", "jellicent", "kingdra", "ninetales_alolan", "honedge", "doublade", "aegislash_shield", "aegislash_blade", "oranguru", "runerigus", "walrein", "dewgong"]
                 }
             ]
         },
@@ -644,91 +372,27 @@
             "levelCap": 50
         },
         {
-            "name": "mega",
-            "title": "All Pokemon",
+            "name": "maelstrom",
+            "title": "Maelstrom Cup",
+            "link": "https://devon.gg",
+            "cup": "maelstrom",
             "include": [],
-            "exclude": []
-        },
-        {
-            "name": "metamorphosis",
-            "title": "Metamorphosis",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dragon", "flying", "psychic"]
-                },
+            "exclude": [
                 {
                     "filterType": "id",
                     "name": "Species",
-                    "values": ["togekiss", "jellicent", "trevenant", "marowak_alolan", "marowak_alolan_shadow", "seaking", "primeape", "primeape_shadow"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dark", "electric", "steel", "ice"]
+                    "values": ["aegislash_shield", "altaria", "annihilape", "araquanid", "azumarill", "carbink", "corsola_galarian", "corviknight", "doublade", "empoleon", "florges", "forretress", "furret", "gastrodon", "guzzlord", "jellicent", "lickilicky", "marowak", "quagsire", "scizor", "stunfisk", "tinkaton", "wigglytuff"]
                 },
                 {
                     "filterType": "tag",
                     "name": "Tag",
                     "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["corsola_galarian", "rapidash_galarian", "togetic"]
                 }
             ],
             "overrides": [],
             "league": 1500,
             "useDefaultMovesets": 1,
             "excludeLowPokemon": 1
-        },
-        {
-            "name": "onyx",
-            "title": "Onyx Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["normal", "rock", "fire", "steel", "water", "ghost", "dark", "psychic", "bug", "ice", "dragon", "electric", "poison"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["onix"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["ground", "flying", "fighting", "grass", "fairy"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["registeel", "bastiodon", "pachirisu", "araquanid", "togedemaru", "morpeko_full_belly", "bellibolt", "toxtricity", "guzzlord", "genesect", "forretress", "corsola_galarian", "malamar", "drapion", "regidrago", "melmetal", "lanturn", "toxapex", "wormadam_trash", "spinda", "furret", "spiritomb", "jellicent", "dubwool", "dunsparce", "kangaskhan"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega", "shadow"]
-                },
-                {
-                    "filterType": "move",
-                    "values": []
-                }
-            ]
-        },
-        {
-            "name": "pillar3",
-            "title": "Gymbreakers Pillar Cup Remix",
-            "include": [
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["bewear", "bibarel", "bibarel_shadow", "starmie", "lokix", "ariados", "leavanny", "araquanid", "beedrill", "golisopod", "beedrill_shadow", "malamar", "malamar_shadow", "sableye", "sableye_shadow", "raticate_alolan", "raticate_alolan_shadow", "qwilfish_hisuian", "goodra", "arctibax", "dragapult", "sceptile", "sceptile_shadow", "froslass", "froslass_shadow", "spiritomb", "trevenant", "cresselia", "rapidash_galarian", "victini", "stunfisk", "runerigus", "gligar", "gligar_shadow", "gliscor", "gliscor_shadow", "flygon", "flygon_shadow", "sandslash", "sandslash_shadow", "clodsire", "weezing_galarian", "weezing_galarian_shadow", "drapion", "drapion_shadow", "swalot", "nidoking", "nidoking_shadow", "nidoqueen", "nidoqueen_shadow", "regice", "lapras", "lapras_shadow", "walrein", "walrein_shadow", "sealeo", "sealeo_shadow", "aurorus", "aurorus_shadow", "regirock", "cradily", "cradily_shadow", "solrock", "lunatone", "lickilicky", "miltank", "ursaring", "ursaring_shadow", "diggersby", "diggersby_shadow", "noctowl", "pidgeot", "pidgeot_shadow", "furfrou", "greedent", "zangoose", "azumarill", "feraligatr", "feraligatr_shadow", "castform_rainy", "tapu_fini", "qwilfish", "empoleon", "empoleon_shadow", "samurott", "samurott_shadow", "pelipper", "jellicent", "seaking", "poliwhirl", "politoed", "gyarados", "sneasler", "sneasler_shadow", "gyarados_shadow", "sneasel_hisuian", "sneasel_hisuian_shadow", "mienshao", "mienshao_shadow", "quagsire", "quagsire_shadow", "magmar", "magmar_shadow", "magmortar", "magmortar_shadow", "araquanid", "fearow", "crustle", "oranguru", "turtonator", "castform", "ninetales", "ninetales_shadow", "crustle_shadow"]
-                }
-            ],
-            "exclude": []
         },
         {
             "name": "premier",
@@ -743,321 +407,54 @@
             "partySize": 3
         },
         {
-            "name": "remix",
-            "title": "Remix",
-            "include": [],
+            "name": "spellcraft",
+            "title": "Spellcraft Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["bug", "electric", "grass", "poison", "psychic"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["banette", "delphox", "houndstone", "misdreavus", "mismagius", "polteageist", "azelf", "mesprit", "uxie"]
+                }
+            ],
             "exclude": [
                 {
-                    "filterType": "id",
-                    "values": ["blastoise", "primeape", "marowak", "azumarill", "dunsparce", "scizor", "corsola_galarian", "altaria", "cradily", "dusclops", "empoleon", "bastiodon", "gastrodon", "togekiss", "stunfisk", "talonflame", "dedenne", "corviknight", "annihilape"],
-                    "leagues": [1500]
+                    "filterType": "tag",
+                    "values": ["mega", "shadow", "legendary", "ultrabeast"]
+                },
+                {
+                    "filterType": "type",
+                    "values": ["dark", "fire", "ground", "rock", "steel"]
                 },
                 {
                     "filterType": "id",
-                    "values": ["venusaur", "muk_alolan", "umbreon", "swampert", "empoleon", "togekiss", "giratina_altered", "cresselia", "talonflame", "obstagoon"],
-                    "leagues": [2500]
-                },
+                    "values": ["abomasnow", "amoonguss", "araquanid", "bellibolt", "charjabug", "dhelmise", "dragalge", "golbat", "gourgeist_average", "gourgeist_large", "gourgeist_small", "gourgeist_super", "jumpluff", "lanturn", "ledian", "nidorina", "oranguru", "pachirisu", "pumpkaboo_average", "pumpkaboo_large", "pumpkaboo_small", "pumpkaboo_super", "rotom", "rotom_fan", "rotom_frost", "rotom_mow", "rotom_wash", "slowking_galarian", "smoochum", "spidops", "swalot", "toxapex", "toxtricity", "vespiquen", "vikavolt"]
+                }
+            ]
+        },
+        {
+            "name": "spring",
+            "title": "Spring Cup",
+            "include": [
+                {
+                    "filterType": "type",
+                    "values": ["water", "grass", "fairy"]
+                }
+            ],
+            "exclude": [
                 {
                     "filterType": "tag",
                     "values": ["mega"]
+                },
+                {
+                    "filterType": "id",
+                    "values": ["jumpluff", "roserade", "toxapex"]
                 }
             ],
             "partySize": 3,
             "presetOnly": true
-        },
-        {
-            "name": "retro",
-            "title": "Retro Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "fairy", "steel"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "rivalry",
-            "title": "Rivalry",
-            "include": [
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["aggron", "aggron_shadow", "araquanid", "arctibax", "aurorus", "barbaracle", "bombirdier", "clefable", "cofagrigus", "corviknight", "cradily", "cradily_shadow", "crawdaunt", "crawdaunt_shadow", "cresselia", "cresselia_shadow", "deoxys_defense", "diggersby", "dragalge", "dunsparce", "dusclops", "dusclops_shadow", "dusknoir", "dusknoir_shadow", "electrode", "electrode_hisuian", "electrode_shadow", "electivire", "electivire_shadow", "ferrothorn", "ferrothorn_shadow", "froslass", "froslass_shadow", "furret", "galvantula", "galvantula_shadow", "gengar", "giratina_origin", "glalie", "glalie_shadow", "gligar", "gligar_shadow", "golisopod", "goodra", "greedent", "guzzlord", "hitmonchan", "hitmonchan_shadow", "hitmonlee", "hitmonlee_shadow", "houndstone", "jirachi", "lapras", "lapras_shadow", "linoone", "linoone_galarian", "linoone_shadow", "lunatone", "lunatone_shadow", "machamp", "machamp_shadow", "magmortar", "magmortar_shadow", "magneton", "magneton_shadow", "magnezone", "magnezone_shadow", "malamar", "mandibuzz", "mantine", "marowak_alolan", "marowak_alolan_shadow", "marowak", "marowak_shadow", "mawile", "mawile_shadow", "milotic", "muk", "muk_alolan", "muk_alolan_shadow", "muk_shadow", "nidoking", "nidoking_shadow", "nidoqueen", "nidoqueen_shadow", "ninetales", "ninetales_alolan", "ninetales_alolan_shadow", "ninetales_shadow", "obstagoon", "pelipper", "perrserker", "politoed", "politoed_shadow", "poliwrath", "poliwrath_shadow", "primeape", "primeape_shadow", "qwilfish", "qwilfish_hisuian", "raichu", "raichu_alolan", "rapidash", "rapidash_galarian", "raticate_alolan", "raticate_alolan_shadow", "runerigus", "sableye", "sableye_shadow", "sandslash", "sandslash_alolan", "sandslash_alolan_shadow", "sandslash_shadow", "seviper", "slowbro", "slowbro_galarian", "slowbro_shadow", "solrock", "spiritomb", "stunfisk", "stunfisk_galarian", "tapu_fini", "tinkaton", "tyranitar", "tyranitar_shadow", "tyrunt", "ursaluna", "ursaluna_shadow", "ursaring", "ursaring_shadow", "vespiquen", "weezing", "weezing_galarian", "weezing_galarian_shadow", "weezing_shadow", "whiscash", "whiscash_shadow", "wormadam_trash", "zangoose"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50,
-            "includeLowStatProduct": true
-        },
-        {
-            "name": "scroll",
-            "title": "Scroll Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["water", "fighting", "dark"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["primarina"]
-                }
-            ],
-            "partySize": 3
-        },
-        {
-            "name": "solstice",
-            "title": "Solstice Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["bug", "ice", "normal", "psychic"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["gyarados", "gyarados_mega", "gyarados_shadow", "hippowdon", "hippowdon_shadow", "muk", "muk_shadow", "nihilego", "samurott", "samurott_shadow", "swampert", "swampert_mega", "swampert_shadow", "weezing", "weezing_shadow"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["fire", "steel"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["aurorus", "buzzwole", "cresselia", "golisopod", "greedent", "heracross", "heracross_mega", "leavanny", "lickilicky", "lokix", "malamar", "miltank", "ninetales_alolan", "oranguru", "walrein", "grumpig", "lapras"]
-                }
-            ]
-        },
-        {
-            "name": "spicebowl",
-            "title": "Spice Bowl Cup",
-            "include": [],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["jumpluff", "clodsire", "mandibuzz", "malamar", "lapras", "corsola_galarian", "tinkaton", "sableye", "dusknoir", "feraligatr", "corviknight", "weezing_galarian", "grumpig", "diggersby", "primeape", "carbink", "azumarill", "pangoro", "annihilape", "gastrodon", "jellicent", "machoke", "steelix", "toxapex", "morpeko_full_belly", "golurk", "bastiodon", "tinkatuff", "claydol", "clefable", "furret", "stunfisk", "togedemaru", "golisopod", "emolga", "marowak", "sandslash_alolan", "quagsire", "drapion", "guzzlord", "dachsbun", "marowak_alolan", "cradily", "aurorus", "medicham", "machamp", "swalot", "spiritomb", "runerigus", "blastoise", "ninetales_alolan", "registeel", "drifblim", "serperior", "wigglytuff", "talonflame", "umbreon", "lickitung", "dewgong", "lickilicky", "dunsparce", "klefki", "gogoat", "chansey", "skarmory", "blissey", "mudbray", "mudsdale", "skiddo"]
-                }
-            ]
-        },
-        {
-            "name": "stygian",
-            "title": "Devon Stygian Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["dark", "water", "dragon", "ice"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["electric", "fairy", "rock"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["mandibuzz", "toxapex", "malamar", "azumarill", "feraligatr", "umbreon", "moltres_galarian", "gastrodon", "quagsire", "pangoro", "obstagoon", "scrafty", "poliwrath", "lapras"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50,
-            "includeLowStatProduct": true
-        },
-        {
-            "name": "summer",
-            "title": "Summer Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["normal", "grass", "fire", "water", "electric", "bug"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                }
-            ]
-        },
-        {
-            "name": "sunshine",
-            "title": "Sunshine Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["normal", "fire", "ground", "grass"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["charizard"]
-                }
-            ],
-            "partySize": 3,
-            "presetOnly": true
-        },
-        {
-            "name": "tempo",
-            "title": "Tempo Cup",
-            "include": [
-                {
-                    "filterType": "move",
-                    "values": ["water_shuriken", "bullet_seed", "geomancy", "rollout", "snarl", "incinerate", "volt_switch", "double_kick", "hex", "infestation", "present", "bubble", "charge_beam", "astonish", "extrasensory", "fire_spin", "force_palm", "ice_shard", "magical_leaf", "mud_slap", "confusion", "gust", "splash", "yawn", "air_slash", "dragon_tail", "hidden_power_bug", "smack_down", "struggle_bug", "take_down", "waterfall"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["chatot", "minun", "plusle", "sylveon", "vaporeon"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "dragon", "fighting", "ground", "steel"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["legendary", "mythical", "ultrabeast", "mega"]
-                },
-                {
-                    "filterType": "move",
-                    "values": ["incinerate"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["aipom", "anorith", "araquanid", "ariados", "azumarill", "bayleef", "blastoise", "boldore", "cetitan", "cetoddle", "charjabug", "chespin", "chinchou", "clauncher", "clefable", "comfey", "corphish", "corsola", "corsola_galarian", "corvisquire", "cradily", "cursola", "deerling", "dhelmise", "dolliv", "drifblim", "drifloon", "drowzee", "dunsparce", "duosion", "dusclops", "dusknoir", "dwebble", "elgyem", "espeon", "espurr", "exeggcute", "feraligatr", "flaaffy", "frillish", "frogadier", "froslass", "gardevoir", "gengar", "geodude_alolan", "gigalith", "golem_alolan", "", "gothorita", "grafaiai", "graveler_alolan", "greedent", "grimer", "grumpig", "hatterene", "hattrem", "haunter", "herdier", "jellicent", "jumpluff", "kadabra", "kangaskhan", "koffing", "krabby", "lampent", "lanturn", "lapras", "lickilicky", "lileep", "lombre", "magmortar", "mantyke", "marowak_alolan", "meganium", "miltank", "munna", "ninetales", "oinkologne", "oinkologne_female", "pachirisu", "piplup", "poliwhirl", "porygon", "prinplup", "pumpkaboo_average", "pumpkaboo_large", "pumpkaboo_small", "pumpkaboo_super", "raichu", "raichu_alolan", "rampardos", "roggenrola", "roselia", "roserade", "rotom", "rotom_frost", "rotom_heat", "rotom_mow", "rotom_wash", "rowlet", "seel", "shellos", "simisear", "skorupi", "slowpoke", "slowpoke_galarian", "snover", "solosis", "spoink", "spritzee", "swadloon", "swalot", "tentacool", "tranquill", "tropius", "typhlosion_hisuian", "unown", "vikavolt", "wailmer", "walrein", "weepinbell", "wobbuffet", "wugtrio"]
-                }
-            ]
-        },
-        {
-            "name": "tundraremixv2",
-            "title": "Devon Tundra Cup (Gymbreakers Remix V2)",
-            "include": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["bug", "dark", "ice", "normal", "poison"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["goodra", "politoed", "politoed_shadow", "tangrowth", "tangrowth_shadow", "relicanth", "gyarados", "gyarados_shadow", "scyther", "scyther_shadow", "vespiquen", "ninjask", "armaldo", "armaldo_shadow"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "name": "Type",
-                    "values": ["electric", "fairy", "fire", "flying", "ground", "rock", "steel"]
-                },
-                {
-                    "filterType": "id",
-                    "name": "Species",
-                    "values": ["dewgong", "ariados", "oranguru", "obstagoon", "vigoroth", "toxicroak", "ursaring", "heracross", "buzzwole", "scrafty", "miltank", "lokix", "dubwool", "munchlax", "castform", "dunsparce", "araquanid", "toxapex", "arctibax", "oinkologne_female", "oinkologne_male", "cetoddle", "malamar", "pangoro", "lickilicky", "oinkologne"]
-                },
-                {
-                    "filterType": "tag",
-                    "name": "Tag",
-                    "values": ["mega"]
-                }
-            ],
-            "overrides": [],
-            "league": 1500,
-            "useDefaultMovesets": 1,
-            "levelCap": 50,
-            "includeLowStatProduct": true
-        },
-        {
-            "name": "wasteland",
-            "title": "Wasteland Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["poison", "ghost", "steel", "dark", "psychic"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["ampharos", "gallade", "farfetchd_galarian", "electrode"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "type",
-                    "values": ["ground", "electric", "fire", "dragon", "fighting", "flying"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["registeel", "bastiodon", "probopass", "weezing_galarian", "sableye", "klefki", "umbreon", "overqwil", "empoleon", "greninja", "jellicent", "drapion", "sandslash_alolan", "toxapex", "grimer_alolan", "stunky", "tentacruel", "raticate_alolan", "forretress", "grimer", "genesect", "mawile", "malamar", "spiritomb", "corsola_galarian", "cursola", "dusknoir", "grumpig", "thievul", "mightyena", "amoonguss", "dusclops", "tinkatuff", "tinkaton", "cacturne", "swalot"]
-                },
-                {
-                    "filterType": "tag",
-                    "values": ["mega", "shadow"]
-                },
-                {
-                    "filterType": "move",
-                    "values": ["counter", "mud_slap"]
-                }
-            ]
-        },
-        {
-            "name": "willpower",
-            "title": "Willpower Cup",
-            "include": [
-                {
-                    "filterType": "type",
-                    "values": ["dark", "psychic", "fighting"]
-                }
-            ],
-            "exclude": [
-                {
-                    "filterType": "tag",
-                    "values": ["mega"]
-                },
-                {
-                    "filterType": "id",
-                    "values": ["gardevoir", "zorua", "zoroark"]
-                }
-            ],
-            "partySize": 3
         }
     ],
     "formats": [
@@ -1072,58 +469,69 @@
             "hideRankings": true
         },
         {
-            "title": "Halloween Cup",
-            "cup": "halloween",
-            "cp": 1500,
-            "meta": "halloween",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Poison-,  Bug-,  Ghost-,  Dark-,  and Fairy-type Pokémon are eligible."]
-        },
-        {
-            "title": "Jungle Cup",
-            "cup": "jungle",
-            "cp": 1500,
-            "meta": "jungle",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Normal-,  Grass-,  Electric-,  Poison-,  Ground-,  Flying-,  Bug-,  and Dark-type Pokémon are eligible.", "The following Pokémon will not be allowed: Gligar,  Galarian Stunfisk"]
-        },
-        {
-            "title": "Mega Master League",
-            "cup": "mega",
+            "title": "Master Premier Cup",
+            "cup": "premier",
             "cp": 10000,
-            "meta": "mega",
+            "meta": "premiermaster",
+            "showCup": true,
+            "showFormat": false,
+            "showMeta": true,
+            "hideRankings": true,
+            "rules": ["No CP limit.", "Legendary Pokémon,  Mythical Pokémon,  and Ultra Beasts are not eligible."]
+        },
+        {
+            "title": "Electric Cup",
+            "cup": "electric",
+            "cp": 1500,
+            "meta": "electric",
             "showCup": true,
             "showFormat": true,
             "showMeta": true,
-            "rules": ["No CP limit.", "Mega-Evolved Pokémon are allowed."]
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Electric-type Pokémon are eligible.", "The following Pokemon are not allowed: Stunfisk,  Heliolisk,  Charjabug,  Vikavolt"]
         },
         {
-            "title": "LAIC 2025 Championship Series Cup",
-            "cup": "laic2025",
+            "title": "Fantasy Cup",
+            "cup": "fantasy",
             "cp": 1500,
-            "meta": "laic2025",
+            "meta": "fantasy",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
+        },
+        {
+            "title": "Spring Cup",
+            "cup": "spring",
+            "cp": 1500,
+            "meta": "spring",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Water-,  Grass-,  and Fairy-type Pokémon are eligible.", "The following Pokemon are not allowed: Junpluff,  Roserade,  Toxapex"]
+        },
+        {
+            "title": "Battle Frontier (Bayou Cup)",
+            "cup": "bayou",
+            "cp": 1500,
+            "meta": "bayou",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
         },
         {
-            "title": "Battle Frontier (Calamity)",
-            "cup": "calamity",
+            "title": "Battle Frontier (Spellcraft Cup)",
+            "cup": "spellcraft",
             "cp": 1500,
-            "meta": "calamity",
+            "meta": "spellcraft",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
         },
         {
-            "title": "Battle Frontier (Ultra)",
-            "cup": "battlefrontierultra",
+            "title": "Battle Frontier (UL Retro)",
+            "cup": "bfretro",
             "cp": 2500,
-            "meta": "ultra",
+            "meta": "bfretro",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
@@ -1138,19 +546,28 @@
             "showMeta": true
         },
         {
-            "title": "Devon Metamorphosis Cup",
-            "cup": "metamorphosis",
+            "title": "Devon Equinox Cup",
+            "cup": "equinox",
             "cp": 1500,
-            "meta": "metamorphosis",
+            "meta": "equinox",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
         },
         {
-            "title": "Gymbreakers Pillar Cup Remix",
-            "cup": "pillar3",
+            "title": "Devon Maelstrom Cup",
+            "cup": "maelstrom",
             "cp": 1500,
-            "meta": "pillar3",
+            "meta": "maelstrom",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true
+        },
+        {
+            "title": "Gymbreakers LAIC 2025 Remix",
+            "cup": "laic2025remix",
+            "cp": 1500,
+            "meta": "laic2025remix",
             "showCup": true,
             "showFormat": true,
             "showMeta": true
@@ -1261,7 +678,8 @@
             "dexEnd": 1008
         }
     ],
-    "shadowPokemon": ["bulbasaur", "ivysaur", "venusaur", "venusaur_mega", "charmander", "charmeleon", "charizard", "charizard_mega_x", "charizard_mega_y", "squirtle", "wartortle", "blastoise", "weedle", "kakuna", "beedrill", "beedrill_mega", "rattata", "raticate", "zubat", "golbat", "oddish", "gloom", "vileplume", "venonat", "venomoth", "meowth", "persian", "psyduck", "golduck", "growlithe", "arcanine", "poliwag", "poliwhirl", "poliwrath", "abra", "kadabra", "alakazam", "alakazam_mega", "grimer", "muk", "drowzee", "hypno", "cubone", "marowak", "hitmonchan", "scyther", "electabuzz", "magmar", "magikarp", "gyarados", "gyarados_mega", "lapras", "snorlax", "dratini", "dragonair", "dragonite", "crobat", "mareep", "flaaffy", "ampharos", "ampharos_mega", "bellossom", "politoed", "scizor", "scizor_mega", "houndour", "houndoom", "houndoom_mega", "larvitar", "pupitar", "tyranitar", "tyranitar_mega", "mudkip", "marshtomp", "swampert", "swampert_mega", "seedot", "nuzleaf", "shiftry", "ralts", "kirlia", "gardevoir", "gardevoir_mega", "trapinch", "vibrava", "flygon", "shuppet", "banette", "banette_mega", "duskull", "dusclops", "turtwig", "grotle", "torterra", "electivire", "magmortar", "gallade", "gallade_mega", "dusknoir", "magnemite", "magneton", "magnezone", "bellsprout", "weepinbell", "victreebel", "sandshrew", "sandslash", "porygon", "porygon2", "porygon_z", "wobbuffet", "meowth", "persian", "hitmonlee", "articuno", "sneasel", "weavile", "sableye", "sableye_mega", "zapdos", "moltres", "delibird", "stantler", "absol", "bagon", "shelgon", "salamence", "salamence_mega", "snover", "abomasnow", "abomasnow_mega", "raikou", "vulpix", "ninetales", "exeggcute", "exeggutor", "omanyte", "omastar", "misdreavus", "mismagius", "carvanha", "sharpedo", "sharpedo_mega", "pinsir", "pinsir_mega", "mawile", "mawile_mega", "beldum", "metang", "metagross", "metagross_mega", "entei", "ekans", "arbok", "koffing", "weezing", "nidoran_female", "nidorina", "nidoran_male", "nidorino", "nidoqueen", "nidoking", "machop", "machoke", "machamp", "gligar", "gliscor", "shuckle", "stunky", "skuntank", "suicune", "pineco", "forretress", "mewtwo", "mewtwo_mega_x", "mewtwo_mega_y", "diglett", "dugtrio", "shellder", "cloyster", "slowpoke", "slowbro", "slowking", "aerodactyl", "skarmory", "teddiursa", "ursaring", "hoppip", "skiploom", "jumpluff", "wooper", "quagsire", "swinub", "piloswine", "mamoswine", "nosepass", "probopass", "aron", "lairon", "aggron", "spheal", "sealeo", "walrein", "lileep", "cradily", "anorith", "armaldo", "aipom", "ambipom", "skorupi", "drapion", "poochyena", "mightyena", "murkrow", "honchkrow", "electrike", "manectric", "snubbull", "granbull", "makuhita", "hariyama", "starly", "staravia", "staraptor", "tangela", "tangrowth", "horsea", "seadra", "kingdra", "ho_oh", "bidoof", "bibarel", "cacnea", "cacturne", "lugia", "voltorb", "electrode", "chikorita", "bayleef", "meganium", "cyndaquil", "quilava", "typhlosion", "totodile", "croconaw", "feraligatr", "whismur", "loudred", "exploud", "hippopotas", "hippowdon", "rattata_alolan", "raticate_alolan", "sandshrew_alolan", "sandslash_alolan", "exeggutor_alolan", "sudowoodo", "girafarig", "numel", "camerupt", "latias", "exeggutor_alolan", "marowak_alolan", "geodude", "graveler", "golem", "shinx", "luxio", "luxray", "purrloin", "liepard", "latios", "foongus", "amoonguss", "patrat", "watchog", "ducklett", "swanna", "ursaluna", "diglett_alolan", "dugtrio_alolan", "onix", "steelix", "natu", "xatu", "wailmer", "wailord", "golett", "golurk", "vulpix_alolan", "ninetales_alolan", "spoink", "grumpig", "blitzle", "zebstrika", "joltik", "galvantula", "registeel", "salamence_mega", "aggron_mega", "manectric_mega", "gardevoir_mega", "latios_mega", "latias_mega", "grimer_alolan", "muk_alolan", "phanpy", "donphan", "treecko", "grovyle", "sceptile", "sceptile_mega", "torchic", "combusken", "blaziken", "blaziken_mega", "drifloon", "drifblim", "regice", "regirock", "throh", "sawk", "geodude_alolan", "graveler_alolan", "golem_alolan", "ledyba", "ledian", "hitmontop", "glameow", "purugly", "gible", "gabite", "garchomp", "regigigas", "gastly", "haunter", "gengar", "rhyhorn", "rhydon", "rhyperior", "barboach", "whiscash", "cranidos", "rampardos", "shieldon", "bastiodon", "drilbur", "excadrill", "litwick", "lampent", "chandelure", "sneasel_hisuian", "sneasler", "kyogre", "corphish", "crawdaunt", "snorunt", "glalie", "froslass", "chimchar", "monferno", "infernape", "piplup", "prinplup", "empoleon", "croagunk", "toxicroak", "dwebble", "crustle", "ferroseed", "ferrothorn", "tentacool", "tentacruel", "groudon", "pidgey", "pidgeotto", "pidgeot", "darumaka", "darmanitan_standard", "gothita", "gothorita", "gothitelle", "solosis", "duosion", "reuniclus", "pidove", "tranquill", "unfezant", "cresselia", "archen", "archeops", "tirtouga", "carracosta", "timburr", "gurdurr", "conkeldurr", "weezing_galarian", "heatran", "mankey", "primeape", "annihilape", "caterpie", "metapod", "butterfree", "roggenrola", "boldore", "gigalith", "venipede", "whirlipede", "scolipede", "karrablast", "escavalier", "shelmet", "accelgor", "zigzagoon_galarian", "linoone_galarian", "obstagoon", "palkia", "taillow", "swellow", "snivy", "servine", "serperior", "tepig", "pignite", "emboar", "oshawott", "dewott", "samurott", "trubbish", "garbodor", "bunnelby", "diggersby", "slakoth", "vigoroth", "slaking", "dialga", "inkay", "malamar", "tyrunt", "tyrantrum", "amaura", "aurorus", "giratina_altered", "staryu", "starmie", "fletchling", "fletchinder", "talonflame", "pikipek", "trumbeak", "toucannon", "grubbin", "charjabug", "vikavolt", "qwilfish", "swablu", "altaria", "baltoy", "claydol", "deino", "zweilous", "hydreigon", "tornadus_incarnate", "feebas", "milotic", "yamask", "cofagrigus", "phantump", "trevenant"],
+    "shadowPokemon": ["bulbasaur", "ivysaur", "venusaur", "venusaur_mega", "charmander", "charmeleon", "charizard", "charizard_mega_x", "charizard_mega_y", "squirtle", "wartortle", "blastoise", "weedle", "kakuna", "beedrill", "beedrill_mega", "rattata", "raticate", "zubat", "golbat", "oddish", "gloom", "vileplume", "venonat", "venomoth", "meowth", "persian", "psyduck", "golduck", "growlithe", "arcanine", "poliwag", "poliwhirl", "poliwrath", "abra", "kadabra", "alakazam", "alakazam_mega", "grimer", "muk", "drowzee", "hypno", "cubone", "marowak", "hitmonchan", "scyther", "electabuzz", "magmar", "magikarp", "gyarados", "gyarados_mega", "lapras", "snorlax", "dratini", "dragonair", "dragonite", "crobat", "mareep", "flaaffy", "ampharos", "ampharos_mega", "bellossom", "politoed", "scizor", "scizor_mega", "houndour", "houndoom", "houndoom_mega", "larvitar", "pupitar", "tyranitar", "tyranitar_mega", "mudkip", "marshtomp", "swampert", "swampert_mega", "seedot", "nuzleaf", "shiftry", "ralts", "kirlia", "gardevoir", "gardevoir_mega", "trapinch", "vibrava", "flygon", "shuppet", "banette", "banette_mega", "duskull", "dusclops", "turtwig", "grotle", "torterra", "electivire", "magmortar", "gallade", "gallade_mega", "dusknoir", "magnemite", "magneton", "magnezone", "bellsprout", "weepinbell", "victreebel", "sandshrew", "sandslash", "porygon", "porygon2", "porygon_z", "wobbuffet", "meowth", "persian", "hitmonlee", "articuno", "sneasel", "weavile", "sableye", "sableye_mega", "zapdos", "moltres", "delibird", "stantler", "absol", "bagon", "shelgon", "salamence", "salamence_mega", "snover", "abomasnow", "abomasnow_mega", "raikou", "vulpix", "ninetales", "exeggcute", "exeggutor", "omanyte", "omastar", "misdreavus", "mismagius", "carvanha", "sharpedo", "sharpedo_mega", "pinsir", "pinsir_mega", "mawile", "mawile_mega", "beldum", "metang", "metagross", "metagross_mega", "entei", "ekans", "arbok", "koffing", "weezing", "nidoran_female", "nidorina", "nidoran_male", "nidorino", "nidoqueen", "nidoking", "machop", "machoke", "machamp", "gligar", "gliscor", "shuckle", "stunky", "skuntank", "suicune", "pineco", "forretress", "mewtwo", "mewtwo_mega_x", "mewtwo_mega_y", "diglett", "dugtrio", "shellder", "cloyster", "slowpoke", "slowbro", "slowking", "aerodactyl", "skarmory", "teddiursa", "ursaring", "hoppip", "skiploom", "jumpluff", "wooper", "quagsire", "swinub", "piloswine", "mamoswine", "nosepass", "probopass", "aron", "lairon", "aggron", "spheal", "sealeo", "walrein", "lileep", "cradily", "anorith", "armaldo", "aipom", "ambipom", "skorupi", "drapion", "poochyena", "mightyena", "murkrow", "honchkrow", "electrike", "manectric", "snubbull", "granbull", "makuhita", "hariyama", "starly", "staravia", "staraptor", "tangela", "tangrowth", "horsea", "seadra", "kingdra", "ho_oh", "bidoof", "bibarel", "cacnea", "cacturne", "lugia", "voltorb", "electrode", "chikorita", "bayleef", "meganium", "cyndaquil", "quilava", "typhlosion", "totodile", "croconaw", "feraligatr", "whismur", "loudred", "exploud", "hippopotas", "hippowdon", "rattata_alolan", "raticate_alolan", "sandshrew_alolan", "sandslash_alolan", "exeggutor_alolan", "sudowoodo", "girafarig", "numel", "camerupt", "latias", "exeggutor_alolan", "marowak_alolan", "geodude", "graveler", "golem", "shinx", "luxio", "luxray", "purrloin", "liepard", "latios", "foongus", "amoonguss", "patrat", "watchog", "ducklett", "swanna", "ursaluna", "diglett_alolan", "dugtrio_alolan", "onix", "steelix", "natu", "xatu", "wailmer", "wailord", "golett", "golurk", "vulpix_alolan", "ninetales_alolan", "spoink", "grumpig", "blitzle", "zebstrika", "joltik", "galvantula", "registeel", "salamence_mega", "aggron_mega", "manectric_mega", "gardevoir_mega", "latios_mega", "latias_mega", "grimer_alolan", "muk_alolan", "phanpy", "donphan", "treecko", "grovyle", "sceptile", "sceptile_mega", "torchic", "combusken", "blaziken", "blaziken_mega", "drifloon", "drifblim", "regice", "regirock", "throh", "sawk", "geodude_alolan", "graveler_alolan", "golem_alolan", "ledyba", "ledian", "hitmontop", "glameow", "purugly", "gible", "gabite", "garchomp", "regigigas", "gastly", "haunter", "gengar", "rhyhorn", "rhydon", "rhyperior", "barboach", "whiscash", "cranidos", "rampardos", "shieldon", "bastiodon", "drilbur", "excadrill", "litwick", "lampent", "chandelure", "sneasel_hisuian", "sneasler", "kyogre", "corphish", "crawdaunt", "snorunt", "glalie", "froslass", "chimchar", "monferno", "infernape", "piplup", "prinplup", "empoleon", "croagunk", "toxicroak", "dwebble", "crustle", "ferroseed", "ferrothorn", "tentacool", "tentacruel", "groudon", "pidgey", "pidgeotto", "pidgeot", "darumaka", "darmanitan_standard", "gothita", "gothorita", "gothitelle", "solosis", "duosion", "reuniclus", "pidove", "tranquill", "unfezant", "cresselia", "archen", "archeops", "tirtouga", "carracosta", "timburr", "gurdurr", "conkeldurr", "weezing_galarian", "heatran", "mankey", "primeape", "annihilape", "caterpie", "metapod", "butterfree", "roggenrola", "boldore", "gigalith", "venipede", "whirlipede", "scolipede", "karrablast", "escavalier", "shelmet", "accelgor", "zigzagoon_galarian", "linoone_galarian", "obstagoon", "palkia", "taillow", "swellow", "snivy", "servine", "serperior", "tepig", "pignite", "emboar", "oshawott", "dewott", "samurott", "trubbish", "garbodor", "bunnelby", "diggersby", "slakoth", "vigoroth", "slaking", "dialga", "inkay", "malamar", "tyrunt", "tyrantrum", "amaura", "aurorus", "giratina_altered", "staryu", "starmie", "fletchling", "fletchinder", "talonflame", "pikipek", "trumbeak", "toucannon", "grubbin", "charjabug", "vikavolt", "qwilfish", "swablu", "altaria", "baltoy", "claydol", "deino", "zweilous", "hydreigon", "tornadus_incarnate", "feebas", "milotic", "yamask", "cofagrigus", "phantump", "trevenant", "darkrai", "thundurus_incarnate", "froakie", "frogadier", "greninja", "chespin", "quilladin", "chesnaught", "fennekin", "braixen", "delphox", "ponyta", "rapidash", "kabuto", "kabutops"],
+    "greatLeagueIneligible": ["mewtwo", "mewtwo_armored", "giratina_altered", "groudon", "kyogre", "palkia", "dialga", "cobalion", "terrakion", "virizion", "tornadus_therian", "tornadus_therian_xl", "landorus_therian", "reshiram", "zekrom", "kyurem", "genesect_burn", "xerneas", "thundurus_therian", "yveltal", "meloetta_aria", "zacian", "zamazenta", "zacian_hero", "zamazenta_hero", "genesect_douse", "zarude", "hoopa_unbound", "genesect_shock", "tapu_koko", "tapu_lele", "tapu_bulu", "nihilego", "genesect_chill", "solgaleo", "lunala", "keldeo_ordinary", "kyogre_primal", "groudon_primal", "zygarde_complete", "enamorus_therian", "enamorus_incarnate", "dialga_origin", "palkia_origin", "necrozma", "necrozma_dawn_wings", "necrozma_dusk_mane", "marshadow", "kyurem_black", "kyurem_white", "zacian_crowned_sword", "zamazenta_crowned_shield", "eternatus", "sinistcha", "keldeo_resolute"],
     "pokemon": [
         {
             "dex": 1,
@@ -2357,7 +1775,7 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["AIR_SLASH", "STEEL_WING", "WING_ATTACK", "GUST"],
-            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE"],
+            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE", "HEAT_WAVE"],
             "defaultIVs": {
                 "cp500": [9, 4, 9, 14],
                 "cp1500": [26.5, 4, 14, 12],
@@ -2386,7 +1804,7 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["AIR_SLASH", "STEEL_WING", "WING_ATTACK", "GUST"],
-            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE"],
+            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE", "HEAT_WAVE"],
             "defaultIVs": {
                 "cp500": [5, 15, 15, 14],
                 "cp1500": [15, 4, 13, 12],
@@ -2413,7 +1831,7 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["AIR_SLASH", "STEEL_WING", "WING_ATTACK", "GUST"],
-            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE"],
+            "chargedMoves": ["AERIAL_ACE", "AIR_CUTTER", "BRAVE_BIRD", "HURRICANE", "FEATHER_DANCE", "HEAT_WAVE"],
             "defaultIVs": {
                 "cp500": [9, 4, 9, 14],
                 "cp1500": [26.5, 4, 14, 12],
@@ -3241,7 +2659,7 @@
                 "cp2500": [47.5, 4, 12, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 9,
+            "searchPriority": 4,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -3385,7 +2803,7 @@
             "tags": ["shadoweligible"],
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "searchPriority": 2,
+            "searchPriority": 1,
             "released": true,
             "family": {
                 "id": "FAMILY_NIDORAN_FEMALE",
@@ -3413,7 +2831,7 @@
             "tags": ["shadow"],
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "searchPriority": 2,
+            "searchPriority": null,
             "released": true,
             "family": {
                 "id": "FAMILY_NIDORAN_FEMALE",
@@ -3441,7 +2859,7 @@
             },
             "tags": ["shadoweligible"],
             "level25CP": 1519,
-            "searchPriority": 2,
+            "searchPriority": 3,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -3818,7 +3236,7 @@
             },
             "types": ["fire", "none"],
             "fastMoves": ["EMBER", "FEINT_ATTACK", "FIRE_SPIN"],
-            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS"],
+            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS", "ENERGY_BALL"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 4],
                 "cp1500": [24.5, 4, 15, 14],
@@ -3827,7 +3245,7 @@
             },
             "level25CP": 1382,
             "tags": ["shadoweligible"],
-            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER"],
+            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER", "ENERGY_BALL"],
             "searchPriority": 3,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
@@ -3849,7 +3267,8 @@
             },
             "types": ["ice", "fairy"],
             "fastMoves": ["FEINT_ATTACK", "POWDER_SNOW", "CHARM"],
-            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE"],
+            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE", "CHILLING_WATER"],
+            "eliteMoves": ["CHILLING_WATER"],
             "tags": ["alolan", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [8, 8, 14, 15],
@@ -3857,7 +3276,7 @@
                 "cp2500": [47.5, 13, 15, 14],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 5,
+            "searchPriority": 8,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -3879,7 +3298,8 @@
             },
             "types": ["ice", "fairy"],
             "fastMoves": ["FEINT_ATTACK", "POWDER_SNOW", "CHARM"],
-            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE"],
+            "chargedMoves": ["BLIZZARD", "DAZZLING_GLEAM", "ICE_BEAM", "PSYSHOCK", "WEATHER_BALL_ICE", "CHILLING_WATER"],
+            "eliteMoves": ["CHILLING_WATER"],
             "tags": ["alolan", "shadow"],
             "defaultIVs": {
                 "cp500": [8, 8, 14, 15],
@@ -3908,7 +3328,7 @@
             },
             "types": ["fire", "none"],
             "fastMoves": ["EMBER", "FEINT_ATTACK", "FIRE_SPIN"],
-            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS"],
+            "chargedMoves": ["FIRE_BLAST", "FLAMETHROWER", "HEAT_WAVE", "OVERHEAT", "PSYSHOCK", "SOLAR_BEAM", "WEATHER_BALL_FIRE", "SCORCHING_SANDS", "ENERGY_BALL"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 4],
                 "cp1500": [24.5, 4, 15, 14],
@@ -3916,7 +3336,7 @@
                 "cp2500l40": [40, 15, 15, 15]
             },
             "tags": ["shadow"],
-            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER"],
+            "eliteMoves": ["EMBER", "FIRE_BLAST", "FLAMETHROWER", "ENERGY_BALL"],
             "searchPriority": 6,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
@@ -5871,6 +5291,34 @@
         },
         {
             "dex": 71,
+            "speciesName": "Victreebel (Mega)",
+            "speciesId": "victreebel_mega",
+            "baseStats": {
+                "atk": 265,
+                "def": 181,
+                "hp": 190
+            },
+            "types": ["grass", "poison"],
+            "fastMoves": ["ACID", "RAZOR_LEAF", "MAGICAL_LEAF"],
+            "chargedMoves": ["LEAF_BLADE", "SLUDGE_BOMB", "SOLAR_BEAM", "ACID_SPRAY", "LEAF_TORNADO"],
+            "eliteMoves": ["MAGICAL_LEAF"],
+            "defaultIVs": {
+                "cp500": [5.5, 5, 12, 13],
+                "cp1500": [15.5, 7, 14, 14],
+                "cp2500": [26, 4, 14, 15]
+            },
+            "level25CP": 2192,
+            "tags": ["shadoweligible", "mega"],
+            "buddyDistance": 3,
+            "thirdMoveCost": 50000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_BELLSPROUT",
+                "parent": "weepinbell"
+            }
+        },
+        {
+            "dex": 71,
             "speciesName": "Victreebel (Shadow)",
             "speciesId": "victreebel_shadow",
             "baseStats": {
@@ -5962,7 +5410,7 @@
             },
             "types": ["water", "poison"],
             "fastMoves": ["ACID", "POISON_JAB", "POISON_STING"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "SLUDGE_WAVE", "ACID_SPRAY", "SCALD"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "SLUDGE_WAVE", "ACID_SPRAY", "SCALD", "PAYBACK"],
             "defaultIVs": {
                 "cp500": [8, 4, 12, 8],
                 "cp1500": [23, 4, 15, 15],
@@ -5992,7 +5440,7 @@
             },
             "types": ["water", "poison"],
             "fastMoves": ["ACID", "POISON_JAB", "POISON_STING"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "SLUDGE_WAVE", "ACID_SPRAY", "SCALD"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "SLUDGE_WAVE", "ACID_SPRAY", "SCALD", "PAYBACK"],
             "defaultIVs": {
                 "cp500": [8, 4, 12, 8],
                 "cp1500": [23, 4, 15, 15],
@@ -6368,7 +5816,9 @@
             "family": {
                 "id": "FAMILY_PONYTA",
                 "evolutions": ["rapidash"]
-            }
+            },
+            "level25CP": 1000,
+            "tags": ["shadoweligible"]
         },
         {
             "dex": 77,
@@ -6397,6 +5847,33 @@
             }
         },
         {
+            "dex": 77,
+            "speciesName": "Ponyta (Shadow)",
+            "speciesId": "ponyta_shadow",
+            "baseStats": {
+                "atk": 170,
+                "def": 127,
+                "hp": 137
+            },
+            "types": ["fire", "none"],
+            "fastMoves": ["EMBER", "TACKLE"],
+            "chargedMoves": ["FIRE_BLAST", "FLAME_CHARGE", "FLAME_WHEEL", "STOMP"],
+            "defaultIVs": {
+                "cp500": [11, 5, 15, 12],
+                "cp1500": [36, 4, 14, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "eliteMoves": ["FIRE_BLAST"],
+            "buddyDistance": 3,
+            "thirdMoveCost": 50000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_PONYTA",
+                "evolutions": ["rapidash_shadow"]
+            },
+            "tags": ["shadow"]
+        },
+        {
             "dex": 78,
             "speciesName": "Rapidash",
             "speciesId": "rapidash",
@@ -6422,7 +5899,9 @@
             "family": {
                 "id": "FAMILY_PONYTA",
                 "parent": "ponyta"
-            }
+            },
+            "level25CP": 1500,
+            "tags": ["shadoweligible"]
         },
         {
             "dex": 78,
@@ -6452,6 +5931,35 @@
                 "parent": "ponyta_galarian"
             },
             "nicknames": ["gdash"]
+        },
+        {
+            "dex": 78,
+            "speciesName": "Rapidash (Shadow)",
+            "speciesId": "rapidash_shadow",
+            "baseStats": {
+                "atk": 207,
+                "def": 162,
+                "hp": 163
+            },
+            "types": ["fire", "none"],
+            "fastMoves": ["EMBER", "FIRE_SPIN", "LOW_KICK", "INCINERATE"],
+            "chargedMoves": ["DRILL_RUN", "FIRE_BLAST", "HEAT_WAVE", "FLAME_CHARGE", "SCORCHING_SANDS", "WILD_CHARGE"],
+            "defaultIVs": {
+                "cp500": [7.5, 9, 14, 14],
+                "cp1500": [22.5, 4, 14, 15],
+                "cp2500": [46, 4, 13, 14],
+                "cp2500l40": [40, 15, 15, 15]
+            },
+            "eliteMoves": ["EMBER", "WILD_CHARGE"],
+            "searchPriority": 5,
+            "buddyDistance": 3,
+            "thirdMoveCost": 50000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_PONYTA",
+                "parent": "ponyta_shadow"
+            },
+            "tags": ["shadow"]
         },
         {
             "dex": 79,
@@ -7070,7 +6578,7 @@
                 "cp1500": [20, 4, 15, 15],
                 "cp2500": [37, 4, 15, 15]
             },
-            "searchPriority": 6,
+            "searchPriority": 2,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -9913,7 +9421,36 @@
             "family": {
                 "id": "FAMILY_KABUTO",
                 "evolutions": ["kabutops"]
-            }
+            },
+            "level25CP": 789,
+            "tags": ["shadoweligible"]
+        },
+        {
+            "dex": 140,
+            "speciesName": "Kabuto (Shadow)",
+            "speciesId": "kabuto_shadow",
+            "baseStats": {
+                "atk": 148,
+                "def": 140,
+                "hp": 102
+            },
+            "types": ["rock", "water"],
+            "fastMoves": ["MUD_SHOT", "SCRATCH"],
+            "chargedMoves": ["ANCIENT_POWER", "AQUA_JET", "ROCK_TOMB"],
+            "defaultIVs": {
+                "cp500": [14, 4, 14, 11],
+                "cp1500": [49, 13, 15, 13],
+                "cp2500": [50, 15, 15, 15],
+                "cp1500l40": [40, 15, 15, 15]
+            },
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_KABUTO",
+                "evolutions": ["kabutops_shadow"]
+            },
+            "tags": ["shadow"]
         },
         {
             "dex": 141,
@@ -9939,7 +9476,36 @@
             "family": {
                 "id": "FAMILY_KABUTO",
                 "parent": "kabuto"
-            }
+            },
+            "level25CP": 1666,
+            "tags": ["shadoweligible"]
+        },
+        {
+            "dex": 141,
+            "speciesName": "Kabutops (Shadow)",
+            "speciesId": "kabutops_shadow",
+            "baseStats": {
+                "atk": 220,
+                "def": 186,
+                "hp": 155
+            },
+            "types": ["rock", "water"],
+            "fastMoves": ["FURY_CUTTER", "MUD_SHOT", "ROCK_SMASH", "WATERFALL"],
+            "chargedMoves": ["ANCIENT_POWER", "STONE_EDGE", "WATER_PULSE"],
+            "defaultIVs": {
+                "cp500": [7, 4, 12, 14],
+                "cp1500": [20.5, 4, 12, 14],
+                "cp2500": [37.5, 5, 15, 14]
+            },
+            "eliteMoves": ["FURY_CUTTER"],
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_KABUTO",
+                "parent": "kabuto_shadow"
+            },
+            "tags": ["shadow"]
         },
         {
             "dex": 142,
@@ -9951,7 +9517,7 @@
                 "hp": 190
             },
             "types": ["rock", "flying"],
-            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW"],
+            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW", "DRAGON_BREATH"],
             "chargedMoves": ["ANCIENT_POWER", "HYPER_BEAM", "IRON_HEAD", "ROCK_SLIDE", "EARTH_POWER"],
             "defaultIVs": {
                 "cp500": [7, 4, 4, 14],
@@ -9974,7 +9540,7 @@
                 "hp": 190
             },
             "types": ["rock", "flying"],
-            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW"],
+            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW", "DRAGON_BREATH"],
             "chargedMoves": ["ANCIENT_POWER", "HYPER_BEAM", "IRON_HEAD", "ROCK_SLIDE", "EARTH_POWER"],
             "tags": ["mega", "shadoweligible"],
             "defaultIVs": {
@@ -9996,7 +9562,7 @@
                 "hp": 190
             },
             "types": ["rock", "flying"],
-            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW"],
+            "fastMoves": ["BITE", "STEEL_WING", "ROCK_THROW", "DRAGON_BREATH"],
             "chargedMoves": ["ANCIENT_POWER", "HYPER_BEAM", "IRON_HEAD", "ROCK_SLIDE", "EARTH_POWER"],
             "defaultIVs": {
                 "cp500": [7, 4, 4, 14],
@@ -10077,7 +9643,7 @@
                 "hp": 207
             },
             "types": ["ice", "flying"],
-            "fastMoves": ["FROST_BREATH", "ICE_SHARD"],
+            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "POWDER_SNOW"],
             "chargedMoves": ["BLIZZARD", "HURRICANE", "ICE_BEAM", "ICY_WIND", "ANCIENT_POWER", "TRIPLE_AXEL"],
             "tags": ["legendary", "shadoweligible"],
             "defaultIVs": {
@@ -10124,7 +9690,7 @@
                 "hp": 207
             },
             "types": ["ice", "flying"],
-            "fastMoves": ["FROST_BREATH", "ICE_SHARD"],
+            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "POWDER_SNOW"],
             "chargedMoves": ["BLIZZARD", "HURRICANE", "ICE_BEAM", "ICY_WIND", "ANCIENT_POWER", "TRIPLE_AXEL"],
             "tags": ["legendary", "shadow"],
             "defaultIVs": {
@@ -10149,7 +9715,7 @@
             },
             "types": ["electric", "flying"],
             "fastMoves": ["CHARGE_BEAM", "THUNDER_SHOCK"],
-            "chargedMoves": ["THUNDER", "THUNDERBOLT", "ZAP_CANNON", "ANCIENT_POWER", "DRILL_PECK"],
+            "chargedMoves": ["THUNDER", "THUNDERBOLT", "ZAP_CANNON", "ANCIENT_POWER", "DRILL_PECK", "HEAT_WAVE"],
             "tags": ["legendary", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [5.5, 6, 11, 9],
@@ -10195,7 +9761,7 @@
             },
             "types": ["electric", "flying"],
             "fastMoves": ["CHARGE_BEAM", "THUNDER_SHOCK"],
-            "chargedMoves": ["THUNDER", "THUNDERBOLT", "ZAP_CANNON", "ANCIENT_POWER", "DRILL_PECK"],
+            "chargedMoves": ["THUNDER", "THUNDERBOLT", "ZAP_CANNON", "ANCIENT_POWER", "DRILL_PECK", "HEAT_WAVE"],
             "tags": ["legendary", "shadow"],
             "defaultIVs": {
                 "cp500": [5, 11, 15, 13],
@@ -10218,7 +9784,7 @@
             },
             "types": ["fire", "flying"],
             "fastMoves": ["FIRE_SPIN", "WING_ATTACK"],
-            "chargedMoves": ["FIRE_BLAST", "HEAT_WAVE", "OVERHEAT", "SKY_ATTACK", "ANCIENT_POWER"],
+            "chargedMoves": ["FIRE_BLAST", "HEAT_WAVE", "OVERHEAT", "SKY_ATTACK", "ANCIENT_POWER", "FLY"],
             "tags": ["legendary", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [5.5, 9, 11, 13],
@@ -10265,7 +9831,7 @@
             },
             "types": ["fire", "flying"],
             "fastMoves": ["FIRE_SPIN", "WING_ATTACK"],
-            "chargedMoves": ["FIRE_BLAST", "HEAT_WAVE", "OVERHEAT", "SKY_ATTACK", "ANCIENT_POWER"],
+            "chargedMoves": ["FIRE_BLAST", "HEAT_WAVE", "OVERHEAT", "SKY_ATTACK", "ANCIENT_POWER", "FLY"],
             "tags": ["legendary", "shadow"],
             "defaultIVs": {
                 "cp500": [5.5, 14, 6, 9],
@@ -10446,6 +10012,34 @@
                 "parent": "dragonair_shadow"
             },
             "nicknames": ["dnite"]
+        },
+        {
+            "dex": 149,
+            "speciesName": "Dragonite (Mega)",
+            "speciesId": "dragonite_mega",
+            "baseStats": {
+                "atk": 299,
+                "def": 255,
+                "hp": 209
+            },
+            "types": ["dragon", "flying"],
+            "fastMoves": ["DRAGON_BREATH", "DRAGON_TAIL", "STEEL_WING"],
+            "chargedMoves": ["DRACO_METEOR", "DRAGON_CLAW", "DRAGON_PULSE", "HURRICANE", "HYPER_BEAM", "OUTRAGE", "SUPER_POWER", "THUNDER_PUNCH"],
+            "defaultIVs": {
+                "cp500": [4, 12, 15, 15],
+                "cp1500": [11.5, 4, 8, 12],
+                "cp2500": [19, 4, 9, 15]
+            },
+            "level25CP": 3079,
+            "tags": ["shadoweligible", "mega"],
+            "eliteMoves": ["DRACO_METEOR", "DRAGON_PULSE"],
+            "buddyDistance": 5,
+            "thirdMoveCost": 75000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_DRATINI",
+                "parent": "dragonair"
+            }
         },
         {
             "dex": 150,
@@ -11038,7 +10632,7 @@
                 "id": "FAMILY_TOTODILE",
                 "parent": "croconaw"
             },
-            "searchPriority": 8
+            "searchPriority": 3
         },
         {
             "dex": 160,
@@ -11067,7 +10661,7 @@
                 "id": "FAMILY_TOTODILE",
                 "parent": "croconaw_shadow"
             },
-            "searchPriority": 8
+            "searchPriority": 3
         },
         {
             "dex": 161,
@@ -11111,7 +10705,7 @@
                 "cp1500": [34.5, 4, 14, 13],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 3,
+            "searchPriority": 10,
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
             "released": true,
@@ -11583,7 +11177,7 @@
             },
             "types": ["fairy", "flying"],
             "fastMoves": ["FAIRY_WIND", "EXTRASENSORY", "HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "STEEL_WING", "ZEN_HEADBUTT"],
-            "chargedMoves": ["AERIAL_ACE", "ANCIENT_POWER", "DAZZLING_GLEAM", "DRAINING_KISS", "PSYSHOCK"],
+            "chargedMoves": ["AERIAL_ACE", "ANCIENT_POWER", "DAZZLING_GLEAM", "DRAINING_KISS", "PSYSHOCK", "HEAT_WAVE"],
             "defaultIVs": {
                 "cp500": [11, 4, 15, 15],
                 "cp1500": [36.5, 4, 14, 14],
@@ -11832,7 +11426,7 @@
                 "cp1500": [19.5, 4, 14, 12],
                 "cp2500": [35, 4, 12, 15]
             },
-            "searchPriority": 3,
+            "searchPriority": 4,
             "level25CP": 1760,
             "tags": ["shadoweligible"],
             "eliteMoves": ["DRAGON_PULSE"],
@@ -12026,7 +11620,7 @@
                 "cp1500": [26, 5, 15, 13],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 8,
+            "searchPriority": 2,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -12054,7 +11648,7 @@
                 "cp1500": [26, 5, 15, 13],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 8,
+            "searchPriority": 2,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -13004,7 +12598,7 @@
             },
             "level25CP": 1383,
             "tags": ["shadoweligible"],
-            "searchPriority": 2,
+            "searchPriority": 7,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -13032,7 +12626,7 @@
                 "cp2500l40": [40, 15, 15, 15]
             },
             "tags": ["shadow"],
-            "searchPriority": 2,
+            "searchPriority": 7,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -13458,7 +13052,7 @@
                 "cp2500": [31, 4, 15, 14]
             },
             "tags": ["shadow"],
-            "searchPriority": 11,
+            "searchPriority": 8,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -13522,8 +13116,8 @@
                 "hp": 190
             },
             "types": ["bug", "fighting"],
-            "fastMoves": ["COUNTER", "STRUGGLE_BUG"],
-            "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND"],
+            "fastMoves": ["COUNTER", "STRUGGLE_BUG", "FURY_CUTTER"],
+            "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND", "ROCK_TOMB"],
             "tags": ["regional"],
             "defaultIVs": {
                 "cp500": [6, 10, 15, 13],
@@ -13544,8 +13138,8 @@
                 "hp": 190
             },
             "types": ["bug", "fighting"],
-            "fastMoves": ["COUNTER", "STRUGGLE_BUG"],
-            "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND"],
+            "fastMoves": ["COUNTER", "STRUGGLE_BUG", "FURY_CUTTER"],
+            "chargedMoves": ["CLOSE_COMBAT", "EARTHQUAKE", "MEGAHORN", "ROCK_BLAST", "UPPER_HAND", "ROCK_TOMB"],
             "tags": ["regional", "mega"],
             "defaultIVs": {
                 "cp500": [4, 14, 14, 14],
@@ -13975,7 +13569,7 @@
                 "cp2500": [50, 15, 15, 15],
                 "cp1500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 6,
+            "searchPriority": 5,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true
@@ -14883,7 +14477,7 @@
                 "hp": 225
             },
             "types": ["water", "none"],
-            "fastMoves": ["EXTRASENSORY", "HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ICE_FANG", "SNARL"],
+            "fastMoves": ["EXTRASENSORY", "HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ICE_FANG", "SNARL", "WATER_GUN"],
             "chargedMoves": ["BUBBLE_BEAM", "HYDRO_PUMP", "ICE_BEAM", "WATER_PULSE", "SCALD"],
             "tags": ["legendary", "shadoweligible", "wildlegendary"],
             "defaultIVs": {
@@ -14907,7 +14501,7 @@
                 "hp": 225
             },
             "types": ["water", "none"],
-            "fastMoves": ["EXTRASENSORY", "HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ICE_FANG", "SNARL"],
+            "fastMoves": ["EXTRASENSORY", "HIDDEN_POWER_BUG", "HIDDEN_POWER_DARK", "HIDDEN_POWER_DRAGON", "HIDDEN_POWER_ELECTRIC", "HIDDEN_POWER_FIGHTING", "HIDDEN_POWER_FIRE", "HIDDEN_POWER_FLYING", "HIDDEN_POWER_GHOST", "HIDDEN_POWER_GRASS", "HIDDEN_POWER_GROUND", "HIDDEN_POWER_ICE", "HIDDEN_POWER_POISON", "HIDDEN_POWER_PSYCHIC", "HIDDEN_POWER_ROCK", "HIDDEN_POWER_STEEL", "HIDDEN_POWER_WATER", "ICE_FANG", "SNARL", "WATER_GUN"],
             "chargedMoves": ["BUBBLE_BEAM", "HYDRO_PUMP", "ICE_BEAM", "WATER_PULSE", "SCALD"],
             "tags": ["legendary", "shadow"],
             "defaultIVs": {
@@ -15038,7 +14632,7 @@
                 "hp": 225
             },
             "types": ["rock", "dark"],
-            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN"],
+            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN", "DRAGON_BREATH"],
             "chargedMoves": ["CRUNCH", "FIRE_BLAST", "STONE_EDGE", "BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [5, 7, 15, 13],
@@ -15068,7 +14662,7 @@
                 "hp": 225
             },
             "types": ["rock", "dark"],
-            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN"],
+            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN", "DRAGON_BREATH"],
             "chargedMoves": ["CRUNCH", "FIRE_BLAST", "STONE_EDGE", "BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [3.5, 15, 15, 14],
@@ -15092,7 +14686,7 @@
                 "hp": 225
             },
             "types": ["rock", "dark"],
-            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN"],
+            "fastMoves": ["BITE", "IRON_TAIL", "SMACK_DOWN", "DRAGON_BREATH"],
             "chargedMoves": ["CRUNCH", "FIRE_BLAST", "STONE_EDGE", "BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [5, 7, 15, 13],
@@ -15539,8 +15133,8 @@
                 "hp": 190
             },
             "types": ["fire", "fighting"],
-            "fastMoves": ["COUNTER", "FIRE_SPIN"],
-            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK"],
+            "fastMoves": ["COUNTER", "FIRE_SPIN", "EMBER"],
+            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK", "AURA_SPHERE"],
             "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [6.5, 11, 14, 13],
@@ -15568,8 +15162,8 @@
                 "hp": 190
             },
             "types": ["fire", "fighting"],
-            "fastMoves": ["COUNTER", "FIRE_SPIN"],
-            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK"],
+            "fastMoves": ["COUNTER", "FIRE_SPIN", "EMBER"],
+            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK", "AURA_SPHERE"],
             "tags": ["starter", "mega", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [4.5, 14, 15, 15],
@@ -15592,8 +15186,8 @@
                 "hp": 190
             },
             "types": ["fire", "fighting"],
-            "fastMoves": ["COUNTER", "FIRE_SPIN"],
-            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK"],
+            "fastMoves": ["COUNTER", "FIRE_SPIN", "EMBER"],
+            "chargedMoves": ["BRAVE_BIRD", "FOCUS_BLAST", "OVERHEAT", "STONE_EDGE", "BLAST_BURN", "BLAZE_KICK", "AURA_SPHERE"],
             "tags": ["starter", "shadow"],
             "defaultIVs": {
                 "cp500": [6.5, 11, 14, 13],
@@ -16255,8 +15849,8 @@
                 "hp": 190
             },
             "types": ["water", "grass"],
-            "fastMoves": ["BUBBLE", "RAZOR_LEAF"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "ENERGY_BALL", "ICE_BEAM", "SOLAR_BEAM", "LEAF_STORM", "SCALD"],
+            "fastMoves": ["BUBBLE", "RAZOR_LEAF", "ASTONISH"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "ENERGY_BALL", "ICE_BEAM", "SOLAR_BEAM", "LEAF_STORM", "SCALD", "WEATHER_BALL_WATER"],
             "defaultIVs": {
                 "cp500": [8, 7, 15, 14],
                 "cp1500": [24, 5, 13, 15],
@@ -16269,7 +15863,8 @@
             "family": {
                 "id": "FAMILY_LOTAD",
                 "parent": "lombre"
-            }
+            },
+            "searchPriority": 5
         },
         {
             "dex": 273,
@@ -17545,7 +17140,7 @@
             },
             "level25CP": 858,
             "tags": ["shadoweligible"],
-            "searchPriority": 10,
+            "searchPriority": 7,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true
@@ -17592,7 +17187,7 @@
                 "cp1500l40": [40, 15, 15, 15]
             },
             "tags": ["shadow"],
-            "searchPriority": 9,
+            "searchPriority": 7,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true
@@ -18320,7 +17915,7 @@
                 "cp2500": [28, 4, 12, 15]
             },
             "level25CP": 1295,
-            "tags": ["shadoweligible", "include1500", "mega"],
+            "tags": ["shadoweligible", "mega"],
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -18346,7 +17941,7 @@
                 "cp1500": [25.5, 4, 12, 15],
                 "cp2500": [50, 15, 15, 15]
             },
-            "tags": ["shadoweligible", "shadow"],
+            "tags": ["shadoweligible", "shadow", "include1500"],
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -18529,7 +18124,7 @@
             },
             "types": ["fire", "ground"],
             "fastMoves": ["EMBER", "ROCK_SMASH", "INCINERATE"],
-            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER"],
+            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER", "SCORCHING_SANDS", "ROCK_TOMB"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 14],
                 "cp1500": [25.5, 4, 13, 14],
@@ -18556,7 +18151,7 @@
             },
             "types": ["fire", "ground"],
             "fastMoves": ["EMBER", "ROCK_SMASH", "INCINERATE"],
-            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER"],
+            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER", "SCORCHING_SANDS", "ROCK_TOMB"],
             "defaultIVs": {
                 "cp500": [6, 4, 11, 12],
                 "cp1500": [17, 4, 15, 14],
@@ -18583,7 +18178,7 @@
             },
             "types": ["fire", "ground"],
             "fastMoves": ["EMBER", "ROCK_SMASH", "INCINERATE"],
-            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER"],
+            "chargedMoves": ["EARTHQUAKE", "OVERHEAT", "SOLAR_BEAM", "EARTH_POWER", "SCORCHING_SANDS", "ROCK_TOMB"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 14],
                 "cp1500": [25.5, 4, 13, 14],
@@ -18871,7 +18466,7 @@
             },
             "types": ["ground", "dragon"],
             "fastMoves": ["DRAGON_TAIL", "MUD_SHOT", "SAND_ATTACK"],
-            "chargedMoves": ["DRAGON_CLAW", "EARTHQUAKE", "STONE_EDGE", "EARTH_POWER", "BOOMBURST", "SCORCHING_SANDS", "SAND_TOMB"],
+            "chargedMoves": ["DRAGON_CLAW", "EARTHQUAKE", "STONE_EDGE", "EARTH_POWER", "BOOMBURST", "SCORCHING_SANDS", "SAND_TOMB", "TWISTER"],
             "defaultIVs": {
                 "cp500": [7, 7, 15, 14],
                 "cp1500": [21, 4, 11, 15],
@@ -18899,7 +18494,7 @@
             },
             "types": ["ground", "dragon"],
             "fastMoves": ["DRAGON_TAIL", "MUD_SHOT", "SAND_ATTACK"],
-            "chargedMoves": ["DRAGON_CLAW", "EARTHQUAKE", "STONE_EDGE", "EARTH_POWER", "BOOMBURST", "SCORCHING_SANDS", "SAND_TOMB"],
+            "chargedMoves": ["DRAGON_CLAW", "EARTHQUAKE", "STONE_EDGE", "EARTH_POWER", "BOOMBURST", "SCORCHING_SANDS", "SAND_TOMB", "TWISTER"],
             "defaultIVs": {
                 "cp500": [7, 7, 15, 14],
                 "cp1500": [21, 4, 11, 15],
@@ -19216,7 +18811,7 @@
             },
             "types": ["rock", "psychic"],
             "fastMoves": ["CONFUSION", "ROCK_THROW", "PSYWAVE"],
-            "chargedMoves": ["MOONBLAST", "PSYCHIC", "ROCK_SLIDE"],
+            "chargedMoves": ["MOONBLAST", "PSYCHIC", "ROCK_SLIDE", "WEATHER_BALL_ICE"],
             "defaultIVs": {
                 "cp500": [8, 5, 15, 15],
                 "cp1500": [24, 4, 13, 15],
@@ -19239,7 +18834,7 @@
             },
             "types": ["rock", "psychic"],
             "fastMoves": ["CONFUSION", "ROCK_THROW", "PSYWAVE"],
-            "chargedMoves": ["PSYCHIC", "ROCK_SLIDE", "SOLAR_BEAM"],
+            "chargedMoves": ["PSYCHIC", "ROCK_SLIDE", "SOLAR_BEAM", "WEATHER_BALL_FIRE"],
             "defaultIVs": {
                 "cp500": [8, 5, 15, 15],
                 "cp1500": [24, 4, 13, 15],
@@ -19889,7 +19484,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["DRAGON_TAIL", "WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "HYPER_BEAM", "SURF", "WRAP"],
+            "chargedMoves": ["BLIZZARD", "HYPER_BEAM", "SURF", "WRAP", "AQUA_TAIL"],
             "defaultIVs": {
                 "cp500": [6.5, 4, 11, 8],
                 "cp1500": [18.5, 5, 14, 12],
@@ -19916,7 +19511,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["DRAGON_TAIL", "WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "HYPER_BEAM", "SURF", "WRAP"],
+            "chargedMoves": ["BLIZZARD", "HYPER_BEAM", "SURF", "WRAP", "AQUA_TAIL"],
             "defaultIVs": {
                 "cp500": [6.5, 4, 11, 8],
                 "cp1500": [18.5, 5, 14, 12],
@@ -20390,6 +19985,7 @@
             "types": ["dark", "none"],
             "fastMoves": ["PSYCHO_CUT", "SNARL"],
             "chargedMoves": ["DARK_PULSE", "MEGAHORN", "THUNDER", "PAYBACK", "BRUTAL_SWING"],
+            "eliteMoves": ["BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 13, 11],
                 "cp1500": [22, 4, 14, 11],
@@ -20490,7 +20086,7 @@
                 "hp": 190
             },
             "types": ["ice", "none"],
-            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT"],
+            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT", "POWDER_SNOW"],
             "chargedMoves": ["AVALANCHE", "GYRO_BALL", "SHADOW_BALL"],
             "defaultIVs": {
                 "cp500": [9, 4, 13, 14],
@@ -20517,7 +20113,7 @@
                 "hp": 190
             },
             "types": ["ice", "none"],
-            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT"],
+            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT", "POWDER_SNOW"],
             "chargedMoves": ["AVALANCHE", "GYRO_BALL", "SHADOW_BALL"],
             "defaultIVs": {
                 "cp500": [6, 4, 9, 13],
@@ -20539,7 +20135,7 @@
                 "hp": 190
             },
             "types": ["ice", "none"],
-            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT"],
+            "fastMoves": ["FROST_BREATH", "ICE_SHARD", "ROLLOUT", "POWDER_SNOW"],
             "chargedMoves": ["AVALANCHE", "GYRO_BALL", "SHADOW_BALL"],
             "defaultIVs": {
                 "cp500": [9, 4, 13, 14],
@@ -21522,7 +21118,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE", "AVALANCHE"],
             "eliteMoves": ["ORIGIN_PULSE"],
             "tags": ["legendary", "shadoweligible"],
             "defaultIVs": {
@@ -21547,7 +21143,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE", "AVALANCHE"],
             "eliteMoves": ["ORIGIN_PULSE"],
             "tags": ["legendary", "mega"],
             "defaultIVs": {
@@ -21570,7 +21166,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE"],
+            "chargedMoves": ["BLIZZARD", "HYDRO_PUMP", "THUNDER", "SURF", "ORIGIN_PULSE", "AVALANCHE"],
             "eliteMoves": ["ORIGIN_PULSE"],
             "tags": ["legendary", "shadow"],
             "defaultIVs": {
@@ -23152,7 +22748,7 @@
                 "hp": 155
             },
             "types": ["bug", "grass"],
-            "fastMoves": ["BUG_BITE", "CONFUSION"],
+            "fastMoves": ["BUG_BITE", "CONFUSION", "SUCKER_PUNCH"],
             "chargedMoves": ["BUG_BUZZ", "ENERGY_BALL", "PSYBEAM"],
             "defaultIVs": {
                 "cp500": [10.5, 7, 13, 14],
@@ -23177,7 +22773,7 @@
                 "hp": 155
             },
             "types": ["bug", "ground"],
-            "fastMoves": ["BUG_BITE", "CONFUSION"],
+            "fastMoves": ["BUG_BITE", "CONFUSION", "SUCKER_PUNCH"],
             "chargedMoves": ["BUG_BUZZ", "BULLDOZE", "PSYBEAM"],
             "defaultIVs": {
                 "cp500": [10.5, 7, 13, 14],
@@ -23202,7 +22798,7 @@
                 "hp": 155
             },
             "types": ["bug", "steel"],
-            "fastMoves": ["BUG_BITE", "CONFUSION", "METAL_SOUND"],
+            "fastMoves": ["BUG_BITE", "CONFUSION", "METAL_SOUND", "SUCKER_PUNCH"],
             "chargedMoves": ["BUG_BUZZ", "IRON_HEAD", "PSYBEAM"],
             "defaultIVs": {
                 "cp500": [12, 4, 15, 12],
@@ -24044,7 +23640,7 @@
                 "cp2500": [50, 4, 14, 13],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 5,
+            "searchPriority": 3,
             "level25CP": 1430,
             "tags": ["shadoweligible"],
             "buddyDistance": 3,
@@ -24073,7 +23669,7 @@
                 "cp2500": [50, 4, 14, 13],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 5,
+            "searchPriority": 3,
             "tags": ["shadow"],
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
@@ -24120,7 +23716,7 @@
             },
             "types": ["steel", "psychic"],
             "fastMoves": ["CONFUSION", "FEINT_ATTACK", "METAL_SOUND"],
-            "chargedMoves": ["FLASH_CANNON", "HEAVY_SLAM", "PSYCHIC", "BULLDOZE", "PSYSHOCK", "PAYBACK"],
+            "chargedMoves": ["FLASH_CANNON", "HEAVY_SLAM", "PSYCHIC", "BULLDOZE", "PSYSHOCK", "PAYBACK", "WEATHER_BALL_WATER"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 15, 12],
                 "cp1500": [25, 5, 15, 13],
@@ -24373,7 +23969,7 @@
             },
             "types": ["dragon", "ground"],
             "fastMoves": ["DRAGON_TAIL", "MUD_SHOT"],
-            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE"],
+            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE", "TWISTER"],
             "eliteMoves": ["EARTH_POWER"],
             "defaultIVs": {
                 "cp500": [5, 4, 9, 10],
@@ -24403,7 +23999,7 @@
             },
             "types": ["dragon", "ground"],
             "fastMoves": ["DRAGON_TAIL", "MUD_SHOT"],
-            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE"],
+            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE", "TWISTER"],
             "eliteMoves": ["EARTH_POWER"],
             "defaultIVs": {
                 "cp500": [3.5, 14, 15, 15],
@@ -24426,7 +24022,7 @@
             },
             "types": ["dragon", "ground"],
             "fastMoves": ["DRAGON_TAIL", "MUD_SHOT"],
-            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE"],
+            "chargedMoves": ["EARTHQUAKE", "FIRE_BLAST", "OUTRAGE", "SAND_TOMB", "EARTH_POWER", "BREAKING_SWIPE", "TWISTER"],
             "eliteMoves": ["EARTH_POWER"],
             "defaultIVs": {
                 "cp500": [5, 4, 9, 10],
@@ -24506,7 +24102,7 @@
             },
             "types": ["fighting", "steel"],
             "fastMoves": ["BULLET_PUNCH", "COUNTER", "FORCE_PALM"],
-            "chargedMoves": ["CLOSE_COMBAT", "FLASH_CANNON", "SHADOW_BALL", "POWER_UP_PUNCH", "AURA_SPHERE", "BLAZE_KICK", "THUNDER_PUNCH"],
+            "chargedMoves": ["CLOSE_COMBAT", "FLASH_CANNON", "SHADOW_BALL", "POWER_UP_PUNCH", "AURA_SPHERE", "BLAZE_KICK", "THUNDER_PUNCH", "METEOR_MASH"],
             "eliteMoves": ["FORCE_PALM"],
             "defaultIVs": {
                 "cp500": [7, 4, 12, 15],
@@ -24532,7 +24128,7 @@
             },
             "types": ["fighting", "steel"],
             "fastMoves": ["BULLET_PUNCH", "COUNTER", "FORCE_PALM"],
-            "chargedMoves": ["CLOSE_COMBAT", "FLASH_CANNON", "SHADOW_BALL", "POWER_UP_PUNCH", "AURA_SPHERE", "BLAZE_KICK", "THUNDER_PUNCH"],
+            "chargedMoves": ["CLOSE_COMBAT", "FLASH_CANNON", "SHADOW_BALL", "POWER_UP_PUNCH", "AURA_SPHERE", "BLAZE_KICK", "THUNDER_PUNCH", "METEOR_MASH"],
             "eliteMoves": ["FORCE_PALM"],
             "defaultIVs": {
                 "cp500": [5, 6, 14, 15],
@@ -24937,7 +24533,7 @@
             },
             "types": ["water", "none"],
             "fastMoves": ["WATER_GUN", "WATERFALL"],
-            "chargedMoves": ["BLIZZARD", "SILVER_WIND", "WATER_PULSE"],
+            "chargedMoves": ["BLIZZARD", "SILVER_WIND", "WATER_PULSE", "AQUA_TAIL"],
             "defaultIVs": {
                 "cp500": [10.5, 4, 13, 13],
                 "cp1500": [32.5, 4, 14, 14],
@@ -25242,7 +24838,7 @@
                 "cp2500l40": [40, 15, 15, 15]
             },
             "eliteMoves": ["BODY_SLAM"],
-            "searchPriority": 6,
+            "searchPriority": 10,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -25589,7 +25185,7 @@
             },
             "types": ["ground", "flying"],
             "fastMoves": ["FURY_CUTTER", "WING_ATTACK", "SAND_ATTACK"],
-            "chargedMoves": ["AERIAL_ACE", "EARTHQUAKE", "NIGHT_SLASH", "SAND_TOMB"],
+            "chargedMoves": ["AERIAL_ACE", "EARTHQUAKE", "NIGHT_SLASH", "SAND_TOMB", "ACROBATICS"],
             "defaultIVs": {
                 "cp500": [7, 6, 14, 15],
                 "cp1500": [21, 4, 14, 9],
@@ -25616,7 +25212,7 @@
             },
             "types": ["ground", "flying"],
             "fastMoves": ["FURY_CUTTER", "WING_ATTACK", "SAND_ATTACK"],
-            "chargedMoves": ["AERIAL_ACE", "EARTHQUAKE", "NIGHT_SLASH", "SAND_TOMB"],
+            "chargedMoves": ["AERIAL_ACE", "EARTHQUAKE", "NIGHT_SLASH", "SAND_TOMB", "ACROBATICS"],
             "defaultIVs": {
                 "cp500": [7, 6, 14, 15],
                 "cp1500": [21, 4, 14, 9],
@@ -25954,7 +25550,7 @@
                 "cp1500": [27.5, 4, 14, 14],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 7,
+            "searchPriority": 2,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -25983,7 +25579,7 @@
                 "cp1500": [27.5, 4, 14, 14],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 7,
+            "searchPriority": 2,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -26092,7 +25688,7 @@
             },
             "types": ["electric", "grass"],
             "fastMoves": ["ASTONISH", "THUNDER_SHOCK"],
-            "chargedMoves": ["OMINOUS_WIND", "THUNDER", "THUNDERBOLT"],
+            "chargedMoves": ["OMINOUS_WIND", "THUNDER", "THUNDERBOLT", "LEAF_STORM"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 14, 7],
                 "cp1500": [21.5, 4, 15, 14],
@@ -26620,7 +26216,32 @@
                 "cp2500": [24, 10, 11, 13]
             },
             "levelFloor": 15,
-            "tags": ["mythical", "untradeable"],
+            "tags": ["mythical", "untradeable", "shadoweligible"],
+            "buddyDistance": 20,
+            "thirdMoveCost": 100000,
+            "released": true,
+            "level25CP": 2346
+        },
+        {
+            "dex": 491,
+            "speciesName": "Darkrai (Shadow)",
+            "speciesId": "darkrai_shadow",
+            "baseStats": {
+                "atk": 285,
+                "def": 198,
+                "hp": 172
+            },
+            "types": ["dark", "none"],
+            "fastMoves": ["FEINT_ATTACK", "SNARL"],
+            "chargedMoves": ["DARK_PULSE", "FOCUS_BLAST", "SHADOW_BALL", "SLUDGE_BOMB"],
+            "eliteMoves": ["SLUDGE_BOMB"],
+            "defaultIVs": {
+                "cp500": [5, 10, 13, 15],
+                "cp1500": [1, 0, 0, 0],
+                "cp2500": [24, 10, 11, 13]
+            },
+            "levelFloor": 15,
+            "tags": ["mythical", "untradeable", "shadow"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
             "released": true
@@ -27550,7 +27171,7 @@
             },
             "types": ["water", "dark"],
             "fastMoves": ["FURY_CUTTER", "WATERFALL", "SNARL"],
-            "chargedMoves": ["RAZOR_SHELL", "ICY_WIND", "X_SCISSOR", "DARK_PULSE"],
+            "chargedMoves": ["RAZOR_SHELL", "ICY_WIND", "X_SCISSOR", "DARK_PULSE", "SACRED_SWORD"],
             "tags": ["starter", "hisuian"],
             "defaultIVs": {
                 "cp500": [7, 4, 7, 8],
@@ -29262,7 +28883,7 @@
             },
             "types": ["bug", "poison"],
             "fastMoves": ["BUG_BITE", "POISON_JAB", "POISON_STING"],
-            "chargedMoves": ["MEGAHORN", "SLUDGE_BOMB", "GYRO_BALL", "X_SCISSOR"],
+            "chargedMoves": ["MEGAHORN", "SLUDGE_BOMB", "GYRO_BALL", "X_SCISSOR", "AQUA_TAIL"],
             "defaultIVs": {
                 "cp500": [7.5, 9, 15, 14],
                 "cp1500": [22.5, 5, 15, 14],
@@ -29290,7 +28911,7 @@
             },
             "types": ["bug", "poison"],
             "fastMoves": ["BUG_BITE", "POISON_JAB", "POISON_STING"],
-            "chargedMoves": ["MEGAHORN", "SLUDGE_BOMB", "GYRO_BALL", "X_SCISSOR"],
+            "chargedMoves": ["MEGAHORN", "SLUDGE_BOMB", "GYRO_BALL", "X_SCISSOR", "AQUA_TAIL"],
             "defaultIVs": {
                 "cp500": [7.5, 9, 15, 14],
                 "cp1500": [22.5, 5, 15, 14],
@@ -31627,7 +31248,7 @@
                 "cp2500": [47, 13, 14, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 4,
+            "searchPriority": 2,
             "buddyDistance": 3,
             "thirdMoveCost": 75000,
             "released": true,
@@ -31656,7 +31277,7 @@
                 "cp2500": [47, 13, 14, 15],
                 "cp2500l40": [40, 15, 15, 15]
             },
-            "searchPriority": 4,
+            "searchPriority": 2,
             "buddyDistance": 3,
             "thirdMoveCost": 75000,
             "released": true,
@@ -32312,7 +31933,7 @@
                 "cp1500": [26, 5, 15, 13],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 6,
+            "searchPriority": 9,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -32891,7 +32512,7 @@
             },
             "types": ["dark", "dragon"],
             "fastMoves": ["BITE", "DRAGON_BREATH"],
-            "chargedMoves": ["DRAGON_PULSE", "DARK_PULSE", "FLASH_CANNON", "BRUTAL_SWING"],
+            "chargedMoves": ["DRAGON_PULSE", "DARK_PULSE", "FLASH_CANNON", "BRUTAL_SWING", "FLY"],
             "eliteMoves": ["BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [5.5, 4, 7, 6],
@@ -32919,7 +32540,7 @@
             },
             "types": ["dark", "dragon"],
             "fastMoves": ["BITE", "DRAGON_BREATH"],
-            "chargedMoves": ["DRAGON_PULSE", "DARK_PULSE", "FLASH_CANNON", "BRUTAL_SWING"],
+            "chargedMoves": ["DRAGON_PULSE", "DARK_PULSE", "FLASH_CANNON", "BRUTAL_SWING", "FLY"],
             "eliteMoves": ["BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [5.5, 4, 7, 6],
@@ -33142,7 +32763,30 @@
                 "cp1500": [16.5, 7, 12, 10],
                 "cp2500": [27.5, 5, 14, 9]
             },
-            "tags": ["legendary"],
+            "tags": ["legendary", "shadoweligible"],
+            "buddyDistance": 20,
+            "thirdMoveCost": 100000,
+            "released": true,
+            "level25CP": 2083
+        },
+        {
+            "dex": 642,
+            "speciesId": "thundurus_incarnate_shadow",
+            "speciesName": "Thundurus (Incarnate) (Shadow)",
+            "baseStats": {
+                "atk": 266,
+                "def": 164,
+                "hp": 188
+            },
+            "types": ["electric", "flying"],
+            "fastMoves": ["ASTONISH", "THUNDER_SHOCK"],
+            "chargedMoves": ["CRUNCH", "THUNDER", "BRICK_BREAK", "THUNDER_PUNCH"],
+            "defaultIVs": {
+                "cp500": [6, 4, 4, 4],
+                "cp1500": [16.5, 7, 12, 10],
+                "cp2500": [27.5, 5, 14, 9]
+            },
+            "tags": ["legendary", "shadow"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
             "released": true
@@ -33369,8 +33013,8 @@
             },
             "types": ["water", "fighting"],
             "fastMoves": ["POISON_JAB", "LOW_KICK"],
-            "chargedMoves": ["AQUA_JET", "CLOSE_COMBAT", "HYDRO_PUMP", "X_SCISSOR", "SACRED_SWORD"],
-            "eliteMoves": ["SACRED_SWORD"],
+            "chargedMoves": ["AQUA_JET", "CLOSE_COMBAT", "HYDRO_PUMP", "X_SCISSOR", "SECRET_SWORD"],
+            "eliteMoves": ["SECRET_SWORD"],
             "defaultIVs": {
                 "cp500": [5, 14, 11, 15],
                 "cp1500": [14.5, 12, 12, 13],
@@ -33379,7 +33023,8 @@
             "tags": ["mythical", "untradeable"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
-            "released": false
+            "released": true,
+            "searchPriority": 2
         },
         {
             "dex": 648,
@@ -33551,7 +33196,7 @@
             "types": ["grass", "none"],
             "fastMoves": ["TAKE_DOWN", "VINE_WHIP"],
             "chargedMoves": ["GYRO_BALL", "SEED_BOMB", "BODY_SLAM"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [17.5, 5, 13, 15],
                 "cp1500": [50, 15, 15, 15],
@@ -33563,6 +33208,33 @@
             "family": {
                 "id": "FAMILY_CHESPIN",
                 "evolutions": ["quilladin"]
+            },
+            "level25CP": 614
+        },
+        {
+            "dex": 650,
+            "speciesName": "Chespin (Shadow)",
+            "speciesId": "chespin_shadow",
+            "baseStats": {
+                "atk": 110,
+                "def": 106,
+                "hp": 148
+            },
+            "types": ["grass", "none"],
+            "fastMoves": ["TAKE_DOWN", "VINE_WHIP"],
+            "chargedMoves": ["GYRO_BALL", "SEED_BOMB", "BODY_SLAM"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [17.5, 5, 13, 15],
+                "cp1500": [50, 15, 15, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_CHESPIN",
+                "evolutions": ["quilladin_shadow"]
             }
         },
         {
@@ -33577,7 +33249,7 @@
             "types": ["grass", "none"],
             "fastMoves": ["LOW_KICK", "VINE_WHIP"],
             "chargedMoves": ["GYRO_BALL", "ENERGY_BALL", "BODY_SLAM"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [11, 4, 13, 15],
                 "cp1500": [35, 5, 15, 15],
@@ -33590,6 +33262,34 @@
                 "id": "FAMILY_CHESPIN",
                 "parent": "chespin",
                 "evolutions": ["chesnaught"]
+            },
+            "level25CP": 1016
+        },
+        {
+            "dex": 651,
+            "speciesName": "Quilladin (Shadow)",
+            "speciesId": "quilladin_shadow",
+            "baseStats": {
+                "atk": 146,
+                "def": 156,
+                "hp": 156
+            },
+            "types": ["grass", "none"],
+            "fastMoves": ["LOW_KICK", "VINE_WHIP"],
+            "chargedMoves": ["GYRO_BALL", "ENERGY_BALL", "BODY_SLAM"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [11, 4, 13, 15],
+                "cp1500": [35, 5, 15, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_CHESPIN",
+                "parent": "chespin_shadow",
+                "evolutions": ["chesnaught_shadow"]
             }
         },
         {
@@ -33605,7 +33305,7 @@
             "fastMoves": ["LOW_KICK", "SMACK_DOWN", "VINE_WHIP"],
             "chargedMoves": ["GYRO_BALL", "ENERGY_BALL", "SUPER_POWER", "SOLAR_BEAM", "FRENZY_PLANT", "THUNDER_PUNCH"],
             "eliteMoves": ["FRENZY_PLANT"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [6.5, 4, 15, 11],
                 "cp1500": [19, 4, 14, 9],
@@ -33618,6 +33318,35 @@
             "family": {
                 "id": "FAMILY_CHESPIN",
                 "parent": "quilladin"
+            },
+            "level25CP": 1829
+        },
+        {
+            "dex": 652,
+            "speciesName": "Chesnaught (Shadow)",
+            "speciesId": "chesnaught_shadow",
+            "baseStats": {
+                "atk": 201,
+                "def": 204,
+                "hp": 204
+            },
+            "types": ["grass", "fighting"],
+            "fastMoves": ["LOW_KICK", "SMACK_DOWN", "VINE_WHIP"],
+            "chargedMoves": ["GYRO_BALL", "ENERGY_BALL", "SUPER_POWER", "SOLAR_BEAM", "FRENZY_PLANT", "THUNDER_PUNCH"],
+            "eliteMoves": ["FRENZY_PLANT"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [6.5, 4, 15, 11],
+                "cp1500": [19, 4, 14, 9],
+                "cp2500": [33, 4, 15, 11]
+            },
+            "searchPriority": 3,
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_CHESPIN",
+                "parent": "quilladin_shadow"
             }
         },
         {
@@ -33632,7 +33361,7 @@
             "types": ["fire", "none"],
             "fastMoves": ["SCRATCH", "EMBER"],
             "chargedMoves": ["PSYSHOCK", "FLAMETHROWER", "FLAME_CHARGE"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [19, 4, 12, 13],
                 "cp1500": [50, 15, 15, 15],
@@ -33644,6 +33373,33 @@
             "family": {
                 "id": "FAMILY_FENNEKIN",
                 "evolutions": ["braixen"]
+            },
+            "level25CP": 572
+        },
+        {
+            "dex": 653,
+            "speciesName": "Fennekin (Shadow)",
+            "speciesId": "fennekin_shadow",
+            "baseStats": {
+                "atk": 116,
+                "def": 102,
+                "hp": 120
+            },
+            "types": ["fire", "none"],
+            "fastMoves": ["SCRATCH", "EMBER"],
+            "chargedMoves": ["PSYSHOCK", "FLAMETHROWER", "FLAME_CHARGE"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [19, 4, 12, 13],
+                "cp1500": [50, 15, 15, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FENNEKIN",
+                "evolutions": ["braixen_shadow"]
             }
         },
         {
@@ -33658,7 +33414,7 @@
             "types": ["fire", "none"],
             "fastMoves": ["SCRATCH", "EMBER"],
             "chargedMoves": ["PSYSHOCK", "FLAMETHROWER", "FLAME_CHARGE"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [10.5, 4, 11, 12],
                 "cp1500": [31, 6, 15, 14],
@@ -33671,6 +33427,34 @@
                 "id": "FAMILY_FENNEKIN",
                 "parent": "fennekin",
                 "evolutions": ["delphox"]
+            },
+            "level25CP": 1075
+        },
+        {
+            "dex": 654,
+            "speciesName": "Braixen (Shadow)",
+            "speciesId": "braixen_shadow",
+            "baseStats": {
+                "atk": 171,
+                "def": 130,
+                "hp": 153
+            },
+            "types": ["fire", "none"],
+            "fastMoves": ["SCRATCH", "EMBER"],
+            "chargedMoves": ["PSYSHOCK", "FLAMETHROWER", "FLAME_CHARGE"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [10.5, 4, 11, 12],
+                "cp1500": [31, 6, 15, 14],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FENNEKIN",
+                "parent": "fennekin_shadow",
+                "evolutions": ["delphox_shadow"]
             }
         },
         {
@@ -33686,7 +33470,7 @@
             "fastMoves": ["SCRATCH", "FIRE_SPIN", "ZEN_HEADBUTT"],
             "chargedMoves": ["PSYCHIC", "FLAMETHROWER", "FLAME_CHARGE", "FIRE_BLAST", "BLAST_BURN", "MYSTICAL_FIRE", "PSYSHOCK"],
             "eliteMoves": ["BLAST_BURN"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [6, 14, 15, 13],
                 "cp1500": [18, 4, 15, 14],
@@ -33698,6 +33482,34 @@
             "family": {
                 "id": "FAMILY_FENNEKIN",
                 "parent": "braixen"
+            },
+            "level25CP": 1897
+        },
+        {
+            "dex": 655,
+            "speciesName": "Delphox (Shadow)",
+            "speciesId": "delphox_shadow",
+            "baseStats": {
+                "atk": 230,
+                "def": 189,
+                "hp": 181
+            },
+            "types": ["fire", "psychic"],
+            "fastMoves": ["SCRATCH", "FIRE_SPIN", "ZEN_HEADBUTT"],
+            "chargedMoves": ["PSYCHIC", "FLAMETHROWER", "FLAME_CHARGE", "FIRE_BLAST", "BLAST_BURN", "MYSTICAL_FIRE", "PSYSHOCK"],
+            "eliteMoves": ["BLAST_BURN"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [6, 14, 15, 13],
+                "cp1500": [18, 4, 15, 14],
+                "cp2500": [30.5, 4, 15, 11]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FENNEKIN",
+                "parent": "braixen_shadow"
             }
         },
         {
@@ -33712,7 +33524,7 @@
             "types": ["water", "none"],
             "fastMoves": ["POUND", "BUBBLE"],
             "chargedMoves": ["WATER_PULSE", "AERIAL_ACE", "SURF"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [19.5, 4, 12, 15],
                 "cp1500": [50, 15, 15, 15],
@@ -33724,6 +33536,33 @@
             "family": {
                 "id": "FAMILY_FROAKIE",
                 "evolutions": ["frogadier"]
+            },
+            "level25CP": 548
+        },
+        {
+            "dex": 656,
+            "speciesName": "Froakie (Shadow)",
+            "speciesId": "froakie_shadow",
+            "baseStats": {
+                "atk": 122,
+                "def": 84,
+                "hp": 121
+            },
+            "types": ["water", "none"],
+            "fastMoves": ["POUND", "BUBBLE"],
+            "chargedMoves": ["WATER_PULSE", "AERIAL_ACE", "SURF"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [19.5, 4, 12, 15],
+                "cp1500": [50, 15, 15, 15],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FROAKIE",
+                "evolutions": ["frogadier_shadow"]
             }
         },
         {
@@ -33738,7 +33577,7 @@
             "types": ["water", "none"],
             "fastMoves": ["POUND", "BUBBLE"],
             "chargedMoves": ["WATER_PULSE", "AERIAL_ACE", "SURF"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "defaultIVs": {
                 "cp500": [11.5, 4, 12, 15],
                 "cp1500": [38.5, 4, 15, 14],
@@ -33751,6 +33590,34 @@
                 "id": "FAMILY_FROAKIE",
                 "parent": "froakie",
                 "evolutions": ["greninja"]
+            },
+            "level25CP": 960
+        },
+        {
+            "dex": 657,
+            "speciesName": "Frogadier (Shadow)",
+            "speciesId": "frogadier_shadow",
+            "baseStats": {
+                "atk": 168,
+                "def": 114,
+                "hp": 144
+            },
+            "types": ["water", "none"],
+            "fastMoves": ["POUND", "BUBBLE"],
+            "chargedMoves": ["WATER_PULSE", "AERIAL_ACE", "SURF"],
+            "tags": ["starter", "shadow"],
+            "defaultIVs": {
+                "cp500": [11.5, 4, 12, 15],
+                "cp1500": [38.5, 4, 15, 14],
+                "cp2500": [50, 15, 15, 15]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FROAKIE",
+                "parent": "froakie_shadow",
+                "evolutions": ["greninja_shadow"]
             }
         },
         {
@@ -33764,7 +33631,7 @@
             },
             "types": ["water", "dark"],
             "fastMoves": ["FEINT_ATTACK", "BUBBLE", "WATER_SHURIKEN"],
-            "tags": ["starter"],
+            "tags": ["starter", "shadoweligible"],
             "chargedMoves": ["NIGHT_SLASH", "AERIAL_ACE", "SURF", "HYDRO_PUMP", "HYDRO_CANNON"],
             "eliteMoves": ["HYDRO_CANNON"],
             "defaultIVs": {
@@ -33779,6 +33646,35 @@
             "family": {
                 "id": "FAMILY_FROAKIE",
                 "parent": "frogadier"
+            },
+            "level25CP": 1627
+        },
+        {
+            "dex": 658,
+            "speciesName": "Greninja (Shadow)",
+            "speciesId": "greninja_shadow",
+            "baseStats": {
+                "atk": 223,
+                "def": 152,
+                "hp": 176
+            },
+            "types": ["water", "dark"],
+            "fastMoves": ["FEINT_ATTACK", "BUBBLE", "WATER_SHURIKEN"],
+            "tags": ["starter", "shadow"],
+            "chargedMoves": ["NIGHT_SLASH", "AERIAL_ACE", "SURF", "HYDRO_PUMP", "HYDRO_CANNON"],
+            "eliteMoves": ["HYDRO_CANNON"],
+            "defaultIVs": {
+                "cp500": [7, 7, 15, 15],
+                "cp1500": [21, 5, 12, 12],
+                "cp2500": [39.5, 4, 13, 15]
+            },
+            "searchPriority": 6,
+            "buddyDistance": 3,
+            "thirdMoveCost": 10000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_FROAKIE",
+                "parent": "frogadier_shadow"
             }
         },
         {
@@ -34256,7 +34152,7 @@
                 "cp1500": [17, 6, 13, 14],
                 "cp2500": [28.5, 4, 13, 15]
             },
-            "searchPriority": 2,
+            "searchPriority": 8,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true,
@@ -34302,7 +34198,7 @@
             },
             "types": ["grass", "none"],
             "fastMoves": ["ZEN_HEADBUTT", "ROCK_SMASH", "VINE_WHIP"],
-            "chargedMoves": ["BRICK_BREAK", "LEAF_BLADE", "SEED_BOMB"],
+            "chargedMoves": ["BRICK_BREAK", "LEAF_BLADE", "SEED_BOMB", "ROCK_SLIDE"],
             "defaultIVs": {
                 "cp500": [7, 4, 10, 5],
                 "cp1500": [19.5, 7, 15, 15],
@@ -34500,8 +34396,8 @@
                 "hp": 153
             },
             "types": ["steel", "ghost"],
-            "fastMoves": ["PSYCHO_CUT", "TACKLE"],
-            "chargedMoves": ["IRON_HEAD", "GYRO_BALL"],
+            "fastMoves": ["PSYCHO_CUT", "TACKLE", "SHADOW_CLAW"],
+            "chargedMoves": ["IRON_HEAD", "GYRO_BALL", "SACRED_SWORD"],
             "defaultIVs": {
                 "cp500": [7.5, 11, 15, 13],
                 "cp1500": [22.5, 6, 15, 15],
@@ -34546,7 +34442,8 @@
             "formChange": {
                 "type": "set",
                 "trigger": "activate_shield",
-                "alternativeFormId": "aegislash_shield"
+                "alternativeFormId": "aegislash_shield",
+                "resetOnSwitch": true
             }
         },
         {
@@ -34580,7 +34477,8 @@
                 "type": "set",
                 "trigger": "activate_charged",
                 "moveId": "ANY",
-                "alternativeFormId": "aegislash_blade"
+                "alternativeFormId": "aegislash_blade",
+                "resetOnSwitch": true
             }
         },
         {
@@ -34769,6 +34667,33 @@
         },
         {
             "dex": 687,
+            "speciesName": "Malamar (Mega)",
+            "speciesId": "malamar_mega",
+            "baseStats": {
+                "atk": 208,
+                "def": 222,
+                "hp": 200
+            },
+            "types": ["dark", "psychic"],
+            "fastMoves": ["PECK", "PSYCHO_CUT", "PSYWAVE"],
+            "chargedMoves": ["PSYBEAM", "FOUL_PLAY", "SUPER_POWER", "HYPER_BEAM"],
+            "defaultIVs": {
+                "cp500": [6, 8, 13, 15],
+                "cp1500": [17.5, 4, 15, 15],
+                "cp2500": [29.5, 4, 15, 11]
+            },
+            "buddyDistance": 3,
+            "thirdMoveCost": 50000,
+            "released": true,
+            "family": {
+                "id": "FAMILY_INKAY",
+                "parent": "inkay"
+            },
+            "level25CP": 1955,
+            "tags": ["shadoweligible", "mega"]
+        },
+        {
+            "dex": 687,
             "speciesName": "Malamar (Shadow)",
             "speciesId": "malamar_shadow",
             "baseStats": {
@@ -34894,7 +34819,8 @@
             "family": {
                 "id": "FAMILY_SKRELP",
                 "parent": "skrelp"
-            }
+            },
+            "searchPriority": 4
         },
         {
             "dex": 692,
@@ -35277,7 +35203,7 @@
                 "cp1500": [30, 6, 15, 15],
                 "cp2500": [50, 15, 15, 15]
             },
-            "searchPriority": 12,
+            "searchPriority": 4,
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
             "released": true
@@ -35630,7 +35556,7 @@
                 "hp": 163
             },
             "types": ["ghost", "grass"],
-            "fastMoves": ["HEX", "RAZOR_LEAF"],
+            "fastMoves": ["HEX", "RAZOR_LEAF", "INCINERATE"],
             "chargedMoves": ["SEED_BOMB", "SHADOW_BALL", "FOUL_PLAY", "FIRE_BLAST", "POLTERGEIST"],
             "defaultIVs": {
                 "cp500": [8, 4, 14, 11],
@@ -35657,7 +35583,7 @@
                 "hp": 181
             },
             "types": ["ghost", "grass"],
-            "fastMoves": ["HEX", "RAZOR_LEAF"],
+            "fastMoves": ["HEX", "RAZOR_LEAF", "INCINERATE"],
             "chargedMoves": ["SEED_BOMB", "SHADOW_BALL", "FOUL_PLAY", "FIRE_BLAST", "POLTERGEIST"],
             "defaultIVs": {
                 "cp500": [7.5, 5, 13, 15],
@@ -35684,7 +35610,7 @@
                 "hp": 146
             },
             "types": ["ghost", "grass"],
-            "fastMoves": ["HEX", "RAZOR_LEAF"],
+            "fastMoves": ["HEX", "RAZOR_LEAF", "INCINERATE"],
             "chargedMoves": ["SEED_BOMB", "SHADOW_BALL", "FOUL_PLAY", "FIRE_BLAST", "POLTERGEIST"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 7, 14],
@@ -35711,7 +35637,7 @@
                 "hp": 198
             },
             "types": ["ghost", "grass"],
-            "fastMoves": ["HEX", "RAZOR_LEAF"],
+            "fastMoves": ["HEX", "RAZOR_LEAF", "INCINERATE"],
             "chargedMoves": ["SEED_BOMB", "SHADOW_BALL", "FOUL_PLAY", "FIRE_BLAST", "POLTERGEIST"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 8, 4],
@@ -35722,7 +35648,7 @@
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
-            "searchPriority": 2,
+            "searchPriority": 7,
             "family": {
                 "id": "FAMILY_PUMPKABOO",
                 "parent": "pumpkaboo_super"
@@ -36096,7 +36022,7 @@
             },
             "types": ["fire", "water"],
             "fastMoves": ["INCINERATE", "WATER_GUN", "TAKE_DOWN"],
-            "chargedMoves": ["HYDRO_PUMP", "OVERHEAT", "EARTH_POWER", "SLUDGE_BOMB"],
+            "chargedMoves": ["HYDRO_PUMP", "OVERHEAT", "EARTH_POWER", "SLUDGE_BOMB", "SCALD"],
             "defaultIVs": {
                 "cp500": [5, 15, 15, 10],
                 "cp1500": [15, 10, 11, 10],
@@ -36498,7 +36424,8 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["PECK", "ROCK_SMASH", "BULLET_SEED"],
-            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON"],
+            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON", "BEAK_BLAST"],
+            "eliteMoves": ["BEAK_BLAST"],
             "defaultIVs": {
                 "cp500": [7, 4, 15, 14],
                 "cp1500": [20.5, 5, 14, 14],
@@ -36525,7 +36452,8 @@
             },
             "types": ["normal", "flying"],
             "fastMoves": ["PECK", "ROCK_SMASH", "BULLET_SEED"],
-            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON"],
+            "chargedMoves": ["DRILL_PECK", "ROCK_BLAST", "FLASH_CANNON", "BEAK_BLAST"],
+            "eliteMoves": ["BEAK_BLAST"],
             "defaultIVs": {
                 "cp500": [7, 4, 15, 14],
                 "cp1500": [20.5, 5, 14, 14],
@@ -37654,7 +37582,7 @@
                 "cp2500": [29, 5, 13, 15]
             },
             "nicknames": ["pod"],
-            "searchPriority": 8,
+            "searchPriority": 6,
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
             "released": true,
@@ -38280,19 +38208,59 @@
             "dex": 778,
             "speciesName": "Mimikyu",
             "speciesId": "mimikyu",
+            "originalFormId": "mimikyu",
             "baseStats": {
                 "atk": 177,
                 "def": 199,
                 "hp": 146
             },
+            "nativeStatBuffs": [0, 0],
             "types": ["ghost", "fairy"],
-            "fastMoves": ["SHADOW_CLAW", "CHARM"],
-            "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "SHADOW_BALL"],
+            "fastMoves": ["SHADOW_CLAW", "HEX"],
+            "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "THUNDER"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 12, 14],
                 "cp1500": [25, 5, 13, 15],
                 "cp2500": [50, 13, 15, 15],
                 "cp2500l40": [40, 15, 15, 15]
+            },
+            "formChange": {
+                "type": "set",
+                "trigger": "charged_move_damage",
+                "effect": "protect",
+                "moveId": "ANY",
+                "alternativeFormId": "mimikyu_busted",
+                "resetOnSwitch": false
+            },
+            "searchPriority": 4,
+            "buddyDistance": 5,
+            "thirdMoveCost": 50000,
+            "released": false
+        },
+        {
+            "dex": 778,
+            "speciesName": "Mimikyu (Busted)",
+            "speciesId": "mimikyu_busted",
+            "originalFormId": "mimikyu",
+            "baseStats": {
+                "atk": 177,
+                "def": 199,
+                "hp": 146
+            },
+            "nativeStatBuffs": [0, -1],
+            "types": ["ghost", "fairy"],
+            "fastMoves": ["SHADOW_CLAW", "HEX"],
+            "chargedMoves": ["SHADOW_SNEAK", "PLAY_ROUGH", "THUNDER"],
+            "defaultIVs": {
+                "cp500": [8.5, 4, 12, 14],
+                "cp1500": [25, 5, 13, 15],
+                "cp2500": [50, 13, 15, 15],
+                "cp2500l40": [40, 15, 15, 15]
+            },
+            "formChange": {
+                "type": "set",
+                "trigger": "none",
+                "resetOnSwitch": false
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
@@ -38352,7 +38320,7 @@
             },
             "types": ["ghost", "grass"],
             "fastMoves": ["ASTONISH", "SHADOW_CLAW", "METAL_SOUND"],
-            "chargedMoves": ["POWER_WHIP", "SHADOW_BALL", "HEAVY_SLAM", "WRAP"],
+            "chargedMoves": ["POWER_WHIP", "SHADOW_BALL", "HEAVY_SLAM", "WRAP", "BRUTAL_SWING"],
             "defaultIVs": {
                 "cp500": [6.5, 4, 14, 10],
                 "cp1500": [20, 1, 4, 4],
@@ -38767,8 +38735,8 @@
                 "hp": 139
             },
             "types": ["grass", "steel"],
-            "fastMoves": ["AIR_SLASH", "RAZOR_LEAF"],
-            "chargedMoves": ["LEAF_BLADE", "X_SCISSOR", "NIGHT_SLASH", "AERIAL_ACE"],
+            "fastMoves": ["AIR_SLASH", "RAZOR_LEAF", "FURY_CUTTER"],
+            "chargedMoves": ["LEAF_BLADE", "X_SCISSOR", "NIGHT_SLASH", "AERIAL_ACE", "SACRED_SWORD"],
             "defaultIVs": {
                 "cp500": [5, 15, 15, 14],
                 "cp1500": [15, 4, 10, 14],
@@ -38927,7 +38895,7 @@
                 "hp": 207
             },
             "types": ["fighting", "ghost"],
-            "fastMoves": ["SUCKER_PUNCH", "COUNTER", "POISON_JAB"],
+            "fastMoves": ["SUCKER_PUNCH", "COUNTER", "POISON_JAB", "SHADOW_CLAW"],
             "chargedMoves": ["CLOSE_COMBAT", "FIRE_PUNCH", "THUNDER_PUNCH", "ICE_PUNCH", "ROCK_SLIDE"],
             "defaultIVs": {
                 "cp500": [5, 14, 15, 13],
@@ -39025,13 +38993,14 @@
             },
             "types": ["fire", "ghost"],
             "fastMoves": ["INCINERATE", "ASTONISH"],
-            "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT"],
+            "chargedMoves": ["MYSTICAL_FIRE", "SHADOW_BALL", "OVERHEAT", "MIND_BLOWN"],
+            "eliteMoves": ["MIND_BLOWN"],
             "defaultIVs": {
                 "cp500": [6, 4, 9, 5],
                 "cp1500": [16.5, 5, 15, 13],
                 "cp2500": [27.5, 5, 14, 14]
             },
-            "tags": ["ultrabeast"],
+            "tags": ["ultrabeast", "include1500", "include2500", "include10000"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
             "released": true
@@ -39175,7 +39144,8 @@
             },
             "types": ["grass", "none"],
             "fastMoves": ["SCRATCH", "RAZOR_LEAF"],
-            "chargedMoves": ["ENERGY_BALL", "GRASS_KNOT", "EARTH_POWER"],
+            "chargedMoves": ["ENERGY_BALL", "GRASS_KNOT", "EARTH_POWER", "DRUM_BEATING", "FRENZY_PLANT"],
+            "eliteMoves": ["FRENZY_PLANT"],
             "defaultIVs": {
                 "cp500": [6, 4, 4, 7],
                 "cp1500": [16.5, 5, 15, 13],
@@ -39255,7 +39225,8 @@
             },
             "types": ["fire", "none"],
             "fastMoves": ["TACKLE", "FIRE_SPIN"],
-            "chargedMoves": ["FLAME_CHARGE", "FLAMETHROWER", "FOCUS_BLAST"],
+            "chargedMoves": ["FLAME_CHARGE", "FLAMETHROWER", "FOCUS_BLAST", "PYRO_BALL", "BLAST_BURN"],
+            "eliteMoves": ["BLAST_BURN"],
             "defaultIVs": {
                 "cp500": [6.5, 4, 11, 4],
                 "cp1500": [18.5, 4, 10, 14],
@@ -39479,7 +39450,7 @@
                 "id": "FAMILY_ROOKIDEE",
                 "parent": "corvisquire"
             },
-            "searchPriority": 5
+            "searchPriority": 8
         },
         {
             "dex": 824,
@@ -39500,7 +39471,7 @@
             },
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_BLIPBUG",
                 "evolutions": ["dottler"]
@@ -39525,7 +39496,7 @@
             },
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_BLIPBUG",
                 "parent": "blipbug",
@@ -39542,8 +39513,8 @@
                 "hp": 155
             },
             "types": ["bug", "psychic"],
-            "fastMoves": ["STRUGGLE_BUG", "CONFUSION"],
-            "chargedMoves": ["BUG_BUZZ", "PSYCHIC"],
+            "fastMoves": ["STRUGGLE_BUG", "CONFUSION", "PSYCHO_CUT"],
+            "chargedMoves": ["BUG_BUZZ", "PSYCHIC", "PSYSHOCK"],
             "defaultIVs": {
                 "cp500": [8.5, 5, 14, 13],
                 "cp1500": [25.5, 4, 10, 14],
@@ -39552,7 +39523,7 @@
             },
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_BLIPBUG",
                 "parent": "dottler"
@@ -39827,7 +39798,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "evolutions": ["carkol"]
@@ -39843,7 +39814,7 @@
                 "hp": 190
             },
             "types": ["rock", "fire"],
-            "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+            "fastMoves": ["SMACK_DOWN"],
             "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
             "defaultIVs": {
                 "cp500": [13, 4, 12, 8],
@@ -39853,7 +39824,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "parent": "boltund",
@@ -39870,7 +39841,7 @@
                 "hp": 242
             },
             "types": ["rock", "fire"],
-            "fastMoves": ["SMACK_DOWN", "INCINERATE"],
+            "fastMoves": ["SMACK_DOWN", "FIRE_SPIN"],
             "chargedMoves": ["ROCK_BLAST", "ROCK_SLIDE", "FLAME_CHARGE"],
             "defaultIVs": {
                 "cp500": [8, 6, 15, 14],
@@ -39880,7 +39851,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_ROLYCOLY",
                 "parent": "rolycoly"
@@ -40256,7 +40227,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_CLOBBOPUS",
                 "evolutions": ["grapploct"]
@@ -40281,7 +40252,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_CLOBBOPUS",
                 "parent": "clobbopus"
@@ -40433,7 +40404,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_IMPIDIMP",
                 "evolutions": ["morgrem"]
@@ -40459,7 +40430,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_IMPIDIMP",
                 "parent": "impidimp",
@@ -40485,7 +40456,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_IMPIDIMP",
                 "parent": "morgrem"
@@ -40980,7 +40951,8 @@
                 "trigger": "charged_move",
                 "moveId": "ANY",
                 "defaultFormId": "morpeko_full_belly",
-                "alternativeFormId": "morpeko_hangry"
+                "alternativeFormId": "morpeko_hangry",
+                "resetOnSwitch": true
             },
             "tags": ["include2500"],
             "searchPriority": 4,
@@ -41528,7 +41500,7 @@
             },
             "types": ["dragon", "none"],
             "fastMoves": ["BITE", "DRAGON_BREATH"],
-            "chargedMoves": ["HYPER_BEAM", "OUTRAGE", "DRAGON_PULSE", "BREAKING_SWIPE", "DRAGON_ENERGY"],
+            "chargedMoves": ["HYPER_BEAM", "OUTRAGE", "DRAGON_PULSE", "BREAKING_SWIPE", "DRAGON_ENERGY", "VICE_GRIP"],
             "eliteMoves": ["DRAGON_BREATH", "DRAGON_ENERGY"],
             "defaultIVs": {
                 "cp500": [6.5, 5, 11, 9],
@@ -41686,8 +41658,8 @@
                 "hp": 277
             },
             "types": ["ground", "normal"],
-            "fastMoves": ["TACKLE", "ROCK_SMASH"],
-            "chargedMoves": ["FIRE_PUNCH", "THUNDER_PUNCH", "AERIAL_ACE", "HIGH_HORSEPOWER", "ICE_PUNCH", "TRAILBLAZE", "SWIFT"],
+            "fastMoves": ["TACKLE", "ROCK_SMASH", "SMACK_DOWN"],
+            "chargedMoves": ["FIRE_PUNCH", "THUNDER_PUNCH", "AERIAL_ACE", "HIGH_HORSEPOWER", "ICE_PUNCH", "TRAILBLAZE", "SWIFT", "PLAY_ROUGH"],
             "eliteMoves": ["HIGH_HORSEPOWER"],
             "defaultIVs": {
                 "cp500": [5, 6, 15, 13],
@@ -41714,8 +41686,8 @@
                 "hp": 277
             },
             "types": ["ground", "normal"],
-            "fastMoves": ["TACKLE", "ROCK_SMASH"],
-            "chargedMoves": ["FIRE_PUNCH", "THUNDER_PUNCH", "AERIAL_ACE", "HIGH_HORSEPOWER", "ICE_PUNCH", "TRAILBLAZE", "SWIFT"],
+            "fastMoves": ["TACKLE", "ROCK_SMASH", "SMACK_DOWN"],
+            "chargedMoves": ["FIRE_PUNCH", "THUNDER_PUNCH", "AERIAL_ACE", "HIGH_HORSEPOWER", "ICE_PUNCH", "TRAILBLAZE", "SWIFT", "PLAY_ROUGH"],
             "eliteMoves": ["HIGH_HORSEPOWER"],
             "defaultIVs": {
                 "cp500": [5, 6, 15, 13],
@@ -41894,8 +41866,8 @@
                 "hp": 179
             },
             "types": ["fairy", "flying"],
-            "fastMoves": ["ASTONISH", "ZEN_HEADBUTT", "FAIRY_WIND"],
-            "chargedMoves": ["DAZZLING_GLEAM", "FLY", "GRASS_KNOT"],
+            "fastMoves": ["ASTONISH", "EXTRASENSORY", "FAIRY_WIND"],
+            "chargedMoves": ["MOONBLAST", "FLY", "EARTH_POWER", "MYSTICAL_FIRE"],
             "defaultIVs": {
                 "cp500": [5.5, 14, 10, 15],
                 "cp1500": [16.5, 4, 9, 11],
@@ -41904,7 +41876,7 @@
             "tags": ["legendary"],
             "buddyDistance": 20,
             "thirdMoveCost": 100000,
-            "released": false
+            "released": true
         },
         {
             "dex": 906,
@@ -42052,7 +42024,7 @@
                 "cp1500": [18.5, 4, 13, 11],
                 "cp2500": [30.5, 6, 15, 13]
             },
-            "searchPriority": 5,
+            "searchPriority": 6,
             "nicknames": ["dirge"],
             "buddyDistance": 3,
             "thirdMoveCost": 10000,
@@ -42533,7 +42505,7 @@
                 "hp": 149
             },
             "types": ["fairy", "none"],
-            "fastMoves": ["CHARM", "BITE"],
+            "fastMoves": ["CHARM", "BITE", "FIRE_FANG"],
             "chargedMoves": ["BODY_SLAM", "PLAY_ROUGH", "PSYCHIC_FANGS"],
             "defaultIVs": {
                 "cp500": [9, 4, 14, 14],
@@ -42750,7 +42722,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_NACLI",
                 "evolutions": ["naclstack"]
@@ -42775,7 +42747,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_NACLI",
                 "parent": "nacli",
@@ -42801,7 +42773,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_NACLI",
                 "parent": "naclstack"
@@ -42952,7 +42924,7 @@
             },
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_WATTREL",
                 "evolutions": ["kilowattrel"]
@@ -42978,7 +42950,7 @@
             },
             "buddyDistance": 1,
             "thirdMoveCost": 10000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_WATTREL",
                 "parent": "wattrel"
@@ -43209,7 +43181,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 75000,
-            "released": false
+            "released": true
         },
         {
             "dex": 951,
@@ -43426,7 +43398,8 @@
             },
             "types": ["fairy", "steel"],
             "fastMoves": ["FAIRY_WIND", "ROCK_SMASH"],
-            "chargedMoves": ["PLAY_ROUGH", "FLASH_CANNON", "HEAVY_SLAM", "BULLDOZE"],
+            "chargedMoves": ["PLAY_ROUGH", "FLASH_CANNON", "HEAVY_SLAM", "BULLDOZE", "GIGATON_HAMMER"],
+            "eliteMoves": ["GIGATON_HAMMER"],
             "defaultIVs": {
                 "cp500": [8.5, 4, 11, 14],
                 "cp1500": [25, 4, 15, 14],
@@ -43727,7 +43700,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_GLIMMET",
                 "evolutions": ["glimmora"]
@@ -43744,7 +43717,7 @@
             },
             "types": ["rock", "poison"],
             "fastMoves": ["ROCK_THROW", "SMACK_DOWN"],
-            "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE"],
+            "chargedMoves": ["DAZZLING_GLEAM", "POWER_GEM", "SLUDGE_WAVE", "METEOR_BEAM"],
             "defaultIVs": {
                 "cp500": [6, 4, 6, 11],
                 "cp1500": [17, 4, 10, 14],
@@ -43752,7 +43725,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_GLIMMET",
                 "parent": "glimmet"
@@ -43794,7 +43767,7 @@
             },
             "types": ["ghost", "none"],
             "fastMoves": ["LICK", "BITE"],
-            "chargedMoves": ["SHADOW_BALL", "DIG", "PSYCHIC_FANGS"],
+            "chargedMoves": ["SHADOW_BALL", "DIG", "PSYCHIC_FANGS", "PLAY_ROUGH"],
             "defaultIVs": {
                 "cp500": [7.5, 5, 13, 15],
                 "cp1500": [22, 6, 13, 14],
@@ -43821,7 +43794,7 @@
             },
             "types": ["flying", "fighting"],
             "fastMoves": ["WING_ATTACK", "DOUBLE_KICK"],
-            "chargedMoves": ["AERIAL_ACE", "BRAVE_BIRD", "CLOSE_COMBAT"],
+            "chargedMoves": ["AERIAL_ACE", "BRAVE_BIRD", "UPPER_HAND"],
             "defaultIVs": {
                 "cp500": [7, 4, 12, 8],
                 "cp1500": [20, 4, 15, 14],
@@ -43829,7 +43802,7 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 75000,
-            "released": false
+            "released": true
         },
         {
             "dex": 974,
@@ -43867,7 +43840,7 @@
             },
             "types": ["ice", "none"],
             "fastMoves": ["ICE_SHARD", "TACKLE", "POWDER_SNOW"],
-            "chargedMoves": ["BODY_SLAM", "AVALANCHE", "HEAVY_SLAM"],
+            "chargedMoves": ["BODY_SLAM", "AVALANCHE", "HEAVY_SLAM", "SUPER_POWER", "ICICLE_SPEAR"],
             "defaultIVs": {
                 "cp500": [6, 10, 14, 15],
                 "cp1500": [18, 4, 13, 10],
@@ -44022,7 +43995,8 @@
                 "parent": "primeape"
             },
             "level25CP": 2037,
-            "tags": ["shadoweligible"]
+            "tags": ["shadoweligible"],
+            "searchPriority": 7
         },
         {
             "dex": 979,
@@ -44050,7 +44024,8 @@
                 "id": "FAMILY_MANKEY",
                 "parent": "primeape_shadow"
             },
-            "tags": ["shadow"]
+            "tags": ["shadow"],
+            "searchPriority": 6
         },
         {
             "dex": 980,
@@ -44114,8 +44089,8 @@
                 "hp": 268
             },
             "types": ["normal", "none"],
-            "fastMoves": ["BITE", "ASTONISH", "ROLLOUT"],
-            "chargedMoves": ["DIG", "ROCK_SLIDE", "DRILL_RUN"],
+            "fastMoves": ["BITE", "ASTONISH", "ROLLOUT", "DRAGON_TAIL"],
+            "chargedMoves": ["DIG", "ROCK_SLIDE", "DRILL_RUN", "BODY_SLAM"],
             "defaultIVs": {
                 "cp500": [7, 4, 14, 10],
                 "cp1500": [20.5, 4, 13, 12],
@@ -45184,30 +45159,6 @@
             "turns": 1
         },
         {
-            "moveId": "AEGISLASH_CHARGE_AIR_SLASH",
-            "name": "Air Slash",
-            "abbreviation": "AS",
-            "type": "flying",
-            "power": 0,
-            "energy": 0,
-            "energyGain": 6,
-            "cooldown": 1500,
-            "archetype": "Low Quality",
-            "turns": 3
-        },
-        {
-            "moveId": "AEGISLASH_CHARGE_PSYCHO_CUT",
-            "name": "Psycho Cut",
-            "abbreviation": "PC",
-            "type": "psychic",
-            "power": 0,
-            "energy": 0,
-            "energyGain": 6,
-            "cooldown": 1000,
-            "archetype": "Low Quality",
-            "turns": 2
-        },
-        {
             "moveId": "AERIAL_ACE",
             "name": "Aerial Ace",
             "type": "flying",
@@ -45385,6 +45336,21 @@
             "turns": 1
         },
         {
+            "moveId": "BEAK_BLAST",
+            "name": "Beak Blast",
+            "type": "flying",
+            "power": 110,
+            "energy": 55,
+            "energyGain": 0,
+            "turns": 1,
+            "cooldown": 500,
+            "archetype": "Debuff Nuke",
+            "abbreviation": "BBl",
+            "buffTarget": "opponent",
+            "buffs": [-1, 0],
+            "buffApplyChance": "1"
+        },
+        {
             "moveId": "BEHEMOTH_BASH",
             "name": "Behemoth Bash",
             "type": "steel",
@@ -45536,7 +45502,7 @@
             "name": "Brick Break",
             "abbreviation": "BkB",
             "type": "fighting",
-            "power": 40,
+            "power": 50,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -45642,11 +45608,11 @@
             "moveId": "BULLET_PUNCH",
             "name": "Bullet Punch",
             "type": "steel",
-            "power": 8,
+            "power": 7,
             "energy": 0,
             "energyGain": 7,
             "cooldown": 1000,
-            "archetype": "Multipurpose",
+            "archetype": "General",
             "turns": 2
         },
         {
@@ -45988,7 +45954,7 @@
             "name": "Dragon Energy",
             "abbreviation": "DrE",
             "type": "dragon",
-            "power": 100,
+            "power": 90,
             "energy": 45,
             "energyGain": 0,
             "cooldown": 500,
@@ -46034,7 +46000,7 @@
             "name": "Drain Punch",
             "abbreviation": "DrP",
             "type": "fighting",
-            "power": 20,
+            "power": 40,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -46065,6 +46031,21 @@
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
+            "turns": 1
+        },
+        {
+            "moveId": "DRUM_BEATING",
+            "name": "Drum Beating",
+            "abbreviation": "DrB",
+            "type": "grass",
+            "power": 60,
+            "energy": 35,
+            "energyGain": 0,
+            "cooldown": 500,
+            "buffs": [-1, 0],
+            "buffTarget": "opponent",
+            "buffApplyChance": "1",
+            "archetype": "Debuff Spam",
             "turns": 1
         },
         {
@@ -46380,7 +46361,7 @@
             "name": "Foul Play",
             "abbreviation": "FoP",
             "type": "dark",
-            "power": 60,
+            "power": 65,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -46486,7 +46467,7 @@
             "name": "Geomancy",
             "abbreviation": "Geo",
             "type": "fairy",
-            "power": 4,
+            "power": 8,
             "energy": 0,
             "energyGain": 13,
             "cooldown": 1500,
@@ -46510,6 +46491,17 @@
             "type": "normal",
             "power": 150,
             "energy": 80,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Nuke",
+            "turns": 1
+        },
+        {
+            "moveId": "GIGATON_HAMMER",
+            "name": "Gigaton Hammer",
+            "type": "steel",
+            "power": 130,
+            "energy": 60,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "Nuke",
@@ -46589,11 +46581,11 @@
             "moveId": "HEAT_WAVE",
             "name": "Heat Wave",
             "type": "fire",
-            "power": 95,
-            "energy": 75,
+            "power": 75,
+            "energy": 45,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "High Energy",
+            "archetype": "General",
             "turns": 1
         },
         {
@@ -46627,7 +46619,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_DARK",
@@ -46638,7 +46631,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_DRAGON",
@@ -46649,7 +46643,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_ELECTRIC",
@@ -46660,7 +46655,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_FIGHTING",
@@ -46671,7 +46667,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_FIRE",
@@ -46682,7 +46679,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_FLYING",
@@ -46693,7 +46691,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_GHOST",
@@ -46704,7 +46703,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_GRASS",
@@ -46715,7 +46715,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_GROUND",
@@ -46726,12 +46727,25 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_ICE",
             "name": "Hidden Power (Ice)",
             "type": "ice",
+            "power": 9,
+            "energy": 0,
+            "energyGain": 8,
+            "cooldown": 1500,
+            "archetype": "Low Quality",
+            "turns": 3,
+            "unlisted": true
+        },
+        {
+            "moveId": "HIDDEN_POWER_NORMAL",
+            "name": "Hidden Power",
+            "type": "normal",
             "power": 9,
             "energy": 0,
             "energyGain": 8,
@@ -46748,7 +46762,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_PSYCHIC",
@@ -46759,7 +46774,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_ROCK",
@@ -46770,7 +46786,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_STEEL",
@@ -46781,7 +46798,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIDDEN_POWER_WATER",
@@ -46792,7 +46810,8 @@
             "energyGain": 8,
             "cooldown": 1500,
             "archetype": "Low Quality",
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "HIGH_HORSEPOWER",
@@ -46961,7 +46980,7 @@
             "moveId": "ICICLE_SPEAR",
             "name": "Icicle Spear",
             "type": "ice",
-            "power": 65,
+            "power": 70,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -47143,11 +47162,11 @@
             "moveId": "LOW_KICK",
             "name": "Low Kick",
             "type": "fighting",
-            "power": 4,
+            "power": 5,
             "energy": 0,
-            "energyGain": 5,
+            "energyGain": 8,
             "cooldown": 1000,
-            "archetype": "Low Quality",
+            "archetype": "Fast Charge",
             "turns": 2
         },
         {
@@ -47292,10 +47311,25 @@
             "name": "Meteor Mash",
             "type": "steel",
             "power": 100,
-            "energy": 50,
+            "energy": 45,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
+            "turns": 1
+        },
+        {
+            "moveId": "MIND_BLOWN",
+            "name": "Mind Blown",
+            "abbreviation": "MdB",
+            "type": "fire",
+            "power": 90,
+            "energy": 35,
+            "energyGain": 0,
+            "cooldown": 500,
+            "buffs": [0, -4],
+            "buffTarget": "self",
+            "buffApplyChance": "1",
+            "archetype": "Debuff",
             "turns": 1
         },
         {
@@ -47384,20 +47418,20 @@
             "moveId": "MUD_BOMB",
             "name": "Mud Bomb",
             "type": "ground",
-            "power": 60,
-            "energy": 40,
+            "power": 65,
+            "energy": 45,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "Spam/Bait",
+            "archetype": "General",
             "turns": 1
         },
         {
             "moveId": "MUD_SHOT",
             "name": "Mud Shot",
             "type": "ground",
-            "power": 4,
+            "power": 3,
             "energy": 0,
-            "energyGain": 8,
+            "energyGain": 9,
             "cooldown": 1000,
             "archetype": "Fast Charge",
             "turns": 2
@@ -47407,11 +47441,11 @@
             "name": "Mud Slap",
             "abbreviation": "MSl",
             "type": "ground",
-            "power": 12,
+            "power": 11,
             "energy": 0,
             "energyGain": 10,
             "cooldown": 1500,
-            "archetype": "Multipurpose",
+            "archetype": "Heavy Damage",
             "turns": 3
         },
         {
@@ -47462,7 +47496,7 @@
             "energy": 35,
             "energyGain": 0,
             "cooldown": 500,
-            "buffs": [2, 0],
+            "buffs": [1, 0],
             "buffTarget": "self",
             "buffApplyChance": ".125",
             "archetype": "Boost Spam",
@@ -47477,8 +47511,11 @@
             "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "General",
-            "turns": 1
+            "archetype": "Boost",
+            "turns": 1,
+            "buffTarget": "self",
+            "buffs": [0, 1],
+            "buffApplyChance": "1"
         },
         {
             "moveId": "OBSTRUCT",
@@ -47569,7 +47606,7 @@
             "abbreviation": "PbC",
             "type": "electric",
             "power": 70,
-            "energy": 45,
+            "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
             "buffs": [0, 1],
@@ -47690,11 +47727,11 @@
             "moveId": "POWDER_SNOW",
             "name": "Powder Snow",
             "type": "ice",
-            "power": 5,
+            "power": 6,
             "energy": 0,
             "energyGain": 8,
             "cooldown": 1000,
-            "archetype": "Fast Charge",
+            "archetype": "Multipurpose",
             "turns": 2
         },
         {
@@ -47816,7 +47853,7 @@
             "moveId": "PSYCHO_CUT",
             "name": "Psycho Cut",
             "type": "psychic",
-            "power": 3,
+            "power": 4,
             "energy": 0,
             "energyGain": 9,
             "cooldown": 1000,
@@ -47857,6 +47894,17 @@
             "energyGain": 4,
             "cooldown": 500,
             "archetype": "Fast Charge",
+            "turns": 1
+        },
+        {
+            "moveId": "PYRO_BALL",
+            "name": "Pyro Ball",
+            "type": "fire",
+            "power": 75,
+            "energy": 40,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Spam/Bait",
             "turns": 1
         },
         {
@@ -47994,7 +48042,7 @@
             "moveId": "ROCK_TOMB",
             "name": "Rock Tomb",
             "type": "rock",
-            "power": 80,
+            "power": 75,
             "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
@@ -48084,7 +48132,7 @@
             "moveId": "SAND_TOMB",
             "name": "Sand Tomb",
             "type": "ground",
-            "power": 25,
+            "power": 40,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -48137,6 +48185,18 @@
             "turns": 1
         },
         {
+            "moveId": "SECRET_SWORD",
+            "name": "Secret Sword",
+            "abbreviation": "SeS",
+            "type": "fighting",
+            "power": 70,
+            "energy": 35,
+            "energyGain": 0,
+            "cooldown": 500,
+            "archetype": "Spam/Bait",
+            "turns": 1
+        },
+        {
             "moveId": "SEED_BOMB",
             "name": "Seed Bomb",
             "abbreviation": "SeB",
@@ -48168,10 +48228,10 @@
             "name": "Shadow Ball",
             "type": "ghost",
             "power": 100,
-            "energy": 55,
+            "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "Nuke",
+            "archetype": "General",
             "turns": 1
         },
         {
@@ -48228,8 +48288,8 @@
             "moveId": "SHADOW_SNEAK",
             "name": "Shadow Sneak",
             "type": "ghost",
-            "power": 50,
-            "energy": 45,
+            "power": 75,
+            "energy": 50,
             "energyGain": 0,
             "cooldown": 500,
             "archetype": "General",
@@ -48330,7 +48390,7 @@
             "moveId": "SMACK_DOWN",
             "name": "Smack Down",
             "type": "rock",
-            "power": 12,
+            "power": 11,
             "energy": 0,
             "energyGain": 8,
             "cooldown": 1500,
@@ -48367,10 +48427,10 @@
             "name": "Spacial Rend",
             "type": "dragon",
             "power": 95,
-            "energy": 50,
+            "energy": 55,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "General",
+            "archetype": "High Energy",
             "turns": 1
         },
         {
@@ -48770,7 +48830,8 @@
             "energy": 0,
             "energyGain": 0,
             "cooldown": 1500,
-            "turns": 3
+            "turns": 3,
+            "unlisted": true
         },
         {
             "moveId": "TRIPLE_AXEL",
@@ -48806,11 +48867,11 @@
             "name": "Twister",
             "abbreviation": "Tw",
             "type": "dragon",
-            "power": 45,
-            "energy": 45,
+            "power": 70,
+            "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
-            "archetype": "General",
+            "archetype": "Spam/Bait",
             "turns": 1
         },
         {
@@ -48831,7 +48892,7 @@
             "moveId": "VICE_GRIP",
             "name": "Vise Grip",
             "type": "normal",
-            "power": 40,
+            "power": 70,
             "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
@@ -48865,7 +48926,7 @@
             "name": "Volt Tackle",
             "type": "electric",
             "power": 90,
-            "energy": 50,
+            "energy": 40,
             "energyGain": 0,
             "cooldown": 500,
             "buffs": [0, -1],
@@ -48892,9 +48953,9 @@
             "moveId": "WATERFALL",
             "name": "Waterfall",
             "type": "water",
-            "power": 12,
+            "power": 11,
             "energy": 0,
-            "energyGain": 8,
+            "energyGain": 10,
             "cooldown": 1500,
             "archetype": "Heavy Damage",
             "turns": 3
@@ -48919,7 +48980,8 @@
             "energyGain": 4,
             "cooldown": 1000,
             "archetype": "Low Quality",
-            "turns": 2
+            "turns": 2,
+            "unlisted": true
         },
         {
             "moveId": "WATER_PULSE",
@@ -49034,7 +49096,7 @@
             "type": "flying",
             "power": 5,
             "energy": 0,
-            "energyGain": 7,
+            "energyGain": 8,
             "cooldown": 1000,
             "archetype": "Fast Charge",
             "turns": 2
@@ -49100,6 +49162,32 @@
             "cooldown": 1500,
             "archetype": "Low Quality",
             "turns": 3
+        },
+        {
+            "moveId": "AEGISLASH_CHARGE_AIR_SLASH",
+            "name": "Air Slash",
+            "abbreviation": "AS",
+            "type": "flying",
+            "power": 0,
+            "energy": 0,
+            "energyGain": 6,
+            "cooldown": 1500,
+            "archetype": "Low Quality",
+            "turns": 3,
+            "unlisted": true
+        },
+        {
+            "moveId": "AEGISLASH_CHARGE_PSYCHO_CUT",
+            "name": "Psycho Cut",
+            "abbreviation": "PC",
+            "type": "psychic",
+            "power": 0,
+            "energy": 0,
+            "energyGain": 6,
+            "cooldown": 1000,
+            "archetype": "Low Quality",
+            "turns": 2,
+            "unlisted": true
         }
     ]
 }

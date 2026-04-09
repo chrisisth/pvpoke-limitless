@@ -166,7 +166,7 @@ header .hamburger .meat {
   display: flex;
   justify-content: center;
   background: #4b8f56;
-  padding: 3px;
+  padding: 6px;
   width: 100%;
   position: fixed;
   z-index: 25;
@@ -2313,6 +2313,13 @@ a.download-csv {
   background: url("../img/shield.png");
   z-index: 10;
 }
+.timeline .item-container .item.shieldSpecial {
+  width: 25px;
+  height: 22px;
+  top: -12px;
+  background: url("../img/shield_special.png");
+  z-index: 10;
+}
 .timeline .item-container .item.faint {
   color: #ff0000;
   font-size: 20px;
@@ -2579,6 +2586,9 @@ a.download-csv {
 }
 .tooltip.shield {
   background: #df46e5;
+}
+.tooltip.shieldSpecial {
+  background: #fef4b5;
 }
 .tooltip.tap {
   background: #eee;
@@ -3476,6 +3486,30 @@ a.download-csv {
 .modal .sort-group .center .button {
   display: block;
   min-width: 200px;
+}
+
+th.col-sort {
+  cursor: pointer;
+  padding-right: 20px;
+  position: relative;
+}
+
+th.col-sort::after {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  visibility: hidden;
+}
+
+th.col-sort[data-asc=true]::after {
+  content: "▴";
+  visibility: visible;
+}
+
+th.col-sort[data-asc=false]::after {
+  content: "▾";
+  visibility: visible;
 }
 
 .rankings-container > .rank,
@@ -4498,8 +4532,8 @@ a.rating:hover:after {
   display: flex;
   justify-content: space-between;
 }
-.modal .list-export .export-options a.json,
-.modal .search-string-window .export-options a.json {
+.modal .list-export .export-options a,
+.modal .search-string-window .export-options a {
   font-size: 12px;
 }
 .modal .save-list input {
@@ -5067,9 +5101,6 @@ a.pokebattler {
   .header-ticker {
     position: fixed;
     z-index: 50;
-  }
-  .header-ticker a {
-    font-size: 11px;
   }
 
   body {
