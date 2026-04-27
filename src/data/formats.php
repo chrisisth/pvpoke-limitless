@@ -30,18 +30,18 @@ $formats = array (
   ),
   2 => 
   array (
-    'title' => 'Electric Cup',
-    'cup' => 'electric',
+    'title' => 'Spring Cup',
+    'cup' => 'spring',
     'cp' => 1500,
-    'meta' => 'electric',
+    'meta' => 'spring',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Electric-type Pokémon are eligible.',
-      2 => 'The following Pokemon are not allowed: Stunfisk, Heliolisk, Charjabug, Vikavolt',
+      1 => 'Only Water-, Grass-, and Fairy-type Pokémon are eligible.',
+      2 => 'The following Pokemon are not allowed: Jumpluff, Roserade, Toxapex',
     ),
   ),
   3 => 
@@ -61,18 +61,19 @@ $formats = array (
   ),
   4 => 
   array (
-    'title' => 'Spring Cup',
-    'cup' => 'spring',
+    'title' => 'NAIC 2026 Championship Series Cup',
+    'cup' => 'naic2026',
     'cp' => 1500,
-    'meta' => 'spring',
+    'meta' => 'naic2026',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
       0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Water-, Grass-, and Fairy-type Pokémon are eligible.',
-      2 => 'The following Pokemon are not allowed: Junpluff, Roserade, Toxapex',
+      1 => 'Only Fairy-, Normal-, Psychic- and Water-type Pokémon are eligible.',
+      2 => 'The following types are not allowed: Dark, Grass, Steel',
+      3 => 'The following Pokemon are not allowed: Araquanid, Carbink, Chansey, Chinchou, Claydol, Clefable, Cresselia, Dedenne, Diggersby, Farfetch\'d, Gastrodon, Golisopod, Greedent, Jellicent, Lanturn, Lickilicky, Lickitung, Lugia, Medicham, Oranguru, Poliwrath',
     ),
   ),
   5 => 
