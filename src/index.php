@@ -71,8 +71,6 @@
 		</span>
 	</a>
 
-	<?php require 'modules/ads/body-728.php'; ?>
-
 	<!--Update section for updates-->
 	<div class="flex new-header">
 		<h3>What's New</h3>
@@ -94,15 +92,11 @@
 		<button class="feed-expand"></button>
 	</div>
 
-	<?php if($_SETTINGS->ads == 1) : ?>
-		<span data-ccpa-link="1"></span>
-	<?php endif; ?>
-
 </div>
 
 <?php
 // Localhost developer panel
-if (strpos($WEB_ROOT, 'src') !== false) : ?>
+if (strpos($WEB_ROOT, 'src') !== true) : ?>
 
 	<script src="<?php echo $WEB_ROOT; ?>js/GameMaster.js?v=<?php echo $SITE_VERSION; ?>"></script>
 	<script src="<?php echo $WEB_ROOT; ?>js/pokemon/Pokemon.js?v=<?php echo $SITE_VERSION; ?>"></script>

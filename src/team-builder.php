@@ -23,8 +23,19 @@ require_once 'header.php';
 			<div class="team-option">
 				<h3>Max Team Size</h3>
 				<select class="team-size-select">
-					<option value="6" selected>6</option>
+					<option value="3" selected>3</option>
+					<option value="6">6</option>
 					<option value="8">8</option>
+					<option value="10">10</option>
+					<option value="12">12</option>
+					<option value="15">15</option>
+					<option value="20">20</option>
+					<option value="30">30</option>
+					<option value="40">40</option>
+					<option value="60">60</option>
+					<option value="80">80</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
 				</select>
 			</div>
 			<div class="team-option">
@@ -36,6 +47,13 @@ require_once 'header.php';
 					<option value="40">40</option>
 					<option value="60">60</option>
 					<option value="80">80</option>
+					<option value="100">100</option>
+					<option value="200">200</option>
+					<option value="300">300</option>
+					<option value="400">400</option>
+					<option value="500">500</option>
+					<option value="1000">1000</option>
+					<option value="2000">2000</option>					
 				</select>
 			</div>
 			<div class="team-option">
@@ -115,8 +133,6 @@ require_once 'header.php';
 </button>
 
 <div class="section white error">Please select one or more Pokemon.</div>
-
-<?php require 'modules/ads/body-728.php'; ?>
 
 <div class="section typings white">
 	<a href="#" class="toggle active">Overview <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>

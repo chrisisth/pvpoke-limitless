@@ -214,8 +214,6 @@ if(! isset($OG_IMAGE)){
 	?>
 </script>
 
-	<?php require_once 'modules/ads/base-code.php'; ?>
-
 </head>
 
 <body <?php if($_SETTINGS->colorblindMode == 1): ?>class="colorblind"<?php endif; ?>>

@@ -98,8 +98,6 @@ if(isset($_COOKIE['settings'])){
 	?>
 </script>
 
-	<?php require_once 'modules/ads/base-code.php'; ?>
-
 </head>
 
 <body>

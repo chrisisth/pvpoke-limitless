@@ -44,7 +44,7 @@ var InterfaceMaster = (function () {
 					multiSelectors[i].init(data.pokemon, battle);
 				}
 
-				multiSelectors[0].setMaxPokemonCount(6);
+				multiSelectors[0].setMaxPokemonCount(3);
 				multiSelectors[0].setContext("team");
 
 

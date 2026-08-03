@@ -94,7 +94,7 @@ var InterfaceMaster = (function () {
                         if(host.includes("localhost")){
                             $("#edit-btn").show();
                         } else{
-                            $("#edit-btn").hide();
+                            $("#edit-btn").show();
                         }
                     } else{
                         $("#save-btn").show();

@@ -20,6 +20,7 @@ var InterfaceMaster = (function () {
 			var customRankingInterface;
 			var metaGroup = [];
 			var metaGroupData = [];
+			var metaGroupExport = [];
 			var csv = '';
 			var showMoveCounts = false;
 			var rankingDisplayInterval;
@@ -85,6 +86,7 @@ var InterfaceMaster = (function () {
 				clearInterval(rankingDisplayInterval);
 				$(".rankings-container").html('');
 				$(".loading").show();
+
 
 				var format = gm.getFormat(cup, league);
 
@@ -234,9 +236,11 @@ var InterfaceMaster = (function () {
 				// Create an element for each ranked Pokemon
 
 				metaGroup = [];
+				metaGroupExport = [];
 
 
 				$(".loading").hide();
+
 
 				var i = 0;
 				var rankingDisplayIncrement = 15;
@@ -282,8 +286,9 @@ var InterfaceMaster = (function () {
 				}
 
 				// Construct meta group from ranked Pokemon
-				if((index < 100)&&(context == "custom")){
+				if((index < 2000)&&(context == "custom")){
 					metaGroup.push(pokemon);
+
 				}
 
 				if(context != "custom"){
@@ -295,6 +300,8 @@ var InterfaceMaster = (function () {
 						}
 					}
 				}
+
+
 
 				// Get names of of ranking moves
 
@@ -337,7 +344,8 @@ var InterfaceMaster = (function () {
 						moveNameStr += ", "
 					}
 				}
-
+					metaGroupExport.push(pokemon);
+					
 				// Is this the best way to add HTML content? I'm gonna go with no here. But does it work? Yes!
 				var $el = $("<div class=\"rank typed-ranking " + pokemon.types[0] + "\" type-1=\""+pokemon.types[0]+"\" type-2=\""+pokemon.types[1]+"\" data=\""+pokemon.speciesId+"\">" +
 					"<div class=\"expand-label\"></div>" +
@@ -518,6 +526,12 @@ var InterfaceMaster = (function () {
 				if(context == "custom"){
 					customRankingInterface.setMetaGroup(metaGroup);
 				}
+				
+				if (typeof PokeMultiSelect !== 'undefined'){
+					var customMetaSelector = new PokeMultiSelect($(".poke.multi").eq(0));
+				customMetaSelector.init(data.pokemon, battle);
+				}
+				customMetaSelector.setPokemonList(metaGroupExport);
 			}
 
 			// Given JSON of get parameters, load these settings
@@ -1499,7 +1513,7 @@ var InterfaceMaster = (function () {
 				}
 
 				metaGroup.sort((a,b) => (a.partnerScore > b.partnerScore) ? -1 : ((b.partnerScore > a.partnerScore) ? 1 : 0));
-
+				
 				return metaGroup;
 			}
 

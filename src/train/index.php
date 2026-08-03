@@ -143,8 +143,6 @@ require_once '../header.php';
 	</div>
 </div>
 
-<?php require '../modules/ads/body-728.php'; ?>
-
 <?php require_once '../modules/scripts/battle-scripts.php'; ?>
 <?php require_once '../modules/scripts/train-scripts.php'; ?>
 
