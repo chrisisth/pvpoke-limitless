@@ -3981,7 +3981,7 @@ th.col-sort[data-asc=false]::after {
   background: rgba(0, 0, 0, 0.1);
 }
 .article table.alternatives-table {
-  min-width: 600px;
+  min-width: 900px;
 }
 .article .rating-table td {
   padding: 3px;
@@ -3995,6 +3995,22 @@ th.col-sort[data-asc=false]::after {
   font-size: 14px;
   max-width: 80px;
   vertical-align: bottom;
+}
+.article .rating-table th.summary, .article .rating-table td.summary {
+  min-width: 170px;
+  max-width: 190px;
+  white-space: normal;
+  vertical-align: middle;
+}
+.article .rating-table td.summary .summary-primary {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 2px;
+}
+.article .rating-table td.summary .summary-secondary {
+  display: block;
+  font-size: 11px;
+  opacity: 0.85;
 }
 .article .rating-table.legend {
   margin: 0;

@@ -243,7 +243,7 @@ require_once 'header.php';
 
 	<a href="#" class="toggle active">Potential Alternatives <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
-		<p>The Pokemon below have the best overall matchups against this team's potential threats. Results are taken from 0 and 1 shield simulations. Scores also factor in a Pokemon's overall strength and consistency. See the team's Coverage grade for more on its potential threats.</p>
+		<p>The Pokemon below have the best overall matchups against this team's potential threats. Results are taken from 0 and 1 shield simulations across a broader set of threat matchups, and each row now includes a compact synergy summary to help you spot stronger team fits. Scores also factor in a Pokemon's overall strength and consistency. See the team's Coverage grade for more on its potential threats.</p>
 
 		<div class="poke-search-container">
 			<input class="poke-search" context="alternative-search" type="text" placeholder="Search Pokemon" />

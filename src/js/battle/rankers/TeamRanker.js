@@ -149,6 +149,8 @@ var RankerMaster = (function () {
 					var avg = 0;
 					var matchupScore = 0; // A softer representation of wins/losses used for team builder threats and alternatives
 					var matchupAltScore = 0;
+					var favorableMatchupCount = 0;
+					var strongMatchupCount = 0;
 					var opponentRating = 0;
 
 					// Simulate battle against each Pokemon
@@ -244,6 +246,14 @@ var RankerMaster = (function () {
 						avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
 
 						csv += ',' + avgOpRating + ',' + opponent.energy + ',' + opponent.hp;
+
+						if(avgPokeRating >= 600){
+							favorableMatchupCount++;
+						}
+
+						if(avgPokeRating >= 500){
+							strongMatchupCount++;
+						}
 
 						avg += avgPokeRating;
 						opponentRating = avgOpRating;
@@ -345,6 +355,8 @@ var RankerMaster = (function () {
 					avg = Math.floor(avg / team.length);
 					matchupScore = matchupScore / team.length;
 					matchupAltScore = matchupAltScore / team.length;
+					matchupAltScore += (favorableMatchupCount * 25) / team.length;
+					matchupAltScore += (strongMatchupCount * 10) / team.length;
 
 
 					rankObj.rating = avg;

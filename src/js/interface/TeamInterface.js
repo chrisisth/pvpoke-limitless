@@ -204,6 +204,7 @@ var InterfaceMaster = (function () {
 
 				// Gather advanced settings
 				var scorecardCount = parseInt($(".scorecard-length-select option:selected").val());
+				var maxThreatsToShow = Math.min(20, Math.max(10, scorecardCount));
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on") ? 1 : 0;
@@ -392,7 +393,7 @@ var InterfaceMaster = (function () {
 					var pokemon = r.pokemon;
 
 					// Push to counter team
-					if(counterTeam.length < 6){
+					if(counterTeam.length < maxThreatsToShow){
 						let similarCounterExists = counterTeam.some(counter => {
 							let similarityScore = counter.calculateSimilarity(pokemon, pokemon?.traits, false);
 
@@ -760,6 +761,45 @@ var InterfaceMaster = (function () {
 				runningResults = false;
 			}
 
+			this.getAlternativeSummary = function(ranking){
+				var ratings = ranking.matchups.map(function(matchup){
+					return matchup.rating;
+				});
+
+				var avgRating = Math.round(ratings.reduce(function(sum, value){
+					return sum + value;
+				}, 0) / ratings.length);
+
+				var winCount = ratings.filter(function(value){
+					return value >= 700;
+				}).length;
+				var closeWinCount = ratings.filter(function(value){
+					return value >= 600 && value < 700;
+				}).length;
+				var tieCount = ratings.filter(function(value){
+					return value >= 400 && value < 600;
+				}).length;
+				var closeLossCount = ratings.filter(function(value){
+					return value >= 300 && value < 400;
+				}).length;
+				var lossCount = ratings.filter(function(value){
+					return value < 300;
+				}).length;
+
+				var bestIndex = ratings.reduce(function(bestIndex, value, index, array){
+					return value > array[bestIndex] ? index : bestIndex;
+				}, 0);
+				var worstIndex = ratings.reduce(function(worstIndex, value, index, array){
+					return value < array[worstIndex] ? index : worstIndex;
+				}, 0);
+
+				return {
+					primary: avgRating + " avg",
+					secondary: winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
+					title: "Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
+				};
+			};
+
 			// Display the list of alternative Pokemon given a list of searched Pokemon
 			this.displayAlternatives = function(list){
 				// Gather advanced settings
@@ -773,13 +813,16 @@ var InterfaceMaster = (function () {
 				// Generate counters and histograms, and display that, too
 				var shieldMode = $(".team-advanced .flex.poke .shield-select option:selected").val();
 				var shieldCount = 1;
+				var maxThreatsToShow = Math.min(20, Math.max(10, scorecardCount));
 
 			if(shieldMode != "average" && shieldMode != "all"){
 				shieldCount = parseInt(shieldMode);
 				shieldMode = "single";
 			}
 
+				$(".alternatives-table").html("");
 				var $row = $("<thead><tr><td class=\"arrow\"></td></tr></thead>");
+				$row.find("tr").append("<th class=\"summary\">Synergy</th>");
 
 				for(var n = 0; n < counterTeam.length; n++){
 					$row.find("tr").append("<td class=\"name-small\">"+counterTeam[n].speciesName+"</td>");
@@ -894,9 +937,10 @@ var InterfaceMaster = (function () {
 						}
 					}
 
-					// Add results to alternatives table
-
+						// Add results to alternatives table
+					var summary = self.getAlternativeSummary(r);
 					$row = $("<tr><th class=\"name\"><b>"+(count+1)+". "+pokemon.speciesName+"<div class=\"button add\" pokemon=\""+pokemon.speciesId+"\" alias=\""+pokemon.aliasId+"\">+</div></b></th></tr>");
+					$row.append("<td class=\"summary\" title=\""+summary.title+"\"><div class=\"summary-primary\">"+summary.primary+"</div><div class=\"summary-secondary\">"+summary.secondary+"</div></td>");
 
 					for(var n = 0; n < r.matchups.length; n++){
 						var $cell = $("<td><a class=\"rating\" href=\"#\" target=\"blank\"><span></span></a></td>");
