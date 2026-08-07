@@ -77,6 +77,7 @@ require_once 'header.php';
 				<h3>Shields</h3>
 				<select class="shield-select">
 					<option value="average" selected>Average (0 & 1)</option>
+					<option value="all">All combinations (0–2 each)</option>
 					<option value="0">No shields</option>
 					<option value="1">1 shield</option>
 					<option value="2">2 shields</option>

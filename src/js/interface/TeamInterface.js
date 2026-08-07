@@ -269,21 +269,18 @@ var InterfaceMaster = (function () {
 				var shieldMode = $(".team-advanced .flex.poke .shield-select option:selected").val();
 				var shieldCount = 1;
 
-				if(shieldMode != "average"){
-					shieldCount = parseInt(shieldMode);
-					shieldMode = "single";
-				}
+			if(shieldMode != "average" && shieldMode != "all"){
+				shieldCount = parseInt(shieldMode);
+				shieldMode = "single";
+			}
 
-				var teamSettings = getDefaultMultiBattleSettings();
-				var opponentSettings = getDefaultMultiBattleSettings();
+			var teamSettings = getDefaultMultiBattleSettings();
+			var opponentSettings = getDefaultMultiBattleSettings();
 
-				teamSettings.shields = opponentSettings.shields = shieldCount;
-				teamSettings.bait = opponentSettings.bait = baitShields;
-
-				var ranker = RankerMaster.getInstance();
-				ranker.setShieldMode(shieldMode);
+			teamSettings.shields = opponentSettings.shields = shieldCount;
 				ranker.applySettings(teamSettings, 0);
 				ranker.applySettings(opponentSettings, 1);
+				ranker.setShieldMode(shieldMode);
 				ranker.setMetaGroup(metaGroup);
 				ranker.setPrioritizeMeta(prioritizeMeta);
 
@@ -776,14 +773,10 @@ var InterfaceMaster = (function () {
 				var shieldMode = $(".team-advanced .flex.poke .shield-select option:selected").val();
 				var shieldCount = 1;
 
-				if(shieldMode != "average"){
-					shieldCount = parseInt(shieldMode);
-					shieldMode = "single";
-				}
-
-				$(".alternatives-table").html("");
-
-				var $row = $("<thead><tr><td class=\"arrow\"></td></tr></thead>");
+			if(shieldMode != "average" && shieldMode != "all"){
+				shieldCount = parseInt(shieldMode);
+				shieldMode = "single";
+			}
 
 				for(var n = 0; n < counterTeam.length; n++){
 					$row.find("tr").append("<td class=\"name-small\">"+counterTeam[n].speciesName+"</td>");

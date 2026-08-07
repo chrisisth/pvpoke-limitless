@@ -192,43 +192,53 @@ var RankerMaster = (function () {
 							shieldTestArr.push([ overrideSettings[0].shields, overrideSettings[1].shields ]);
 						} else if(shieldMode == 'average'){
 							shieldTestArr.push([0,0], [1,1]);
+						} else if(shieldMode == 'all'){
+						for(var attackerShields = 0; attackerShields <= 2; attackerShields++){
+							for(var defenderShields = 0; defenderShields <= 2; defenderShields++){
+								shieldTestArr.push([ defenderShields, attackerShields ]);
+							}
+						}
+					}
+
+					var avgPokeRating = 0;
+					var avgOpRating = 0;
+					var shieldRatings = [];
+
+					for(var j = 0; j < shieldTestArr.length; j++){
+						pokemon.setShields(shieldTestArr[j][1]);
+
+						if((shieldMode == 'average') || (shieldMode == 'single') || (shieldMode == 'all') || (context == 'matrix')){
+							opponent.setShields(shieldTestArr[j][0]);
 						}
 
-						var avgPokeRating = 0;
-						var avgOpRating = 0;
-						var shieldRatings = [];
+						battle.simulate();
 
-						for(var j = 0; j < shieldTestArr.length; j++){
-							pokemon.setShields(shieldTestArr[j][1]);
+						var healthRating = (pokemon.hp / pokemon.stats.hp);
+						var damageRating = ((opponent.stats.hp - opponent.hp) / (opponent.stats.hp));
 
-							if((shieldMode == 'average')||(shieldMode == 'single')||(context == 'matrix')){
-								opponent.setShields(shieldTestArr[j][0]);
-							}
+						var opHealthRating = (opponent.hp / opponent.stats.hp);
+						var opDamageRating = ((pokemon.stats.hp - pokemon.hp) / (pokemon.stats.hp));
 
-							battle.simulate();
+						var rating = Math.floor( (healthRating + damageRating) * 500);
+						var opRating = Math.floor( (opHealthRating + opDamageRating) * 500);
 
-							var healthRating = (pokemon.hp / pokemon.stats.hp);
-							var damageRating = ((opponent.stats.hp - opponent.hp) / (opponent.stats.hp));
-
-							var opHealthRating = (opponent.hp / opponent.stats.hp);
-							var opDamageRating = ((pokemon.stats.hp - pokemon.hp) / (pokemon.stats.hp));
-
-							var rating = Math.floor( (healthRating + damageRating) * 500);
-							var opRating = Math.floor( (opHealthRating + opDamageRating) * 500);
-
-							if(isNaN(avgPokeRating)){
-								console.log(battle.getPokemon());
-								return false;
-							}
-
-							avgPokeRating += rating;
-							avgOpRating += opRating;
-
-							shieldRatings.push(rating);
+						if(isNaN(avgPokeRating)){
+							console.log(battle.getPokemon());
+							return false;
 						}
+
+						avgPokeRating += rating;
+						avgOpRating += opRating;
+
+						shieldRatings.push(rating);
+					}
 
 						if(shieldTestArr.length > 1){
-							avgPokeRating = Math.round( Math.pow(shieldRatings[0] * Math.pow(shieldRatings[1], 3), 1/4));
+							if(shieldMode == 'average' && shieldTestArr.length == 2){
+								avgPokeRating = Math.round( Math.pow(shieldRatings[0] * Math.pow(shieldRatings[1], 3), 1/4));
+							} else {
+								avgPokeRating = Math.floor(avgPokeRating / shieldRatings.length);
+							}
 						}
 
 						avgOpRating = Math.floor(avgOpRating / shieldTestArr.length);
