@@ -641,8 +641,23 @@ var InterfaceMaster = (function () {
 				$(".poke-search[context='alternative-search']").val('');
 
 				altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
-				altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
-				self.updateTeamBlueprint(team, counterRankings, altRankings);
+				var threatEntries = [];
+				for(var i = 0; i < counterTeam.length; i++){
+					var match = counterRankings.filter(function(entry){
+						return entry.speciesId == counterTeam[i].speciesId || entry.speciesName == counterTeam[i].speciesName;
+					})[0];
+
+					if(match){
+						threatEntries.push(match);
+					}
+				}
+
+				for(var i = 0; i < altRankings.length; i++){
+					altRankings[i].synergyScore = self.getAlternativeSynergyScore(altRankings[i], threatEntries);
+				}
+
+				altRankings.sort((a,b) => (b.synergyScore > a.synergyScore) ? 1 : ((a.synergyScore > b.synergyScore) ? -1 : 0));
+				self.updateTeamBlueprint(team, threatEntries, altRankings);
 				self.displayAlternatives();
 
 				// Clear targets so it will default to the normal format if the user changes settings
@@ -812,6 +827,47 @@ var InterfaceMaster = (function () {
 				};
 			};
 
+			this.getAlternativeSynergyScore = function(candidate, threatEntries){
+				var score = candidate.matchupAltScore || 0;
+				var pressureSum = 0;
+				var pressureCount = 0;
+
+				for(var i = 0; i < threatEntries.length; i++){
+					var threatEntry = threatEntries[i];
+					var altRating = candidate.matchups[i] ? candidate.matchups[i].rating : 0;
+					var teamBestAnswer = 0;
+
+					if(threatEntry && threatEntry.matchups){
+						var threatRatings = threatEntry.matchups.map(function(matchup){
+							return matchup.rating;
+						});
+						teamBestAnswer = Math.max.apply(null, threatRatings.map(function(value){
+							return 1000 - value;
+						}));
+					}
+
+					var improvement = altRating - teamBestAnswer;
+					if(improvement > 0){
+						score += improvement * 0.35;
+						pressureSum += altRating;
+						pressureCount++;
+					} else if(altRating < 450){
+						score -= 30;
+					}
+				}
+
+				if(pressureCount > 0){
+					var averagePressure = pressureSum / pressureCount;
+					if(averagePressure >= 650){
+						score += 35;
+					} else if(averagePressure < 450){
+						score -= 25;
+					}
+				}
+
+				return score;
+			};
+
 			this.updateTeamBlueprint = function(team, threats, alternatives){
 				var roleRows = [];
 				var threatRows = threats.slice(0, Math.min(8, threats.length));
@@ -860,9 +916,17 @@ var InterfaceMaster = (function () {
 					archetype = "Coverage core";
 				}
 
-				var gapThreat = threatRows.reduce(function(best, threat){
+				var bestThreat = threatRows.reduce(function(best, threat){
 					var avg = threat.matchups.reduce(function(sum, matchup){ return sum + matchup.rating; }, 0) / threat.matchups.length;
 					if(! best || avg < best.avg){
+						return {avg: avg, speciesName: threat.speciesName};
+					}
+					return best;
+				}, null);
+
+				var gapThreat = threatRows.reduce(function(best, threat){
+					var avg = threat.matchups.reduce(function(sum, matchup){ return sum + matchup.rating; }, 0) / threat.matchups.length;
+					if(! best || avg > best.avg){
 						return {avg: avg, speciesName: threat.speciesName};
 					}
 					return best;
@@ -877,8 +941,8 @@ var InterfaceMaster = (function () {
 				$(".team-blueprint .role-list li").eq(0).find(".role-value").html(lead.pokemon.speciesName + " · " + lead.avg + " avg").attr("title", "Lead role: average matchup rating against the current threat list. Higher is better.");
 				$(".team-blueprint .role-list li").eq(1).find(".role-value").html(safe.pokemon.speciesName + " · " + safe.avg + " avg").attr("title", "Safe switch role: how well this Pokémon keeps the team afloat in bad matchups.");
 				$(".team-blueprint .role-list li").eq(2).find(".role-value").html(closer.pokemon.speciesName + " · " + closer.avg + " avg").attr("title", "Closer role: how well this Pokémon converts favorable endgames and shield pressure.");
-				$(".team-blueprint .best-threat").html(gapThreat ? gapThreat.speciesName : "—").attr("title", "The threat that currently hurts your team the most on average.");
-				$(".team-blueprint .biggest-gap").html(gapThreat ? Math.round(gapThreat.avg) + " avg" : "—").attr("title", "Lower average matchup values mean a bigger weakness in your current team structure.");
+				$(".team-blueprint .best-threat").html(bestThreat ? bestThreat.speciesName : "—").attr("title", "The threat your team currently handles best on average.");
+				$(".team-blueprint .biggest-gap").html(gapThreat ? gapThreat.speciesName + " · " + Math.round(gapThreat.avg) + " avg" : "—").attr("title", "The threat your team currently struggles with most on average.");
 
 				if(altSummary){
 					$(".team-blueprint .best-alternative").html("<strong>" + alternatives[0].speciesName + "</strong><br>" + altSummary.primary + " · " + altSummary.secondary).attr("title", altSummary.title);
