@@ -139,6 +139,33 @@ require_once 'header.php';
 	<a href="#" class="toggle active">Overview <span class="arrow-down">&#9660;</span><span class="arrow-up">&#9650;</span></a>
 	<div class="toggle-content article">
 		<p>Below is a high-level evaluation of your team. Use this as a general guideline for any adjustments you may want to make. Some unique strategies can score lower marks.</p>
+		<div class="overview-section team-blueprint">
+			<div class="flex">
+				<h3>Team Blueprint</h3>
+				<div class="blueprint-pill">Balanced core</div>
+			</div>
+			<div class="blueprint-grid">
+				<div class="blueprint-card">
+					<h4>Role Fit</h4>
+					<ul class="role-list">
+						<li><span class="role-label">Lead</span><span class="role-value"></span></li>
+						<li><span class="role-label">Safe Switch</span><span class="role-value"></span></li>
+						<li><span class="role-label">Closer</span><span class="role-value"></span></li>
+					</ul>
+				</div>
+				<div class="blueprint-card">
+					<h4>Coverage Focus</h4>
+					<div class="focus-list">
+						<div class="focus-item"><strong>Best vs</strong><span class="focus-value best-threat"></span></div>
+						<div class="focus-item"><strong>Biggest gap</strong><span class="focus-value biggest-gap"></span></div>
+					</div>
+				</div>
+				<div class="blueprint-card">
+					<h4>Best Alternative</h4>
+					<div class="best-alternative"></div>
+				</div>
+			</div>
+		</div>
 		<div class="overview-section coverage">
 			<div class="flex">
 				<h3>Coverage</h3>

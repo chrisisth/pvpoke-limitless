@@ -642,6 +642,7 @@ var InterfaceMaster = (function () {
 
 				altRankings = ranker.rank(counterTeam, battle.getCP(), battle.getCup(), exclusionList, "team-alternatives").rankings;
 				altRankings.sort((a,b) => (a.matchupAltScore > b.matchupAltScore) ? -1 : ((b.matchupAltScore > a.matchupAltScore) ? 1 : 0));
+				self.updateTeamBlueprint(team, counterRankings, altRankings);
 				self.displayAlternatives();
 
 				// Clear targets so it will default to the normal format if the user changes settings
@@ -798,6 +799,81 @@ var InterfaceMaster = (function () {
 					secondary: winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
 					title: "Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
 				};
+			};
+
+			this.updateTeamBlueprint = function(team, threats, alternatives){
+				var roleRows = [];
+				var threatRows = threats.slice(0, Math.min(8, threats.length));
+
+				for(var i = 0; i < team.length; i++){
+					var ratings = [];
+					var minRating = 1000;
+					var favorableCount = 0;
+
+					for(var n = 0; n < threatRows.length; n++){
+						var rating = threatRows[n].matchups[i].rating;
+						ratings.push(rating);
+						minRating = Math.min(minRating, rating);
+
+						if(rating >= 600){
+							favorableCount++;
+						}
+					}
+
+					roleRows.push({
+						pokemon: team[i],
+						avg: Math.round(ratings.reduce(function(sum, value){ return sum + value; }, 0) / ratings.length),
+						min: minRating,
+						favorable: favorableCount
+					});
+				}
+
+				roleRows.sort(function(a, b){
+					return (b.avg - a.avg) || (b.favorable - a.favorable);
+				});
+
+				var lead = roleRows[0];
+				var safe = roleRows.slice().sort(function(a, b){
+					return (b.min - a.min) || (b.favorable - a.favorable);
+				})[0];
+				var closer = roleRows.slice().sort(function(a, b){
+					return (b.favorable - a.favorable) || (b.avg - a.avg);
+				})[0];
+
+				var archetype = "Balanced core";
+				if((lead.avg + safe.avg) / 2 > 620){
+					archetype = "Pressure core";
+				} else if(safe.min > 500){
+					archetype = "Safe swap core";
+				} else if(lead.avg - safe.avg > 80){
+					archetype = "Coverage core";
+				}
+
+				var gapThreat = threatRows.reduce(function(best, threat){
+					var avg = threat.matchups.reduce(function(sum, matchup){ return sum + matchup.rating; }, 0) / threat.matchups.length;
+					if(! best || avg < best.avg){
+						return {avg: avg, speciesName: threat.speciesName};
+					}
+					return best;
+				}, null);
+
+				var altSummary = null;
+				if(alternatives && alternatives.length > 0){
+					altSummary = self.getAlternativeSummary(alternatives[0]);
+				}
+
+				$(".team-blueprint .blueprint-pill").html(archetype);
+				$(".team-blueprint .role-list li").eq(0).find(".role-value").html(lead.pokemon.speciesName + " · " + lead.avg + " avg");
+				$(".team-blueprint .role-list li").eq(1).find(".role-value").html(safe.pokemon.speciesName + " · " + safe.avg + " avg");
+				$(".team-blueprint .role-list li").eq(2).find(".role-value").html(closer.pokemon.speciesName + " · " + closer.avg + " avg");
+				$(".team-blueprint .best-threat").html(gapThreat ? gapThreat.speciesName : "—");
+				$(".team-blueprint .biggest-gap").html(gapThreat ? Math.round(gapThreat.avg) + " avg" : "—");
+
+				if(altSummary){
+					$(".team-blueprint .best-alternative").html("<strong>" + alternatives[0].speciesName + "</strong><br>" + altSummary.primary + " · " + altSummary.secondary);
+				} else{
+					$(".team-blueprint .best-alternative").html("No strong alternative yet");
+				}
 			};
 
 			// Display the list of alternative Pokemon given a list of searched Pokemon
