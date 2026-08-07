@@ -12,6 +12,7 @@ var InterfaceMaster = (function () {
 
 			var gm;
 			var battle;
+			var ranker = RankerMaster.getInstance();
 			var pokeSelectors = [];
 			var multiSelectors = [
 				new PokeMultiSelect($(".team .poke.multi")),
