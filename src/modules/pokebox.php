@@ -5,7 +5,7 @@
 		<div class="pokebox-on hide">
 			<p>Select Pokemon below to import.</p>
 			<div class="poke-count-container multi">
-				<span class="poke-count">0</span> / <span class="poke-max-count">100</span>
+				<span class="poke-count">0</span> / <span class="poke-max-count">2000</span>
 			</div>
 			<div class="pokebox-options">
 				<a href="#" class="pokebox-refresh">Refresh</a>

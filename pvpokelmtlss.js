@@ -170,8 +170,7 @@
     uw.Main();
     await sleep(500);
     
-    // Update display to show 1000
-    uw.$('.poke-max-count').text('1000');
+    uw.$('.poke-max-count').text('2000');
   }
 
   // Router
