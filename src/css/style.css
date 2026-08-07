@@ -3803,6 +3803,33 @@ th.col-sort[data-asc=false]::after {
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
+.typings .summary-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  margin: 8px 0 10px 0;
+  font-size: 12px;
+}
+.typings .legend-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.08);
+  font-weight: bold;
+}
+.typings .legend-help {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: rgba(1, 141, 186, 0.2);
+  cursor: help;
+  font-weight: bold;
+}
 .typings .blueprint-pill {
   font-size: 12px;
   font-weight: bold;

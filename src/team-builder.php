@@ -278,6 +278,14 @@ require_once 'header.php';
 			<a href="#" class="search-traits" title="Search Traits">+</a>
 		</div>
 
+		<div class="summary-legend" title="Average = average matchup rating vs the current threat list. W/CW/T/CL/L describe how often the alternative lands in each matchup class.">
+			<span class="legend-pill">Strong fit</span>
+			<span class="legend-pill">Good fit</span>
+			<span class="legend-pill">Mixed fit</span>
+			<span class="legend-pill">Weak fit</span>
+			<span class="legend-help">?</span>
+		</div>
+
 		<div class="table-container">
 			<table class="alternatives-table rating-table" cellspacing="0">
 			</table>

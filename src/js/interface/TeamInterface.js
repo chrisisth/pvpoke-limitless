@@ -794,10 +794,21 @@ var InterfaceMaster = (function () {
 					return value < array[worstIndex] ? index : worstIndex;
 				}, 0);
 
+				var label = "Mixed fit";
+				if(avgRating >= 700){
+					label = "Strong fit";
+				} else if(avgRating >= 600){
+					label = "Good fit";
+				} else if(avgRating >= 500){
+					label = "Mixed fit";
+				} else{
+					label = "Weak fit";
+				}
+
 				return {
-					primary: avgRating + " avg",
-					secondary: winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
-					title: "Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
+					primary: label,
+					secondary: avgRating + " avg • " + winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
+					title: "Average matchup rating vs the current threat list. W = win, CW = close win, T = tie, CL = close loss, L = loss. Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
 				};
 			};
 
@@ -863,14 +874,14 @@ var InterfaceMaster = (function () {
 				}
 
 				$(".team-blueprint .blueprint-pill").html(archetype);
-				$(".team-blueprint .role-list li").eq(0).find(".role-value").html(lead.pokemon.speciesName + " · " + lead.avg + " avg");
-				$(".team-blueprint .role-list li").eq(1).find(".role-value").html(safe.pokemon.speciesName + " · " + safe.avg + " avg");
-				$(".team-blueprint .role-list li").eq(2).find(".role-value").html(closer.pokemon.speciesName + " · " + closer.avg + " avg");
-				$(".team-blueprint .best-threat").html(gapThreat ? gapThreat.speciesName : "—");
-				$(".team-blueprint .biggest-gap").html(gapThreat ? Math.round(gapThreat.avg) + " avg" : "—");
+				$(".team-blueprint .role-list li").eq(0).find(".role-value").html(lead.pokemon.speciesName + " · " + lead.avg + " avg").attr("title", "Lead role: average matchup rating against the current threat list. Higher is better.");
+				$(".team-blueprint .role-list li").eq(1).find(".role-value").html(safe.pokemon.speciesName + " · " + safe.avg + " avg").attr("title", "Safe switch role: how well this Pokémon keeps the team afloat in bad matchups.");
+				$(".team-blueprint .role-list li").eq(2).find(".role-value").html(closer.pokemon.speciesName + " · " + closer.avg + " avg").attr("title", "Closer role: how well this Pokémon converts favorable endgames and shield pressure.");
+				$(".team-blueprint .best-threat").html(gapThreat ? gapThreat.speciesName : "—").attr("title", "The threat that currently hurts your team the most on average.");
+				$(".team-blueprint .biggest-gap").html(gapThreat ? Math.round(gapThreat.avg) + " avg" : "—").attr("title", "Lower average matchup values mean a bigger weakness in your current team structure.");
 
 				if(altSummary){
-					$(".team-blueprint .best-alternative").html("<strong>" + alternatives[0].speciesName + "</strong><br>" + altSummary.primary + " · " + altSummary.secondary);
+					$(".team-blueprint .best-alternative").html("<strong>" + alternatives[0].speciesName + "</strong><br>" + altSummary.primary + " · " + altSummary.secondary).attr("title", altSummary.title);
 				} else{
 					$(".team-blueprint .best-alternative").html("No strong alternative yet");
 				}
