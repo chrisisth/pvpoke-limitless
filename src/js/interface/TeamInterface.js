@@ -781,10 +781,17 @@ var InterfaceMaster = (function () {
 				var ratings = ranking.matchups.map(function(matchup){
 					return matchup.rating;
 				});
-
+				var scenarioSpreads = ranking.matchups.map(function(matchup){
+					if(! matchup.scenarioRatings || matchup.scenarioRatings.length < 2){
+						return 0;
+					}
+					return Math.max.apply(null, matchup.scenarioRatings) - Math.min.apply(null, matchup.scenarioRatings);
+				});
 				var avgRating = Math.round(ratings.reduce(function(sum, value){
 					return sum + value;
 				}, 0) / ratings.length);
+				var minRating = Math.round(Math.min.apply(null, ratings));
+				var scenarioSpread = Math.round(Math.max.apply(null, scenarioSpreads));
 
 				var winCount = ratings.filter(function(value){
 					return value >= 700;
@@ -810,20 +817,24 @@ var InterfaceMaster = (function () {
 				}, 0);
 
 				var label = "Mixed fit";
-				if(avgRating >= 700){
+				if(avgRating >= 700 && minRating >= 500 && scenarioSpread < 220){
 					label = "Strong fit";
-				} else if(avgRating >= 600){
+				} else if(avgRating >= 600 && minRating >= 400 && scenarioSpread < 250){
 					label = "Good fit";
-				} else if(avgRating >= 500){
+				} else if(avgRating >= 500 && minRating >= 300){
 					label = "Mixed fit";
 				} else{
 					label = "Weak fit";
 				}
 
+				if(scenarioSpread >= 260){
+					label = "Bait-risk fit";
+				}
+
 				return {
 					primary: label,
-					secondary: avgRating + " avg • " + winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
-					title: "Average matchup rating vs the current threat list. W = win, CW = close win, T = tie, CL = close loss, L = loss. Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
+					secondary: avgRating + " avg • min " + minRating + " • spread " + scenarioSpread + " • " + winCount + "W • " + closeWinCount + "CW • " + tieCount + "T • " + closeLossCount + "CL • " + lossCount + "L",
+					title: "Average / worst-case / spread of the shield scenario results. W = win, CW = close win, T = tie, CL = close loss, L = loss. Best vs " + ranking.matchups[bestIndex].opponent.speciesName + " (" + ratings[bestIndex] + "), weakest vs " + ranking.matchups[worstIndex].opponent.speciesName + " (" + ratings[worstIndex] + ")"
 				};
 			};
 

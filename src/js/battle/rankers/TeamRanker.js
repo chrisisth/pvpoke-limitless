@@ -303,7 +303,10 @@ var RankerMaster = (function () {
 							rating: avgPokeRating,
 							score: score,
 							alternativeScore: score,
-							time: battle.getDuration()
+							time: battle.getDuration(),
+							scenarioRatings: shieldRatings,
+							minRating: Math.min.apply(null, shieldRatings),
+							maxRating: Math.max.apply(null, shieldRatings)
 						};
 
 						// Calculate breakpoint and bulkpoint
