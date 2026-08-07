@@ -1562,6 +1562,17 @@ function Pokemon(id, i, b, d){
 			});
 		}
 
+		if((self.chargedMoves.length == 2) && self.chargedMoves.some(m => m.selfDebuffing)){
+			var selfDebuffingMove = self.chargedMoves.find(m => m.selfDebuffing);
+			var otherMove = self.chargedMoves.find(m => !m.selfDebuffing);
+			if(otherMove && selfDebuffingMove.energy >= 60 && otherMove.energy <= 55){
+				cons.push({
+					trait: "Risky",
+					desc: "Relies on baiting and a self-debuffing nuke, which is strong but vulnerable if the opponent refuses the bait."
+				});
+			}
+		}
+
 		return {
 			pros: pros,
 			cons: cons
@@ -2255,24 +2266,40 @@ function Pokemon(id, i, b, d){
 
 				buffChanceFactor /= chargedMoves.length;
 
+				var selfDebuffRiskFactor = 1;
+				if (chargedMoves.length == 2) {
+					var selfDebuffingMove = null;
+					var otherMove = null;
+					for (var k = 0; k < chargedMoves.length; k++) {
+						if (chargedMoves[k].selfDebuffing) {
+							selfDebuffingMove = chargedMoves[k];
+						} else {
+							otherMove = chargedMoves[k];
+						}
+					}
 
-				consistencyScore *= factor * buffChanceFactor;
+					if (selfDebuffingMove && otherMove) {
+						var energyDiff = selfDebuffingMove.energy - otherMove.energy;
+						var otherIsDebuff = (otherMove.selfAttackDebuffing || otherMove.selfDefenseDebuffing || (otherMove.buffs && otherMove.buffs[0] < 0) || (otherMove.buffs && otherMove.buffs[1] < 0));
+
+						if (energyDiff >= 15 && selfDebuffingMove.energy >= 60 && otherMove.energy <= 55) {
+							selfDebuffRiskFactor *= otherIsDebuff ? 0.75 : 0.85;
+						} else if (energyDiff >= 10 && selfDebuffingMove.energy > otherMove.energy && selfDebuffingMove.dpe > otherMove.dpe * 1.4) {
+							selfDebuffRiskFactor *= 0.9;
+						}
+					}
+				}
+
+				consistencyScore *= factor * buffChanceFactor * selfDebuffRiskFactor;
 			}
 
-			// Now do a square root mean
 			consistencyScore = Math.pow(consistencyScore, (1/effectivenessScenarios.length));
 		}
-
-		// Factor in fast move duration, slower moves are less consistent
-		/*var fastMoveConsistency = .5 + (.5 * (1 / (fastMove.cooldown / 500)));
-
-		consistencyScore = ((consistencyScore * 6) + (fastMoveConsistency * 1)) / 7;*/
 
 		// Penalize specific moves
 		if(self.hasMove("POWER_UP_PUNCH")){
 			consistencyScore *= .85;
 		}
-
 		if(self.hasMove("LUNGE")){
 			consistencyScore *= .85;
 		}
