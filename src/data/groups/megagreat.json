@@ -61,6 +61,11 @@
         "chargedMoves": ["FIRE_PUNCH", "SCORCHING_SANDS"]
     },
     {
+        "speciesId": "electrode_hisuian",
+        "fastMove": "THUNDER_SHOCK",
+        "chargedMoves": ["WILD_CHARGE", "ENERGY_BALL"]
+    },
+    {
         "speciesId": "empoleon",
         "fastMove": "METAL_SOUND",
         "chargedMoves": ["HYDRO_CANNON", "DRILL_PECK"]
@@ -252,8 +257,28 @@
         "chargedMoves": ["ICY_WIND", "SWIFT"]
     },
     {
-        "speciesId": "electrode_hisuian",
-        "fastMove": "THUNDER_SHOCK",
-        "chargedMoves": ["WILD_CHARGE", "ENERGY_BALL"]
+        "speciesId": "sableye_mega",
+        "fastMove": "SHADOW_CLAW",
+        "chargedMoves": ["FOUL_PLAY", "POWER_GEM"]
+    },
+    {
+        "speciesId": "gyarados_mega",
+        "fastMove": "DRAGON_BREATH",
+        "chargedMoves": ["AQUA_TAIL", "CRUNCH"]
+    },
+    {
+        "speciesId": "altaria_mega",
+        "fastMove": "DRAGON_BREATH",
+        "chargedMoves": ["MOONBLAST", "SKY_ATTACK"]
+    },
+    {
+        "speciesId": "charizard_mega_x",
+        "fastMove": "DRAGON_BREATH",
+        "chargedMoves": ["BLAST_BURN", "AIR_CUTTER"]
+    },
+    {
+        "speciesId": "ampharos_mega",
+        "fastMove": "VOLT_SWITCH",
+        "chargedMoves": ["BRUTAL_SWING", "TRAILBLAZE"]
     }
 ]
