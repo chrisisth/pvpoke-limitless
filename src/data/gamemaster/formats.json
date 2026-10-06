@@ -49,17 +49,30 @@
 		]
 	},
 	{
-		"title": "Willpower Cup",
-		"cup": "willpower",
+		"title": "Mega Color Cup",
+		"cup": "colormega",
 		"cp": 1500,
-		"meta": "willpower",
+		"meta": "colormega",
 		"showCup": true,
 		"showFormat": true,
 		"showMeta": true,
 		"rules": [
 			"Pokemon must be at or below 1,500 CP to enter.",
-			"Only Fighting-, Psychic-, and Dark-type Pokémon are eligible.",
-			"The following Pokemon are not allowed: Gardevoir, Zorua, Zoroark."
+			"Mega-Evolved Pokémon are eligible.",
+			"Only Grass-, Fire-, Water-, Electric-type Pokémon are eligible."
+		]
+	},
+	{
+		"title": "Little Cup",
+		"cup": "little",
+		"cp": 500,
+		"meta": "little",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true,
+		"rules": [
+			"Pokémon must be at or below 500 CP to enter.",
+			"Only Pokémon that are able to evolve and have not evolved even once are eligible."
 		]
 	},
 	{
@@ -78,6 +91,51 @@
 			"Prohibited Categories: Legendary, Mythical, Ultra Beasts.",
 			"Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye."
 		]
+	},
+	{
+		"title": "Battle Frontier (Spectral)",
+		"cup": "spectral",
+		"cp": 1500,
+		"meta": "spectral",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Battle Frontier (Cauldron)",
+		"cup": "cauldron",
+		"cp": 2500,
+		"meta": "cauldron",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Battle Frontier (Master)",
+		"cup": "battlefrontiermaster",
+		"cp": 10000,
+		"meta": "battlefrontiermaster",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Devon Trail Cup",
+		"cup": "trail",
+		"cp": 1500,
+		"meta": "trail",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
+	},
+	{
+		"title": "Gymbreakers Invitational Season 7",
+		"cup": "gymbreakers",
+		"cp": 1500,
+		"meta": "gymbreakers",
+		"showCup": true,
+		"showFormat": true,
+		"showMeta": true
 	},
 	{
 		"title": "Master Premier Cup",
