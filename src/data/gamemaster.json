@@ -1,5 +1,5 @@
 {
-    "timestamp": "2026-10-04 00:17:21",
+    "timestamp": "2026-10-21 03:50:13",
     "id": "gamemaster",
     "title": "Default",
     "settings": {
@@ -54,7 +54,7 @@
             "exclude": [
                 {
                     "filterType": "id",
-                    "values": ["rayquaza_mega", "groudon_primal", "kyogre_primal", "metagross_mega", "heracross_mega", "delphox_mega", "dragonite_mega", "tyranitar_mega", "salamence_mega", "garchomp_mega", "mewtwo_mega_y", "mewtwo_mega_x", "gyarados_mega", "greninja_mega", "chesnaught_mega", "charizard_mega_y", "swampert_mega", "latios_mega", "latias_mega", "kyogre", "xerneas", "yveltal", "palkia_origin"]
+                    "values": ["rayquaza_mega", "groudon_primal", "kyogre_primal", "metagross_mega", "heracross_mega", "delphox_mega", "dragonite_mega", "tyranitar_mega", "salamence_mega", "garchomp_mega", "mewtwo_mega_y", "mewtwo_mega_x", "gyarados_mega", "greninja_mega", "chesnaught_mega", "charizard_mega_y", "swampert_mega", "latios_mega", "latias_mega", "gallade_mega", "gengar_mega", "aggron_mega", "kyogre", "xerneas", "yveltal", "palkia_origin", "ursaluna", "marshadow", "lugia", "kyurem_white", "groudon", "reshiram", "lunala", "zacian_crowned_sword", "eternatus"]
                 }
             ]
         },
@@ -114,7 +114,7 @@
                 },
                 {
                     "filterType": "id",
-                    "values": ["mimikyu"]
+                    "values": ["mimikyu", "minior_core", "minior_meteor"]
                 }
             ]
         },
@@ -327,7 +327,7 @@
                 },
                 {
                     "filterType": "id",
-                    "values": ["altaria", "annihilape", "araquanid", "chansey", "clodsire", "corsola_galarian", "dusclops", "furret", "jellicent", "kingdra", "medicham", "oranguru", "snorlax", "wobbuffet", "sableye_mega"]
+                    "values": ["altaria", "annihilape", "araquanid", "chansey", "clodsire", "corsola_galarian", "dusclops", "furret", "jellicent", "kingdra", "medicham", "oranguru", "snorlax", "wobbuffet", "sableye_mega", "minior_core", "minior_meteor"]
                 }
             ]
         },
@@ -546,16 +546,6 @@
             "rules": ["No CP limit.", "Mega Evolutions are eligible."]
         },
         {
-            "title": "Mega Color Cup",
-            "cup": "colormega",
-            "cp": 1500,
-            "meta": "colormega",
-            "showCup": true,
-            "showFormat": true,
-            "showMeta": true,
-            "rules": ["Pokemon must be at or below 1, 500 CP to enter.", "Mega-Evolved Pokémon are eligible.", "Only Grass-,  Fire-,  Water-,  Electric-type Pokémon are eligible."]
-        },
-        {
             "title": "Little Cup",
             "cup": "little",
             "cp": 500,
@@ -564,6 +554,16 @@
             "showFormat": true,
             "showMeta": true,
             "rules": ["Pokémon must be at or below 500 CP to enter.", "Only Pokémon that are able to evolve and have not evolved even once are eligible."]
+        },
+        {
+            "title": "Fantasy Cup",
+            "cup": "fantasy",
+            "cp": 1500,
+            "meta": "fantasy",
+            "showCup": true,
+            "showFormat": true,
+            "showMeta": true,
+            "rules": ["Pokémon must be at or below 1, 500 CP to enter.", "Only Dragon-,  Steel-,  and Fairy-type Pokémon are eligible."]
         },
         {
             "title": "LAIC 2027 Championship Series Cup",
@@ -30469,14 +30469,16 @@
                 "hp": 155
             },
             "types": ["dark", "none"],
-            "fastMoves": ["SHADOW_CLAW", "SNARL"],
+            "fastMoves": ["SHADOW_CLAW", "SNARL", "SUCKER_PUNCH"],
             "chargedMoves": ["FOUL_PLAY", "SLUDGE_BOMB", "FLAMETHROWER", "NIGHT_SHADE"],
+            "eliteMoves": ["SUCKER_PUNCH"],
             "defaultIVs": {
                 "cp500": [7.5, 4, 13, 6],
                 "cp1500": [21.5, 4, 15, 12],
                 "cp2500": [41.5, 4, 15, 13],
                 "cp2500l40": [39, 12, 14, 15]
             },
+            "searchPriority": 4,
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
             "released": true,
@@ -39236,6 +39238,7 @@
             "dex": 774,
             "speciesName": "Minior (Core)",
             "speciesId": "minior_core",
+            "originalFormId": "minior_core",
             "baseStats": {
                 "atk": 218,
                 "def": 131,
@@ -39252,12 +39255,20 @@
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false
+            "released": true,
+            "formChange": {
+                "type": "set",
+                "trigger": "battle_start",
+                "alternativeFormId": "minior_meteor",
+                "resetOnSwitch": false
+            },
+            "searchPriority": 4
         },
         {
             "dex": 774,
             "speciesName": "Minior (Meteor)",
             "speciesId": "minior_meteor",
+            "originalFormId": "minior_meteor",
             "baseStats": {
                 "atk": 116,
                 "def": 194,
@@ -39268,13 +39279,21 @@
             "chargedMoves": ["POWER_GEM", "ANCIENT_POWER", "ACROBATICS"],
             "defaultIVs": {
                 "cp500": [12.5, 4, 11, 15],
-                "cp1500": [45.5, 4, 14, 13],
+                "cp1500": [44, 5, 14, 13],
                 "cp2500": [50, 15, 15, 15],
                 "cp1500l40": [39.5, 13, 14, 14]
             },
             "buddyDistance": 3,
             "thirdMoveCost": 50000,
-            "released": false
+            "released": false,
+            "formChange": {
+                "type": "set",
+                "trigger": "hp",
+                "amount": 0.5,
+                "alternativeFormId": "minior_core",
+                "resetOnSwitch": false,
+                "animationTime": 5000
+            }
         },
         {
             "dex": 775,
@@ -44324,7 +44343,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_BRAMBLIN",
                 "evolutions": ["brambleghast"]
@@ -44350,7 +44369,7 @@
             },
             "buddyDistance": 5,
             "thirdMoveCost": 75000,
-            "released": false,
+            "released": true,
             "family": {
                 "id": "FAMILY_BRAMBLIN",
                 "parent": "bramblin"
