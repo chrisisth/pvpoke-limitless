@@ -59,35 +59,23 @@ $formats = array (
   ),
   4 => 
   array (
-    'title' => 'Little Cup',
-    'cup' => 'little',
-    'cp' => 500,
-    'meta' => 'little',
+    'title' => 'LAIC 2027 Cup (GBL)',
+    'cup' => 'laic2027gbl',
+    'cp' => 1500,
+    'meta' => 'laic2027gbl',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,
     'rules' => 
     array (
-      0 => 'Pokémon must be at or below 500 CP to enter.',
-      1 => 'Only Pokémon that are able to evolve and have not evolved even once are eligible.',
+      0 => 'Pokemon must be at or below 1,500 CP to enter.',
+      1 => 'Fire-, Dark-, Steel-, and Fairy-type Pokémon are not eligible.',
+      2 => 'Legendary Pokémon, Mythical Pokémon, and Ultra Beasts are not eligible.',
+      3 => 'Mega-Evolved Pokémon are not eligible for the GO Battle League version of this Cup. However, Mega-Evolved Pokémon will be eligible for the Pokémon Latin America International Championships 2026 in-person competition.',
+      4 => 'Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye.',
     ),
   ),
   5 => 
-  array (
-    'title' => 'Fantasy Cup',
-    'cup' => 'fantasy',
-    'cp' => 1500,
-    'meta' => 'fantasy',
-    'showCup' => true,
-    'showFormat' => true,
-    'showMeta' => true,
-    'rules' => 
-    array (
-      0 => 'Pokémon must be at or below 1,500 CP to enter.',
-      1 => 'Only Dragon-, Steel-, and Fairy-type Pokémon are eligible.',
-    ),
-  ),
-  6 => 
   array (
     'title' => 'LAIC 2027 Championship Series Cup',
     'cup' => 'laic2027',
@@ -106,7 +94,7 @@ $formats = array (
       5 => 'Prohibited Pokemon: Altaria, Annihilape, Araquanid, Chansey, Clodsire, Corsola (Galarian), Dusclops, Furret, Jellicent, Kingdra, Medicham, Oranguru, Snorlax, Wobbuffet, Mega Sableye.',
     ),
   ),
-  7 => 
+  6 => 
   array (
     'title' => 'Battle Frontier (Spectral)',
     'cup' => 'spectral',
@@ -116,7 +104,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  8 => 
+  7 => 
   array (
     'title' => 'Battle Frontier (Cauldron)',
     'cup' => 'cauldron',
@@ -126,7 +114,7 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  9 => 
+  8 => 
   array (
     'title' => 'Battle Frontier (Master)',
     'cup' => 'battlefrontiermaster',
@@ -136,12 +124,22 @@ $formats = array (
     'showFormat' => true,
     'showMeta' => true,
   ),
-  10 => 
+  9 => 
   array (
     'title' => 'Devon Trail Cup',
     'cup' => 'trail',
     'cp' => 1500,
     'meta' => 'trail',
+    'showCup' => true,
+    'showFormat' => true,
+    'showMeta' => true,
+  ),
+  10 => 
+  array (
+    'title' => 'Devon Fable Cup',
+    'cup' => 'fable',
+    'cp' => 1500,
+    'meta' => 'fable',
     'showCup' => true,
     'showFormat' => true,
     'showMeta' => true,

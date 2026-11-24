@@ -210,7 +210,8 @@ var InterfaceMaster = (function () {
 				var allowShadows = $(".team-option .check.allow-shadows").hasClass("on");
 				var allowXL = $(".team-option .check.allow-xl").hasClass("on");
 				var baitShields = $(".team-option .check.shield-baiting").hasClass("on") ? 1 : 0;
-				var prioritizeMeta = $(".team-option .check.prioritize-meta").hasClass("on");
+				var prioritizeMetaThreats = $(".team-option .check.prioritize-meta-threats").hasClass("on");
+				var prioritizeMetaAlternatives = $(".team-option .check.prioritize-meta-alternatives").hasClass("on");
 
 				if(battle.getCup().name == "shadow"){
 					allowShadows = true;
@@ -289,7 +290,7 @@ var InterfaceMaster = (function () {
 				ranker.applySettings(opponentSettings, 1);
 				ranker.setShieldMode(shieldMode);
 				ranker.setMetaGroup(metaGroup);
-				ranker.setPrioritizeMeta(prioritizeMeta);
+				ranker.setPrioritizeMeta(prioritizeMetaThreats);
 
 				ranker.setRecommendMoveUsage(true);
 
@@ -636,6 +637,7 @@ var InterfaceMaster = (function () {
 				}
 
 				ranker.setRecommendMoveUsage(true);
+				ranker.setPrioritizeMeta(prioritizeMetaAlternatives);
 
 				// Set targets for custom alternatives
 				if(multiSelectors[2].getPokemonList().length > 0){

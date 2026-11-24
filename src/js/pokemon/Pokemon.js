@@ -291,7 +291,7 @@ function Pokemon(id, i, b, d){
 			self.levelCap = b.getLevelCap();
 		}
 
-		if(self.megaLevel == 4){
+		if(self.megaLevel == 4 && targetCP < 10000){
 			self.baseLevelCap = 52;
 			self.levelCap = 52;
 		}
@@ -2031,14 +2031,6 @@ function Pokemon(id, i, b, d){
 
 	// Set the Pokemon's Mega Level
 	this.setMegaLevel = function(level){
-		if(battle.getCP() == 10000){
-			if(self.megaLevel != 4 && level == 4){
-				self.setLevel(52);
-			} else if(self.megaLevel == 4 && level < 4){
-				self.setLevel(50);
-			}
-		}
-
 		self.megaLevel = level;
 	}
 
@@ -2588,28 +2580,30 @@ function Pokemon(id, i, b, d){
 
 				case "minior_meteor":
 					if(battleCP == 1500){
-						newLevel = self.level * 2;
+						// Formulas as posted by u/Ok_Lobster8494
+						newLevel = Math.floor((47 * self.level / 25 + 1) * 2) / 2; // Floor to 0.5 level increment
 					}
 
-					/*if(battleCP == 2500){
-						newLevel = (Math.round(self.level * 1.25) * 2) / 2;
-					}*/
+					if(battleCP == 2500){
+						// Formulas as posted by u/Ok_Lobster8494
+						newLevel = Math.floor((73 * self.level/50 + (26/25)) * 2) / 2; // Floor to 0.5 level increment
+					}
 					break;
 
 				case "minior_core":
+					// Inverse of the formulas above
 					if(battleCP == 1500){
-						if(self.level % 0.5 == 0 && self.level % 1 != 0)
-							newLevel = (self.level - 0.5) / 2;
-						else
-							newLevel = self.level / 2;
+						newLevel = Math.round((self.level - 1) * 25 / 47 * 2) / 2;
 					}
 
-					/*if(battleCP == 2500){
-						newLevel = (Math.round(self.level * 1.25) * 2) / 2;
-					}*/
+					if(battleCP == 2500){
+						newLevel = Math.round((self.level - 26 / 25) * 50 / 73 * 2) / 2;
+					}
 					break;
 			}
 		}
+
+		newLevel = Math.min(newLevel, 55);
 
 		let newCPM = cpms[cpmIndex];
 		let newCP = self.cp;
